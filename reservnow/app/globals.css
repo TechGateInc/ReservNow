@@ -1,3 +1,9 @@
+@font-face {
+  font-family: "Circular";
+  src: url("../fonts/Circular/Circular-normal-400-100.ttf") format("truetype");
+  color: var(--navbar_text-color);
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
