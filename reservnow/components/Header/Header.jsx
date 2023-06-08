@@ -1,10 +1,10 @@
 "use client";
 import "../Header/header.css";
-import Search from "./Search";
+import Search from "../Search/Search";
 import { useState } from "react";
 import Link from "next/link";
 
-const Header = ({}) => {
+const Header = ({ }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -14,8 +14,7 @@ const Header = ({}) => {
     <div>
       <div className="header">
         <div className="Headerlogo">
-          <p>Logo</p>
-        </div>
+          <img src="/images/RNL.svg" alt="ReservNow" style={{ height: "22px" }} />        </div>
         <div className="SearchBarHolder">
           <Search />
         </div>
@@ -23,7 +22,7 @@ const Header = ({}) => {
           <div className="ReserveLink">
             <p style={{ fontSize: 12, color: "black" }}>
               {" "}
-              Reserve Event Centre
+              Add Event Centre
             </p>
           </div>
           <div>
