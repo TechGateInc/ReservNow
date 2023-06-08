@@ -1,168 +1,150 @@
-.header{
-    display: flex;
-    flex-direction: row;
-    padding-left: 5%;
-    padding-right: 5%;
-    padding-top: 8px;
-    padding-bottom: 8px;
-    background-color: white;
-    color: black;
-    width: 100%;
-    align-items: center;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 4px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-    border-bottom: 2px solid rgb(233, 233, 233);
+.header {
+  display: flex;
+  flex-direction: row;
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  background-color: white;
+  color: black;
+  width: 100%;
+  height: 80px;
+  align-items: center;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 4px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  border-bottom: 2px solid rgb(233, 233, 233);
 }
 
-.SearchBar{
-    display: flex;
-    flex-direction: row;
-    padding: 5px;
-    font-size: 13px;
-    width: 320px;
-    justify-content: space-between;
-    border-radius: 15px;
-    align-items: center;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-    height: 40px;
+.SearchBar {
+  display: flex;
+  flex-direction: row;
+  padding: 5px;
+  font-size: 13px;
+  width: 352.2px;
+  justify-content: space-evenly;
+  border-radius: 40px;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  height: 48px;
+  font-family: 'Circular';
+}
+.SearchBar p{
+    font-size: 14px;
+    font-weight:500;
 }
 
-.weekBtn{
-    border-left: 1px solid rgb(223, 223, 223);
-    border-right: 1px solid rgb(223, 223, 223);
-    padding-left: 10px;
-    padding-right: 10px;
-    height: 25px;
-    display: flex;
-    align-items: center;
-
-    
+.weekBtn {
+  border-left: 1px solid rgb(223, 223, 223);
+  border-right: 1px solid rgb(223, 223, 223);
+  padding-left: 10px;
+  padding-right: 10px;
+  height: 25px;
+  display: flex;
+  align-items: center;
 }
 
-.searchIcon{
-    background-color: pink;
-    height: 30px;
-    width: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 15px;
-    padding: 4px;
-    
-
+.searchIcon {
+  background-color: pink;
+  height: 30px;
+  width: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  padding: 4px;
 }
 
-.SearchBarHolder{
-    width: 40%;
-    display: flex;
-    justify-content: center;
+.SearchBarHolder {
+  width: 40%;
+  display: flex;
+  justify-content: center;
 }
 
-.Headerlogo{
-    width: 30%;
-  
+.Headerlogo {
+  width: 30%;
 }
 
-.ProfileSection{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 25%;
-    align-items: center;
-    margin-left: 5%;
-    
-    
+.ProfileSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 25%;
+  align-items: center;
+  margin-left: 5%;
 }
 
-.profileHolder{
-   
-
-
-    
+.profileHolder {
 }
 
-.profileHolderIcons{
-    display: flex;
-    flex-direction: row;
-    border: 1px solid rgb(209, 208, 208);
-    width: 70px;
-    justify-content: space-around;
-    border-radius: 20px;
-    align-items: center;
-    height: 30px;
-    padding-top: 5px;
-    cursor: pointer;
-    transition: transform 0.2s ease-in-out;
-
+.profileHolderIcons {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid rgb(209, 208, 208);
+  width: 70px;
+  justify-content: space-around;
+  border-radius: 20px;
+  align-items: center;
+  height: 30px;
+  padding-top: 5px;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
 }
 
-.ReserveLink{
-    background-color: white;
-    padding: 5px;
-    border-radius: 5px;
-    cursor: pointer;
+.ReserveLink {
+  background-color: white;
+  padding: 5px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-.ReserveLink:hover{
-    background-color: rgb(231, 231, 231);
+.ReserveLink:hover {
+  background-color: rgb(231, 231, 231);
 }
 
-
-
-.profileHolderIcons:hover{
-    transform: scale(1.1);
+.profileHolderIcons:hover {
+  transform: scale(1.1);
 }
 
-.DropdownContent{
-    position: absolute;
-    margin-top: 20px;
-    right: 50px;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-    width: 200px;
-    display: flex;
-    flex-direction: column;
-    border-radius: 5px;
+.DropdownContent {
+  position: absolute;
+  margin-top: 20px;
+  right: 50px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
 }
 
-.contentSection2{
-    display: flex;
-    flex-direction: column;
-    border-top: 1px solid rgb(230, 230, 230);
-    
-
+.contentSection2 {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid rgb(230, 230, 230);
 }
 
-.contentSection1{
-
-    display: flex;
-    flex-direction: column;
-
+.contentSection1 {
+  display: flex;
+  flex-direction: column;
 }
 
-.DropdownLinks{
-    /* margin: 5px; */
-    cursor: pointer;
-    padding: 10px;
-    
-
+.DropdownLinks {
+  /* margin: 5px; */
+  cursor: pointer;
+  padding: 10px;
 }
 
-.DropdownLinks:hover{
-    background-color: rgb(238, 234, 234);
+.DropdownLinks:hover {
+  background-color: rgb(238, 234, 234);
 }
 
-.guestBtn{
-    cursor: pointer;
-
+.guestBtn {
+  cursor: pointer;
 }
 
-.weekBtn{
-    cursor: pointer;
-
+.weekBtn {
+  cursor: pointer;
 }
 
-
-.locationBtn{
-    cursor: pointer;
+.locationBtn {
+  cursor: pointer;
 }
-
-
