@@ -1,0 +1,35 @@
+.popup-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.popup-modal-inner {
+  position: relative;
+  padding: 34px;
+  width: 100%;
+  max-width: 550px;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.close-btn {
+  border: none;
+  background-color: white;
+  font-size: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.close-btn:hover {
+  color: #ff3259;
+  cursor: pointer;
+}
