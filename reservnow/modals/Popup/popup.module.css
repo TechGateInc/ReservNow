@@ -15,7 +15,7 @@
   position: relative;
   padding: 34px;
   width: 100%;
-  max-width: 550px;
+  max-width: 500px;
   background-color: white;
   border-radius: 10px;
 }
@@ -29,7 +29,29 @@
   justify-content: flex-end;
 }
 
-.close-btn:hover {
+.cancel-icon:hover {
+  width: 5%;
+  color: #ff3259;
+  cursor: pointer;
+}
+
+.back-btn {
+  border: none;
+  background-color: white;
+  font-size: 16px;
+  font-weight: 600;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  justify-content: space-between;
+}
+
+.back-icon {
+  font-size: 20px;
+}
+
+.back-icon:hover {
   color: #ff3259;
   cursor: pointer;
 }
