@@ -25,7 +25,12 @@ export default function PasswordModal({
               />
             </div>
             <div className={styles["submit-btn"]}>
-              <button onClick={handleSubmit}>Submit</button>
+              <button
+                onClick={handleSubmit}
+                disabled={formData.password === "" ? true : false}
+              >
+                Submit
+              </button>
             </div>
           </div>
         </div>

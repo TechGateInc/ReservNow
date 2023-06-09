@@ -21,13 +21,6 @@
 }
 
 .signup-modal-form button:disabled {
-    /* margin-top: 4%;
-    width: 100%;
-    padding: 10px;
-    border-radius: 5px;
-    background-color: #e61e4d;
-    border: none;
-    color: white; */
     background-color: grey;
   }
 

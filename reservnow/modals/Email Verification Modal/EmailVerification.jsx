@@ -31,7 +31,12 @@ export default function EmailVerification({
               and data rates apply. Privacy Policy and Terms of Service
             </p>
             <div className={styles["submit-btn"]}>
-              <button onClick={handleSubmit}>Continue</button>
+              <button
+                onClick={handleSubmit}
+                disabled={formData.email === "" ? true : false}
+              >
+                Continue
+              </button>
             </div>
           </div>
           <div className={styles["or"]}>
