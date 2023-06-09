@@ -4,7 +4,7 @@ import Search from "../Search/Search";
 import { useState } from "react";
 import Link from "next/link";
 
-const Header = ({ }) => {
+const Header = ({}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -14,16 +14,18 @@ const Header = ({ }) => {
     <div>
       <div className="header">
         <div className="Headerlogo">
-          <img src="/images/RNL.svg" alt="ReservNow" style={{ height: "22px" }} />        </div>
+          <img
+            src="/images/RNL.svg"
+            alt="ReservNow"
+            style={{ height: "22px" }}
+          />
+        </div>
         <div className="SearchBarHolder">
           <Search />
         </div>
         <div className="ProfileSection">
           <div className="ReserveLink">
-            <p style={{ fontSize: 12, color: "black" }}>
-              {" "}
-              Add Event Centre
-            </p>
+            <p style={{ fontSize: 12, color: "black" }}> Add Event Centre</p>
           </div>
           <div>
             <img
