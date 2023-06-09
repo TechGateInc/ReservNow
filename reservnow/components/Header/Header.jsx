@@ -1,27 +1,136 @@
 "use client";
 import "../Header/header.css";
 import Search from "../Search/Search";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Location from "../LocationsCarousel/Location";
+import Events from "../LocationsCarousel/Events";
+import LoginModal from "@/modals/Login Modal/LoginModal";
 
 const Header = ({}) => {
+  const [emailVerification, setEmailVerification] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpen2, setIsOpen2] = useState(false);
+  const buttons = [
+    "Abeokuta",
+    "Ikeja",
+    "Mushin",
+    "Victoria Island",
+    "Magodo",
+    "Ketu",
+  ];
+
+  const buttons2 = [
+    "Weddings",
+    "Concerts",
+    "Parties",
+    "Seminars",
+    "Graduation",
+    "Corperate Events",
+  ];
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
+
+  const toggleDropdown2 = () => {
+    setIsOpen2(!isOpen2);
+  };
+
+  const [isExtended, setIsExtended] = useState(false);
+  const [isExtended2, setIsExtended2] = useState(false);
+  const navbarRef = useRef(null);
+
+  const toggleExtend = () => {
+    setIsExtended(!isExtended);
+  };
+
+  const toggleExtend2 = () => {
+    setIsExtended2(!isExtended2);
+  };
+
+  const handleClickOutside = (event) => {
+    if (navbarRef.current && !navbarRef.current.contains(event.target)) {
+      setIsExtended(false);
+      setIsExtended2(false);
+      setIsOpen(false);
+      setIsOpen2(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const [duplicatedButton, setDuplicatedButton] = useState(null);
+
+  const handleDuplicate = (button) => {
+    setDuplicatedButton(button);
+  };
+
+  const handleRemove = () => {
+    setDuplicatedButton(null);
+  };
+
+  const [duplicatedButton2, setDuplicatedButton2] = useState(null);
+
+  const handleDuplicate2 = (button2) => {
+    setDuplicatedButton2(button2);
+  };
+
+  const handleRemove2 = () => {
+    setDuplicatedButton2(null);
+  };
   return (
-    <div>
+    <div ref={navbarRef} className={`navbar ${isExtended ? "extended" : ""}`}>
+      <div className={`extended-content  ${isExtended ? "slide-down" : ""}`}>
+        <div className="locationCardHolder">
+          {buttons.map((button, index) => (
+            <Location
+              key={index}
+              label={button}
+              onClick={() => handleDuplicate(button)}
+            />
+          ))}
+        </div>
+      </div>
+      <div className={`extended-content  ${isExtended2 ? "slide-down" : ""}`}>
+        <div className="locationCardHolder">
+          {buttons2.map((button2, index) => (
+            <Events
+              key={index}
+              label={button2}
+              onClick={() => handleDuplicate2(button2)}
+            />
+          ))}
+        </div>
+      </div>
+
       <div className="header">
         <div className="Headerlogo">
           <img
             src="/images/RNL.svg"
             alt="ReservNow"
             style={{ height: "22px" }}
-          />
+          />{" "}
         </div>
         <div className="SearchBarHolder">
-          <Search />
+          <Search
+            toggleExtend={toggleExtend}
+            isExtended={isExtended}
+            toggleExtend2={toggleExtend2}
+            isExtended2={isExtended2}
+            toggleDropdown2={toggleDropdown2}
+            isOpen2={isOpen2}
+            duplicatedButton={duplicatedButton}
+            handleRemove={handleRemove}
+            duplicatedButton2={duplicatedButton2}
+            handleRemove2={handleRemove2}
+          />
         </div>
         <div className="ProfileSection">
           <div className="ReserveLink">
@@ -55,7 +164,11 @@ const Header = ({}) => {
             {isOpen && (
               <div className="DropdownContent">
                 <div className="contentSection1">
-                  <Link href={""} className="DropdownLinks">
+                  <Link
+                    href={""}
+                    className="DropdownLinks"
+                    onClick={() => setEmailVerification(true)}
+                  >
                     Signin
                   </Link>
                   <Link href={""} className="DropdownLinks">
@@ -75,6 +188,10 @@ const Header = ({}) => {
           </div>
         </div>
       </div>
+      <LoginModal
+        emailVerification={emailVerification}
+        setEmailVerification={setEmailVerification}
+      />
     </div>
   );
 };

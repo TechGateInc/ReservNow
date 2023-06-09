@@ -11,8 +11,11 @@ import EmailVerification from "../Email Verification Modal/EmailVerification";
 import PasswordModal from "../Password Modal/PasswordModal";
 import SignUpModal from "../Sign Up Modal/SignUpModal";
 
-export default function LoginModal() {
-  const [emailVerification, setEmailVerification] = useState(false);
+export default function LoginModal({
+  emailVerification,
+  setEmailVerification,
+}) {
+  // const [emailVerification, setEmailVerification] = useState(false);
   const [passwordModal, setPasswordModal] = useState(false);
   const [signUpModal, setSignUpModal] = useState(false);
 
@@ -140,8 +143,6 @@ export default function LoginModal() {
 
   return (
     <div className={styles["login-modal-root"]}>
-      <button onClick={() => setEmailVerification(true)}>Login</button>
-
       <EmailVerificationPopup
         trigger={emailVerification}
         setTrigger={setEmailVerification}

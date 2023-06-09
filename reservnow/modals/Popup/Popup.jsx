@@ -11,7 +11,7 @@ export function EmailVerificationPopup(props) {
           className={styles["close-btn"]}
           onClick={() => {
             props.setTrigger(false);
-            props.setEmailFormData("");
+            props.setEmailFormData({ email: "" });
           }}
         >
           <div className={styles["cancel-icon"]}>
@@ -33,7 +33,7 @@ export function PasswordPopup(props) {
           onClick={() => {
             props.setEmailVerification(true);
             props.setTrigger(false);
-            props.setPasswordFormData("");
+            props.setPasswordFormData({ password: "" });
           }}
         >
           <div className={styles["back-icon"]}>
@@ -57,7 +57,12 @@ export function SignupPopup(props) {
           onClick={() => {
             props.setEmailVerification(true);
             props.setTrigger(false);
-            props.setSignUpFormData(" ");
+            props.setSignUpFormData({
+              name: "",
+              email: "",
+              password: "",
+              phoneNo: "",
+            });
           }}
         >
           <div className={styles["back-icon"]}>
