@@ -15,7 +15,6 @@ export default function LoginModal({
   emailVerification,
   setEmailVerification,
 }) {
-  // const [emailVerification, setEmailVerification] = useState(false);
   const [passwordModal, setPasswordModal] = useState(false);
   const [signUpModal, setSignUpModal] = useState(false);
 
