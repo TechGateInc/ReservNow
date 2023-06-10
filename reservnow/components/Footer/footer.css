@@ -1,0 +1,107 @@
+.footer {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: white;
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  border-top: 2px solid rgb(233, 233, 233);
+  align-items: center;
+}
+
+.leftLinks {
+  width: 40%;
+  display: flex;
+  flex-direction: row;
+  margin-right: 20%;
+  justify-content: space-between;
+}
+
+.rightLinks {
+  width: 40%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.rightLinks p {
+  margin-left: 20px;
+}
+
+.hiddenSection {
+  height: 250px;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: white;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 10s ease-in-out;
+  z-index: 1;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  border-top: 2px solid rgb(233, 233, 233);
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+}
+
+.hiddenSection.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.5
+  ); /* Adjust the opacity value (0.5) for desired darkness */
+  /* Ensure the overlay is below the hidden section */
+  display: none;
+}
+
+.overlay.active {
+  display: block;
+}
+
+body.overlay-active {
+  overflow: hidden;
+}
+
+.dropdownCaret {
+  margin-left: 10px;
+  font-size: 15px;
+}
+
+.hiddenFooterLinkHolder {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding: 10px;
+}
+
+.hiddenFooterLink1 {
+  width: 25%;
+}
+.hiddenFooterLink2 {
+  width: 25%;
+}
+.hiddenFooterLink3 {
+  width: 25%;
+}
+.hiddenFooterLink4 {
+  width: 25%;
+}
