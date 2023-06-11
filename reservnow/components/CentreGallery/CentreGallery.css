@@ -13,9 +13,10 @@
   align-items: center;
 }
 
+
+
 .galleryCardHolder {
   margin-top: 20px;
-  height: 600px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -39,6 +40,12 @@
   padding: 10px;
   background-color: whitesmoke;
   width: 99.3%;
+  transition: transform 0.2s ease-in-out;
+}
+
+.centreDesc:hover{
+    cursor: pointer;
+   transform: scale(1.1);
 }
 
 .ratingSection {
@@ -64,6 +71,12 @@
   color: red;
   font-size: 25px;
 
+}
+
+.centreDesc-content{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 5px;
 }
 
 
