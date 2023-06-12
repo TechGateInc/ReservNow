@@ -16,7 +16,7 @@ const Header = ({ }) => {
     "Ikeja",
     "Mushin",
     "Victoria Island",
-    "Magodo",
+    "Akute",
     "Ketu",
   ];
 

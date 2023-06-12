@@ -1,9 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import "../CentreGallery/CentreGallery.css";
-import { AiFillStar, AiOutlineHeart, AiFillHeart } from "react-icons/ai";
-import ImageSlider from "./ImageSlider";
-import { RiArrowRightSLine } from "react-icons/ri";
 import config from "@/config";
 import CentreCard from "./CentreCard";
 
@@ -34,7 +31,7 @@ const CentreGallery = () => {
 
   return (
     <div className="galleryHolder">
-      <p style={{ textAlign: "center", fontSize: 40 }}>Our Centres</p>
+    
       <div className="galleryCardHolder">
         {centres &&
           centres.map((centre, index) => (

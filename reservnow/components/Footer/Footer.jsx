@@ -2,6 +2,10 @@
 import { useEffect, useState } from "react";
 import "../Footer/footer.css";
 import { AiFillCaretUp, AiOutlineCloseCircle } from "react-icons/ai";
+import AOS from "aos";
+import "aos/dist/aos.css"; // You can also use <link> for styles
+// ..
+AOS.init();
 
 const Footer = () => {
   const [isHidden, setIsHidden] = useState(true);
@@ -28,10 +32,10 @@ const Footer = () => {
       <div className="footer">
         {isHidden ? (
           <div className="leftLinks">
-            <p>©2023 ReserveNow.inc</p>
-            <p>terms</p>
-            <p>sitemap</p>
-            <p>Privacy</p>
+            <p>©2023 ReserveNow.inc</p>.
+            <p>Terms</p>.
+            <p>Sitemap</p>.
+            <p>Privacy</p>.
             <p>Centres</p>
           </div>
         ) : null}
@@ -50,7 +54,10 @@ const Footer = () => {
         ) : null}
       </div>
       {!isHidden ? (
-        <div className="hiddenSectionWrapper">
+        <div className="hiddenSectionWrapper" 
+        // data-aos="fade-up"
+        // data-aos-duration="1000"
+        >
           <div className={`hiddenSection ${isHidden ? "" : "active"}`}>
             {/* Content of the hidden section */}
             <h1 onClick={hideHiddenSection}>
