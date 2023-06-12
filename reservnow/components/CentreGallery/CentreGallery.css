@@ -1,0 +1,83 @@
+.galleryHolder {
+  padding-left: 5%;
+  padding-right: 5%;
+  margin-top: 100px;
+}
+
+.galleryCardV1 {
+  width: 270px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+.galleryCardHolder {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.centreImageHolder {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.centreImage {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.centreDesc {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+  padding: 10px;
+  background-color: whitesmoke;
+  width: 99.3%;
+  transition: transform 0.2s ease-in-out;
+}
+
+.centreDesc:hover{
+    cursor: pointer;
+   transform: scale(1.1);
+}
+
+.ratingSection {
+  display: flex;
+  flex-direction: row;
+}
+
+.iconWrapper {
+  position: relative;
+  top: 40px;
+  left: 240px;
+  z-index: 1;
+  width: 20px;
+}
+
+.likeIcon1 {
+  color: white;
+  font-size: 25px;
+  z-index: 0 !important;
+}
+
+.likeIcon2 {
+  color: red;
+  font-size: 25px;
+
+}
+
+.centreDesc-content{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 5px;
+}
+
+
+  
