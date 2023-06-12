@@ -10,9 +10,12 @@
   width: 100%;
   height: 80px;
   align-items: center;
- 
+  z-index: 1;
   border-bottom: 2px solid rgb(233, 233, 233);
+  position: fixed;
 }
+
+
 
 .SearchBar {
   display: flex;
@@ -25,11 +28,11 @@
   align-items: center;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   height: 48px;
-  font-family: 'Circular';
+  font-family: "Circular";
 }
-.SearchBar p{
-    font-size: 14px;
-    font-weight:500;
+.SearchBar p {
+  font-size: 14px;
+  font-weight: 500;
 }
 
 .weekBtn {
@@ -169,52 +172,45 @@
   transition: height 0.3s ease;
   margin-left: 5%;
   margin-right: 5%;
+  z-index: 1 !important;
 }
 
 .slide-down {
-  height: 70px; 
+  height: 70px;
+  z-index: 1;
 }
 
-.location-Cards{
+.location-Cards {
   /* background-color: rgb(107, 107, 232); */
   background-color: white;
   border: 1px solid rgb(221, 221, 221);
-  width:140px;
+  width: 140px;
   height: 30px;
   /* box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px; */
   border-radius: 15px;
   display: flex;
- justify-content: center;
+  justify-content: center;
   align-items: center;
   color: black;
   transition: transform 0.2s ease-in-out;
-  
-
 }
-
-
 
 .location-Cards:hover {
   transform: scale(1.1);
   cursor: pointer;
 }
 
-.locationCardHolder{
+.locationCardHolder {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-   margin-top: 20px;
+  margin-top: 20px;
 }
 
-
-
-.DropdownLinks2{
+.DropdownLinks2 {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding: 15px;
   text-decoration: none;
- 
-  
 }
-
