@@ -5,9 +5,9 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Location from "../LocationsCarousel/Location";
 import Events from "../LocationsCarousel/Events";
-import LoginModal from "@/modals/Login Modal/LoginModal";
+import LoginModal from "@/components/modals/Login Modal/LoginModal";
 
-const Header = ({}) => {
+const Header = ({ }) => {
   const [emailVerification, setEmailVerification] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isOpen2, setIsOpen2] = useState(false);
@@ -168,8 +168,9 @@ const Header = ({}) => {
                     href={""}
                     className="DropdownLinks"
                     onClick={() => setEmailVerification(true)}
+                    style={{ textDecoration: 'none' }}
                   >
-                    Signin
+                    Log in
                   </Link>
                   <Link href={""} className="DropdownLinks">
                     Signin

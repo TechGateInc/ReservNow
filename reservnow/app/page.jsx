@@ -1,13 +1,10 @@
-"use client";
+"use client"
 
-import LoginModal from "@/modals/Login Modal/LoginModal";
+import { AuthProvider } from '../Context/context';
 
 export default function Home() {
   return (
-    <main style={{ backgroundColor: "white", color: "black" }}>
-      <div>
-        <LoginModal />
-      </div>
-    </main>
+    <AuthProvider>
+    </AuthProvider>
   );
 }
