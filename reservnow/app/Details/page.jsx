@@ -7,9 +7,26 @@ import { IoIosShare } from "react-icons/io";
 import { IoArrowForwardOutline } from "react-icons/io5";
 import { GrCapacity } from "react-icons/gr";
 import { Rating } from "@/components/Ratings Star/RatingStar";
-import { ReviewPopup } from "@/modals/Popup/Popup";
+import { ReviewPopup } from "@/components/modals/Popup/Popup";
+import { useAuth } from "@/Context/context";
+import LoginModal from "@/components/modals/Login Modal/LoginModal";
 
 export default function Details() {
+  const { state } = useAuth();
+  const { isLoggedIn } = state;
+  const [emailVerification, setEmailVerification] = useState(false);
+
+  const handleBook = () => {
+    if (isLoggedIn) {
+      // Perform add to cart action
+    } else {
+      // Show login modal or trigger login popup
+      setEmailVerification(true)
+    }
+  };
+
+
+
   const [Review, setReview] = useState(false);
   const [isOverflowed, setIsOverflowed] = useState(false);
   const ratingValue = 3;
@@ -207,7 +224,7 @@ export default function Details() {
               </div>
             </div>
             <div className={styles["book-btn"]}>
-              <button>Book</button>
+              <button onClick={handleBook}>Book</button>
             </div>
           </div>
         </div>
@@ -355,6 +372,10 @@ export default function Details() {
           </ReviewPopup>
         </div>
       </div>
+      <LoginModal
+        emailVerification={emailVerification}
+        setEmailVerification={setEmailVerification}
+      />
     </div>
   );
 }
