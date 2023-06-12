@@ -8,6 +8,11 @@
   margin-top: 8%;
 }
 
+.email-modal-content h2 {
+  display: flex;
+  align-items: center;
+}
+
 .email-modal-form {
   margin-top: 4%;
 }

@@ -1,6 +1,4 @@
 "use client";
-
-import Link from "next/link";
 import styles from "./loginModal.module.css";
 import { useState } from "react";
 import config from "@/config";
@@ -10,15 +8,22 @@ import { SignupPopup } from "../Popup/Popup";
 import EmailVerification from "../Email Verification Modal/EmailVerification";
 import PasswordModal from "../Password Modal/PasswordModal";
 import SignUpModal from "../Sign Up Modal/SignUpModal";
+import { useAuth } from '../../../Context/context';
+import { loginRequest, loginSuccess, loginFailure, logout } from '../../../Context/actions';
 
-export default function LoginModal() {
-  const [emailVerification, setEmailVerification] = useState(false);
+export default function LoginModal({
+  emailVerification,
+  setEmailVerification,
+}) {
+
   const [passwordModal, setPasswordModal] = useState(false);
   const [signUpModal, setSignUpModal] = useState(false);
-
   //for the email verification
   const [emailFormData, setEmailFormData] = useState({ email: "" });
   const [emailData, setEmailData] = useState([]);
+
+  const { state, dispatch } = useAuth();
+
 
   //For checking if email exist
   const emailHandleSubmit = async (e) => {
@@ -68,7 +73,7 @@ export default function LoginModal() {
   // For logging in
   const passwordHandleSubmit = async (e) => {
     e.preventDefault();
-
+    dispatch(loginRequest());
     try {
       const response = await fetch(`${config.baseURL}/auth/user/signin`, {
         method: "POST",
@@ -85,7 +90,9 @@ export default function LoginModal() {
       const data = await response.json();
       console.log(data);
       window.alert("Login successful");
+      dispatch(loginSuccess(user));
     } catch (error) {
+      dispatch(loginFailure(error.message));
       window.alert("Login failed");
       console.error(error);
     }
@@ -140,8 +147,6 @@ export default function LoginModal() {
 
   return (
     <div className={styles["login-modal-root"]}>
-      <button onClick={() => setEmailVerification(true)}>Login</button>
-
       <EmailVerificationPopup
         trigger={emailVerification}
         setTrigger={setEmailVerification}

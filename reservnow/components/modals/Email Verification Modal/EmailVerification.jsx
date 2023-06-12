@@ -15,7 +15,16 @@ export default function EmailVerification({
           <p>Log in and sign up</p>
         </div>
         <div className={styles["email-modal-content"]}>
-          <h2>Welcome to ReservNow</h2>
+          <h2>
+            Welcome to{" "}
+            <div className="email-modal-logo">
+              <img
+                src="/images/RNL.svg"
+                alt="ReservNow"
+                style={{ height: "18px", marginLeft: "4%" }}
+              />
+            </div>
+          </h2>
           <div className={styles["email-modal-form"]}>
             <div className={styles["form-content"]}>
               <input

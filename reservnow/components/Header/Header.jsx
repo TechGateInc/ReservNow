@@ -5,8 +5,10 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Location from "../LocationsCarousel/Location";
 import Events from "../LocationsCarousel/Events";
+import LoginModal from "@/components/modals/Login Modal/LoginModal";
 
-const Header = ({}) => {
+const Header = ({ }) => {
+  const [emailVerification, setEmailVerification] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isOpen2, setIsOpen2] = useState(false);
   const buttons = [
@@ -52,7 +54,7 @@ const Header = ({}) => {
       setIsExtended(false);
       setIsExtended2(false);
       setIsOpen(false);
-      setIsOpen2(false)
+      setIsOpen2(false);
     }
   };
 
@@ -95,10 +97,9 @@ const Header = ({}) => {
             />
           ))}
         </div>
-
       </div>
       <div className={`extended-content  ${isExtended2 ? "slide-down" : ""}`}>
-      <div className="locationCardHolder">
+        <div className="locationCardHolder">
           {buttons2.map((button2, index) => (
             <Events
               key={index}
@@ -129,7 +130,6 @@ const Header = ({}) => {
             handleRemove={handleRemove}
             duplicatedButton2={duplicatedButton2}
             handleRemove2={handleRemove2}
-
           />
         </div>
         <div className="ProfileSection">
@@ -164,8 +164,13 @@ const Header = ({}) => {
             {isOpen && (
               <div className="DropdownContent">
                 <div className="contentSection1">
-                  <Link href={""} className="DropdownLinks">
-                    Signin
+                  <Link
+                    href={""}
+                    className="DropdownLinks"
+                    onClick={() => setEmailVerification(true)}
+                    style={{ textDecoration: 'none' }}
+                  >
+                    Log in
                   </Link>
                   <Link href={""} className="DropdownLinks">
                     Signin
@@ -184,6 +189,10 @@ const Header = ({}) => {
           </div>
         </div>
       </div>
+      <LoginModal
+        emailVerification={emailVerification}
+        setEmailVerification={setEmailVerification}
+      />
     </div>
   );
 };

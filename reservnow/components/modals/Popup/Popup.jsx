@@ -2,6 +2,10 @@ import Link from "next/link";
 import styles from "./popup.module.css";
 import { IoArrowBackCircle } from "react-icons/io5";
 import { MdCancel } from "react-icons/md";
+import AOS from "aos";
+import "aos/dist/aos.css"; // You can also use <link> for styles
+// ..
+AOS.init();
 
 export function EmailVerificationPopup(props) {
   return props.trigger ? (
@@ -11,7 +15,7 @@ export function EmailVerificationPopup(props) {
           className={styles["close-btn"]}
           onClick={() => {
             props.setTrigger(false);
-            props.setEmailFormData("");
+            props.setEmailFormData({ email: "" });
           }}
         >
           <div className={styles["cancel-icon"]}>
@@ -33,7 +37,7 @@ export function PasswordPopup(props) {
           onClick={() => {
             props.setEmailVerification(true);
             props.setTrigger(false);
-            props.setPasswordFormData("");
+            props.setPasswordFormData({ password: "" });
           }}
         >
           <div className={styles["back-icon"]}>
@@ -57,7 +61,12 @@ export function SignupPopup(props) {
           onClick={() => {
             props.setEmailVerification(true);
             props.setTrigger(false);
-            props.setSignUpFormData(" ");
+            props.setSignUpFormData({
+              name: "",
+              email: "",
+              password: "",
+              phoneNo: "",
+            });
           }}
         >
           <div className={styles["back-icon"]}>
@@ -65,6 +74,32 @@ export function SignupPopup(props) {
           </div>
           Finish Signing up
           <div></div>
+        </button>
+        {props.children}
+      </div>
+    </div>
+  ) : (
+    ""
+  );
+}
+
+export function ReviewPopup(props) {
+  return props.trigger ? (
+    <div className={styles["popup-modal"]}>
+      <div
+        className={styles["popup-modal-inner"]}
+        data-aos="fade-up"
+        data-aos-duration="1000"
+      >
+        <button
+          className={styles["close-btn"]}
+          onClick={() => {
+            props.setTrigger(false);
+          }}
+        >
+          <div className={styles["cancel-icon"]}>
+            <MdCancel />
+          </div>
         </button>
         {props.children}
       </div>
