@@ -130,6 +130,8 @@ const Header = ({ }) => {
             handleRemove={handleRemove}
             duplicatedButton2={duplicatedButton2}
             handleRemove2={handleRemove2}
+            setDuplicatedButton={setDuplicatedButton}
+            setDuplicatedButton2={setDuplicatedButton2}
           />
         </div>
         <div className="ProfileSection">
@@ -173,15 +175,15 @@ const Header = ({ }) => {
                     Log in
                   </Link>
                   <Link href={""} className="DropdownLinks">
-                    Signin
+                    Sign in
                   </Link>
                 </div>
                 <div className="contentSection2">
                   <Link href={""} className="DropdownLinks">
-                    Signin
+                    Reserve your Centre
                   </Link>
                   <Link href={""} className="DropdownLinks">
-                    Signin
+                    Help
                   </Link>
                 </div>
               </div>

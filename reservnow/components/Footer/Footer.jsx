@@ -32,11 +32,8 @@ const Footer = () => {
       <div className="footer">
         {isHidden ? (
           <div className="leftLinks">
-            <p>©2023 ReserveNow.inc</p>.
-            <p>Terms</p>.
-            <p>Sitemap</p>.
-            <p>Privacy</p>.
-            <p>Centres</p>
+            <p>©2023 ReserveNow.inc</p><p>.Terms</p><p>.Sitemap</p>
+            <p>.Privacy</p><p>Centres</p>
           </div>
         ) : null}
         {isHidden ? (
@@ -54,9 +51,10 @@ const Footer = () => {
         ) : null}
       </div>
       {!isHidden ? (
-        <div className="hiddenSectionWrapper" 
-        // data-aos="fade-up"
-        // data-aos-duration="1000"
+        <div
+          className="hiddenSectionWrapper"
+          // data-aos="fade-up"
+          // data-aos-duration="1000"
         >
           <div className={`hiddenSection ${isHidden ? "" : "active"}`}>
             {/* Content of the hidden section */}
@@ -70,9 +68,9 @@ const Footer = () => {
                 </div>
 
                 <div>
-                  <p>Help Centre</p>
-                  <p>Report a neighborhood</p>
-                  <p>Cancellation options</p>
+                  <p className="hiddenlink-space">Help Centre</p>
+                  <p className="hiddenlink-space">Report a neighborhood</p>
+                  <p className="hiddenlink-space">Cancellation options</p>
                   <p></p>
                 </div>
               </div>
@@ -81,9 +79,9 @@ const Footer = () => {
                   <p>Community</p>
                 </div>
                 <div>
-                  <p>Help Centre</p>
-                  <p>Report a neighborhood</p>
-                  <p>Cancellation options</p>
+                  <p className="hiddenlink-space">Help Centre</p>
+                  <p className="hiddenlink-space">Report a neighborhood</p>
+                  <p className="hiddenlink-space">Cancellation options</p>
                   <p></p>
                 </div>
               </div>
@@ -92,9 +90,9 @@ const Footer = () => {
                   <p> Hosting</p>
                 </div>
                 <div>
-                  <p>Help Centre</p>
-                  <p>Report a neighborhood</p>
-                  <p>Cancellation options</p>
+                  <p className="hiddenlink-space">Help Centre</p>
+                  <p className="hiddenlink-space">Report a neighborhood</p>
+                  <p className="hiddenlink-space">Cancellation options</p>
                   <p></p>
                 </div>
               </div>
@@ -103,9 +101,9 @@ const Footer = () => {
                   <p>ReserveNow</p>
                 </div>
                 <div>
-                  <p>Help Centre</p>
-                  <p>Report a neighborhood</p>
-                  <p>Cancellation options</p>
+                  <p className="hiddenlink-space">Help Centre</p>
+                  <p className="hiddenlink-space">Report a neighborhood</p>
+                  <p className="hiddenlink-space">Cancellation options</p>
                   <p></p>
                 </div>
               </div>

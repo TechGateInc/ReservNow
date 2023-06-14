@@ -10,11 +10,24 @@ const CentreGallery = () => {
   useEffect(() => {
     const fetchCentres = async () => {
       try {
-        const response = await fetch(`${config.baseURL}/eventcentre/`); // Replace with your API endpoint
-        const jsonData = await response.json();
-        getCentres(jsonData);
+        const response = await fetch(`${config.baseURL}/eventcentre/`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          // body: JSON.stringify({
+          //   duplicatedButton: duplicatedButton,
+          //   duplicatedButton3: duplicatedButton3,
+          // }),
+        });
+        const data = await response.json();
+        if (response.ok) {
+          getCentres(data);
+        } else {
+          console.log("Error:", data.message);
+        }
       } catch (error) {
-        console.log("Error fetching data:", error);
+        console.log("Error:", error);
       }
     };
 
@@ -31,15 +44,11 @@ const CentreGallery = () => {
 
   return (
     <div className="galleryHolder">
-    
       <div className="galleryCardHolder">
         {centres &&
           centres.map((centre, index) => (
             <CentreCard key={index} centre={centre} />
           ))}
-       
-      
-     
       </div>
     </div>
   );

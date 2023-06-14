@@ -35,14 +35,14 @@ const CentreCard = ({ centre }) => {
       </div>
       <div className="centreDesc">
         <div>
-          <p style={{ fontSize: 17, fontFamily: "700" }}>{centre.centreName}</p>
+          <p style={{ fontSize: 17, fontFamily: "700" }}>{centre.name}</p>
           <div
             className="centreDesc-content"
             style={{ marginTop: 5, fontSize: 13 }}
           >
             <MdLocationOn />
             <p style={{ color: "gray", marginLeft: 10 }}>
-              {centre.centreCity}, {centre.centreState}
+              {centre.city}, {centre.state}
             </p>
           </div>
           <div className="centreDesc-content" style={{ fontSize: 13 }}>

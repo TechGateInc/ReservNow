@@ -36,6 +36,7 @@
 
 .rightLinks p {
   margin-left: 20px;
+  font-size: 14px;
 }
 
 .hiddenSection {
@@ -109,4 +110,10 @@ body.overlay-active {
 }
 .hiddenFooterLink4 {
   width: 25%;
+}
+
+.hiddenlink-space{
+  margin-bottom: 15px;
+ 
+  
 }
