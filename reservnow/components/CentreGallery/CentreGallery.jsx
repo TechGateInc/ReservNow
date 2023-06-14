@@ -11,7 +11,7 @@ const CentreGallery = () => {
     const fetchCentres = async () => {
       try {
         const response = await fetch(`${config.baseURL}/eventcentre/`, {
-          method: "POST",
+          method: "GET",
           headers: {
             "Content-Type": "application/json",
           },

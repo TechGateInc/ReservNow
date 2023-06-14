@@ -56,7 +56,7 @@ const CentreCard = ({ centre }) => {
         </div>
         <div className="ratingSection">
           <AiFillStar />
-          4.7
+          {centre.rating}
         </div>
       </div>
     </div>
