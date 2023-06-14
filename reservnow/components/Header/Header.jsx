@@ -9,9 +9,8 @@ import LoginModal from "@/components/modals/Login Modal/LoginModal";
 
 const Header = ({ }) => {
   const [emailVerification, setEmailVerification] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
-  const [isOpen2, setIsOpen2] = useState(false);
-  const buttons = [
+
+  const locations = [
     "Abeokuta",
     "Ikeja",
     "Mushin",
@@ -20,7 +19,7 @@ const Header = ({ }) => {
     "Ketu",
   ];
 
-  const buttons2 = [
+  const eventTypes = [
     "Weddings",
     "Concerts",
     "Parties",
@@ -29,32 +28,35 @@ const Header = ({ }) => {
     "Corperate Events",
   ];
 
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
+  const [isCapacityOpen, setIsCapacityOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const dropdownToggle = (type) => {
+    if (type === "capacity") {
+      setIsCapacityOpen(!isCapacityOpen);
+    } else if (type === "menu") {
+      setIsMenuOpen(!isMenuOpen);
+    }
   };
 
-  const toggleDropdown2 = () => {
-    setIsOpen2(!isOpen2);
-  };
-
-  const [isExtended, setIsExtended] = useState(false);
-  const [isExtended2, setIsExtended2] = useState(false);
+  const [isLocationExtended, setIsLocationExtended] = useState(false);
+  const [isEventExtended, setIsEventExtended] = useState(false);
   const navbarRef = useRef(null);
 
-  const toggleExtend = () => {
-    setIsExtended(!isExtended);
-  };
-
-  const toggleExtend2 = () => {
-    setIsExtended2(!isExtended2);
+  const extendToggle = (type) => {
+    if (type === "location") {
+      setIsLocationExtended(!isLocationExtended);
+    } else if (type === "event") {
+      setIsEventExtended(!isEventExtended);
+    }
   };
 
   const handleClickOutside = (event) => {
     if (navbarRef.current && !navbarRef.current.contains(event.target)) {
-      setIsExtended(false);
-      setIsExtended2(false);
-      setIsOpen(false);
-      setIsOpen2(false);
+      setIsLocationExtended(false);
+      setIsEventExtended(false);
+      setIsMenuOpen(false);
+      setIsCapacityOpen(false);
     }
   };
 
@@ -66,41 +68,32 @@ const Header = ({ }) => {
     };
   }, []);
 
-  const [duplicatedButton, setDuplicatedButton] = useState(null);
+  const [location, setLocation] = useState(null);
 
-  const handleDuplicate = (button) => {
-    setDuplicatedButton(button);
+  const handleLocation = (label) => {
+    setLocation(label);
   };
 
   const handleRemove = () => {
-    setDuplicatedButton(null);
+    setLocation(null);
   };
-
-  const [duplicatedButton2, setDuplicatedButton2] = useState(null);
-
-  const handleDuplicate2 = (button2) => {
-    setDuplicatedButton2(button2);
-  };
-
-  const handleRemove2 = () => {
-    setDuplicatedButton2(null);
-  };
+  
   return (
-    <div ref={navbarRef} className={`navbar ${isExtended ? "extended" : ""}`}>
-      <div className={`extended-content  ${isExtended ? "slide-down" : ""}`}>
+    <div ref={navbarRef} className={`navbar ${isLocationExtended ? "extended" : ""}`}>
+      <div className={`extended-content  ${isLocationExtended ? "slide-down" : ""}`}>
         <div className="locationCardHolder">
-          {buttons.map((button, index) => (
+          {locations.map((button, index) => (
             <Location
               key={index}
               label={button}
-              onClick={() => handleDuplicate(button)}
+              handleLocation={handleLocation}
             />
           ))}
         </div>
       </div>
-      <div className={`extended-content  ${isExtended2 ? "slide-down" : ""}`}>
+      <div className={`extended-content  ${isEventExtended ? "slide-down" : ""}`}>
         <div className="locationCardHolder">
-          {buttons2.map((button2, index) => (
+          {eventTypes.map((button2, index) => (
             <Events
               key={index}
               label={button2}
@@ -116,22 +109,16 @@ const Header = ({ }) => {
             src="/images/RNL.svg"
             alt="ReservNow"
             style={{ height: "22px" }}
-          />{" "}
+          />
         </div>
         <div className="SearchBarHolder">
           <Search
-            toggleExtend={toggleExtend}
-            isExtended={isExtended}
-            toggleExtend2={toggleExtend2}
-            isExtended2={isExtended2}
-            toggleDropdown2={toggleDropdown2}
-            isOpen2={isOpen2}
-            duplicatedButton={duplicatedButton}
+            dropdownToggle={dropdownToggle}
+            extendToggle={extendToggle}
+            isCapacityOpen={isCapacityOpen}
+            location={location}
             handleRemove={handleRemove}
-            duplicatedButton2={duplicatedButton2}
-            handleRemove2={handleRemove2}
-            setDuplicatedButton={setDuplicatedButton}
-            setDuplicatedButton2={setDuplicatedButton2}
+            setLocation={setLocation}
           />
         </div>
         <div className="ProfileSection">
@@ -147,7 +134,7 @@ const Header = ({ }) => {
             />
           </div>
 
-          <div className="profileHolder" onClick={toggleDropdown}>
+          <div className="profileHolder" onClick={() => dropdownToggle('menu')}>
             <div className="profileHolderIcons">
               <div>
                 <img
@@ -163,7 +150,7 @@ const Header = ({ }) => {
                 />
               </div>
             </div>
-            {isOpen && (
+            {isMenuOpen && (
               <div className="DropdownContent">
                 <div className="contentSection1">
                   <Link
