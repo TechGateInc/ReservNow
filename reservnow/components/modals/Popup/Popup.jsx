@@ -2,10 +2,10 @@ import Link from "next/link";
 import styles from "./popup.module.css";
 import { IoArrowBackCircle } from "react-icons/io5";
 import { MdCancel } from "react-icons/md";
-import AOS from "aos";
-import "aos/dist/aos.css"; // You can also use <link> for styles
-// ..
-AOS.init();
+// import AOS from "aos";
+// import "aos/dist/aos.css"; // You can also use <link> for styles
+// // ..
+// AOS.init();
 
 export function EmailVerificationPopup(props) {
   return props.trigger ? (
@@ -88,8 +88,8 @@ export function ReviewPopup(props) {
     <div className={styles["popup-modal"]}>
       <div
         className={styles["popup-modal-inner"]}
-        data-aos="fade-up"
-        data-aos-duration="1000"
+        // data-aos="fade-up"
+        // data-aos-duration="1000"
       >
         <button
           className={styles["close-btn"]}

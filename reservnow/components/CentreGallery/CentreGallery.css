@@ -55,11 +55,12 @@
 
 .iconWrapper {
   position: relative;
-  top: 40px;
+  top: 50px;
   left: 240px;
   z-index: 1;
   width: 20px;
 }
+
 
 .likeIcon1 {
   color: white;

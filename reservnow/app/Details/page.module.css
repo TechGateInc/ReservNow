@@ -104,7 +104,11 @@
 
 .details-card .details-card-right {
   width: 35%;
-  height: 250px;
+  padding: 0;
+}
+.details-card-right .details-card-right-inner {
+  width: 100%;
+  /* height: 250px; */
   border-radius: 5px;
   padding: 20px;
   background-color: white;
@@ -129,11 +133,13 @@
   display: flex;
   flex-direction: column;
   width: 50%;
+  margin-bottom: 2%;
 }
 .card-right-content .form-content input {
   width: 100%;
   padding: 5px;
   border: none;
+  outline: none;
 }
 .book-btn button {
   margin-top: 5%;
@@ -175,18 +181,39 @@
   margin-bottom: 2%;
 }
 
-.show-more-btn{
-    background-color: white;
-    border: none;
-    cursor: pointer;
-    margin-bottom: 2%;
+.show-more-btn {
+  background-color: white;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 2%;
+  text-decoration: underline;
+  font-weight: 600;
 }
 
-
-.overflow-ellipsis {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-  }
+.card-right-footer .compilation{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5%;
+}
+.card-right-footer .compilation button{
+  border: none;
+  background-color: white;
+  font-size: 14px;
+  text-decoration: underline;
+  color: grey;
+}
+.card-right-footer .total{
+  font-size: 16px;
+  margin-top: 10%;
+  color: black;
+  display: flex;
+  justify-content: space-between;
+}
+.disAlCenter{
+  display: flex;
+  align-items: center;
+}
+.disJusSpaBet{
+  display: flex;
+  justify-content: space-between;
+}

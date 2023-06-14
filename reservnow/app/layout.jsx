@@ -1,4 +1,3 @@
-
 import "./globals.css";
 import { Inter } from "next/font/google";
 import Footer from "@/components/Footer/Footer";
@@ -13,8 +12,8 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <AuthProvider>
           <Header />
-          {children}
-          <Footer/>
+          <div style={{marginTop: "8%"}}>{children}</div>
+          <Footer />
         </AuthProvider>
       </body>
     </html>

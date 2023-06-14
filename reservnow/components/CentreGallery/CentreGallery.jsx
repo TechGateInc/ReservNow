@@ -40,9 +40,6 @@ const CentreGallery = () => {
           centres.map((centre, index) => (
             <CentreCard key={index} centre={centre} />
           ))}
-       
-      
-     
       </div>
     </div>
   );
