@@ -2,10 +2,11 @@ import Link from "next/link";
 import styles from "./popup.module.css";
 import { IoArrowBackCircle } from "react-icons/io5";
 import { MdCancel } from "react-icons/md";
-import AOS from "aos";
-import "aos/dist/aos.css"; // You can also use <link> for styles
-// ..
-AOS.init();
+if (typeof document !== "undefined") {
+  const AOS = require("aos");
+  require("aos/dist/aos.css");
+  AOS.init();
+}
 
 export function EmailVerificationPopup(props) {
   return props.trigger ? (
