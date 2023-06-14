@@ -27,3 +27,26 @@
     justify-content: space-between;
     flex-wrap: wrap;
   }
+
+  .skeletonImage{
+    background-color: rgb(230, 230, 230);
+    width: 290px;
+    height: 250px;
+    border-radius: 8px;
+  }
+
+  .skeletonText{
+    background-color: rgb(230, 230, 230);
+    width: 290px;
+    height: 15px;
+    margin-top: 5px;
+
+  }
+
+  .skeletonText1{
+    background-color: rgb(230, 230, 230);
+    width: 290px;
+    height: 25px;
+    margin-top: 15px;
+
+  }

@@ -7,7 +7,7 @@ import Location from "../LocationsCarousel/Location";
 import Events from "../LocationsCarousel/Events";
 import LoginModal from "@/components/modals/Login Modal/LoginModal";
 
-const Header = ({ }) => {
+const Header = ({}) => {
   const [emailVerification, setEmailVerification] = useState(false);
 
   const locations = [
@@ -16,7 +16,7 @@ const Header = ({ }) => {
     "Mushin",
     "Victoria Island",
     "Akute",
-    "Ketu",
+    "Magodo",
   ];
 
   const eventTypes = [
@@ -77,10 +77,17 @@ const Header = ({ }) => {
   const handleRemove = () => {
     setLocation(null);
   };
-  
+
   return (
-    <div ref={navbarRef} className={`navbar ${isLocationExtended ? "extended" : ""}`}>
-      <div className={`extended-content  ${isLocationExtended ? "slide-down" : ""}`}>
+    <div
+      ref={navbarRef}
+      className={`navbar ${isLocationExtended ? "extended" : ""}`}
+    >
+      <div
+        className={`extended-content  ${
+          isLocationExtended ? "slide-down" : ""
+        }`}
+      >
         <div className="locationCardHolder">
           {locations.map((button, index) => (
             <Location
@@ -91,7 +98,9 @@ const Header = ({ }) => {
           ))}
         </div>
       </div>
-      <div className={`extended-content  ${isEventExtended ? "slide-down" : ""}`}>
+      <div
+        className={`extended-content  ${isEventExtended ? "slide-down" : ""}`}
+      >
         <div className="locationCardHolder">
           {eventTypes.map((button2, index) => (
             <Events
@@ -134,7 +143,7 @@ const Header = ({ }) => {
             />
           </div>
 
-          <div className="profileHolder" onClick={() => dropdownToggle('menu')}>
+          <div className="profileHolder" onClick={() => dropdownToggle("menu")}>
             <div className="profileHolderIcons">
               <div>
                 <img
@@ -157,7 +166,7 @@ const Header = ({ }) => {
                     href={""}
                     className="DropdownLinks"
                     onClick={() => setEmailVerification(true)}
-                    style={{ textDecoration: 'none' }}
+                    style={{ textDecoration: "none" }}
                   >
                     Log in
                   </Link>

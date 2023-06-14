@@ -25,6 +25,7 @@ const Search = ({
   };
 
   const capacitySize = [
+    10,
     50,
     100,
     200,
@@ -34,7 +35,8 @@ const Search = ({
   const router = useRouter();
 
   const handleSearchClick = () => {
-    router.push(`/search?l=${location}c=${capacity}`);
+    router.push(`/search?l=${location}&c=${capacity}`);
+    
   };
 
   return (

@@ -3,9 +3,11 @@ import React, { useState, useEffect } from "react";
 import "../CentreGallery/CentreGallery.css";
 import config from "@/config";
 import CentreCard from "./CentreCard";
+import SearchSkeleton from "../SearchSkeleton/SearchSkeleton";
 
 const CentreGallery = () => {
   const [centres, getCentres] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchCentres = async () => {
@@ -15,14 +17,11 @@ const CentreGallery = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          // body: JSON.stringify({
-          //   duplicatedButton: duplicatedButton,
-          //   duplicatedButton3: duplicatedButton3,
-          // }),
         });
         const data = await response.json();
         if (response.ok) {
           getCentres(data);
+          setIsLoading(false);
         } else {
           console.log("Error:", data.message);
         }
@@ -45,10 +44,29 @@ const CentreGallery = () => {
   return (
     <div className="galleryHolder">
       <div className="galleryCardHolder">
-        {centres &&
+      {isLoading ? (
+        <div 
+         style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            width:"100%",
+            marginTop:35
+          }}
+        >
+          <SearchSkeleton/>
+          <SearchSkeleton/>
+          <SearchSkeleton/>
+          <SearchSkeleton/>
+          </div>
+        ) : (
+
+        centres &&
           centres.map((centre, index) => (
             <CentreCard key={index} centre={centre} />
-          ))}
+          ))
+          
+        )}
       </div>
     </div>
   );

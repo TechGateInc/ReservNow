@@ -236,3 +236,7 @@
   
 
 }
+.searchBtn:hover{
+   cursor: pointer;
+   background-color: rgb(236, 167, 179);
+}
