@@ -1,6 +1,10 @@
-const Location = ({ label, handleLocation }) => {
+const Location = ({ label, handleLocation, removeLocationExtend }) => {
+  const handleLocationClick = () => {
+    handleLocation(label);
+    removeLocationExtend();
+  };
   return (
-    <div className="location-Cards" onClick={() => handleLocation(label)}>
+    <div className="location-Cards" onClick={handleLocationClick}>
       {label}
     </div>
   );

@@ -12,10 +12,14 @@ const Footer = () => {
 
   const toggleHiddenSection = () => {
     setIsHidden(!isHidden);
+    // if (isHidden) {
+    //   AOS.refresh(); // Refresh AOS after changing visibility to trigger fade-down animation
+    // }
   };
 
   const hideHiddenSection = () => {
     setIsHidden(true);
+    // AOS.refresh(); 
   };
 
   useEffect(() => {
@@ -53,12 +57,18 @@ const Footer = () => {
       {!isHidden ? (
         <div
           className="hiddenSectionWrapper"
-          // data-aos="fade-up"
-          // data-aos-duration="1000"
+          // data-aos="fade-down"
         >
-          <div className={`hiddenSection ${isHidden ? "" : "active"}`}>
+          <div className={`hiddenSection ${isHidden ? "" : "active"}`}
+          
+          data-aos={isHidden ? "fade-down" : "fade-up"}
+          data-aos-duration="700"
+          
+          >
             {/* Content of the hidden section */}
-            <h1 onClick={hideHiddenSection}>
+            <h1 onClick={hideHiddenSection}
+            
+            >
               <AiOutlineCloseCircle style={{ fontSize: 20 }} />
             </h1>
             <div className="hiddenFooterLinkHolder">

@@ -116,6 +116,7 @@
   border-radius: 5px;
   background-color: white;
   z-index: 1;
+  
 }
 
 .DropdownContent2 {
@@ -129,6 +130,7 @@
   border-radius: 5px;
   background-color: white;
   z-index: 1;
+  color: black;
   
 }
 
@@ -190,7 +192,7 @@
   /* background-color: rgb(107, 107, 232); */
   background-color: white;
   border: 1px solid rgb(221, 221, 221);
-  width: 140px;
+  width: 140px !important;
   height: 30px;
   /* box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px; */
   border-radius: 15px;
@@ -198,6 +200,7 @@
   justify-content: center;
   align-items: center;
   color: black;
+  
   transition: transform 0.2s ease-in-out;
 }
 

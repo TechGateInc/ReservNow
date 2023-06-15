@@ -6,9 +6,41 @@ import Link from "next/link";
 import Location from "../LocationsCarousel/Location";
 import Events from "../LocationsCarousel/Events";
 import LoginModal from "@/components/modals/Login Modal/LoginModal";
+import config from "@/config";
 
 const Header = ({}) => {
   const [emailVerification, setEmailVerification] = useState(false);
+
+  const [centres, getCentres] = useState(null);
+
+  useEffect(() => {
+    const fetchCentres = async () => {
+      try {
+        const response = await fetch(`${config.baseURL}/eventcentre/`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        if (response.ok) {
+          const data = await response.json();
+          getCentres(data);
+          setIsLoading(false);
+        } else {
+          const errorData = await response.json();
+          throw new Error(
+            errorData.message || "Error occurred while fetching centres"
+          );
+        }
+      } catch (error) {
+        console.log("Error:", error.message);
+      }
+    };
+
+    fetchCentres();
+  }, []);
+
+  console.log(centres);
 
   const locations = [
     "Abeokuta",
@@ -51,6 +83,14 @@ const Header = ({}) => {
     }
   };
 
+  const removeLocationExtend = () => {
+    setIsLocationExtended(false);
+  };
+
+  const removeCapacityMenu = () => {
+    setIsCapacityOpen(false);
+  };
+
   const handleClickOutside = (event) => {
     if (navbarRef.current && !navbarRef.current.contains(event.target)) {
       setIsLocationExtended(false);
@@ -89,13 +129,23 @@ const Header = ({}) => {
         }`}
       >
         <div className="locationCardHolder">
-          {locations.map((button, index) => (
-            <Location
-              key={index}
-              label={button}
-              handleLocation={handleLocation}
-            />
-          ))}
+          { 
+          centres &&
+          [...new Set(centres.map((centre) => centre.city))]
+            .map((city) => ({
+              city,
+              count: centres.filter((centre) => centre.city === city).length,
+            }))
+            .sort((a, b) => b.count - a.count)
+            .slice(0, 6) // Get only the top 6 values
+            .map((item, index) => (
+              <Location
+                key={index}
+                label={item.city}
+                handleLocation={handleLocation}
+                removeLocationExtend={removeLocationExtend}
+              />
+            ))}
         </div>
       </div>
       <div
@@ -128,6 +178,7 @@ const Header = ({}) => {
             location={location}
             handleRemove={handleRemove}
             setLocation={setLocation}
+            removeCapacityMenu={removeCapacityMenu}
           />
         </div>
         <div className="ProfileSection">

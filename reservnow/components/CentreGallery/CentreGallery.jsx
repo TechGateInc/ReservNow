@@ -5,6 +5,7 @@ import config from "@/config";
 import CentreCard from "./CentreCard";
 import SearchSkeleton from "../SearchSkeleton/SearchSkeleton";
 
+
 const CentreGallery = () => {
   const [centres, getCentres] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -18,22 +19,25 @@ const CentreGallery = () => {
             "Content-Type": "application/json",
           },
         });
-        const data = await response.json();
         if (response.ok) {
+          const data = await response.json();
           getCentres(data);
           setIsLoading(false);
         } else {
-          console.log("Error:", data.message);
+          const errorData = await response.json();
+          throw new Error(errorData.message || "Error occurred while fetching centres");
         }
       } catch (error) {
-        console.log("Error:", error);
+        console.log("Error:", error.message);
       }
     };
-
+  
     fetchCentres();
   }, []);
+  
 
   console.log(centres);
+  console.log("car")
 
   const [isImageClicked, setIsImageClicked] = useState(false);
 
@@ -67,6 +71,7 @@ const CentreGallery = () => {
           ))
           
         )}
+     
       </div>
     </div>
   );

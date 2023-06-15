@@ -11,7 +11,10 @@ const Search = ({
   isCapacityOpen,
   location,
   handleRemove,
-  setLocation
+  setLocation,
+  removeCapacityMenu
+  
+
 }) => {
 
   const [capacity, setCapacity] = useState(null);
@@ -24,12 +27,13 @@ const Search = ({
     setCapacity(null);
   };
 
+  
+
   const capacitySize = [
-    10,
-    50,
-    100,
-    200,
-    500
+     "less than 100",
+     "100 - 500",
+     "500 - 1000",
+     "greater than 1000"
   ];
 
   const router = useRouter();
@@ -44,7 +48,8 @@ const Search = ({
       <div className="extend-button locationBtn" onClick={() => extendToggle('location')}>
         {location ? (
           <div>
-            <p onClick={() => setLocation(location)}>{location}</p>
+           <p onClick={() => { setLocation(location); handleRemove(); }}>{location}</p>
+
           </div>
         ) : (
           "Anywhere"
@@ -59,7 +64,7 @@ const Search = ({
       <div className="guestBtn extend-button" onClick={() => dropdownToggle('capacity')}>
         {capacity ? (
           <div>
-            <p onClick={() => setCapacity(capacity)}>{capacity}</p>
+            <p onClick={() => {setCapacity(capacity); handleRemove3();}}>{capacity}</p>
           </div>
         ) : (
           "Any Guest"
@@ -71,9 +76,9 @@ const Search = ({
             <Link
               href={""}
               className="DropdownLinks2"
-              onClick={() => handleCapcity(button3)}
+              onClick={() => {handleCapcity(button3); removeCapacityMenu(); }}
             >
-              <p> {button3}</p>
+              <p style={{color:"black"}}> {button3}</p>
             </Link>
           ))}
         </div>

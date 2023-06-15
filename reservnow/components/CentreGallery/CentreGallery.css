@@ -79,5 +79,11 @@
   border-radius: 8px !important;
 }
 
+.container {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  /* Add other styles as needed */
+}
 
   
