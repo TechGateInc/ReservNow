@@ -22,6 +22,7 @@ export default function Details() {
   const [centreDetails, setCentreDetails] = useState(""); // to get the centre data from db
   const [reviewData, setReviewData] = useState(""); // to get the review data from db
   const [Review, setReview] = useState(false); // to activate the review popup
+  const reservNowPrice = 270; //reserve now price
 
   const handleBook = () => {
     if (isLoggedIn) {
@@ -218,7 +219,69 @@ export default function Details() {
   };
   const duration = calculateDuration();
 
-  const reservNowPrice = 270;
+  // For booking an event centre
+  const [bookingForm, setBookingForm] = useState({
+    event_centre_id: "",
+    userId: "",
+    end_date: "",
+    start_date: "",
+    duration: "",
+    notes: "",
+  });
+
+  // to submit the booking request
+  const bookingHandleSubmit = async (e) => {
+    e.preventDefault();
+
+    const startDateTime = new Date(`${startDate}T${startTime}`);
+    const endDateTime = new Date(`${endDate}T${endTime}`);
+
+    // Get the timezone offset in minutes
+    const timezoneOffset = startDateTime.getTimezoneOffset();
+
+    // Apply the timezone offset to adjust the date and time
+    startDateTime.setMinutes(startDateTime.getMinutes() - timezoneOffset);
+    endDateTime.setMinutes(endDateTime.getMinutes() - timezoneOffset);
+
+    const formattedBookingForm = {
+      ...bookingForm,
+      start_date: startDateTime,
+      end_date: endDateTime,
+    };
+
+    try {
+      const response = await fetch(`${config.baseURL}/booking/newbooking`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formattedBookingForm),
+      });
+
+      // Handle response
+      const data = await response.json();
+      console.log(data);
+      window.alert("booking successful");
+    } catch (error) {
+      window.alert("booking failed");
+      console.error(error);
+    }
+    setBookingForm({
+      event_centre_id: id,
+      userId: "64808477095b7ab4ace42779",
+      end_date: "",
+      start_date: "",
+      duration: duration,
+      notes: "",
+    });
+  };
+
+  const bookingHandleChange = (e) => {
+    setBookingForm((prevData) => ({
+      ...prevData,
+      [e.target.name]: e.target.value,
+    }));
+  };
 
   return (
     <div className={styles["details-root"]}>
@@ -228,9 +291,7 @@ export default function Details() {
           <div className={styles["left-side"]}>
             <b>
               <AiFillStar />
-              <span className={styles["rating"]}>
-                {centreDetails.averageRating} .
-              </span>
+              <span className={styles["rating"]}>{centreDetails.rating} .</span>
               <button onClick={reviewSection}>
                 {reviewData.length} Reviews
               </button>
@@ -361,7 +422,7 @@ export default function Details() {
                       className={styles["rating"]}
                       style={{ marginLeft: "5px" }}
                     >
-                      {centreDetails.averageRating} .
+                      {centreDetails.rating} .
                     </span>
                     <button
                       style={{
@@ -385,6 +446,7 @@ export default function Details() {
                   <input
                     id="startDateInput"
                     type="date"
+                    name="startDate"
                     min={new Date().toISOString().split("T")[0]}
                     value={startDate}
                     onChange={handleStartDateChange}
@@ -397,6 +459,7 @@ export default function Details() {
                   <input
                     type="date"
                     id="endDateInput"
+                    name="endDate"
                     value={endDate}
                     onChange={handleEndDateChange}
                   />
@@ -408,6 +471,7 @@ export default function Details() {
                   <input
                     id="startTimeInput"
                     type="time"
+                    name="startTime"
                     min={getCurrentTime()}
                     value={startTime}
                     onChange={handleStartTimeChange}
@@ -420,6 +484,7 @@ export default function Details() {
                   <input
                     id="endTimeInput"
                     type="time"
+                    name="endTime"
                     min=""
                     value={endTime}
                     onChange={handleEndTimeChange}
@@ -441,6 +506,7 @@ export default function Details() {
                   </label>
                   <input
                     type="text"
+                    name="notes"
                     style={{
                       width: "100%",
                       paddingLeft: "0",
@@ -449,11 +515,13 @@ export default function Details() {
                       borderBottomStyle: "solid",
                       outline: "none",
                     }}
+                    value={bookingForm.notes}
+                    onChange={bookingHandleChange}
                   />
                 </div>
               </div>
               <div className={styles["book-btn"]}>
-                <button onClick={handleBook}>Book</button>
+                <button onClick={bookingHandleSubmit}>Book</button>
               </div>
               <div
                 className={styles["card-right-footer"]}
@@ -510,7 +578,7 @@ export default function Details() {
                   className={styles["rating"]}
                   style={{ marginLeft: "5px", marginRight: "5px" }}
                 >
-                  {centreDetails.averageRating} .
+                  {centreDetails.rating} .
                 </span>
                 {reviewData.length} Reviews
               </b>
