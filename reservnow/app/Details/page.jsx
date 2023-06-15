@@ -10,18 +10,18 @@ import { Rating } from "@/components/Ratings Star/RatingStar";
 import { ReviewPopup } from "@/components/modals/Popup/Popup";
 import { useAuth } from "@/Context/context";
 import LoginModal from "@/components/modals/Login Modal/LoginModal";
-import config from "@/config";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams } from 'next/navigation'
 
 export default function Details() {
-  const searchParams = useSearchParams(); // to search the URL for parameters
-  const id = searchParams.get("id"); // to get the centre id from the URL
+  const searchParams = useSearchParams()
+  const id = searchParams.get('id')
+
+  console.log(id);
   const { state } = useAuth();
   const { isLoggedIn } = state;
   const [emailVerification, setEmailVerification] = useState(false);
   const [centreDetails, setCentreDetails] = useState(""); // to get the centre data from db
   const [reviewData, setReviewData] = useState(""); // to get the review data from db
-  const [Review, setReview] = useState(false); // to activate the review popup
   const reservNowPrice = 270; //reserve now price
 
   const handleBook = () => {
@@ -33,7 +33,12 @@ export default function Details() {
     }
   };
 
-  // to get the eventcentre details from the db
+  const [Review, setReview] = useState(false);
+  const [isOverflowed, setIsOverflowed] = useState(false);
+  const ratingValue = 3;
+
+  const contentRef = useRef(null);
+
   useEffect(() => {
     const fetchData = async () => {
       try {

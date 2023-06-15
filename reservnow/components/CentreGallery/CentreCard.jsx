@@ -11,6 +11,7 @@ import {
 import ImageSlider from "./ImageSlider";
 import { BsPeopleFill } from "react-icons/bs";
 import { MdLocationOn } from "react-icons/md";
+import Link from "next/link";
 
 const CentreCard = ({ centre }) => {
   const [isImageClicked, setIsImageClicked] = useState(false);
@@ -18,7 +19,6 @@ const CentreCard = ({ centre }) => {
   const handleClick = () => {
     setIsImageClicked(!isImageClicked);
   };
-  
   return (
     <div>
       <div className="iconWrapper" onClick={handleClick}>
@@ -28,7 +28,7 @@ const CentreCard = ({ centre }) => {
           <AiFillHeart className="likeIcon2" />
         )}
       </div>
-      <Link href={`/details?id=${centre._id}`} style={{textDecoration: "none", color: "black"}}>
+      <Link href={`/details?id=${centre._id}`} style={{ textDecoration: "none", color: "black" }}>
         <div className="galleryCardV1">
           <div className="centreImageholder">
             <ImageSlider />
