@@ -4,7 +4,7 @@ import "../CentreGallery/CentreGallery.css";
 import config from "@/config";
 import CentreCard from "./CentreCard";
 import SearchSkeleton from "../SearchSkeleton/SearchSkeleton";
-
+import StaticCentreCard from "./StaticCentreCard";
 
 const CentreGallery = () => {
   const [centres, getCentres] = useState(null);
@@ -25,19 +25,20 @@ const CentreGallery = () => {
           setIsLoading(false);
         } else {
           const errorData = await response.json();
-          throw new Error(errorData.message || "Error occurred while fetching centres");
+          throw new Error(
+            errorData.message || "Error occurred while fetching centres"
+          );
         }
       } catch (error) {
         console.log("Error:", error.message);
       }
     };
-  
+
     fetchCentres();
   }, []);
-  
 
   console.log(centres);
-  console.log("car")
+  console.log("car");
 
   const [isImageClicked, setIsImageClicked] = useState(false);
 
@@ -48,30 +49,34 @@ const CentreGallery = () => {
   return (
     <div className="galleryHolder">
       <div className="galleryCardHolder">
-      {isLoading ? (
-        <div 
-         style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            width:"100%",
-            marginTop:35
-          }}
-        >
-          <SearchSkeleton/>
-          <SearchSkeleton/>
-          <SearchSkeleton/>
-          <SearchSkeleton/>
+        {isLoading ? (
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              width: "100%",
+              marginTop: 35,
+            }}
+          >
+            <SearchSkeleton />
+            <SearchSkeleton />
+            <SearchSkeleton />
+            <SearchSkeleton />
           </div>
         ) : (
-
-        centres &&
-          centres.map((centre, index) => (
-            <CentreCard key={index} centre={centre} />
-          ))
-          
+          centres &&
+            centres.map((centre, index) => (
+              <CentreCard key={index} centre={centre} />
+            ))
+          // <div className="galleryCardHolder">
+          //   <StaticCentreCard />
+          //   <StaticCentreCard />
+          //   <StaticCentreCard />
+          //   <StaticCentreCard />
+          //   <StaticCentreCard />
+          // </div>
         )}
-     
       </div>
     </div>
   );

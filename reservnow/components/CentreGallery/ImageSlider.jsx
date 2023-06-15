@@ -31,10 +31,11 @@ const ImageSlider = () => {
     <div
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      style={{ position: "relative", borderRadius:"50px"}}
+      style={{borderRadius:8, overflow:"hidden"}}
+      
     >
-      <Splide options={splideOptions} ref={splideRef}>
-        <SplideSlide >
+      <Splide options={splideOptions} ref={splideRef} >
+        <SplideSlide  >
           <img
             src="images/TestImage.jpg"
             width={"100%"}
@@ -42,7 +43,7 @@ const ImageSlider = () => {
             alt="Slide 1"
           />
         </SplideSlide>
-        <SplideSlide>
+        <SplideSlide >
           <img
             src="images/TestImage.jpg"
             width={"100%"}
@@ -50,7 +51,7 @@ const ImageSlider = () => {
             alt="Slide 2"
           />
         </SplideSlide>
-        <SplideSlide>
+        <SplideSlide >
           <img
             src="images/TestImage.jpg"
             width={"100%"}
