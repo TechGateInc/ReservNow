@@ -1,13 +1,16 @@
 "use client";
 
 import styles from "./page.module.css";
+import React from "react";
 import { useEffect, useRef, useState } from "react";
 import { AiFillStar, AiOutlineHeart } from "react-icons/ai";
+import { BsFan } from "react-icons/bs";
 import { IoIosShare } from "react-icons/io";
 import { TbCurrencyNaira } from "react-icons/tb";
 import { GrCapacity } from "react-icons/gr";
 import { Rating } from "@/components/Ratings Star/RatingStar";
 import { ReviewPopup } from "@/components/modals/Popup/Popup";
+import { AmenitiesPopup } from "@/components/modals/Popup/Popup";
 import { useAuth } from "@/Context/context";
 import LoginModal from "@/components/modals/Login Modal/LoginModal";
 import config from "@/config";
@@ -22,6 +25,7 @@ export default function Details() {
   const [centreDetails, setCentreDetails] = useState(""); // to get the centre data from db
   const [reviewData, setReviewData] = useState(""); // to get the review data from db
   const [Review, setReview] = useState(false); // to activate the review popup
+  const [amenities, setAmenities] = useState(false); // to activate the amenities popup
   const reservNowPrice = 270; //reserve now price
 
   const handleBook = () => {
@@ -262,6 +266,9 @@ export default function Details() {
       const data = await response.json();
       console.log(data);
       window.alert("booking successful");
+
+      // Reload the page
+      window.location.reload();
     } catch (error) {
       window.alert("booking failed");
       console.error(error);
@@ -282,6 +289,46 @@ export default function Details() {
       [e.target.name]: e.target.value,
     }));
   };
+
+  const [groupedAmenities, setGroupedAmenities] = useState({});
+  const [getCategory, setGetCategory] = useState([]);
+
+  useEffect(() => {
+    if (centreDetails.amenities) {
+      // Step 1: Group amenities by category
+      const grouped = centreDetails.amenities.reduce((result, item) => {
+        if (!result[item.category]) {
+          result[item.category] = [];
+        }
+        result[item.category].push(item);
+        return result;
+      }, {});
+
+      // Step 2: Sort categories alphabetically
+      const sortedCategories = Object.keys(grouped).sort();
+
+      // Step 3: Sort item names within each category alphabetically
+      for (const category in grouped) {
+        grouped[category].sort((a, b) => a.name.localeCompare(b.name));
+      }
+
+      setGroupedAmenities(grouped);
+    }
+  }, [centreDetails.amenities]);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await fetch(`${config.baseURL}/amenitycategory`);
+        const jsonData = await response.json();
+        setGetCategory(jsonData);
+      } catch (error) {
+        console.log("Error fetching category data:", error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
 
   return (
     <div className={styles["details-root"]}>
@@ -399,6 +446,94 @@ export default function Details() {
             <hr className={styles["line"]} />
             <div className={styles["details-card-footer"]}>
               {centreDetails.description} <br />
+            </div>
+            <hr className={styles["line"]} />
+            <div className={styles["details-card-amenities"]}>
+              <div className={styles["amenities-title"]}>
+                What this place offers
+              </div>
+              <div className={styles["amenities-content"]}>
+                {centreDetails.amenities ? (
+                  centreDetails.amenities.length === 0 ? (
+                    <div
+                      style={{
+                        width: "100%",
+                        marginTop: "5%",
+                        marginBottom: "5%",
+                      }}
+                    >
+                      No amenities avaliable
+                    </div>
+                  ) : (
+                    centreDetails.amenities.slice(0, 10).map((item, index) => (
+                      <div className={styles["amenities-item"]} key={index}>
+                        <div className={styles["amenities-icon"]}>
+                          <BsFan />
+                        </div>
+                        <div
+                          className={styles["amenities-name"]}
+                          style={{ marginLeft: "10px" }}
+                        >
+                          {item.name}
+                        </div>
+                      </div>
+                    ))
+                  )
+                ) : null}
+              </div>
+              {centreDetails.amenities &&
+                centreDetails.amenities.length > 1 && (
+                  <div className={styles["amenities-viewAll-btn"]}>
+                    <button onClick={() => setAmenities(true)}>
+                      Show all {centreDetails.amenities.length} amenities
+                    </button>
+                  </div>
+                )}
+              <AmenitiesPopup trigger={amenities} setTrigger={setAmenities}>
+                <div className={styles["amenities-popup-content"]}>
+                  <div
+                    className={styles["amenities-title"]}
+                    style={{ marginBottom: "8%" }}
+                  >
+                    What this place offers
+                  </div>
+                  {Object.keys(groupedAmenities).map((categoryId) => {
+                    // Find the category name using the categoryId
+                    const category = getCategory.find(
+                      (cat) => cat._id === categoryId
+                    );
+
+                    return (
+                      <React.Fragment key={categoryId}>
+                        <h3
+                          className={styles["category-header"]}
+                          style={{ marginTop: "5%", marginBottom: "3%" }}
+                        >
+                          {category ? category.name : ""}
+                        </h3>
+                        {groupedAmenities[categoryId].map((item, index) => (
+                          <div
+                            className={styles["amenities-item"]}
+                            key={index}
+                            style={{ display: "flex", marginBottom: "2%" }}
+                          >
+                            <div className={styles["amenities-icon"]}>
+                              <BsFan />
+                            </div>
+                            <div
+                              className={styles["amenities-name"]}
+                              style={{ marginLeft: "10px" }}
+                            >
+                              {item.name}
+                            </div>
+                          </div>
+                        ))}
+                        <hr style={{ marginTop: "5%", marginBottom: "5%" }} />
+                      </React.Fragment>
+                    );
+                  })}
+                </div>
+              </AmenitiesPopup>
             </div>
           </div>
           <div className={styles["details-card-right"]}>
@@ -561,6 +696,25 @@ export default function Details() {
           </div>
         </div>
         <hr />
+        <div className={styles["map-section"]}>
+          <div className={styles["map-section-header"]}>
+            <h2>Where you'll be</h2>
+            <p>{centreDetails.address}</p>
+          </div>
+          <div className={styles["map-section-content"]}>
+            {centreDetails && (
+              <iframe
+                src={`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3963.7996105457046!2d3.3814625749447713!3d6.546968393445971!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b8d74a1d96faf%3A0xc6ca00ab91edfc5c!2s${encodeURIComponent(
+                  centreDetails.address
+                )}!5e0!3m2!1sen!2sng!4v1686910536404!5m2!1sen!2sng`}
+                width="600"
+                height="450"
+                style={{ width: "100%", height: "100%", border: "none" }}
+                loading="lazy"
+              ></iframe>
+            )}
+          </div>
+        </div>
         <div className={styles["detail-review-section"]} id="reviewSection">
           <div className={styles["review-section-header"]}>
             <h2>Reviews</h2>
@@ -585,121 +739,136 @@ export default function Details() {
             </div>
           </div>
           <div className={styles["review-section-content"]}>
-            {reviewData &&
-              reviewData.map((item, index) => (
-                <div className={styles["review-card"]} key={index}>
-                  <div className={styles["review-card-header"]}>
-                    <img
-                      src="/images/details.jpg"
-                      alt=""
-                      style={{
-                        width: "50px",
-                        height: "50px",
-                        borderRadius: "50%",
-                      }}
-                    />
-                    <div
-                      className={styles["text"]}
-                      style={{ color: "grey", marginLeft: "10px" }}
-                    >
-                      <p>{item.userId.name}</p>
-                      <p>
-                        {new Date(item.createdAt).toLocaleString("default", {
-                          month: "long",
-                        })}{" "}
-                        {new Date(item.createdAt).getDate()}
-                      </p>
-                    </div>
-                  </div>
-                  <div
-                    className={styles["review-card-content"]}
-                    style={{
-                      position: "relative",
-                      overflow: "hidden",
-                      textOverflow: "ellipsis",
-                      display: "-webkit-box",
-                      WebkitLineClamp: 3,
-                      WebkitBoxOrient: "vertical",
-                      height: "60px",
-                    }}
-                  >
-                    {item.comment}
-                  </div>
-                  {item && item.comment.length > 150 && (
-                    <button
-                      className={styles["show-more-btn"]}
-                      onClick={() => setReview(true)}
-                    >
-                      Show More
-                    </button>
-                  )}
-                  <div
-                    className={styles["review-card-footer"]}
-                    style={{ fontWeight: "bold", marginBottom: "10px" }}
-                  >
-                    Rating
-                  </div>
-                  <Rating value={item.rating} />
-                  <ReviewPopup trigger={Review} setTrigger={setReview}>
-                    <div className={styles["review-card-popup"]}>
-                      <div
-                        className={styles["review-card-header"]}
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          marginBottom: "2%",
-                          marginTop: "2%",
-                        }}
-                      >
-                        <img
-                          src="/images/details.jpg"
-                          alt=""
-                          style={{
-                            width: "50px",
-                            height: "50px",
-                            borderRadius: "50%",
-                          }}
-                        />
-                        <div
-                          className={styles["text"]}
-                          style={{ color: "grey", marginLeft: "10px" }}
-                        >
-                          <p>{item.userId.name}</p>
-                          <p>
-                            {new Date(item.createdAt).toLocaleString(
-                              "default",
-                              {
-                                month: "long",
-                              }
-                            )}{" "}
-                            {new Date(item.createdAt).getDate()}
-                          </p>
-                        </div>
-                      </div>
-                      <div
-                        className={styles["review-card-content"]}
-                        style={{
-                          width: "100%",
-                        }}
-                      >
-                        {item.comment}
-                      </div>
-
-                      <div
-                        className={styles["review-card-footer"]}
-                        style={{
-                          fontWeight: "bold",
-                          marginBottom: "10px",
-                          marginTop: "2%",
-                        }}
-                      >
-                        Rating
-                      </div>
-                      <Rating value={item.rating} />
-                    </div>
-                  </ReviewPopup>
+            {reviewData ? (
+              reviewData.length === 0 ? (
+                <div
+                  style={{
+                    width: "100%",
+                    textAlign: "center",
+                    marginTop: "10%",
+                    marginBottom: "10%",
+                    fontSize: "20px",
+                  }}
+                >
+                  No reviews
                 </div>
-              ))}
+              ) : (
+                reviewData.map((item, index) => (
+                  <div className={styles["review-card"]} key={index}>
+                    <div className={styles["review-card-header"]}>
+                      <img
+                        src="/images/details.jpg"
+                        alt=""
+                        style={{
+                          width: "50px",
+                          height: "50px",
+                          borderRadius: "50%",
+                        }}
+                      />
+                      <div
+                        className={styles["text"]}
+                        style={{ color: "grey", marginLeft: "10px" }}
+                      >
+                        <p>{item.userId.name}</p>
+                        <p>
+                          {new Date(item.createdAt).toLocaleString("default", {
+                            month: "long",
+                          })}{" "}
+                          {new Date(item.createdAt).getDate()}
+                        </p>
+                      </div>
+                    </div>
+                    <div
+                      className={styles["review-card-content"]}
+                      style={{
+                        position: "relative",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        display: "-webkit-box",
+                        WebkitLineClamp: 3,
+                        WebkitBoxOrient: "vertical",
+                        height: "60px",
+                      }}
+                    >
+                      {item.comment}
+                    </div>
+                    {item && item.comment.length > 150 && (
+                      <button
+                        className={styles["show-more-btn"]}
+                        onClick={() => setReview(true)}
+                      >
+                        Show More
+                      </button>
+                    )}
+                    <div
+                      className={styles["review-card-footer"]}
+                      style={{ fontWeight: "bold", marginBottom: "10px" }}
+                    >
+                      Rating
+                    </div>
+                    <Rating value={item.rating} />
+                    <ReviewPopup trigger={Review} setTrigger={setReview}>
+                      <div className={styles["review-card-popup"]}>
+                        <div
+                          className={styles["review-card-header"]}
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            marginBottom: "2%",
+                            marginTop: "2%",
+                          }}
+                        >
+                          <img
+                            src="/images/details.jpg"
+                            alt=""
+                            style={{
+                              width: "50px",
+                              height: "50px",
+                              borderRadius: "50%",
+                            }}
+                          />
+                          <div
+                            className={styles["text"]}
+                            style={{ color: "grey", marginLeft: "10px" }}
+                          >
+                            <p>{item.userId.name}</p>
+                            <p>
+                              {new Date(item.createdAt).toLocaleString(
+                                "default",
+                                {
+                                  month: "long",
+                                }
+                              )}{" "}
+                              {new Date(item.createdAt).getDate()}
+                            </p>
+                          </div>
+                        </div>
+                        <div
+                          className={styles["review-card-content"]}
+                          style={{
+                            width: "100%",
+                          }}
+                        >
+                          {item.comment}
+                        </div>
+
+                        <div
+                          className={styles["review-card-footer"]}
+                          style={{
+                            fontWeight: "bold",
+                            marginBottom: "10px",
+                            marginTop: "2%",
+                          }}
+                        >
+                          Rating
+                        </div>
+                        <Rating value={item.rating} />
+                      </div>
+                    </ReviewPopup>
+                  </div>
+                ))
+              )
+            ) : null}
           </div>
         </div>
       </div>

@@ -86,11 +86,29 @@ export function SignupPopup(props) {
 export function ReviewPopup(props) {
   return props.trigger ? (
     <div className={styles["popup-modal"]}>
-      <div
-        className={styles["popup-modal-inner"]}
-        // data-aos="fade-up"
-        // data-aos-duration="1000"
-      >
+      <div className={styles["popup-modal-inner"]}>
+        <button
+          className={styles["close-btn"]}
+          onClick={() => {
+            props.setTrigger(false);
+          }}
+        >
+          <div className={styles["cancel-icon"]}>
+            <MdCancel />
+          </div>
+        </button>
+        {props.children}
+      </div>
+    </div>
+  ) : (
+    ""
+  );
+}
+
+export function AmenitiesPopup(props) {
+  return props.trigger ? (
+    <div className={styles["popup-modal"]}>
+      <div className={styles["popup-modal-inner"]}>
         <button
           className={styles["close-btn"]}
           onClick={() => {
