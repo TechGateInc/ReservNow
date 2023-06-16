@@ -14,12 +14,11 @@ import { AmenitiesPopup } from "@/components/modals/Popup/Popup";
 import { useAuth } from "@/Context/context";
 import LoginModal from "@/components/modals/Login Modal/LoginModal";
 import { useSearchParams } from 'next/navigation'
+import config from "@/config";
 
 export default function Details() {
   const searchParams = useSearchParams()
   const id = searchParams.get('id')
-
-  console.log(id);
   const { state } = useAuth();
   const { isLoggedIn } = state;
   const [emailVerification, setEmailVerification] = useState(false);
@@ -38,10 +37,6 @@ export default function Details() {
     }
   };
 
-  const [isOverflowed, setIsOverflowed] = useState(false);
-  const ratingValue = 3;
-
-  const contentRef = useRef(null);
 
   useEffect(() => {
     const fetchData = async () => {

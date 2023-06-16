@@ -11,7 +11,7 @@ import {
 import ImageSlider from "./ImageSlider";
 import { BsPeopleFill } from "react-icons/bs";
 import { MdLocationOn } from "react-icons/md";
-import Link from "next/link";
+
 
 const CentreCard = ({ centre }) => {
   const [isImageClicked, setIsImageClicked] = useState(false);
