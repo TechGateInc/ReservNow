@@ -186,6 +186,10 @@
 .slide-down {
   height: 70px;
   z-index: 1;
+  /* background-color: red; */
+  /* position: sticky; */
+  /* position: fixed; */
+
 }
 
 .location-Cards {

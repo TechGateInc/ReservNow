@@ -2,7 +2,6 @@
 import "../Header/header.css";
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import config from "@/config";
 import { useRouter } from 'next/navigation';
 
 const Search = ({

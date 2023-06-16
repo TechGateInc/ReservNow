@@ -41,28 +41,29 @@ const SearchPage = () => {
     fetchCentres();
   }, []);
 
-  // console.log(filterdCentres);
+ 
 
   return (
     <div className={styles["searchPageHolder"]}>
       <div className={styles["searchCardHolder"]}>
         {isLoading ? (
-        <div 
-         style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            width:"100%",
-            marginTop:35
-          }}
-        >
-          <SearchSkeleton/>
-          <SearchSkeleton/>
-          <SearchSkeleton/>
-          <SearchSkeleton/>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              width: "100%",
+              marginTop: 35,
+            }}
+          >
+            <SearchSkeleton />
+            <SearchSkeleton />
+            <SearchSkeleton />
+            <SearchSkeleton />
           </div>
+        ) : filterdCentres && filterdCentres.length === 0 ? (
+          <p>There is no event centre.</p>
         ) : (
-          filterdCentres &&
           filterdCentres.map((centre, index) => (
             <CentreCard key={index} centre={centre} />
           ))

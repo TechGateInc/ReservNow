@@ -68,7 +68,10 @@ const CentreGallery = () => {
           centres &&
             centres.map((centre, index) => (
               <CentreCard key={index} centre={centre} />
+              
             ))
+
+            
           // <div className="galleryCardHolder">
           //   <StaticCentreCard />
           //   <StaticCentreCard />

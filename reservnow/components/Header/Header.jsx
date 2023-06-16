@@ -40,17 +40,6 @@ const Header = ({}) => {
     fetchCentres();
   }, []);
 
-  console.log(centres);
-
-  const locations = [
-    "Abeokuta",
-    "Ikeja",
-    "Mushin",
-    "Victoria Island",
-    "Akute",
-    "Magodo",
-  ];
-
   const eventTypes = [
     "Weddings",
     "Concerts",
@@ -100,11 +89,25 @@ const Header = ({}) => {
     }
   };
 
+  const handleScroll = (event) => {
+    if (navbarRef.current && !navbarRef.current.contains(event.target)) {
+      setIsLocationExtended(false);
+    }
+  };
+
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
 
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -122,6 +125,7 @@ const Header = ({}) => {
     <div
       ref={navbarRef}
       className={`navbar ${isLocationExtended ? "extended" : ""}`}
+      onScroll={handleScroll}
     >
       <div
         className={`extended-content  ${
@@ -129,23 +133,22 @@ const Header = ({}) => {
         }`}
       >
         <div className="locationCardHolder">
-          { 
-          centres &&
-          [...new Set(centres.map((centre) => centre.city))]
-            .map((city) => ({
-              city,
-              count: centres.filter((centre) => centre.city === city).length,
-            }))
-            .sort((a, b) => b.count - a.count)
-            .slice(0, 6) // Get only the top 6 values
-            .map((item, index) => (
-              <Location
-                key={index}
-                label={item.city}
-                handleLocation={handleLocation}
-                removeLocationExtend={removeLocationExtend}
-              />
-            ))}
+          {centres &&
+            [...new Set(centres.map((centre) => centre.city))]
+              .map((city) => ({
+                city,
+                count: centres.filter((centre) => centre.city === city).length,
+              }))
+              .sort((a, b) => b.count - a.count)
+              .slice(0, 6) // Get only the top 6 values
+              .map((item, index) => (
+                <Location
+                  key={index}
+                  label={item.city}
+                  handleLocation={handleLocation}
+                  removeLocationExtend={removeLocationExtend}
+                />
+              ))}
         </div>
       </div>
       <div
