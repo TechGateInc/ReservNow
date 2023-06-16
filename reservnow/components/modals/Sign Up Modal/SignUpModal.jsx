@@ -73,7 +73,7 @@ export default function SignUpModal({ formData, handleChange, handleSubmit }) {
           <b>
             <Link
               href={{}}
-              style={{ textDecoration: "none", color: "#e61e4d" }}
+              style={{ textDecoration: "none", color: "pink" }}
             >
               {" "}
               Terms of Service{" "}
@@ -83,7 +83,7 @@ export default function SignUpModal({ formData, handleChange, handleSubmit }) {
           <b>
             <Link
               href={{}}
-              style={{ textDecoration: "none", color: "#e61e4d" }}
+              style={{ textDecoration: "none", color: "pink" }}
             >
               {" "}
               Payments Terms of Service
@@ -93,7 +93,7 @@ export default function SignUpModal({ formData, handleChange, handleSubmit }) {
           <b>
             <Link
               href={{}}
-              style={{ textDecoration: "none", color: "#e61e4d" }}
+              style={{ textDecoration: "none", color: "pink" }}
             >
               {" "}
               Nondiscrimination Policy{" "}
@@ -103,7 +103,7 @@ export default function SignUpModal({ formData, handleChange, handleSubmit }) {
           <b>
             <Link
               href={{}}
-              style={{ textDecoration: "none", color: "#e61e4d" }}
+              style={{ textDecoration: "none", color: "pink" }}
             >
               {" "}
               Privacy Policy

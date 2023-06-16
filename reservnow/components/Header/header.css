@@ -15,8 +15,6 @@
   position: fixed;
 }
 
-
-
 .SearchBar {
   display: flex;
   flex-direction: row;
@@ -75,7 +73,6 @@
   margin-left: 5%;
 }
 
-
 .profileHolderIcons {
   display: flex;
   flex-direction: row;
@@ -116,7 +113,6 @@
   border-radius: 5px;
   background-color: white;
   z-index: 1;
-  
 }
 
 .DropdownContent2 {
@@ -131,7 +127,6 @@
   background-color: white;
   z-index: 1;
   color: black;
-  
 }
 
 .contentSection2 {
@@ -163,7 +158,6 @@
 
 .guestBtn {
   cursor: pointer;
-  
 }
 
 .weekBtn {
@@ -189,7 +183,6 @@
   /* background-color: red; */
   /* position: sticky; */
   /* position: fixed; */
-
 }
 
 .location-Cards {
@@ -204,7 +197,7 @@
   justify-content: center;
   align-items: center;
   color: black;
-  
+
   transition: transform 0.2s ease-in-out;
 }
 
@@ -228,7 +221,7 @@
   text-decoration: none;
 }
 
-.searchBtn{
+.searchBtn {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -237,11 +230,8 @@
   background-color: pink;
   border-radius: 20px;
   margin-right: -10px;
-  
-  
-
 }
-.searchBtn:hover{
-   cursor: pointer;
-   background-color: rgb(236, 167, 179);
+.searchBtn:hover {
+  cursor: pointer;
+  background-color: rgb(236, 167, 179);
 }

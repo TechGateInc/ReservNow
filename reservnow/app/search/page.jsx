@@ -13,8 +13,6 @@ const SearchPage = () => {
       const searchParams = new URLSearchParams(window.location.search);
       const location = searchParams.get("l");
       const capacity = searchParams.get("c");
-      console.log(location);
-      console.log(capacity);
       // Post the params to the backend
       try {
         const response = await fetch(`${config.baseURL}/eventcentre/`, {

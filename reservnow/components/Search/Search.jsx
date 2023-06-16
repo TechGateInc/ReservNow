@@ -1,7 +1,7 @@
 "use client";
 import "../Header/header.css";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from 'next/navigation';
 
 const Search = ({
@@ -12,8 +12,6 @@ const Search = ({
   handleRemove,
   setLocation,
   removeCapacityMenu
-  
-
 }) => {
 
   const [capacity, setCapacity] = useState(null);
@@ -26,20 +24,18 @@ const Search = ({
     setCapacity(null);
   };
 
-  
-
   const capacitySize = [
-     "less than 100",
-     "100 - 500",
-     "500 - 1000",
-     "greater than 1000"
+    "less than 100",
+    "100 - 500",
+    "500 - 1000",
+    "greater than 1000"
   ];
 
   const router = useRouter();
 
   const handleSearchClick = () => {
     router.push(`/search?l=${location}&c=${capacity}`);
-    
+
   };
 
   return (
@@ -47,7 +43,7 @@ const Search = ({
       <div className="extend-button locationBtn" onClick={() => extendToggle('location')}>
         {location ? (
           <div>
-           <p onClick={() => { setLocation(location); handleRemove(); }}>{location}</p>
+            <p onClick={() => { setLocation(location); handleRemove(); }}>{location}</p>
 
           </div>
         ) : (
@@ -63,7 +59,7 @@ const Search = ({
       <div className="guestBtn extend-button" onClick={() => dropdownToggle('capacity')}>
         {capacity ? (
           <div>
-            <p onClick={() => {setCapacity(capacity); handleRemove3();}}>{capacity}</p>
+            <p onClick={() => { setCapacity(capacity); handleRemove3(); }}>{capacity}</p>
           </div>
         ) : (
           "Any Guest"
@@ -75,9 +71,9 @@ const Search = ({
             <Link
               href={""}
               className="DropdownLinks2"
-              onClick={() => {handleCapcity(button3); removeCapacityMenu(); }}
+              onClick={() => { handleCapcity(button3); removeCapacityMenu(); }}
             >
-              <p style={{color:"black"}}> {button3}</p>
+              <p style={{ color: "black" }}> {button3}</p>
             </Link>
           ))}
         </div>

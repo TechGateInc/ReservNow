@@ -4,7 +4,6 @@ import "../CentreGallery/CentreGallery.css";
 import config from "@/config";
 import CentreCard from "./CentreCard";
 import SearchSkeleton from "../SearchSkeleton/SearchSkeleton";
-import StaticCentreCard from "./StaticCentreCard";
 
 const CentreGallery = () => {
   const [centres, getCentres] = useState(null);
@@ -37,9 +36,6 @@ const CentreGallery = () => {
     fetchCentres();
   }, []);
 
-  console.log(centres);
-  console.log("car");
-
   const [isImageClicked, setIsImageClicked] = useState(false);
 
   const handleClick = () => {
@@ -70,15 +66,6 @@ const CentreGallery = () => {
               <CentreCard key={index} centre={centre} />
               
             ))
-
-            
-          // <div className="galleryCardHolder">
-          //   <StaticCentreCard />
-          //   <StaticCentreCard />
-          //   <StaticCentreCard />
-          //   <StaticCentreCard />
-          //   <StaticCentreCard />
-          // </div>
         )}
       </div>
     </div>

@@ -20,13 +20,10 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
-  
 }
 
 .centreImageHolder {
 }
-
-
 
 .centreDesc {
   display: flex;
@@ -39,6 +36,7 @@
 .ratingSection {
   display: flex;
   flex-direction: row;
+  align-items: flex-start;
 }
 
 .iconWrapper {

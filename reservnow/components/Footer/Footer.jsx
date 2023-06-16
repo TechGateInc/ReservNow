@@ -2,24 +2,21 @@
 import { useEffect, useState } from "react";
 import "../Footer/footer.css";
 import { AiFillCaretUp, AiOutlineCloseCircle } from "react-icons/ai";
-import AOS from "aos";
-import "aos/dist/aos.css"; // You can also use <link> for styles
-// ..
-AOS.init();
+if (typeof document !== "undefined") {
+  const AOS = require("aos");
+  require("aos/dist/aos.css");
+  AOS.init();
+}
 
 const Footer = () => {
   const [isHidden, setIsHidden] = useState(true);
 
   const toggleHiddenSection = () => {
     setIsHidden(!isHidden);
-    // if (isHidden) {
-    //   AOS.refresh(); // Refresh AOS after changing visibility to trigger fade-down animation
-    // }
   };
 
   const hideHiddenSection = () => {
     setIsHidden(true);
-    // AOS.refresh(); 
   };
 
   useEffect(() => {
@@ -36,8 +33,8 @@ const Footer = () => {
       <div className="footer">
         {isHidden ? (
           <div className="leftLinks">
-            <p>©2023 ReserveNow.inc</p><p>.Terms</p><p>.Sitemap</p>
-            <p>.Privacy</p><p>Centres</p>
+            <p>©2023 ReserveNow.inc</p><p>Terms</p><p>Sitemap</p>
+            <p>Privacy</p><p>Centres</p>
           </div>
         ) : null}
         {isHidden ? (
@@ -57,17 +54,17 @@ const Footer = () => {
       {!isHidden ? (
         <div
           className="hiddenSectionWrapper"
-          // data-aos="fade-down"
+        // data-aos="fade-down"
         >
           <div className={`hiddenSection ${isHidden ? "" : "active"}`}
-          
-          data-aos={isHidden ? "fade-down" : "fade-up"}
-          data-aos-duration="700"
-          
+
+            data-aos={isHidden ? "fade-down" : "fade-up"}
+            data-aos-duration="700"
+
           >
             {/* Content of the hidden section */}
             <h1 onClick={hideHiddenSection}
-            
+
             >
               <AiOutlineCloseCircle style={{ fontSize: 20 }} />
             </h1>

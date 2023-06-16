@@ -6,7 +6,6 @@ import "../CentreGallery/CentreGallery.css";
 
 const ImageSlider = () => {
   const [showArrows, setShowArrows] = useState(false);
-  const [autoplay, setAutoplay] = useState(true);
   const splideRef = useRef(null);
 
   const splideOptions = {

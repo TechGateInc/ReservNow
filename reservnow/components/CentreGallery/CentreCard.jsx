@@ -1,10 +1,8 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "../CentreGallery/CentreGallery.css";
 import {
   AiFillStar,
-  AiOutlineHeart,
-  AiFillHeart,
   AiFillCreditCard,
 } from "react-icons/ai";
 import ImageSlider from "./ImageSlider";
@@ -12,25 +10,12 @@ import { BsPeopleFill } from "react-icons/bs";
 import { MdLocationOn } from "react-icons/md";
 
 const CentreCard = ({ centre }) => {
-  const [isImageClicked, setIsImageClicked] = useState(false);
 
-  const handleClick = () => {
-    setIsImageClicked(!isImageClicked);
-  };
   return (
     <div className="galleryCardV1">
-
-      
       <div className="centreImageholder">
-        <div className="iconWrapper" onClick={handleClick}>
-          {!isImageClicked ? (
-            <AiOutlineHeart className="likeIcon1" />
-          ) : (
-            <AiFillHeart className="likeIcon2" />
-          )}
-        </div>
-        <div  className="imgSliderHold">
-        <ImageSlider />
+        <div className="imgSliderHold">
+          <ImageSlider />
         </div>
       </div>
       <div className="centreDesc">
