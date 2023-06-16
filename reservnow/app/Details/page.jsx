@@ -15,6 +15,11 @@ import { useAuth } from "@/Context/context";
 import LoginModal from "@/components/modals/Login Modal/LoginModal";
 import { useSearchParams } from 'next/navigation'
 import config from "@/config";
+import dayjs from 'dayjs';
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 
 export default function Details() {
   const searchParams = useSearchParams()
@@ -27,6 +32,8 @@ export default function Details() {
   const [Review, setReview] = useState(false); // to activate the review popup
   const [amenities, setAmenities] = useState(false); // to activate the amenities popup
   const reservNowPrice = 270; //reserve now price
+  const [value, setValue] = useState(dayjs('2022-04-17T15:30'));
+
 
   const handleBook = () => {
     if (isLoggedIn) {
@@ -392,7 +399,7 @@ export default function Details() {
             <div className={styles["details-card-header"]}>
               <div className={styles["card-left"]}>
                 {centreDetails && centreDetails.venueOwner && (
-                  <p style={{ fontSize: "20px", fontWeight: "600" }}>
+                  <p style={{ fontSize: "20px", fontWeight: "400" }}>
                     {centreDetails.venueOwner.name}
                   </p>
                 )}
@@ -574,57 +581,19 @@ export default function Details() {
                 </div>
               </div>
               <div className={styles["card-right-content"]}>
-                <div className={styles["form-content"]}>
-                  <label htmlFor="" style={{ fontSize: "14px" }}>
-                    Start Date
-                  </label>
-                  <input
-                    id="startDateInput"
-                    type="date"
-                    name="startDate"
-                    min={new Date().toISOString().split("T")[0]}
-                    value={startDate}
-                    onChange={handleStartDateChange}
-                  />
-                </div>
-                <div className={styles["form-content"]}>
-                  <label htmlFor="" style={{ fontSize: "14px" }}>
-                    End Date
-                  </label>
-                  <input
-                    type="date"
-                    id="endDateInput"
-                    name="endDate"
-                    value={endDate}
-                    onChange={handleEndDateChange}
-                  />
-                </div>
-                <div className={styles["form-content"]}>
-                  <label htmlFor="" style={{ fontSize: "14px" }}>
-                    Start Time
-                  </label>
-                  <input
-                    id="startTimeInput"
-                    type="time"
-                    name="startTime"
-                    min={getCurrentTime()}
-                    value={startTime}
-                    onChange={handleStartTimeChange}
-                  />
-                </div>
-                <div className={styles["form-content"]}>
-                  <label htmlFor="" style={{ fontSize: "14px" }}>
-                    End Time
-                  </label>
-                  <input
-                    id="endTimeInput"
-                    type="time"
-                    name="endTime"
-                    min=""
-                    value={endTime}
-                    onChange={handleEndTimeChange}
-                  />
-                </div>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DemoContainer components={['DateTimePicker', 'DateTimePicker']}>
+                    <DateTimePicker
+                      label="Uncontrolled picker"
+                      defaultValue={dayjs('2022-04-17T15:30')}
+                    />
+                    <DateTimePicker
+                      label="Controlled picker"
+                      value={value}
+                      onChange={(newValue) => setValue(newValue)}
+                    />
+                  </DemoContainer>
+                </LocalizationProvider>
                 <div
                   className={styles["form-content"]}
                   style={{ width: "100%" }}
