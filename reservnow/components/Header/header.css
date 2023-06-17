@@ -172,14 +172,16 @@
   height: 0;
   overflow: hidden;
   transition: height 0.3s ease;
-  margin-left: 5%;
-  margin-right: 5%;
-  z-index: 1 !important;
+  padding-left: 2%;
+  padding-right: 2%;
+  background-color: white;
+  
+  
 }
 
 .slide-down {
   height: 70px;
-  z-index: 1;
+ 
   /* background-color: red; */
   /* position: sticky; */
   /* position: fixed; */
@@ -232,6 +234,10 @@
   margin-right: -10px;
 }
 .searchBtn:hover {
-  cursor: pointer;
+  cursor: pointer !important;
   background-color: rgb(236, 167, 179);
+}
+
+.not-allowed{
+  background-color: red;
 }

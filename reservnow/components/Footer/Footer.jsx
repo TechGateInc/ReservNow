@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import "../Footer/footer.css";
-import { AiFillCaretUp, AiOutlineCloseCircle } from "react-icons/ai";
+import { AiFillCaretUp, AiOutlineClose } from "react-icons/ai";
 if (typeof document !== "undefined") {
   const AOS = require("aos");
   require("aos/dist/aos.css");
@@ -63,14 +63,14 @@ const Footer = () => {
 
           >
             {/* Content of the hidden section */}
-            <h1 onClick={hideHiddenSection}
+            <div className="closeBtn" onClick={hideHiddenSection}
 
             >
-              <AiOutlineCloseCircle style={{ fontSize: 20 }} />
-            </h1>
+              <AiOutlineClose style={{ fontSize: 15 }} />
+            </div>
             <div className="hiddenFooterLinkHolder">
               <div className="hiddenFooterLink1">
-                <div style={{ marginBottom: 20 }}>
+                <div className="footerHeader">
                   <p>Support</p>
                 </div>
 
@@ -82,7 +82,7 @@ const Footer = () => {
                 </div>
               </div>
               <div className="hiddenFooterLink2">
-                <div style={{ marginBottom: 20 }}>
+                <div className="footerHeader">
                   <p>Community</p>
                 </div>
                 <div>
@@ -93,7 +93,7 @@ const Footer = () => {
                 </div>
               </div>
               <div className="hiddenFooterLink3">
-                <div style={{ marginBottom: 20 }}>
+                <div className="footerHeader">
                   <p> Hosting</p>
                 </div>
                 <div>
@@ -104,7 +104,7 @@ const Footer = () => {
                 </div>
               </div>
               <div className="hiddenFooterLink4">
-                <div style={{ marginBottom: 20 }}>
+                <div className="footerHeader">
                   <p>ReserveNow</p>
                 </div>
                 <div>

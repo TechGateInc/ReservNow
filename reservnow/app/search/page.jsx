@@ -4,10 +4,12 @@ import { useEffect, useState } from "react";
 import CentreCard from "@/components/CentreGallery/CentreCard";
 import config from "@/config";
 import SearchSkeleton from "@/components/SearchSkeleton/SearchSkeleton";
+import {TfiFaceSad} from "react-icons/tfi"
 
 const SearchPage = () => {
   const [filterdCentres, getFilteredCentres] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState(null);
   useEffect(() => {
     const fetchCentres = async () => {
       const searchParams = new URLSearchParams(window.location.search);
@@ -27,9 +29,11 @@ const SearchPage = () => {
         if (response.ok) {
           getFilteredCentres(data);
           console.log("request success");
-          setIsLoading(false);
+          setIsLoading(false)
+          
         } else {
-          console.log("Error:", data.message);
+          setErrorMessage(data.message);
+          
         }
       } catch (error) {
         console.log("Error:", error);
@@ -39,12 +43,19 @@ const SearchPage = () => {
     fetchCentres();
   }, []);
 
- 
+  
 
   return (
     <div className={styles["searchPageHolder"]}>
-      <div className={styles["searchCardHolder"]}>
-        {isLoading ? (
+        <div className={styles["searchCardHolder"]}>
+        {
+        errorMessage ? (
+          <div className={styles["errorMessage"]}>
+            <iframe src="https://embed.lottiefiles.com/animation/124348" style={{border:"none", marginBottom:50}}></iframe>
+          <p>{errorMessage} that match your description</p>
+          </div>
+        ) :
+         isLoading ? (
           <div
             style={{
               display: "flex",
@@ -59,10 +70,8 @@ const SearchPage = () => {
             <SearchSkeleton />
             <SearchSkeleton />
           </div>
-        ) : filterdCentres && filterdCentres.length === 0 ? (
-          <p>There is no event centre.</p>
         ) : (
-          filterdCentres.map((centre, index) => (
+          filterdCentres && filterdCentres.map((centre, index) => (
             <CentreCard key={index} centre={centre} />
           ))
         )}

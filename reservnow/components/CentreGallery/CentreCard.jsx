@@ -4,10 +4,13 @@ import "../CentreGallery/CentreGallery.css";
 import {
   AiFillStar,
   AiFillCreditCard,
+  AiOutlineCreditCard
 } from "react-icons/ai";
 import ImageSlider from "./ImageSlider";
 import { BsPeopleFill } from "react-icons/bs";
 import { MdLocationOn } from "react-icons/md";
+import {IoLocationOutline} from "react-icons/io5"
+import {BsPeople} from "react-icons/bs"
 
 const CentreCard = ({ centre }) => {
 
@@ -25,17 +28,17 @@ const CentreCard = ({ centre }) => {
             className="centreDesc-content"
             style={{ marginTop: 5, fontSize: 13 }}
           >
-            <MdLocationOn />
+            <IoLocationOutline />
             <p style={{ color: "gray", marginLeft: 10 }}>
               {centre.city}, {centre.state}
             </p>
           </div>
           <div className="centreDesc-content" style={{ fontSize: 13 }}>
-            <BsPeopleFill />
+            <BsPeople />
             <p style={{ color: "gray", marginLeft: 10 }}>{centre.capacity}</p>
           </div>
           <div className="centreDesc-content" style={{ fontSize: 13 }}>
-            <AiFillCreditCard />{" "}
+            <AiOutlineCreditCard />{" "}
             <p style={{ color: "gray", marginLeft: 10 }}>₦{centre.price}/hr</p>
           </div>
         </div>
