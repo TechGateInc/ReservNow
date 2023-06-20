@@ -35,12 +35,16 @@
   width: 100%;
   padding: 10px;
   border-radius: 5px;
-  background-color: #e61e4d;
+  background-color: pink;
   border: none;
   color: white;
+  font-weight: bold;
+  cursor: pointer;
 }
+
 .email-modal-form button:disabled {
   background-color: grey;
+  color: white;
 }
 
 .or {

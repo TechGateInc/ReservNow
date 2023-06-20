@@ -24,11 +24,9 @@ export default function LoginModal({
 
   const { state, dispatch } = useAuth();
 
-
   //For checking if email exist
   const emailHandleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       const response = await fetch(
         `${config.baseURL}/user/check-email/${emailFormData.email}`,
@@ -88,7 +86,6 @@ export default function LoginModal({
 
       // Handle response
       const data = await response.json();
-      console.log(data);
       window.alert("Login successful");
       dispatch(loginSuccess(user));
     } catch (error) {
@@ -129,7 +126,6 @@ export default function LoginModal({
 
       // Handle response
       const data = await response.json();
-      console.log(data);
       window.alert("Sign up successful");
     } catch (error) {
       window.alert("Sign up failed");

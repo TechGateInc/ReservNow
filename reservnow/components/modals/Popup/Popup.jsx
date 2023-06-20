@@ -6,8 +6,12 @@ import { IoArrowBackCircle } from "react-icons/io5";
 import { IoIosArrowBack } from "react-icons/io";
 import { AiOutlineClose } from "react-icons/ai";
 import { MdCancel } from "react-icons/md";
-import AOS from "aos";
-import "aos/dist/aos.css";
+
+if (typeof document !== "undefined") {
+  const AOS = require("aos");
+  require("aos/dist/aos.css");
+  AOS.init();
+}
 
 export function EmailVerificationPopup(props) {
   return props.trigger ? (

@@ -1,0 +1,77 @@
+.skeletonImage {
+  background-color: rgb(230, 230, 230);
+  width: 270px;
+  height: 250px;
+  border-radius: 8px;
+  animation: loader-animation 1s infinite ease-in-out;
+}
+.text1Holder {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.skeletonText {
+  background-color: rgb(230, 230, 230);
+  width: 270px;
+  height: 15px;
+  margin-top: 5px;
+  animation: loader-animation 1s infinite ease-in-out;
+  border-radius: 2px;
+}
+.skeletonText4 {
+  background-color: rgb(230, 230, 230);
+  width: 140px;
+  height: 15px;
+  margin-top: 5px;
+  animation: loader-animation 1s infinite ease-in-out;
+  border-radius: 2px;
+}
+.skeletonText2 {
+  background-color: rgb(230, 230, 230);
+  width: 180px;
+  height: 15px;
+  margin-top: 5px;
+  animation: loader-animation 1s infinite ease-in-out;
+  border-radius: 2px;
+}
+
+.skeletonText3 {
+  background-color: rgb(230, 230, 230);
+  width: 160px;
+  height: 15px;
+  margin-top: 5px;
+  animation: loader-animation 1s infinite ease-in-out;
+  border-radius: 2px;
+}
+
+.skeletonRating{
+  background-color: rgb(230, 230, 230);
+  width: 30px;
+  height: 20px;
+  margin-top: 15px;
+  animation: loader-animation 1s infinite ease-in-out;
+  border-radius: 2px;
+
+}
+
+.skeletonText1 {
+  background-color: rgb(230, 230, 230);
+  width: 190px;
+  height: 20px;
+  margin-top: 15px;
+  animation: loader-animation 1s infinite ease-in-out;
+  border-radius: 2px;
+}
+
+@keyframes loader-animation {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
