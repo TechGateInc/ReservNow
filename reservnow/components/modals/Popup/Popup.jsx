@@ -1,6 +1,4 @@
 "use client";
-
-import { useEffect } from "react";
 import styles from "./popup.module.css";
 import { IoArrowBackCircle } from "react-icons/io5";
 import { IoIosArrowBack } from "react-icons/io";
@@ -90,13 +88,6 @@ export function SignupPopup(props) {
 }
 
 export function DetailsGalleryPopup(props) {
-  useEffect(() => {
-    AOS.init({
-      duration: 300, // Set the animation duration
-      easing: "ease-out", // Set the easing function
-      once: true, // Enable animation only once
-    });
-  }, []);
 
   return props.trigger ? (
     <div className={styles["gallery-inner"]} data-aos="fade-up">
