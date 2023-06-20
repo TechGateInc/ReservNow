@@ -1,5 +1,7 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
+
 import "../CentreGallery/CentreGallery.css";
 import {
   AiFillStar,
@@ -12,9 +14,12 @@ import { MdLocationOn } from "react-icons/md";
 import {IoLocationOutline} from "react-icons/io5"
 import {BsPeople} from "react-icons/bs"
 
+
 const CentreCard = ({ centre }) => {
 
   return (
+    <Link href={`/details?id=${centre._id}`} style={{ textDecoration: "none", color: "black" }}>
+
     <div className="galleryCardV1">
       <div className="centreImageholder">
         <div className="imgSliderHold">
@@ -47,7 +52,7 @@ const CentreCard = ({ centre }) => {
           {centre.rating}
         </div>
       </div>
-    </div>
+            </Link>
   );
 };
 

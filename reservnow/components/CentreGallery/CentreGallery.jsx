@@ -45,6 +45,7 @@ const CentreGallery = () => {
   return (
     <div className="galleryHolder">
       <div className="galleryCardHolder">
+
         {isLoading ? (
           <div
             style={{

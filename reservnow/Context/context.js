@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { createContext, useContext, useEffect, useReducer } from "react";
 import { authReducer, initialState } from "./reducers";
@@ -26,4 +26,3 @@ export const AuthProvider = ({ children }) => {
     </AuthContext.Provider>
   );
 };
-

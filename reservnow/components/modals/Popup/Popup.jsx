@@ -1,7 +1,12 @@
-import Link from "next/link";
+"use client";
+
+import { useEffect } from "react";
 import styles from "./popup.module.css";
 import { IoArrowBackCircle } from "react-icons/io5";
+import { IoIosArrowBack } from "react-icons/io";
+import { AiOutlineClose } from "react-icons/ai";
 import { MdCancel } from "react-icons/md";
+
 if (typeof document !== "undefined") {
   const AOS = require("aos");
   require("aos/dist/aos.css");
@@ -84,14 +89,36 @@ export function SignupPopup(props) {
   );
 }
 
-export function ReviewPopup(props) {
+export function DetailsGalleryPopup(props) {
+  useEffect(() => {
+    AOS.init({
+      duration: 300, // Set the animation duration
+      easing: "ease-out", // Set the easing function
+      once: true, // Enable animation only once
+    });
+  }, []);
+
+  return props.trigger ? (
+    <div className={styles["gallery-inner"]} data-aos="fade-up">
+      <div
+        className={styles["back-icon"]}
+        onClick={() => {
+          props.setTrigger(false);
+        }}
+      >
+        <IoIosArrowBack />
+      </div>
+      {props.children}
+    </div>
+  ) : (
+    ""
+  );
+}
+
+export function DescriptionPopup(props) {
   return props.trigger ? (
     <div className={styles["popup-modal"]}>
-      <div
-        className={styles["popup-modal-inner"]}
-        data-aos="fade-up"
-        data-aos-duration="1000"
-      >
+      <div className={styles["popup-modal-inner"]}>
         <button
           className={styles["close-btn"]}
           onClick={() => {
@@ -103,6 +130,136 @@ export function ReviewPopup(props) {
           </div>
         </button>
         {props.children}
+      </div>
+    </div>
+  ) : (
+    ""
+  );
+}
+
+export function ReviewPopup(props) {
+  return props.trigger ? (
+    <div className={styles["popup-modal"]}>
+      <div className={styles["popup-modal-inner"]}>
+        <button
+          className={styles["close-btn"]}
+          onClick={() => {
+            props.setTrigger(false);
+          }}
+        >
+          <div className={styles["cancel-icon"]}>
+            <MdCancel />
+          </div>
+        </button>
+        {props.children}
+      </div>
+    </div>
+  ) : (
+    ""
+  );
+}
+
+export function AmenitiesPopup(props) {
+  return props.trigger ? (
+    <div className={styles["popup-modal"]}>
+      <div className={styles["amenities-popup"]}>
+        <button
+          className={styles["close-btn"]}
+          onClick={() => {
+            props.setTrigger(false);
+          }}
+        >
+          <div className={styles["cancel-icon"]}>
+            <AiOutlineClose />
+          </div>
+        </button>
+        <div
+          className="content"
+          style={{ paddingTop: "30px" }}
+        >
+          {props.children}
+        </div>
+      </div>
+    </div>
+  ) : (
+    ""
+  );
+}
+
+export function CentreRulesPopup(props) {
+  return props.trigger ? (
+    <div className={styles["popup-modal"]}>
+      <div className={styles["amenities-popup"]}>
+        <button
+          className={styles["close-btn"]}
+          onClick={() => {
+            props.setTrigger(false);
+          }}
+        >
+          <div className={styles["cancel-icon"]}>
+            <AiOutlineClose />
+          </div>
+        </button>
+        <div
+          className="content"
+          style={{ paddingTop: "30px" }}
+        >
+          {props.children}
+        </div>
+      </div>
+    </div>
+  ) : (
+    ""
+  );
+}
+
+export function SafetyPropertyPopup(props) {
+  return props.trigger ? (
+    <div className={styles["popup-modal"]}>
+      <div className={styles["amenities-popup"]}>
+        <button
+          className={styles["close-btn"]}
+          onClick={() => {
+            props.setTrigger(false);
+          }}
+        >
+          <div className={styles["cancel-icon"]}>
+            <AiOutlineClose />
+          </div>
+        </button>
+        <div
+          className="content"
+          style={{ paddingTop: "30px" }}
+        >
+          {props.children}
+        </div>
+      </div>
+    </div>
+  ) : (
+    ""
+  );
+}
+
+export function CancellationPolicyPopup(props) {
+  return props.trigger ? (
+    <div className={styles["popup-modal"]}>
+      <div className={styles["amenities-popup"]}>
+        <button
+          className={styles["close-btn"]}
+          onClick={() => {
+            props.setTrigger(false);
+          }}
+        >
+          <div className={styles["cancel-icon"]}>
+            <AiOutlineClose />
+          </div>
+        </button>
+        <div
+          className="content"
+          style={{ paddingTop: "30px" }}
+        >
+          {props.children}
+        </div>
       </div>
     </div>
   ) : (

@@ -1,0 +1,72 @@
+.detail-review-section {
+  margin-top: 40px;
+  margin-bottom: 6%;
+}
+.detail-review-section .review-section-header {
+  display: flex;
+  justify-content: space-between;
+}
+.review-section-header .review {
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+}
+.review b {
+  display: flex;
+  align-items: center;
+}
+.detail-review-section .review-section-content {
+  margin-top: 2%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.review-section-content .review-card {
+  width: 45%;
+  height: 210px;
+  margin-bottom: 2%;
+}
+.review-section-content .review-card .review-card-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2%;
+}
+.review-card-header img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.review-card-header .text {
+  color: grey;
+  margin-left: 10px;
+}
+.review-section-content .review-card .review-card-content {
+  margin-bottom: 2%;
+  position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  height: 60px;
+}
+
+.review-card-footer {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.review-card-popup .review-card-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+.show-more-btn {
+  background-color: white;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 2%;
+  text-decoration: underline;
+  font-weight: 600;
+}
