@@ -38,14 +38,6 @@ const DetailsCardLeft = ({ centreDetails }) => {
     }
   }, [centreDetails.amenities]);
 
-  // useEffect(() => {
-  //   if (amenities || description) {
-  //     document.body.classList.add("popup-open");
-  //   } else {
-  //     document.body.classList.remove("popup-open");
-  //   }
-  // }, [amenities, description]);
-
   useEffect(() => {
     let scrollPosition = 0;
 
@@ -183,34 +175,6 @@ const DetailsCardLeft = ({ centreDetails }) => {
           <AmenitiesPopup trigger={amenities} setTrigger={setAmenities}>
             <div className="details-card-amenities">
               <div className="amenities-title">What this place offers</div>
-              <div className="amenities-content">
-                {Object.keys(groupedAmenities).map((categoryId) => {
-                  // Find the category name using the categoryId
-                  const category = getCategory.find(
-                    (cat) => cat._id === categoryId
-                  );
-                  return (
-                    <React.Fragment key={categoryId}>
-                      <div className="category-header">
-                        {category ? category.name : ""}
-                      </div>
-                      {groupedAmenities[categoryId].map((item) => (
-                        <div style={{ width: "100%" }}>
-                          <div className="amenities-item1" key={item._id}>
-                            <div className="amenities-icon">
-                              <BsFan />
-                            </div>
-                            <div className="amenities-name">{item.name}</div>
-                          </div>
-                          <hr
-                            style={{ marginTop: "30px", marginBottom: "30px" }}
-                          />
-                        </div>
-                      ))}
-                    </React.Fragment>
-                  );
-                })}
-              </div>
               <div className="amenities-content">
                 {Object.keys(groupedAmenities).map((categoryId) => {
                   // Find the category name using the categoryId

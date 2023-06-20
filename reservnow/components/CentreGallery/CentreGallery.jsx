@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import "../CentreGallery/CentreGallery.css";
 import config from "@/config";
 import CentreCard from "./CentreCard";
-import SearchSkeleton from "../SearchSkeleton/SearchSkeleton";
+import { Skeleton } from "../Skeleton/Skeleton";
 
 const CentreGallery = () => {
   const [centres, getCentres] = useState(null);
@@ -45,7 +45,6 @@ const CentreGallery = () => {
   return (
     <div className="galleryHolder">
       <div className="galleryCardHolder">
-
         {isLoading ? (
           <div
             style={{
@@ -56,17 +55,16 @@ const CentreGallery = () => {
               marginTop: 35,
             }}
           >
-            <SearchSkeleton />
-            <SearchSkeleton />
-            <SearchSkeleton />
-            <SearchSkeleton />
+            <Skeleton />
+            <Skeleton />
+            <Skeleton />
+            <Skeleton />
           </div>
         ) : (
           centres &&
-            centres.map((centre, index) => (
-              <CentreCard key={index} centre={centre} />
-              
-            ))
+          centres.map((centre, index) => (
+            <CentreCard key={index} centre={centre} />
+          ))
         )}
       </div>
     </div>

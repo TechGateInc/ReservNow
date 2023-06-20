@@ -4,14 +4,14 @@
   padding-right: 13%;
 }
 .details-header {
-  margin-top: 2%;
+  margin-top: 20px;
 }
 .details-header h1 {
   font-weight: 500;
   font-size: 25px;
 }
 .details-sub-header {
-  margin-top: 1%;
+  margin-top: 10px;
   display: flex;
   align-items: center;
   font-size: 14px;
@@ -61,4 +61,14 @@
 }
 .things-to-know-section{
   margin-top: 40px;
+}
+
+.popup-open {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  overflow: -moz-hidden-unscrollable;
+}
+.popup-open::-webkit-scrollbar {
+  display: none;
 }

@@ -8,14 +8,6 @@ import { DetailsGalleryPopup } from "../modals/Popup/Popup";
 const DetailsGallery = () => {
   const [gallery, setGallery] = useState(false);
 
-  // useEffect(() => {
-  //   if (gallery) {
-  //     document.body.classList.add("popup-open");
-  //   } else {
-  //     document.body.classList.remove("popup-open");
-  //   }
-  // }, [gallery]);
-
   useEffect(() => {
     let scrollPosition = 0;
 
