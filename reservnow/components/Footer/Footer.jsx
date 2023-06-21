@@ -6,7 +6,9 @@ import { AiFillCaretUp, AiOutlineClose } from "react-icons/ai";
 if (typeof document !== "undefined") {
   const AOS = require("aos");
   require("aos/dist/aos.css");
-  AOS.init({ disable: true });}
+  // AOS.init({ disable: true });}
+  AOS.init();}
+
 
 const Footer = () => {
   const [isHidden, setIsHidden] = useState(true);
