@@ -17,7 +17,7 @@ const SearchPage = () => {
       const capacity = searchParams.get("c");
       // Post the params to the backend
       try {
-        const response = await fetch(`${config.baseURL}/eventcentre/`, {
+        const response = await fetch(`${config.baseURL}/eventcentre/search`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
