@@ -15,8 +15,6 @@
   position: fixed;
 }
 
-
-
 .SearchBar {
   display: flex;
   flex-direction: row;
@@ -74,10 +72,6 @@
   align-items: center;
   margin-left: 5%;
 }
-
-.profileHolder {
-}
-
 .profileHolderIcons {
   display: flex;
   flex-direction: row;
@@ -116,6 +110,8 @@
   display: flex;
   flex-direction: column;
   border-radius: 5px;
+  background-color: white;
+  z-index: 1;
 }
 
 .DropdownContent2 {
@@ -127,6 +123,9 @@
   display: flex;
   flex-direction: column;
   border-radius: 5px;
+  background-color: white;
+  z-index: 1;
+  color: black;
 }
 
 .contentSection2 {
@@ -144,6 +143,8 @@
   /* margin: 5px; */
   cursor: pointer;
   padding: 10px;
+  text-decoration: none;
+  color: black;
 }
 
 .DropdownLinks:hover {
@@ -170,21 +171,26 @@
   height: 0;
   overflow: hidden;
   transition: height 0.3s ease;
-  margin-left: 5%;
-  margin-right: 5%;
-  z-index: 1 !important;
+  padding-left: 2%;
+  padding-right: 2%;
+  background-color: white;
+  
+  
 }
 
 .slide-down {
   height: 70px;
-  z-index: 1;
+ 
+  /* background-color: red; */
+  /* position: sticky; */
+  /* position: fixed; */
 }
 
 .location-Cards {
   /* background-color: rgb(107, 107, 232); */
   background-color: white;
   border: 1px solid rgb(221, 221, 221);
-  width: 140px;
+  width: 140px !important;
   height: 30px;
   /* box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px; */
   border-radius: 15px;
@@ -192,6 +198,7 @@
   justify-content: center;
   align-items: center;
   color: black;
+
   transition: transform 0.2s ease-in-out;
 }
 
@@ -213,4 +220,23 @@
   justify-content: space-between;
   padding: 15px;
   text-decoration: none;
+}
+
+.searchBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: pink;
+  border-radius: 20px;
+  margin-right: -10px;
+}
+.searchBtn:hover {
+  cursor: pointer !important;
+  background-color: rgb(236, 167, 179);
+}
+
+.not-allowed{
+  background-color: red;
 }

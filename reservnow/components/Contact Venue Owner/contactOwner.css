@@ -1,0 +1,65 @@
+.contact-owner-container .top {
+  display: flex;
+  align-items: center;
+}
+.contact-owner-container .left img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+}
+.contact-owner-container .right {
+  margin-left: 15px;
+}
+.contact-owner-container .right h3 {
+  font-weight: 600;
+}
+.contact-owner-container .right span {
+  font-size: 14px;
+  color: grey;
+}
+.ratings-star-section {
+  display: flex;
+  margin-top: 20px;
+}
+.ratings-star-section .reviews {
+  display: flex;
+  align-items: center;
+}
+.ratings-star-section .identity-veri {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}
+.about-venue-owner {
+  margin-top: 20px;
+}
+.about-venue-owner .title p {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+.about-venue-owner .contents {
+  margin-bottom: 20px;
+  font-size: 15px;
+  font-weight: 300;
+}
+.contact-btn button {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: white;
+  border: 1px solid black;
+  font-weight: 549;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.protection{
+    display: flex;
+    align-items: center;
+    margin-top: 25px;
+}
+.protection .text{
+    margin-left: 10px;
+    font-size: 12px;
+    width: 230px;
+}

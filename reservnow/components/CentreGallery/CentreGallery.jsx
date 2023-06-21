@@ -1,30 +1,40 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import "../CentreGallery/CentreGallery.css";
-import { AiFillStar, AiOutlineHeart, AiFillHeart } from "react-icons/ai";
-import ImageSlider from "./ImageSlider";
-import { RiArrowRightSLine } from "react-icons/ri";
 import config from "@/config";
 import CentreCard from "./CentreCard";
+import { Skeleton } from "../Skeleton/Skeleton";
 
 const CentreGallery = () => {
   const [centres, getCentres] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchCentres = async () => {
       try {
-        const response = await fetch(`${config.baseURL}/eventcentre/`); // Replace with your API endpoint
-        const jsonData = await response.json();
-        getCentres(jsonData);
+        const response = await fetch(`${config.baseURL}/eventcentre/`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        if (response.ok) {
+          const data = await response.json();
+          getCentres(data);
+          setIsLoading(false);
+        } else {
+          const errorData = await response.json();
+          throw new Error(
+            errorData.message || "Error occurred while fetching centres"
+          );
+        }
       } catch (error) {
-        console.log("Error fetching data:", error);
+        console.log("Error:", error.message);
       }
     };
 
     fetchCentres();
   }, []);
-
-  console.log(centres);
 
   const [isImageClicked, setIsImageClicked] = useState(false);
 
@@ -34,15 +44,28 @@ const CentreGallery = () => {
 
   return (
     <div className="galleryHolder">
-      <p style={{ textAlign: "center", fontSize: 40 }}>Our Centres</p>
       <div className="galleryCardHolder">
-        {centres &&
+        {isLoading ? (
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              width: "100%",
+              marginTop: 35,
+            }}
+          >
+            <Skeleton />
+            <Skeleton />
+            <Skeleton />
+            <Skeleton />
+          </div>
+        ) : (
+          centres &&
           centres.map((centre, index) => (
             <CentreCard key={index} centre={centre} />
-          ))}
-       
-      
-     
+          ))
+        )}
       </div>
     </div>
   );
