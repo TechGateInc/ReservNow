@@ -25,7 +25,7 @@ const Header = ({ }) => {
         if (response.ok) {
           const data = await response.json();
           getCentres(data);
-          setIsLoading(false);
+          // setIsLoading(false);
         } else {
           const errorData = await response.json();
           throw new Error(

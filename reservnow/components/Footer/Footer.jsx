@@ -2,11 +2,11 @@
 import { useEffect, useState } from "react";
 import "../Footer/footer.css";
 import { AiFillCaretUp, AiOutlineClose } from "react-icons/ai";
+
 if (typeof document !== "undefined") {
   const AOS = require("aos");
   require("aos/dist/aos.css");
-  AOS.init();
-}
+  AOS.init({ disable: true });}
 
 const Footer = () => {
   const [isHidden, setIsHidden] = useState(true);
@@ -56,12 +56,13 @@ const Footer = () => {
           className="hiddenSectionWrapper"
         // data-aos="fade-down"
         >
-          <div className={`hiddenSection ${isHidden ? "" : "active"}`}
-
+          <div
+            className={`hiddenSection ${isHidden ? "" : "active"}`}
             data-aos={isHidden ? "fade-down" : "fade-up"}
             data-aos-duration="700"
-
           >
+
+
             {/* Content of the hidden section */}
             <div className="closeBtn" onClick={hideHiddenSection}
 

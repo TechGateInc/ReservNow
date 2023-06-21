@@ -8,7 +8,8 @@ import { MdCancel } from "react-icons/md";
 if (typeof document !== "undefined") {
   const AOS = require("aos");
   require("aos/dist/aos.css");
-  AOS.init();
+  // AOS.init();
+  AOS.init({ disable: true });
 }
 
 export function EmailVerificationPopup(props) {
