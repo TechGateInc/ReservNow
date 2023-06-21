@@ -1,3 +1,3 @@
 export default {
-  baseURL: "http://localhost:1882",
+  baseURL: "https://reservnow-service.onrender.com",
 };
