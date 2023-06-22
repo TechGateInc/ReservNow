@@ -29,6 +29,8 @@
 .host-content {
   height: 70vh;
   padding-top: 8%;
+  padding-left: 5%;
+  padding-right: 5%;
 }
 .host-footer {
   height: 10vh;
