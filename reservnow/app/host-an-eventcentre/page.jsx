@@ -35,6 +35,7 @@ const HostAnEventCentrePage = ({}) => {
 
           </div>
         </div>
+        <div className={styles["pagefooter-section"]}>
         <div className={styles["page-loader"]}></div>
         <div className={styles["host-footer"]}>
           {active === "Overview" && <div></div>}
@@ -75,6 +76,7 @@ const HostAnEventCentrePage = ({}) => {
               Next
             </button>
           )}
+        </div>
         </div>
       </div>
     </div>

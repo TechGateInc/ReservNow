@@ -30,7 +30,7 @@
   background-color: #f6f2f0;
 }
 .host-content {
-  height: 75vh;
+  height: 70vh;
 }
 .host-footer {
   height: 10vh;
@@ -39,18 +39,23 @@
   justify-content: space-between;
   align-items: center;
   padding-right: 20px;
-  position: fixed;
-  bottom: 0;
+  
+  background-color: white;
 }
 .page-loader {
   height: 8px;
   width: 100%;
   background-color: grey;
-  position: fixed;
-  bottom: 75px;
 }
+.pagefooter-section{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+
+}
+
+
 .host-footer button {
-  margin-top: 15px;
   padding: 15px;
   padding-right: 30px;
   padding-left: 30px;

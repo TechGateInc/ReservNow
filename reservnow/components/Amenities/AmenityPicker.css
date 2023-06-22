@@ -1,4 +1,6 @@
-/* .AmmenityHolder{
+.AmmenityHolder{
     background-color: red;
     height: 100vh;
-} */
+    margin-left: 20%;
+    margin-right: 20%;
+}
