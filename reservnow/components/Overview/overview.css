@@ -24,6 +24,8 @@
   margin-bottom: 5%;
 }
 .host-content-right .line hr {
+  margin-top: 40px;
+  margin-bottom: 40px;
   height: 1px !important;
   background-color: #dddddd;
 }
@@ -45,7 +47,6 @@
   font-weight: 600;
 }
 .icon-container img {
-  height: 150px;
+  height: 100px;
   width: 150px;
 }
-

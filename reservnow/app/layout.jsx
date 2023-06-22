@@ -12,7 +12,7 @@ export default function RootLayout({children}) {
       <body className={inter.className}>
         <AuthProvider>
           {/* <Header /> */}
-          <div style={{ marginBottom: "10px"}}>{children}</div>
+          <div>{children}</div>
           {/* <Footer /> */}
         </AuthProvider>
       </body>
