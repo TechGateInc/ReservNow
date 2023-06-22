@@ -1,0 +1,14 @@
+.type-ofP-overview-root {
+  width: 100%;
+  display: column;
+  justify-content: center;
+  align-items: center;
+  background-color: red;
+}
+.type-of-place-container{
+    display: flex;
+    align-items: center;
+}
+.type-of-place-container .right img{
+    
+}

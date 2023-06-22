@@ -55,6 +55,22 @@ const HostAnEventCentrePage = ({}) => {
               Next
             </button>
           )}
+          {active === "TypeOfPlace" && (
+            <div
+              className={styles["back-btn"]}
+              onClick={() => setActive("AboutCentreOverview")}
+            >
+              Back
+            </div>
+          )}
+          {active === "TypeOfPlace" && (
+            <button
+              onClick={() => setActive("")}
+              style={{ backgroundColor: "black", color: "white" }}
+            >
+              Next
+            </button>
+          )}
         </div>
       </div>
     </div>
