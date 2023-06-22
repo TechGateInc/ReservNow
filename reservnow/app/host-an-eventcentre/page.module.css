@@ -34,8 +34,9 @@
   margin: 10px 0;
 }
 .host-content {
-  height: 76vh;
+  height: 50%;
   margin-top: 10px;
+  background-color:red;
 }
 .host-footer {
   width: 97%;
