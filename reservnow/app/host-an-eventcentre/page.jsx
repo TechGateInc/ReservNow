@@ -6,7 +6,6 @@ import React, { useEffect } from "react";
 import Link from "next/link";
 import Overview from "@/components/Overview/Overview";
 import AboutCentreOverview from "@/components/About Centre Overview/AboutCentreOverview";
-import TypeOfPlace from "@/components/Type of Place/TypeOfPlace";
 
 const HostAnEventCentrePage = ({}) => {
   const [active, setActive] = useState("Overview");
@@ -28,7 +27,6 @@ const HostAnEventCentrePage = ({}) => {
           <div className={styles["host-content"]}>
             {active === "Overview" && <Overview />}
             {active === "AboutCentreOverview" && <AboutCentreOverview />}
-            {active === "TypeOfPlace" && <TypeOfPlace />}
           </div>
         </div>
         <hr />
@@ -50,22 +48,6 @@ const HostAnEventCentrePage = ({}) => {
           {active === "AboutCentreOverview" && (
             <button
               onClick={() => setActive("TypeOfPlace")}
-              style={{ backgroundColor: "black", color: "white" }}
-            >
-              Next
-            </button>
-          )}
-          {active === "TypeOfPlace" && (
-            <div
-              className={styles["back-btn"]}
-              onClick={() => setActive("AboutCentreOverview")}
-            >
-              Back
-            </div>
-          )}
-          {active === "TypeOfPlace" && (
-            <button
-              onClick={() => setActive("")}
               style={{ backgroundColor: "black", color: "white" }}
             >
               Next
