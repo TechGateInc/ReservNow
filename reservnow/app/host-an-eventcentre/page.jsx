@@ -7,6 +7,7 @@ import Link from "next/link";
 import Overview from "@/components/Overview/Overview";
 import AboutCentreOverview from "@/components/About Centre Overview/AboutCentreOverview";
 import TypeOfPlace from "@/components/Type of Place/TypeOfPlace";
+import AmenityPicker from "@/components/Amenities/AmenityPicker";
 
 const HostAnEventCentrePage = ({}) => {
   const [active, setActive] = useState("Overview");
@@ -28,7 +29,10 @@ const HostAnEventCentrePage = ({}) => {
           <div className={styles["host-content"]}>
             {active === "Overview" && <Overview />}
             {active === "AboutCentreOverview" && <AboutCentreOverview />}
+            {active === "AmenityPicker" && <AmenityPicker/>}
             {active === "TypeOfPlace" && <TypeOfPlace />}
+
+
           </div>
         </div>
         <hr />
@@ -49,7 +53,23 @@ const HostAnEventCentrePage = ({}) => {
           )}
           {active === "AboutCentreOverview" && (
             <button
-              onClick={() => setActive("TypeOfPlace")}
+              onClick={() => setActive("AmenityPicker")}
+              style={{ backgroundColor: "black", color: "white" }}
+            >
+              Next
+            </button>
+          )}
+           {active === "AmenityPicker" && (
+            <div
+              className={styles["back-btn"]}
+              onClick={() => setActive("AboutCentreOverview")}
+            >
+              Back
+            </div>
+          )}
+          {active === "AmenityPicker" && (
+            <button
+              onClick={() => setActive("AmenityPicker")}
               style={{ backgroundColor: "black", color: "white" }}
             >
               Next
