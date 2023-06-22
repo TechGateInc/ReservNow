@@ -29,7 +29,7 @@ const HostAnEventCentrePage = ({}) => {
             {active === "AboutCentreOverview" && <AboutCentreOverview />}
           </div>
         </div>
-        <hr />
+        <div className={styles["page-loader"]}></div>
         <div className={styles["host-footer"]}>
           {active === "Overview" && <div></div>}
           {active === "Overview" && (
