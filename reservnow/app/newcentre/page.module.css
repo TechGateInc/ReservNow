@@ -1,0 +1,81 @@
+.newPageHolder {
+  margin-left: 5%;
+  margin-right: 5%;
+
+  width: 90%;
+  height: 80vh;
+  display: flex;
+  flex-direction: row;
+}
+
+.newPageText {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  align-items: center;
+  justify-content: center;
+}
+
+.newPageMap {
+  width: 50%;
+}
+
+.estimateSearch {
+  border: 1px solid rgb(214, 214, 214);
+  width: 350px;
+  height: 50px;
+  border-radius: 25px;
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ReservText {
+  color: pink;
+  font-size: 50px;
+  font-weight: 700;
+}
+
+.ReservText2 {
+  font-size: 40px;
+  font-weight: 600;
+}
+
+.newpageLink {
+  color: rgb(201, 201, 201);
+  font-size: 12px;
+  text-decoration: underline;
+}
+
+.newPageHeader {
+  margin-bottom: 40px;
+  padding-left: 5%;
+  padding-right: 5%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 70px;
+  align-items: center;
+  border-bottom: 2px solid rgb(219, 219, 219);
+}
+
+.pageHeaderBtn {
+  display: flex;
+  flex-direction: row;
+  width: 30%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.setUpBtn {
+  background-color: pink;
+  height: 40px;
+  width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  color: white;
+  font-weight: 700;
+}

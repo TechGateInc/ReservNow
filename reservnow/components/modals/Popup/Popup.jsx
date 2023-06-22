@@ -89,7 +89,6 @@ export function SignupPopup(props) {
 }
 
 export function DetailsGalleryPopup(props) {
-
   return props.trigger ? (
     <div className={styles["gallery-inner"]} data-aos="fade-up">
       <div
@@ -101,6 +100,30 @@ export function DetailsGalleryPopup(props) {
         <IoIosArrowBack />
       </div>
       {props.children}
+    </div>
+  ) : (
+    ""
+  );
+}
+
+export function EstimatePopup(props) {
+  return props.trigger ? (
+    <div className={styles["popup-modal"]}>
+      <div className={styles["popup-modal-inner"]}>
+        <div style={{display:"flex", flexDirection:"row", alignItems:"center", justifyContent:"space-between", marginBottom:20 }}>
+        <div>
+          <p style={{ textAlign: "center" }}>Tell us about your Centre</p>
+        </div>
+          <div className={styles["cancel-icon"]}
+           onClick={() => {
+            props.setTrigger(false);
+          }}
+          >
+            <MdCancel />
+          </div>
+        </div>
+        {props.children}
+      </div>
     </div>
   ) : (
     ""
@@ -165,10 +188,7 @@ export function AmenitiesPopup(props) {
             <AiOutlineClose />
           </div>
         </button>
-        <div
-          className="content"
-          style={{ paddingTop: "30px" }}
-        >
+        <div className="content" style={{ paddingTop: "30px" }}>
           {props.children}
         </div>
       </div>
@@ -192,10 +212,7 @@ export function CentreRulesPopup(props) {
             <AiOutlineClose />
           </div>
         </button>
-        <div
-          className="content"
-          style={{ paddingTop: "30px" }}
-        >
+        <div className="content" style={{ paddingTop: "30px" }}>
           {props.children}
         </div>
       </div>
@@ -219,10 +236,7 @@ export function SafetyPropertyPopup(props) {
             <AiOutlineClose />
           </div>
         </button>
-        <div
-          className="content"
-          style={{ paddingTop: "30px" }}
-        >
+        <div className="content" style={{ paddingTop: "30px" }}>
           {props.children}
         </div>
       </div>
@@ -246,10 +260,7 @@ export function CancellationPolicyPopup(props) {
             <AiOutlineClose />
           </div>
         </button>
-        <div
-          className="content"
-          style={{ paddingTop: "30px" }}
-        >
+        <div className="content" style={{ paddingTop: "30px" }}>
           {props.children}
         </div>
       </div>

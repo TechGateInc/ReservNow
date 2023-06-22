@@ -8,7 +8,7 @@ import Events from "../LocationsCarousel/Events";
 import LoginModal from "@/components/modals/Login Modal/LoginModal";
 import config from "@/config";
 
-const Header = ({ }) => {
+const Header = ({}) => {
   const [emailVerification, setEmailVerification] = useState(false);
 
   const [centres, getCentres] = useState(null);
@@ -128,8 +128,9 @@ const Header = ({ }) => {
       onScroll={handleScroll}
     >
       <div
-        className={`extended-content  ${isLocationExtended ? "slide-down" : ""
-          }`}
+        className={`extended-content  ${
+          isLocationExtended ? "slide-down" : ""
+        }`}
       >
         <div className="locationCardHolder">
           {centres &&
@@ -187,7 +188,9 @@ const Header = ({ }) => {
         </div>
         <div className="ProfileSection">
           <div className="ReserveLink">
-            <p style={{ fontSize: 12, color: "black" }}> Add Event Centre</p>
+            <Link href={"/newcentre"}>
+              <p style={{ fontSize: 12, color: "black" }}> Add Event Centre</p>
+            </Link>
           </div>
           <div className="profileHolder" onClick={() => dropdownToggle("menu")}>
             <div className="profileHolderIcons">
