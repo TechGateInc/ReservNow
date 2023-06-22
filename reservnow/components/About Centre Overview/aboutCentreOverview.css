@@ -1,0 +1,32 @@
+.about-centreO-root {
+  padding: 20px;
+  display: flex;
+  height: 580px;
+}
+.about-centreO-root .left {
+  width: 50%;
+  height: 100%;
+  padding-left: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.about-centreO-root .right {
+  width: 50%;
+  height: 100%;
+  padding-left: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.about-centreO-root .right img{
+    height: 500px;
+    width: 500px;
+}
+.left .about-centreO-header {
+  font-size: 40px;
+  font-weight: 600;
+}
+.left .about-centreO-footer {
+  font-size: 18px;
+}
