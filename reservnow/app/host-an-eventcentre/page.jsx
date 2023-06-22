@@ -6,7 +6,7 @@ import React, { useEffect } from "react";
 import Link from "next/link";
 import Overview from "@/components/Overview/Overview";
 import AboutCentreOverview from "@/components/About Centre Overview/AboutCentreOverview";
-import TypeOfPlace from "@/components/Type of Place/TypeOfPlace";
+
 import AmenityPicker from "@/components/Amenities/AmenityPicker";
 
 const HostAnEventCentrePage = ({}) => {
@@ -30,7 +30,7 @@ const HostAnEventCentrePage = ({}) => {
             {active === "Overview" && <Overview />}
             {active === "AboutCentreOverview" && <AboutCentreOverview />}
             {active === "AmenityPicker" && <AmenityPicker/>}
-            {active === "TypeOfPlace" && <TypeOfPlace />}
+          
 
 
           </div>
