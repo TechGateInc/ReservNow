@@ -7,14 +7,14 @@
   width: 100%;
 }
 .about-centreO-container{
-  width: 80%;
+  width: 90%;
   height: 100%;
   display: flex;
 }
 .about-centreO-root .left {
   width: 50%;
   height: 100%;
-  padding-left: 50px;
+  /* padding-left: 50px; */
   display: flex;
   flex-direction: column;
   justify-content: center;
