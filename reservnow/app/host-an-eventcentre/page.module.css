@@ -12,6 +12,7 @@
   width: 100%;
   padding-left: 50px;
   padding-right: 50px;
+  background-color: white;
 }
 .host-header button {
   padding: 8px;
@@ -27,7 +28,9 @@
 }
 .host-content {
   height: 70vh;
-  padding-top: 150px;
+  padding-top: 8%;
+  padding-left: 5%;
+  padding-right: 5%;
 }
 .host-footer {
   height: 10vh;
