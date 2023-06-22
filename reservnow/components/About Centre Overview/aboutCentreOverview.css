@@ -1,7 +1,7 @@
 .about-centreO-root {
   padding: 20px;
   display: flex;
-  height: 580px;
+  height: 100%;
 }
 .about-centreO-root .left {
   width: 50%;
@@ -21,7 +21,7 @@
 }
 .about-centreO-root .right img{
     height: 90%;
-    width: 80%;
+    width: 70%;
 }
 .left .about-centreO-header {
   font-size: 40px;
