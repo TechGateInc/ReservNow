@@ -1,0 +1,75 @@
+.capacity-root {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.capacity-content {
+  width: 50%;
+}
+.capacity-header {
+  font-size: 30px;
+  font-weight: 600;
+}
+.capacity-sub-header {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  color: grey;
+}
+.capacity-picker-container {
+  height: 300px;
+  width: 100%;
+  border-radius: 10px;
+  background-color: #f7f7f7;
+  padding: 40px;
+  border: 1px solid #c9c9c9;
+}
+.capacity-picker {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.capacity-picker .minus-btn,
+.capacity-picker .plus-btn {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border: 1px solid #c9c9c9;
+  cursor: pointer;
+}
+.capacity-picker input{
+    padding: 20px 0px 20px 0px;
+    font-size: 45px;
+    border-radius: 10px;
+    border: 1px solid #c9c9c9;
+    text-align: center;
+    width: 80%;
+    margin-left: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.error-message{
+    color: #c13515;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+.other-text{
+    text-align: center;
+    margin-top: 30px;
+    font-size: 16px;
+}
+.capacity-picker button:disabled{
+    cursor: default;
+}
+.capacity-picker button:active{
+  background-color: #f7f7f7;
+}

@@ -1,0 +1,169 @@
+.upload-gallery-root {
+  height: 100%;
+  margin-left: 25%;
+  margin-right: 25%;
+}
+.upload-gallery-header-container {
+  text-align: center;
+}
+.upload-gallery-header {
+  font-weight: 600;
+  font-size: 30px;
+}
+.upload-gallery-sub-header {
+  margin-top: 5px;
+  color: grey;
+}
+.upload-photos {
+  margin-top: 8%;
+  padding: 10px;
+  height: 70%;
+  border: 1px dashed #ccc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.img-icon {
+  font-size: 60px;
+}
+.cover-photo .header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.cover-photo .header .right button {
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 20px;
+  border: 1px solid grey;
+  cursor: pointer;
+}
+
+.cover-photo .img-container img {
+  width: 100%;
+  height: 400px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+/* .img-container .remove-btn {
+  position: relative;
+  display: inline-block;
+}
+.remove-btn .trash-icon {
+  position: absolute;
+  bottom: 345px;
+  right: 20px;
+  text-align: center;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+.cover-photo-title {
+  position: relative;
+}
+.cover-photo-title .cover-photo-title-main {
+  position: absolute;
+  bottom: 340px;
+  right: 510px;
+  text-align: center;
+  background-color: white;
+  padding: 10px;
+  width: 150px;
+  font-weight: 600;
+  border-radius: 10px;
+} */
+.img-container {
+  position: relative;
+}
+
+.img-wrapper {
+  position: relative;
+}
+
+.remove-btn {
+  position: absolute;
+  padding-top: 4px;
+  top: 15px;
+  right: 15px;
+  z-index: 1;
+  text-align: center;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.cover-photo-title {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  z-index: 1;
+  text-align: center;
+  background-color: white;
+  padding: 10px;
+  width: 150px;
+  font-weight: 600;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+.other-photos {
+  width: 100%;
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding-bottom: 100px;
+}
+.other-photos-container {
+  width: 49%;
+}
+.other-photos img {
+  width: 100%;
+  height: 300px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+.other-photos-container .remove-btn1 {
+  position: relative;
+  display: inline-block;
+}
+.remove-btn1 .trash-icon1 {
+  position: absolute;
+  bottom: 250px;
+  right: 20px;
+  text-align: center;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.add-more-box {
+  width: 49%;
+  height: 300px;
+  border: 1px dashed black;
+  color: grey;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.add-more-box .add-icon {
+  font-size: 40px;
+}
