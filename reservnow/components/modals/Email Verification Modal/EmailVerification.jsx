@@ -1,11 +1,38 @@
 "use client";
+import config from "@/config";
 import styles from "./emailVerification.module.css";
 
-export default function EmailVerification({
-  formData,
-  handleChange,
-  handleSubmit,
-}) {
+export default function EmailVerificationForm({ email, setEmail, setOpenEmailModal, setOpenLoginAuthModal, setOpenRegistrationModal }) {
+
+  const handleEmailVerification = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(
+        `${config.baseURL}/user/check-email/${email}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      // Handle response
+      const data = await response.json();
+      console.log(data);
+      if (response.ok) {
+        setOpenEmailModal(false);
+        setOpenLoginAuthModal(true);
+      } else {
+        setOpenEmailModal(false);
+        setOpenRegistrationModal(true);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleEmailChange = (e) => setEmail(e.target.value)
+
   return (
     <div className={styles["email-root"]}>
       <div className={styles["email-modal"]}>
@@ -29,8 +56,8 @@ export default function EmailVerification({
                 type="text"
                 placeholder="Email"
                 name="email"
-                value={formData.email}
-                onChange={handleChange}
+                value={email}
+                onChange={handleEmailChange}
               />
             </div>
             <p>
@@ -39,8 +66,8 @@ export default function EmailVerification({
             </p>
             <div className={styles["submit-btn"]}>
               <button
-                onClick={handleSubmit}
-                disabled={formData.email === "" ? true : false}
+                onClick={handleEmailVerification}
+                disabled={email === "" ? true : false}
               >
                 Continue
               </button>

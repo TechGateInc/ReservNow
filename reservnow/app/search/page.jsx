@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import CentreCard from "@/components/CentreGallery/CentreCard";
 import config from "@/config";
 import { Skeleton } from "@/components/Skeleton/Skeleton";
-import { TfiFaceSad } from "react-icons/tfi";
 
 const SearchPage = () => {
   const [filterdCentres, getFilteredCentres] = useState(null);

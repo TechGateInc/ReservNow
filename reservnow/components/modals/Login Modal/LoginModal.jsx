@@ -1,186 +1,38 @@
 "use client";
 import styles from "./loginModal.module.css";
 import { useState } from "react";
-import config from "@/config";
-import { EmailVerificationPopup } from "../Popup/Popup";
-import { PasswordPopup } from "../Popup/Popup";
-import { SignupPopup } from "../Popup/Popup";
-import EmailVerification from "../Email Verification Modal/EmailVerification";
-import PasswordModal from "../Password Modal/PasswordModal";
-import SignUpModal from "../Sign Up Modal/SignUpModal";
-import { useAuth } from '../../../Context/context';
-import { loginRequest, loginSuccess, loginFailure, logout } from '../../../Context/actions';
+import { EmailVerificationModal } from "../Email Verification Modal/EmailVerificationModal";
+import { LoginAuthModal } from "../Password Modal/LoginAuthModal";
+import { RegistrationModal } from "../Registration Modal/RegistrationModal";
 
-export default function LoginModal({
-  emailVerification,
-  setEmailVerification,
-}) {
+export default function LoginModal({ emailVerification, setEmailVerification }) {
 
-  const [passwordModal, setPasswordModal] = useState(false);
-  const [signUpModal, setSignUpModal] = useState(false);
-  //for the email verification
-  const [emailFormData, setEmailFormData] = useState({ email: "" });
-  const [emailData, setEmailData] = useState([]);
+  const [openLoginAuthModal, setOpenLoginAuthModal] = useState(false);
+  const [openRegistrationModal, setOpenRegistrationModal] = useState(false);
+  const [email, setEmail] = useState('')
 
-  const { state, dispatch } = useAuth();
-
-  //For checking if email exist
-  const emailHandleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await fetch(
-        `${config.baseURL}/user/check-email/${emailFormData.email}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      // Handle response
-      const data = await response.json();
-      if (response.ok) {
-        // Email exists in the database
-        setEmailData(data);
-        setEmailVerification(false);
-        setPasswordModal(true);
-      } else {
-        // Email does not exist in the database
-        setEmailVerification(false);
-        setSignUpModal(true);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-    setEmailFormData({ email: "" });
-  };
-
-  const emailHandleChange = (e) => {
-    setEmailFormData((prevData) => ({
-      ...prevData,
-      [e.target.name]: e.target.value,
-    }));
-  };
-
-  // For Sign in
-  const [passwordFormData, setPasswordFormData] = useState({
-    password: "",
-  });
-
-  // For logging in
-  const passwordHandleSubmit = async (e) => {
-    e.preventDefault();
-    dispatch(loginRequest());
-    try {
-      const response = await fetch(`${config.baseURL}/auth/user/signin`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: emailFormData.email,
-          password: passwordFormData.password,
-        }),
-      });
-
-      // Handle response
-      const data = await response.json();
-      window.alert("Login successful");
-      dispatch(loginSuccess(user));
-    } catch (error) {
-      dispatch(loginFailure(error.message));
-      window.alert("Login failed");
-      console.error(error);
-    }
-    setPasswordFormData({ email: "" });
-  };
-
-  const passwordHandleChange = (e) => {
-    setPasswordFormData((prevData) => ({
-      ...prevData,
-      [e.target.name]: e.target.value,
-    }));
-  };
-
-  // For signing up
-  const [signUpFormData, setSignUpFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-    phoneNo: "",
-  });
-
-  // For signing up
-  const signUpHandleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      const response = await fetch(`${config.baseURL}/user/signup`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(signUpFormData),
-      });
-
-      // Handle response
-      const data = await response.json();
-      window.alert("Sign up successful");
-    } catch (error) {
-      window.alert("Sign up failed");
-      console.error(error);
-    }
-    setSignUpFormData({ name: "", email: "", password: "", phoneNo: "" });
-  };
-
-  const signUpHandleChange = (e) => {
-    setSignUpFormData((prevData) => ({
-      ...prevData,
-      [e.target.name]: e.target.value,
-    }));
-  };
 
   return (
     <div className={styles["login-modal-root"]}>
-      <EmailVerificationPopup
+      <EmailVerificationModal
         trigger={emailVerification}
         setTrigger={setEmailVerification}
-        setEmailFormData={setEmailFormData}
-      >
-        <EmailVerification
-          formData={emailFormData}
-          handleChange={emailHandleChange}
-          handleSubmit={emailHandleSubmit}
-        />
-      </EmailVerificationPopup>
-
-      <PasswordPopup
-        trigger={passwordModal}
-        setTrigger={setPasswordModal}
+        email={email}
+        setEmail={setEmail}
+        setOpenLoginAuthModal={setOpenLoginAuthModal}
+        setOpenRegistrationModal={setOpenRegistrationModal} />
+      <LoginAuthModal
+        trigger={openLoginAuthModal}
+        setTrigger={setOpenLoginAuthModal}
         setEmailVerification={setEmailVerification}
-        setPasswordFormData={setPasswordFormData}
-      >
-        <PasswordModal
-          formData={passwordFormData}
-          handleChange={passwordHandleChange}
-          handleSubmit={passwordHandleSubmit}
-          emailData={emailData}
-        />
-      </PasswordPopup>
-
-      <SignupPopup
-        trigger={signUpModal}
-        setTrigger={setSignUpModal}
-        setSignUpFormData={setSignUpFormData}
-        setEmailVerification={setEmailVerification}
-      >
-        <SignUpModal
-          formData={signUpFormData}
-          handleChange={signUpHandleChange}
-          handleSubmit={signUpHandleSubmit}
-        />
-      </SignupPopup>
+        email={email}
+        setEmail={setEmail}
+        setOpenEmailModal={setEmailVerification} />
+      <RegistrationModal
+        trigger={openRegistrationModal}
+        setTrigger={setOpenRegistrationModal}
+        email={email}
+        setEmail={setEmail} />
     </div>
   );
 }
