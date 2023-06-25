@@ -43,10 +43,18 @@
   background-color: white;
 }
 .page-loader {
-  height: 6px;
+  height: 4px;
   width: 100%;
-  background-color: grey;
+  background-color: black;
 }
+
+.loader-background{
+  background-color: rgb(201, 201, 201);
+  width: 100%;
+  height: 4px;
+}
+
+
 .pagefooter-section{
   position: fixed;
   bottom: 0;
@@ -72,4 +80,57 @@
   font-weight: 600;
   text-decoration: underline;
   cursor: pointer;
+}
+
+/* Apply transitions to the loader */
+/* Apply transitions to the loader */
+.page-loader {
+  transition: width 0.3s ease-in-out;
+}
+
+.loader-zero-width {
+  width: 0%;
+ 
+}
+
+.loader-medium-width {
+  width: 10%;
+  animation:  1s ease-in-out forwards;
+}
+
+.loader-medium2-width {
+  width: 20%;
+  animation:  1s ease-in-out forwards;
+}
+
+
+.loader-medium3-width {
+  width: 30%;
+  animation:  3s ease-in-out forwards;
+} 
+
+.loader-medium4-width {
+  width: 40%;
+  animation:  3s ease-in-out forwards;
+} 
+
+.loader-medium5-width{
+  width: 50%;
+  animation: 3s ease-in-out forwards;
+}
+.loader-medium6-width{
+  width: 60%;
+  animation: 3s ease-in-out forwards;
+}
+.loader-medium7-width{
+  width: 70%;
+  animation: 3s ease-in-out forwards;
+}
+.loader-medium8-width{
+  width: 80%;
+  animation: 3s ease-in-out forwards;
+}
+.loader-medium5-width{
+  width: 50%;
+  animation: 3s ease-in-out forwards;
 }
