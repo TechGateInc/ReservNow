@@ -12,13 +12,23 @@ import FinishSetup from "@/components/Finish Setup/FinishSetup";
 import Capacity from "@/components/Capacity/Capacity";
 import Legal from "@/components/Legal/Legal";
 import AmenityPicker from "@/components/Amenities/AmenityPicker";
+import LocationPicker from "@/components/LocationPicker/LocationPicker";
+import PricePicker from "@/components/PricePicker/PricePicker";
+import NamePicker from "@/components/NamePicker/NamePicker";
+import DescriptionInfo from "@/components/CentreDescriptionInfo/DescriptionInfo";
+import DescriptionPicker from "@/components/CentreDescriptionPicker/DescriptionPicker";
+import { a } from "react-spring";
 
 const HostAnEventCentrePage = ({}) => {
-  const [active, setActive] = useState("Legal");
+  const [active, setActive] = useState("Overview");
   const [selectedFiles, setSelectedFiles] = useState([]);
   const isSubmitDisabled = selectedFiles.length < 5;
   const coverPhoto = selectedFiles.length > 0 ? selectedFiles[0] : null;
   const remainingPhotos = selectedFiles.slice(1);
+  const [activeType, setActiveType] = useState(null);
+  const [price, setPrice] = useState(0);
+  const [description, setDescription] = useState("");
+  const [name, setName] = useState("");
 
   return (
     <div className={styles["host-root"]}>
@@ -47,23 +57,68 @@ const HostAnEventCentrePage = ({}) => {
                 remainingPhotos={remainingPhotos}
               />
             )}
+            {active === "LocationPicker" && <LocationPicker />}
+            {active === "PricePicker" && (
+              <PricePicker price={price} setPrice={setPrice} />
+            )}
+            {active === "NamePicker" && (
+              <NamePicker name={name} setName={setName} />
+            )}
+            {active === "DescriptionInfo" && (
+              <DescriptionInfo
+                description={description}
+                setDescription={setDescription}
+              />
+            )}
+            {active === "DescriptionPicker" && <DescriptionPicker />}
+            {active === "CentreTypePicker" && (
+              <CentreTypePicker
+                activeType={activeType}
+                setActiveType={setActiveType}
+              />
+            )}
+            {active === "AmenityPicker" && <AmenityPicker />}
             {active === "StandOut" && <StandOut />}
             {active === "FinishSetup" && <FinishSetup />}
             {active === "Capacity" && <Capacity />}
             {active === "Legal" && <Legal />}
           </div>
         </div>
+
         <div className={styles["pagefooter-section"]}>
-          <div className={styles["page-loader"]}></div>
+          <div className={styles["loader-background"]}>
+            <div
+              className={`${styles["page-loader"]} ${
+                active === "Overview"
+                  ? styles["loader-zero-width"]
+                  : active === "AboutCentreOverview"
+                  ? styles["loader-medium-width"]
+                  : active === "CentreTypePicker"
+                  ? styles["loader-medium2-width"]
+                  : active === "AmenityPicker"
+                  ? styles["loader-medium3-width"]
+                  : active === "LocationPicker"
+                  ? styles["loader-medium4-width"]
+                  : active === "PricePicker"
+                  ? styles["loader-medium5-width"]
+                  : active === "NamePicker"
+                  ? styles["loader-medium6-width"]
+                  : active === "DescriptionInfo"
+                  ? styles["loader-medium7-width"]
+                  : active === "DescriptionPicker"
+                  ? styles["loader-medium8-width"]
+                  : styles["loader-full-width"]
+
+                // : styles["loader-full-width"]
+              }`}
+            ></div>
+          </div>
           <div className={styles["host-footer"]}>
             {active === "Overview" && <div></div>}
             {active === "Overview" && (
-              <div
-                onClick={() => setActive("AboutCentreOverview")}
-                className={styles["get-started-btn"]}
-              >
+              <button onClick={() => setActive("AboutCentreOverview")}>
                 Get started
-              </div>
+              </button>
             )}
             {active === "AboutCentreOverview" && (
               <div
@@ -71,74 +126,6 @@ const HostAnEventCentrePage = ({}) => {
                 onClick={() => setActive("Overview")}
               >
                 Back
-              </div>
-            )}
-            {active === "AboutCentreOverview" && (
-              <div
-                onClick={() => setActive("AmenityPicker")}
-                className={styles["next-btn"]}
-              >
-                Next
-              </div>
-            )}
-            {active === "AmenityPicker" && (
-              <div
-                className={styles["back-btn"]}
-                onClick={() => setActive("AboutCentreOverview")}
-              >
-                Back
-              </div>
-            )}
-            {active === "AmenityPicker" && (
-              <div
-                onClick={() => setActive("UploadGallery")}
-                className={styles["next-btn"]}
-              >
-                Next
-              </div>
-            )}
-            {active === "UploadGallery" && (
-              <div
-                className={styles["back-btn"]}
-                onClick={() => setActive("AmenityPicker")}
-              >
-                Back
-              </div>
-            )}
-            {active === "UploadGallery" && (
-              <div
-                onClick={() => !isSubmitDisabled && setActive("StandOut")}
-                className={`${styles["next-btn"]} ${
-                  isSubmitDisabled ? styles["disabled"] : ""
-                }`}
-              >
-                Next
-              </div>
-            )}
-            {active === "StandOut" && (
-              <div
-                className={styles["back-btn"]}
-                onClick={() => setActive("UploadGallery")}
-              >
-                Back
-              </div>
-            )}
-            {active === "StandOut" && (
-              <div onClick={() => setActive("")} className={styles["next-btn"]}>
-                Next
-              </div>
-            )}
-            {active === "FinishSetup" && (
-              <div
-                className={styles["back-btn"]}
-                onClick={() => setActive("UploadGallery")}
-              >
-                Back
-              </div>
-            )}
-            {active === "FinishSetup" && (
-              <div onClick={() => setActive("")} className={styles["next-btn"]}>
-                Next
               </div>
             )}
           </div>
