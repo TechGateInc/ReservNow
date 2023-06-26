@@ -1,8 +1,14 @@
+"use client";
+
+import React, { useState } from "react";
 import "./legal.css";
-import { HiOutlineInformationCircle } from "react-icons/hi";
 import { GrCircleInformation } from "react-icons/gr";
 
-const Legal = ({}) => {
+const Legal = ({ isRadioButtonSelected, setIsRadioButtonSelected }) => {
+  const handleRadioButtonChange = (event) => {
+    setIsRadioButtonSelected(event.target.value !== "");
+  };
+
   return (
     <div className="legal-root">
       <div className="legal-container">
@@ -16,13 +22,25 @@ const Legal = ({}) => {
           </div>
           <div className="first-section-form">
             <div className="form-item">
-              <input type="radio" name="hosting" id="private-individual" />
+              <input
+                type="radio"
+                name="hosting"
+                id="private-individual"
+                value="private-individual"
+                onChange={handleRadioButtonChange}
+              />
               <label htmlFor="private-individual">
                 I'm hosting as a private individual
               </label>
             </div>
             <div className="form-item">
-              <input type="radio" name="hosting" id="business" />
+              <input
+                type="radio"
+                name="hosting"
+                id="business"
+                value="business"
+                onChange={handleRadioButtonChange}
+              />
               <label htmlFor="business">I'm hosting as a business</label>
             </div>
           </div>

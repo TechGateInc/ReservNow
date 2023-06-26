@@ -49,14 +49,13 @@
   background-color: black;
 }
 
-.loader-background{
+.loader-background {
   background-color: rgb(201, 201, 201);
   width: 100%;
   height: 4px;
 }
 
-
-.pagefooter-section{
+.pagefooter-section {
   position: fixed;
   bottom: 0;
   width: 100%;
@@ -72,6 +71,7 @@
   color: white;
   border-radius: 5px;
   cursor: pointer;
+  border: none;
 }
 .next-btn {
   background-color: black;
@@ -85,6 +85,10 @@
   border-radius: 5px;
   cursor: pointer;
 }
+.next-btn:disabled{
+  background-color: grey;
+  cursor: default;
+}
 .disabled {
   background-color: grey;
   cursor: default;
@@ -94,6 +98,8 @@
   font-weight: 600;
   text-decoration: underline;
   cursor: pointer;
+  background-color: white;
+  border: none;
 }
 
 /* Apply transitions to the loader */
@@ -104,47 +110,65 @@
 
 .loader-zero-width {
   width: 0%;
- 
 }
 
 .loader-medium-width {
-  width: 10%;
-  animation:  1s ease-in-out forwards;
+  width: 0%;
+  animation: 1s ease-in-out forwards;
 }
 
 .loader-medium2-width {
-  width: 20%;
-  animation:  1s ease-in-out forwards;
+  width: 7.5%;
+  animation: 1s ease-in-out forwards;
 }
-
 
 .loader-medium3-width {
-  width: 30%;
-  animation:  3s ease-in-out forwards;
-} 
-
-.loader-medium4-width {
-  width: 40%;
-  animation:  3s ease-in-out forwards;
-} 
-
-.loader-medium5-width{
-  width: 50%;
+  width: 15%;
   animation: 3s ease-in-out forwards;
 }
-.loader-medium6-width{
+
+.loader-medium4-width {
+  width: 22.5%;
+  animation: 3s ease-in-out forwards;
+}
+
+.loader-medium5-width {
+  width: 30%;
+  animation: 3s ease-in-out forwards;
+}
+.loader-medium6-width {
+  width: 37.5%;
+  animation: 3s ease-in-out forwards;
+}
+.loader-medium7-width {
+  width: 45%;
+  animation: 3s ease-in-out forwards;
+}
+.loader-medium8-width {
+  width: 52.5%;
+  animation: 3s ease-in-out forwards;
+}
+.loader-medium9-width {
   width: 60%;
   animation: 3s ease-in-out forwards;
 }
-.loader-medium7-width{
-  width: 70%;
+.loader-medium10-width {
+  width: 67.5%;
   animation: 3s ease-in-out forwards;
 }
-.loader-medium8-width{
-  width: 80%;
+.loader-medium11-width {
+  width: 75%;
   animation: 3s ease-in-out forwards;
 }
-.loader-medium5-width{
-  width: 50%;
+.loader-medium12-width {
+  width: 82.5%;
+  animation: 3s ease-in-out forwards;
+}
+.loader-medium13-width {
+  width: 90%;
+  animation: 3s ease-in-out forwards;
+}
+.loader-full-width {
+  width: 100%;
   animation: 3s ease-in-out forwards;
 }

@@ -7,8 +7,7 @@ import { IoAddOutline } from "react-icons/io5";
 import { MdError } from "react-icons/md";
 import { HiOutlineInformationCircle } from "react-icons/hi";
 
-const Capacity = ({}) => {
-  const [capacity, setCapacity] = useState(10);
+const Capacity = ({ capacity, setCapacity }) => {
   const [eventInfo, setEventInfo] = useState("");
 
   const handleMinusClick = () => {
@@ -62,7 +61,7 @@ const Capacity = ({}) => {
             <button
               className="minus-btn"
               onClick={handleMinusClick}
-              disabled={parseInt(capacity) === 10}
+              disabled={parseInt(capacity) < 20 || capacity === ""}
             >
               <AiOutlineMinus />
             </button>
@@ -75,8 +74,11 @@ const Capacity = ({}) => {
                 style={{
                   appearance: "none",
                   border:
-                    capacity === "0" ? "1px solid red" : "1px solid #c9c9c9",
-                  background: capacity === "0" ? "#fff8f6" : "#fff",
+                    capacity === "0" || capacity === ""
+                      ? "1px solid red"
+                      : "1px solid #c9c9c9",
+                  background:
+                    capacity === "0" || capacity === "" ? "#fff8f6" : "#fff",
                 }}
               />
             </div>

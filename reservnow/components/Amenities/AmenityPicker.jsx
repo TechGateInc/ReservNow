@@ -1,8 +1,8 @@
-"use client"
+"use client";
 import "./AmenityPicker.css";
-import React, {useState} from "react";
+import React, { useState } from "react";
 
-const AmenityPicker = ({}) => {
+const isAmenityPicker = ({}) => {
   const amenities = {
     entertainment: [
       {
@@ -121,15 +121,15 @@ const AmenityPicker = ({}) => {
   console.log(amenities);
 
   const AmenityCard = ({ amenity }) => {
-    const [isActive, setIsActive] = useState(false);
+    const [isAmenityPicker, setisAmenityPicker] = useState(false);
 
     const handleClick = () => {
-      setIsActive(!isActive);
+      setisAmenityPicker(!isAmenityPicker);
     };
     return (
-      <div 
-      className={`amenity-card ${isActive ? 'amenityActive' : ''}`}
-      onClick={handleClick}
+      <div
+        className={`amenity-card ${isAmenityPicker ? "amenityActive" : ""}`}
+        onClick={handleClick}
       >
         <img src={amenity.icon} width={50} alt="" />
         <span className="amenity-type">{amenity.type}</span>
@@ -138,20 +138,21 @@ const AmenityPicker = ({}) => {
   };
 
   const [selectedAmenities, setSelectedAmenities] = useState([]);
+  console.log(selectedAmenities);
 
-  const handleAmenityClick = (amenityType, isActive) => {
-    if (isActive) {
-      setSelectedAmenities(prevSelectedAmenities =>
-        prevSelectedAmenities.filter(type => type !== amenityType)
+  const handleAmenityClick = (amenityType, isAmenityPicker) => {
+    if (isAmenityPicker) {
+      setSelectedAmenities((prevSelectedAmenities) =>
+        prevSelectedAmenities.filter((type) => type !== amenityType)
       );
     } else {
-      setSelectedAmenities(prevSelectedAmenities =>
-        [...prevSelectedAmenities, amenityType]
-      );
+      setSelectedAmenities((prevSelectedAmenities) => [
+        ...prevSelectedAmenities,
+        amenityType,
+      ]);
     }
   };
 
- 
   return (
     <div className="AmenityHolder">
       <p style={{ fontSize: "35px", marginBottom: 20 }}>
@@ -161,20 +162,24 @@ const AmenityPicker = ({}) => {
       <div className="AmenityTypeHolder">
         {Object.keys(amenities).map((category) => (
           <div key={category}>
-            <div style={{marginTop:40, marginBottom:40}}>
+            <div style={{ marginTop: 40, marginBottom: 40 }}>
               <h2>{category}</h2>
             </div>
-          <div className="amenity-list">
+            <div className="amenity-list">
               {amenities[category].map((amenity) => (
-                <AmenityCard key={amenity.type} amenity={amenity} onClick={handleAmenityClick} />
+                <AmenityCard
+                  key={amenity.type}
+                  amenity={amenity}
+                  onClick={handleAmenityClick}
+                />
               ))}
             </div>
           </div>
         ))}
       </div>
-      <div className="selected-amenities" style={{marginBottom:500}}>
+      <div className="selected-amenities" style={{ marginBottom: 500 }}>
         <h3>Selected Amenities:</h3>
-        {selectedAmenities.map(amenityType => (
+        {selectedAmenities.map((amenityType) => (
           <p key={amenityType}>{amenityType}</p>
         ))}
       </div>
@@ -182,4 +187,4 @@ const AmenityPicker = ({}) => {
   );
 };
 
-export default AmenityPicker;
+export default isAmenityPicker;
