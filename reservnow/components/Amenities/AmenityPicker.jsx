@@ -1,6 +1,6 @@
-"use client"
+"use client";
 import "./AmenityPicker.css";
-import React, {useState} from "react";
+import React, { useState } from "react";
 
 const AmenityPicker = ({activeAmenities, setActiveAmenities}) => {
   const amenities = {
@@ -142,8 +142,6 @@ const AmenityPicker = ({activeAmenities, setActiveAmenities}) => {
   };
 
 
-
- 
   return (
     <div className="AmenityHolder">
     <p style={{ fontSize: "35px", marginBottom: 20 }}>

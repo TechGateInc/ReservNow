@@ -6,27 +6,35 @@ import React, { useEffect } from "react";
 import Link from "next/link";
 import Overview from "@/components/Overview/Overview";
 import AboutCentreOverview from "@/components/About Centre Overview/AboutCentreOverview";
-import CentreTypePicker from "@/components/CentreType/CentreTypePicker";
+import UploadGallery from "@/components/Upload Gallery/UploadGallery";
+import StandOut from "@/components/Stand Out/StandOut";
+import FinishSetup from "@/components/Finish Setup/FinishSetup";
+import Capacity from "@/components/Capacity/Capacity";
+import Legal from "@/components/Legal/Legal";
 import AmenityPicker from "@/components/Amenities/AmenityPicker";
 import LocationPicker from "@/components/LocationPicker/LocationPicker";
 import PricePicker from "@/components/PricePicker/PricePicker";
 import NamePicker from "@/components/NamePicker/NamePicker";
 import DescriptionInfo from "@/components/CentreDescriptionInfo/DescriptionInfo";
 import DescriptionPicker from "@/components/CentreDescriptionPicker/DescriptionPicker";
-
+import CentreTypePicker from "@/components/CentreType/CentreTypePicker";
+import ReviewListings from "@/components/Review Listing/ReviewListings";
 
 const HostAnEventCentrePage = ({}) => {
-
-  const [active, setActive] = useState("LocationPicker");
-
+  const [active, setActive] = useState("Overview");
+  const [selectedFiles, setSelectedFiles] = useState([]);
+  const isSubmitDisabled = selectedFiles.length < 5;
+  const coverPhoto = selectedFiles.length > 0 ? selectedFiles[0] : null;
+  const remainingPhotos = selectedFiles.slice(1);
   const [activeType, setActiveType] = useState(null);
   const [price, setPrice] = useState(0);
   const [description, setDescription] = useState("");
   const [name, setName] = useState("");
+  const [capacity, setCapacity] = useState(10);
+  const [isRadioButtonSelected, setIsRadioButtonSelected] = useState(false);
   const [descriptionsPick, setDescriptionsPick] = useState([]);
   const [activeAmenities, setActiveAmenities] = useState([]);
 
- 
   return (
     <div className={styles["host-root"]}>
       <div className={styles["host-container"]}>
@@ -43,182 +51,348 @@ const HostAnEventCentrePage = ({}) => {
           </div>
           <div className={styles["host-content"]}>
             {active === "Overview" && <Overview />}
-            {active === "AboutCentreOverview" && <AboutCentreOverview  />}
-            {active === "CentreTypePicker" && <CentreTypePicker activeType={activeType} setActiveType={setActiveType} />}
-            {active === "AmenityPicker" && <AmenityPicker activeAmenities={activeAmenities} setActiveAmenities={setActiveAmenities} />}
-            {active === "LocationPicker" && <LocationPicker/>}
-            {active === "PricePicker" && <PricePicker price={price} setPrice={setPrice}/>}
-            {active === "NamePicker" && <NamePicker name={name} setName={setName}/>}
-            {active === "DescriptionInfo" && <DescriptionInfo description={description} setDescription={setDescription}/>} 
-            {active === "DescriptionPicker" && <DescriptionPicker descriptionsPick={descriptionsPick} setDescriptionsPick={setDescriptionsPick}/>}
+
+            {active === "AboutCentreOverview" && <AboutCentreOverview />}
+            {active === "CentreTypePicker" && (
+              <CentreTypePicker
+                activeType={activeType}
+                setActiveType={setActiveType}
+              />
+            )}
+            {active === "LocationPicker" && <LocationPicker />}
+            {active === "Capacity" && (
+              <Capacity capacity={capacity} setCapacity={setCapacity} />
+            )}
+            {active === "StandOut" && <StandOut />}
+            {active === "AmenityPicker" && (
+              <AmenityPicker
+                activeAmenities={activeAmenities}
+                setActiveAmenities={setActiveAmenities}
+              />
+            )}
+            {active === "UploadGallery" && (
+              <UploadGallery
+                selectedFiles={selectedFiles}
+                setSelectedFiles={setSelectedFiles}
+                isSubmitDisabled={isSubmitDisabled}
+                coverPhoto={coverPhoto}
+                remainingPhotos={remainingPhotos}
+              />
+            )}
+            {active === "NamePicker" && (
+              <NamePicker name={name} setName={setName} />
+            )}
+            {active === "DescriptionInfo" && (
+              <DescriptionInfo
+                description={description}
+                setDescription={setDescription}
+              />
+            )}
+            {active === "DescriptionPicker" && (
+              <DescriptionPicker
+                descriptionsPick={descriptionsPick}
+                setDescriptionsPick={setDescriptionsPick}
+              />
+            )}
+            {active === "FinishSetup" && <FinishSetup />}
+            {active === "PricePicker" && (
+              <PricePicker price={price} setPrice={setPrice} />
+            )}
+            {active === "Legal" && (
+              <Legal
+                isRadioButtonSelected={isRadioButtonSelected}
+                setIsRadioButtonSelected={setIsRadioButtonSelected}
+              />
+            )}
+            {active === "ReviewListings" && (
+              <ReviewListings
+                selectedFiles={selectedFiles}
+                name={name}
+                price={price}
+              />
+            )}
           </div>
         </div>
+
         <div className={styles["pagefooter-section"]}>
           <div className={styles["loader-background"]}>
-          <div
-            className={`${styles["page-loader"]} ${
-              active === "Overview"
-                ? styles["loader-zero-width"]
-                : active === "AboutCentreOverview"
-                ? styles["loader-medium-width"]
-                : active === "CentreTypePicker"
-                ? styles["loader-medium2-width"]
-                : active === "AmenityPicker"
-                ? styles["loader-medium3-width"]
-                : active === "LocationPicker"
-                ? styles["loader-medium4-width"]
-                : active === "PricePicker"
-                ? styles["loader-medium5-width"]
-                : active === "NamePicker"
-                ? styles["loader-medium6-width"]
-                : active === "DescriptionInfo"
-                ? styles["loader-medium7-width"]
-                : active === "DescriptionPicker"
-                ? styles["loader-medium8-width"]
-                : styles["loader-full-width"]
+            <div
+              className={`${styles["page-loader"]} ${
+                active === "Overview"
+                  ? styles["loader-zero-width"]
+                  : active === "AboutCentreOverview"
+                  ? styles["loader-medium-width"]
+                  : active === "CentreTypePicker"
+                  ? styles["loader-medium2-width"]
+                  : active === "LocationPicker"
+                  ? styles["loader-medium3-width"]
+                  : active === "Capacity"
+                  ? styles["loader-medium4-width"]
+                  : active === "StandOut"
+                  ? styles["loader-medium5-width"]
+                  : active === "AmenityPicker"
+                  ? styles["loader-medium6-width"]
+                  : active === "UploadGallery"
+                  ? styles["loader-medium7-width"]
+                  : active === "NamePicker"
+                  ? styles["loader-medium8-width"]
+                  : active === "DescriptionInfo"
+                  ? styles["loader-medium9-width"]
+                  : active === "DescriptionPicker"
+                  ? styles["loader-medium10-width"]
+                  : active === "FinishSetup"
+                  ? styles["loader-medium11-width"]
+                  : active === "PricePicker"
+                  ? styles["loader-medium12-width"]
+                  : active === "Legal"
+                  ? styles["loader-medium13-width"]
+                  : styles["loader-full-width"]
 
                 // : styles["loader-full-width"]
-            }`}
-          ></div>
+              }`}
+            ></div>
           </div>
           <div className={styles["host-footer"]}>
             {active === "Overview" && <div></div>}
             {active === "Overview" && (
-              <button onClick={() => setActive("AboutCentreOverview")}>
+              <button
+                onClick={() => setActive("AboutCentreOverview")}
+                className={styles["get-started-btn"]}
+              >
                 Get started
               </button>
             )}
             {active === "AboutCentreOverview" && (
-              <div
+              <button
                 className={styles["back-btn"]}
                 onClick={() => setActive("Overview")}
               >
                 Back
-              </div>
+              </button>
             )}
             {active === "AboutCentreOverview" && (
               <button
                 onClick={() => setActive("CentreTypePicker")}
-                style={{ backgroundColor: "black", color: "white" }}
+                className={styles["next-btn"]}
               >
                 Next
               </button>
             )}
             {active === "CentreTypePicker" && (
-              <div
+              <button
                 className={styles["back-btn"]}
                 onClick={() => setActive("AboutCentreOverview")}
               >
                 Back
-              </div>
+              </button>
             )}
             {active === "CentreTypePicker" && (
               <button
-                onClick={() => setActive("AmenityPicker")}
+                onClick={() => setActive("LocationPicker")}
+                className={styles["next-btn"]}
                 disabled={!activeType}
-                style={{ backgroundColor: "black", color: "white" }}
               >
                 Next
               </button>
             )}
-              {active === "AmenityPicker" && (
-              <div
+            {active === "LocationPicker" && (
+              <button
                 className={styles["back-btn"]}
                 onClick={() => setActive("CentreTypePicker")}
-
               >
                 Back
-              </div>
+              </button>
+            )}
+            {active === "LocationPicker" && (
+              <button
+                onClick={() => setActive("Capacity")}
+                className={styles["next-btn"]}
+              >
+                Next
+              </button>
+            )}
+            {active === "Capacity" && (
+              <button
+                className={styles["back-btn"]}
+                onClick={() => setActive("LocationPicker")}
+              >
+                Back
+              </button>
+            )}
+            {active === "Capacity" && (
+              <button
+                onClick={() => setActive("StandOut")}
+                className={styles["next-btn"]}
+                disabled={capacity < 20}
+              >
+                Next
+              </button>
+            )}
+            {active === "StandOut" && (
+              <button
+                className={styles["back-btn"]}
+                onClick={() => setActive("Capacity")}
+              >
+                Back
+              </button>
+            )}
+            {active === "StandOut" && (
+              <button
+                onClick={() => setActive("AmenityPicker")}
+                className={styles["next-btn"]}
+              >
+                Next
+              </button>
             )}
             {active === "AmenityPicker" && (
               <button
-               disabled={activeAmenities.length === 0}
-                onClick={() => setActive("LocationPicker")}
-                style={{ backgroundColor: "black", color: "white" }}
+                className={styles["back-btn"]}
+                onClick={() => setActive("StandOut")}
+              >
+                Back
+              </button>
+            )}
+            {active === "AmenityPicker" && (
+              <button
+                onClick={() => setActive("UploadGallery")}
+                className={styles["next-btn"]}
+                disabled={activeAmenities.length === 0}
               >
                 Next
               </button>
             )}
-             {active === "LocationPicker" && (
-              <div
+            {active === "UploadGallery" && (
+              <button
                 className={styles["back-btn"]}
                 onClick={() => setActive("AmenityPicker")}
               >
                 Back
-              </div>
-            )}
-             {active === "LocationPicker" && (
-              <button
-                onClick={() => setActive("PricePicker")}
-                style={{ backgroundColor: "black", color: "white" }}
-              >
-                Next
               </button>
             )}
-             {active === "PricePicker" && (
-              <div
-                className={styles["back-btn"]}
-                onClick={() => setActive("LocationPicker")}
-              >
-                Back
-              </div>
-            )}
-             {active === "PricePicker" && (
+            {active === "UploadGallery" && (
               <button
-                disabled={price === 0}
                 onClick={() => setActive("NamePicker")}
-                style={{ backgroundColor: "black", color: "white" }}
+                className={`${styles["next-btn"]} ${
+                  isSubmitDisabled ? styles["disabled"] : ""
+                }`}
+                disabled={isSubmitDisabled}
               >
                 Next
               </button>
             )}
-               {active === "NamePicker" && (
-              <div
+            {active === "NamePicker" && (
+              <button
                 className={styles["back-btn"]}
-                onClick={() => setActive("PricePicker")}
+                onClick={() => setActive("UploadGallery")}
               >
                 Back
-              </div>
+              </button>
             )}
-             {active === "NamePicker" && (
+            {active === "NamePicker" && (
               <button
+                onClick={() => setActive("DescriptionInfo")}
+                className={styles["next-btn"]}
                 disabled={!name}
-                onClick={() => setActive("DescriptionInfo")}
-                style={{ backgroundColor: "black", color: "white" }}
               >
                 Next
               </button>
             )}
-                {active === "DescriptionInfo" && (
-              <div
+            {active === "DescriptionInfo" && (
+              <button
                 className={styles["back-btn"]}
                 onClick={() => setActive("NamePicker")}
               >
                 Back
-              </div>
+              </button>
             )}
-             {active === "DescriptionInfo" && (
+            {active === "DescriptionInfo" && (
               <button
-              disabled={!description}
                 onClick={() => setActive("DescriptionPicker")}
-                style={{ backgroundColor: "black", color: "white" }}
+                className={styles["next-btn"]}
+                disabled={!description}
               >
                 Next
               </button>
             )}
-             {active === "DescriptionPicker" && (
-              <div
+            {active === "DescriptionPicker" && (
+              <button
                 className={styles["back-btn"]}
                 onClick={() => setActive("DescriptionInfo")}
               >
                 Back
-              </div>
+              </button>
             )}
-             {active === "DescriptionPicker" && (
+            {active === "DescriptionPicker" && (
               <button
-                onClick={() => setActive("NamePicker")}
-                style={{ backgroundColor: "black", color: "white" }}
+                onClick={() => setActive("FinishSetup")}
+                className={styles["next-btn"]}
                 disabled={descriptionsPick.length === 0}
+              >
+                Next
+              </button>
+            )}
+            {active === "FinishSetup" && (
+              <button
+                className={styles["back-btn"]}
+                onClick={() => setActive("DescriptionPicker")}
+              >
+                Back
+              </button>
+            )}
+            {active === "FinishSetup" && (
+              <button
+                onClick={() => setActive("PricePicker")}
+                className={styles["next-btn"]}
+              >
+                Next
+              </button>
+            )}
+            {active === "PricePicker" && (
+              <button
+                className={styles["back-btn"]}
+                onClick={() => setActive("FinishSetup")}
+              >
+                Back
+              </button>
+            )}
+            {active === "PricePicker" && (
+              <button
+                onClick={() => setActive("Legal")}
+                className={styles["next-btn"]}
+                disabled={!price}
+              >
+                Next
+              </button>
+            )}
+            {active === "Legal" && (
+              <button
+                className={styles["back-btn"]}
+                onClick={() => setActive("PricePicker")}
+              >
+                Back
+              </button>
+            )}
+            {active === "Legal" && (
+              <button
+                onClick={() => setActive("ReviewListings")}
+                className={styles["next-btn"]}
+                disabled={!isRadioButtonSelected}
+              >
+                Next
+              </button>
+            )}
+            {active === "ReviewListings" && (
+              <button
+                className={styles["back-btn"]}
+                onClick={() => setActive("Legal")}
+              >
+                Back
+              </button>
+            )}
+            {active === "ReviewListings" && (
+              <button
+                onClick={() => setActive("")}
+                className={styles["next-btn"]}
               >
                 Next
               </button>
