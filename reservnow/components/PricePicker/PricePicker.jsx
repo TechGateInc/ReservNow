@@ -2,29 +2,23 @@ import React, { useState } from "react";
 import "./PricePicker.css";
 
 const PricePicker = ({ price, setPrice }) => {
-  const [currentPrice, setCurrentPrice] = useState(0);
-
   const handlePlusClick = () => {
-    setCurrentPrice(currentPrice + 1);
-    setPrice(currentPrice + 1);
+    setPrice(price + 1);
   };
 
   const handleMinusClick = () => {
-    if (currentPrice > 0) {
-      setCurrentPrice(currentPrice - 1);
-      setPrice(currentPrice - 1);
+    if (price > 0) {
+      setPrice(price - 1);
     }
   };
 
   const handleInputChange = (event) => {
     const value = event.target.value;
     if (value === "") {
-      setCurrentPrice(0);
       setPrice(0);
     } else {
       const parsedValue = parseInt(value);
       if (!isNaN(parsedValue)) {
-        setCurrentPrice(parsedValue);
         setPrice(parsedValue);
       }
     }
@@ -48,7 +42,7 @@ const PricePicker = ({ price, setPrice }) => {
               <p style={{ position: "relative", left: 20 }}>₦</p>
               <input
                 type="text"
-                value={currentPrice === "" ? 0 : currentPrice}
+                value={price === "" ? 0 : price}
                 onChange={handleInputChange}
                 style={{
                   height: 50,

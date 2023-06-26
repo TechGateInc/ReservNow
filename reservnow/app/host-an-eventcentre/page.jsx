@@ -165,7 +165,7 @@ const HostAnEventCentrePage = ({}) => {
             )}
              {active === "PricePicker" && (
               <button
-                disabled={!price}
+                disabled={price === 0}
                 onClick={() => setActive("NamePicker")}
                 style={{ backgroundColor: "black", color: "white" }}
               >
