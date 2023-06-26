@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import "./DescriptionPicker.css";
 
-const DescriptionPicker = ({}) => {
+const DescriptionPicker = ({descriptionsPick, setDescriptionsPick}) => {
   const Descripions = [
     {
       name: "Peaceful",
@@ -30,28 +30,28 @@ const DescriptionPicker = ({}) => {
     },
   ];
 
-  const [descriptions, setDescriptions] = useState([]);
+
 
   const handleDescriptionClick = (name) => {
     // Check if the clicked description is already selected
-    const isDescriptionSelected = descriptions.includes(name);
+    const isDescriptionSelected = descriptionsPick.includes(name);
 
     if (isDescriptionSelected) {
       // If the clicked description is already selected, remove it from the array
-      const updatedDescriptions = descriptions.filter(
+      const updatedDescriptions = descriptionsPick.filter(
         (desc) => desc !== name
       );
-      setDescriptions(updatedDescriptions);
+      setDescriptionsPick(updatedDescriptions);
     } else {
       // If the clicked description is not selected, add it to the array
       // and ensure only 2 descriptions are selected
-      if (descriptions.length < 2) {
-        const updatedDescriptions = [...descriptions, name];
-        setDescriptions(updatedDescriptions);
+      if (descriptionsPick.length < 2) {
+        const updatedDescriptions = [...descriptionsPick, name];
+        setDescriptionsPick(updatedDescriptions);
       } else {
         // Remove the first selected description and add the new one
-        const updatedDescriptions = descriptions.slice(1).concat(name);
-        setDescriptions(updatedDescriptions);
+        const updatedDescriptions = descriptionsPick.slice(1).concat(name);
+        setDescriptionsPick(updatedDescriptions);
       }
     }
   };
@@ -71,7 +71,8 @@ const DescriptionPicker = ({}) => {
         <div className="descpills">
           {Descripions.map((desc, index) => (
             <div 
-            className={`descpill ${descriptions.includes(desc.name) ? "desc-active" : ""}`}
+            key={index}
+            className={`descpill ${descriptionsPick.includes(desc.name) ? "desc-active" : ""}`}
             onClick={() => handleDescriptionClick(desc.name)}
             >
               <img src={desc.icon} width={25} alt="" />

@@ -27,6 +27,7 @@ const DescriptionInfo = ({description, setDescription}) => {
         value={description}
         onChange={handleInputChange}
         className="DesctextArea"
+        style={{ resize: "none", fontSize: 20 }} 
       />
       <p style={{marginTop:20, color:"grey"}}>{description.length} / 500</p>
     </div>

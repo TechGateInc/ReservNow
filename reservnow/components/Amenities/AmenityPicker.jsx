@@ -2,7 +2,7 @@
 import "./AmenityPicker.css";
 import React, { useState } from "react";
 
-const isAmenityPicker = ({}) => {
+const AmenityPicker = ({activeAmenities, setActiveAmenities}) => {
   const amenities = {
     entertainment: [
       {
@@ -21,10 +21,7 @@ const isAmenityPicker = ({}) => {
         type: "Dance floor",
         icon: "data:image/png;base64,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",
       },
-      {
-        type: "Live band equipment",
-        icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAADdElEQVR4nO2ZyWsUQRTGf5iDmhwU8RgDKh5cDuLBePQQjOAEBP0LRHA9iZDrQIaQixcJSBRRIQREwVsMhiSXkBjEBeIOEQMu4ELUERSXtJS+NmXbVdM9mTIzbX3w0U29V12vtlevX4GHR62hDRgBPgqHgVzCuluBt8BFahSdQGBgoUTdBhkspTuTptFG4Jg8F3rmA60DPcJ3WrltJZzX9M6mafiyVLqUok4T0FJh3tE6v1pra402CEMWm2ZEZxyoTzMAh4EicChF5z9Zlup8eS2mzR6RfbDYdV90PgOtOEST4wEYjGnzjMjeW+zaIZ1Xevfm28ktwEngqmyNg8BSTb7KwRa4rW0BtexDrE24BRpk+Vud4BLgCNBs+VAHMBszM4+BdbhDTmtLdfi0UHeCu+brBI+LwmuDfL/2kS8yKy8jg6AG0RUKlq2hJoYETnDY5ARbtT3yMEa+CHgh8ufAeimvA05ohhzALXKy1IvCoRIzH6JPJlYFQyW9ZEuMfJPWSXUy6KgTB+TC6c2K8c4xIw1eF4cRxTbNqN0xcn0vVpqv/kH/Oac1qN6jWAl8E3lvRLYR+CqyG0BXBVmwLdtKRq/1CY6JK9og9cpKOKr5hu/AZhYe5USv7NSc4F2Djjrfn1mWap7qQNro9S8nqKImExplJYTbIZBB2YcbLBfbVPS2DId4I51ReycJVohj3CBHpCvop4/yNc7QLFHgYqoPe4E9C22Ex/+YcwsywsS5w84qMNY1C2lybl0ZYaLc4Ygh55YVlMwdFkV4iuzCmjssilApZRXW3OGwIeeWFZTMHeZicm7dQH8M1WA9kGe/gWMSvw9YdG4JTfIB+caYRaeULd1pcoeFKjimXLMjTc4tyAjT5A7/gOk/Pzwy1TNt3RDbNR31Hoe8pmOCyZYkdUvCDwBz11HtGqekfCpSrtNUN2R4JgfyHqczqOmY2jHZotctG0FG6AegXATeCeJPgcAfg/g4IB/xDT4QwkeC+FAY/y+A/xkifRBVk3+DQY3TD0C5CISjkYuGaSmftlxGmOqG7NN0+gw6o5qOqR2TLaOVHIB8pNzHAWQ4Dmjzt8Nkmqluhy/IpcR4hDeBp/IcN3ASeAJMWHQeCU3yCfnGpEXHZsuY9MHfDuNvh3/C3w7za4v722ES3g63Z4T+dpi5yfW3wx4e/MYPgCekX4X15YMAAAAASUVORK5CYII=",
-      },
+   
       {
         type: "Audiovisual equipment",
         icon: "data:image/png;base64,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",
@@ -118,17 +115,24 @@ const isAmenityPicker = ({}) => {
     ],
   };
 
-  console.log(amenities);
+  
 
   const AmenityCard = ({ amenity }) => {
-    const [isAmenityPicker, setisAmenityPicker] = useState(false);
+    const isActive = activeAmenities.includes(amenity.type);
 
     const handleClick = () => {
-      setisAmenityPicker(!isAmenityPicker);
+      if (isActive) {
+        setActiveAmenities((prevAmenities) =>
+          prevAmenities.filter((a) => a !== amenity.type)
+        );
+      } else {
+        setActiveAmenities((prevAmenities) => [...prevAmenities, amenity.type]);
+      }
     };
+
     return (
       <div
-        className={`amenity-card ${isAmenityPicker ? "amenityActive" : ""}`}
+        className={`amenity-card ${isActive ? "amenityActive" : ""}`}
         onClick={handleClick}
       >
         <img src={amenity.icon} width={50} alt="" />
@@ -137,54 +141,29 @@ const isAmenityPicker = ({}) => {
     );
   };
 
-  const [selectedAmenities, setSelectedAmenities] = useState([]);
-  console.log(selectedAmenities);
-
-  const handleAmenityClick = (amenityType, isAmenityPicker) => {
-    if (isAmenityPicker) {
-      setSelectedAmenities((prevSelectedAmenities) =>
-        prevSelectedAmenities.filter((type) => type !== amenityType)
-      );
-    } else {
-      setSelectedAmenities((prevSelectedAmenities) => [
-        ...prevSelectedAmenities,
-        amenityType,
-      ]);
-    }
-  };
 
   return (
     <div className="AmenityHolder">
-      <p style={{ fontSize: "35px", marginBottom: 20 }}>
-        Tell guests what your place has to offer
-      </p>
-      <p>You can add more ammenities after you publich your listings</p>
-      <div className="AmenityTypeHolder">
-        {Object.keys(amenities).map((category) => (
-          <div key={category}>
-            <div style={{ marginTop: 40, marginBottom: 40 }}>
-              <h2>{category}</h2>
-            </div>
-            <div className="amenity-list">
-              {amenities[category].map((amenity) => (
-                <AmenityCard
-                  key={amenity.type}
-                  amenity={amenity}
-                  onClick={handleAmenityClick}
-                />
-              ))}
-            </div>
+    <p style={{ fontSize: "35px", marginBottom: 20 }}>
+      Tell guests what your place has to offer
+    </p>
+    <p>You can add more amenities after you publish your listings</p>
+    <div className="AmenityTypeHolder">
+      {Object.keys(amenities).map((category) => (
+        <div key={category}>
+          <div style={{ marginTop: 40, marginBottom: 40 }}>
+            <h2>{category}</h2>
           </div>
-        ))}
-      </div>
-      <div className="selected-amenities" style={{ marginBottom: 500 }}>
-        <h3>Selected Amenities:</h3>
-        {selectedAmenities.map((amenityType) => (
-          <p key={amenityType}>{amenityType}</p>
-        ))}
-      </div>
+          <div className="amenity-list">
+            {amenities[category].map((amenity) => (
+              <AmenityCard key={amenity.type} amenity={amenity} />
+            ))}
+          </div>
+        </div>
+      ))}
     </div>
+  </div>
   );
 };
 
-export default isAmenityPicker;
+export default AmenityPicker;

@@ -31,6 +31,8 @@ const HostAnEventCentrePage = ({}) => {
   const [name, setName] = useState("");
   const [capacity, setCapacity] = useState(10);
   const [isRadioButtonSelected, setIsRadioButtonSelected] = useState(false);
+  const [descriptionsPick, setDescriptionsPick] = useState([]);
+  const [activeAmenities, setActiveAmenities] = useState([]);
 
   return (
     <div className={styles["host-root"]}>
@@ -48,6 +50,7 @@ const HostAnEventCentrePage = ({}) => {
           </div>
           <div className={styles["host-content"]}>
             {active === "Overview" && <Overview />}
+
             {active === "AboutCentreOverview" && <AboutCentreOverview />}
             {active === "CentreTypePicker" && (
               <CentreTypePicker
@@ -60,7 +63,12 @@ const HostAnEventCentrePage = ({}) => {
               <Capacity capacity={capacity} setCapacity={setCapacity} />
             )}
             {active === "StandOut" && <StandOut />}
-            {active === "AmenityPicker" && <AmenityPicker />}
+            {active === "AmenityPicker" && (
+              <AmenityPicker
+                activeAmenities={activeAmenities}
+                setActiveAmenities={setActiveAmenities}
+              />
+            )}
             {active === "UploadGallery" && (
               <UploadGallery
                 selectedFiles={selectedFiles}
@@ -79,7 +87,12 @@ const HostAnEventCentrePage = ({}) => {
                 setDescription={setDescription}
               />
             )}
-            {active === "DescriptionPicker" && <DescriptionPicker />}
+            {active === "DescriptionPicker" && (
+              <DescriptionPicker
+                descriptionsPick={descriptionsPick}
+                setDescriptionsPick={setDescriptionsPick}
+              />
+            )}
             {active === "FinishSetup" && <FinishSetup />}
             {active === "PricePicker" && (
               <PricePicker price={price} setPrice={setPrice} />
@@ -235,6 +248,7 @@ const HostAnEventCentrePage = ({}) => {
               <button
                 onClick={() => setActive("UploadGallery")}
                 className={styles["next-btn"]}
+                disabled={activeAmenities.length === 0}
               >
                 Next
               </button>
@@ -304,6 +318,7 @@ const HostAnEventCentrePage = ({}) => {
               <button
                 onClick={() => setActive("FinishSetup")}
                 className={styles["next-btn"]}
+                disabled={descriptionsPick.length === 0}
               >
                 Next
               </button>
