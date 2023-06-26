@@ -13,7 +13,7 @@ import PricePicker from "@/components/PricePicker/PricePicker";
 import NamePicker from "@/components/NamePicker/NamePicker";
 import DescriptionInfo from "@/components/CentreDescriptionInfo/DescriptionInfo";
 import DescriptionPicker from "@/components/CentreDescriptionPicker/DescriptionPicker";
-import { a } from "react-spring";
+
 
 const HostAnEventCentrePage = ({}) => {
 
@@ -23,9 +23,10 @@ const HostAnEventCentrePage = ({}) => {
   const [price, setPrice] = useState(0);
   const [description, setDescription] = useState("");
   const [name, setName] = useState("");
-  
+  const [descriptionsPick, setDescriptionsPick] = useState([]);
+  const [activeAmenities, setActiveAmenities] = useState([]);
 
-
+ 
   return (
     <div className={styles["host-root"]}>
       <div className={styles["host-container"]}>
@@ -44,12 +45,12 @@ const HostAnEventCentrePage = ({}) => {
             {active === "Overview" && <Overview />}
             {active === "AboutCentreOverview" && <AboutCentreOverview  />}
             {active === "CentreTypePicker" && <CentreTypePicker activeType={activeType} setActiveType={setActiveType} />}
-            {active === "AmenityPicker" && <AmenityPicker/>}
+            {active === "AmenityPicker" && <AmenityPicker activeAmenities={activeAmenities} setActiveAmenities={setActiveAmenities} />}
             {active === "LocationPicker" && <LocationPicker/>}
             {active === "PricePicker" && <PricePicker price={price} setPrice={setPrice}/>}
             {active === "NamePicker" && <NamePicker name={name} setName={setName}/>}
             {active === "DescriptionInfo" && <DescriptionInfo description={description} setDescription={setDescription}/>} 
-            {active === "DescriptionPicker" && <DescriptionPicker/>}
+            {active === "DescriptionPicker" && <DescriptionPicker descriptionsPick={descriptionsPick} setDescriptionsPick={setDescriptionsPick}/>}
           </div>
         </div>
         <div className={styles["pagefooter-section"]}>
@@ -131,6 +132,7 @@ const HostAnEventCentrePage = ({}) => {
             )}
             {active === "AmenityPicker" && (
               <button
+               disabled={activeAmenities.length === 0}
                 onClick={() => setActive("LocationPicker")}
                 style={{ backgroundColor: "black", color: "white" }}
               >
@@ -214,8 +216,9 @@ const HostAnEventCentrePage = ({}) => {
             )}
              {active === "DescriptionPicker" && (
               <button
-                onClick={() => setActive("DescriptionPicker")}
+                onClick={() => setActive("NamePicker")}
                 style={{ backgroundColor: "black", color: "white" }}
+                disabled={descriptionsPick.length === 0}
               >
                 Next
               </button>
