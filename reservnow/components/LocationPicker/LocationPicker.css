@@ -12,14 +12,15 @@
 .searchHolder{
     background-color: white;
     width: 500px;
-    padding: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
     display: flex;
     flex-direction: column;
     align-items: centre;
     justify-content: center;
     border-radius: 30px;
-    position: relative;
-    top: 80px;
+    position: absolute;
+    top: 200px;
     height: 60px;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
@@ -29,16 +30,45 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    margin-top: 110px;
 }
 
-.get-location-dropdown {
-   
+  .mapSearchBtn{
+    background-color: pink;
+    color: white;
+    border: none;
+    padding: 5px;
+    width: 140px;
+    border-radius: 5px;
+    margin-right: 10px;
+
+
+  }
+
+  .hiddenMapSection{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     opacity: 0;
-    transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
-    
+    height:0px;
+    transition: height 0.3s ease;
+
+
   }
-  
-  .get-location-dropdown.show {
-    max-height: 300px; /* Set the desired maximum height for the dropdown */
+
+  .hiddenMapSection.show {
+    height: 100px;
     opacity: 1;
+   
   }
+
+  .imnput{
+    position: relative;
+    top: 10px;
+  }
+
+  .locationLink{
+    margin-left: 10px;
+    text-decoration: underline;
+  }
+

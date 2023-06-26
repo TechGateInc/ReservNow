@@ -17,7 +17,7 @@ import DescriptionPicker from "@/components/CentreDescriptionPicker/DescriptionP
 
 const HostAnEventCentrePage = ({}) => {
 
-  const [active, setActive] = useState("Overview");
+  const [active, setActive] = useState("LocationPicker");
 
   const [activeType, setActiveType] = useState(null);
   const [price, setPrice] = useState(0);

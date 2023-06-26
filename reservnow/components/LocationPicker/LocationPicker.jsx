@@ -1,11 +1,11 @@
+
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./LocationPicker.css";
 
 const LocationPicker = () => {
   const [address, setAddress] = useState("");
   const defaultLocation = "New York, NY";
-  const [showGetLocationButton, setShowGetLocationButton] = useState(false);
 
   useEffect(() => {
     setAddress(defaultLocation);
@@ -44,39 +44,77 @@ const LocationPicker = () => {
     iframe.src = src;
   };
 
-  const handleInputFocus = () => {
-    setShowGetLocationButton(true);
+  const [searchHolderHeight, setSearchHolderHeight] = useState("auto");
+  const [showHiddenSection, setShowHiddenSection] = useState(false);
+  const hiddenSectionRef = useRef(null);
+
+  const handleInputClick = () => {
+    setShowHiddenSection(true);
+    setSearchHolderHeight("100px");
   };
+
+  const handleOutsideClick = (event) => {
+    if (!event.target.closest(".mapContainer")) {
+      setShowHiddenSection(false);
+      setSearchHolderHeight("50px");
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("click", handleOutsideClick);
+    return () => {
+      document.removeEventListener("click", handleOutsideClick);
+    };
+  }, []);
 
   return (
     <div className="mapholder">
       <p style={{ fontSize: "35px", marginBottom: "10px" }}>
         Is the Pin in the right spot ?
       </p>
-      <p>
-        Your address is only shared with guests after they have made thier
-        reservation
-      </p>
+      <p>Your address is only shared with guests after they have made their reservation</p>
       <div className="mapContainer">
-        <div className="searchHolder">
-          <div style={{display:"flex", flexDirection:"row"}}>
+        <div className="searchHolder" style={{ height: searchHolderHeight }}>
+          <div style={{ display: "flex", flexDirection: "row" }} className="imnput">
             <input
               type="text"
               placeholder="Enter an address"
-              // value={address}
+              value={address}
               onChange={handleAddressChange}
-              onFocus={handleInputFocus}
-              style={{ border: "none", width: "400px" }}
+              style={{ border: "none", width: "100%", height:30 }}
+              onClick={handleInputClick}
             />
-            {/* <button onClick={handleSearch}>Search</button> */}
           </div>
-          {/* <div
-            className={`get-location-dropdown ${
-              showGetLocationButton ? "show" : ""
-            }`}
-          >
-            <button onClick={handleGetLocation}>Get Location</button>
-          </div> */}
+          
+            <div style={{ marginTop: 10 }} 
+            className={`hiddenMapSection ${
+              showHiddenSection ? "show" : ""}`
+            }
+             ref={hiddenSectionRef}>
+              {/* Contents of the hidden section */}
+              <button
+                onClick={() => {
+                  handleSearch();
+                  setShowHiddenSection(false);
+                  setSearchHolderHeight("50px");
+                }}
+                className="mapSearchBtn"
+              >
+                Search
+              </button>
+              or
+              <div
+                onClick={() => {
+                  handleGetLocation();
+                  setShowHiddenSection(false);
+                  setSearchHolderHeight("50px");
+                }}
+                className="locationLink"
+              >
+                Get Location via GPS
+              </div>
+            </div>
+        
         </div>
         <iframe
           id="map-iframe"
