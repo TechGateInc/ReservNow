@@ -42,6 +42,7 @@
   background-color: white;
   border: 1px solid #c9c9c9;
   cursor: pointer;
+  font-size: 20px;
 }
 .capacity-picker input{
     padding: 20px 0px 20px 0px;

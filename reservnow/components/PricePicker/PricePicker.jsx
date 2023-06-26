@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import "./PricePicker.css";
+import { AiOutlineMinus } from "react-icons/ai";
+import { IoAddOutline } from "react-icons/io5";
 
 const PricePicker = ({ price, setPrice }) => {
   const handlePlusClick = () => {
@@ -28,17 +30,21 @@ const PricePicker = ({ price, setPrice }) => {
     <div className="pricePickerPage">
       <div className="pricePickerHolder">
         <div className="pricePrompt">
-          <p style={{ fontSize: 35, marginBottom: 10 }}>
-            Now, set your Price.
-          </p>
+          <p style={{ fontSize: 35, marginBottom: 10 }}>Now, set your Price.</p>
           <p>You can change it anytime.</p>
         </div>
         <div className="pickerHolder">
           <div className="pickHolder">
             <div onClick={handleMinusClick} className="increamentBtn">
-              -
+              <AiOutlineMinus />
             </div>
-            <div style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+            >
               <p style={{ position: "relative", left: 20 }}>₦</p>
               <input
                 type="text"
@@ -50,17 +56,15 @@ const PricePicker = ({ price, setPrice }) => {
                   border: "2px solid rgb(196, 196, 196)",
                   fontSize: 30,
                   width: 200,
-                  paddingLeft: 20
+                  paddingLeft: 20,
                 }}
               />
             </div>
             <div onClick={handlePlusClick} className="increamentBtn">
-              +
+              <IoAddOutline />
             </div>
           </div>
-          <div style={{ marginTop: 10, fontWeight: "500" }}>
-            per hour
-          </div>
+          <div style={{ marginTop: 10, fontWeight: "500" }}>per hour</div>
         </div>
       </div>
     </div>

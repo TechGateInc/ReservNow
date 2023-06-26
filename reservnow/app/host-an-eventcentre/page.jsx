@@ -18,6 +18,7 @@ import NamePicker from "@/components/NamePicker/NamePicker";
 import DescriptionInfo from "@/components/CentreDescriptionInfo/DescriptionInfo";
 import DescriptionPicker from "@/components/CentreDescriptionPicker/DescriptionPicker";
 import CentreTypePicker from "@/components/CentreType/CentreTypePicker";
+import ReviewListings from "@/components/Review Listing/ReviewListings";
 
 const HostAnEventCentrePage = ({}) => {
   const [active, setActive] = useState("Overview");
@@ -101,6 +102,13 @@ const HostAnEventCentrePage = ({}) => {
               <Legal
                 isRadioButtonSelected={isRadioButtonSelected}
                 setIsRadioButtonSelected={setIsRadioButtonSelected}
+              />
+            )}
+            {active === "ReviewListings" && (
+              <ReviewListings
+                selectedFiles={selectedFiles}
+                name={name}
+                price={price}
               />
             )}
           </div>
@@ -366,9 +374,25 @@ const HostAnEventCentrePage = ({}) => {
             )}
             {active === "Legal" && (
               <button
-                onClick={() => setActive("")}
+                onClick={() => setActive("ReviewListings")}
                 className={styles["next-btn"]}
                 disabled={!isRadioButtonSelected}
+              >
+                Next
+              </button>
+            )}
+            {active === "ReviewListings" && (
+              <button
+                className={styles["back-btn"]}
+                onClick={() => setActive("Legal")}
+              >
+                Back
+              </button>
+            )}
+            {active === "ReviewListings" && (
+              <button
+                onClick={() => setActive("")}
+                className={styles["next-btn"]}
               >
                 Next
               </button>
