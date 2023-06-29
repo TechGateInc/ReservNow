@@ -1,90 +1,28 @@
 "use client";
 
-import "./detailsCardRight.css";
-import { useEffect, useRef, useState } from "react";
+import "./bookingForm.css";
+import { useState } from "react";
 import { AiFillStar } from "react-icons/ai";
 import { TbCurrencyNaira } from "react-icons/tb";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
-import dayjs from "dayjs";
-import utc from "dayjs/plugin/utc";
-import timezone from "dayjs/plugin/timezone";
-import customParseFormat from "dayjs/plugin/customParseFormat";
-import localizedFormat from "dayjs/plugin/localizedFormat";
 import config from "@/config";
-import { duration } from "@mui/material";
+import dayjs from "dayjs";
+import advancedFormat from "dayjs/plugin/advancedFormat";
 
-const DetailsCardRight = ({ centreDetails, reviewData, id }) => {
-  const reservNowPrice = 270; //reserve now price
-  const minStart = 2; // the minimum start time
-  const minEnd = 1; // the minimum end time
-  const Days = 7; // the maximum duration between start date and end date
-  const [duration, setDuration] = useState(0);
-  const [start, setStart] = useState(
-    dayjs().add(minStart, "hour").add(1, "minutes")
-  );
+const BookingForm = ({ centreDetails, reviewData, id }) => {
+  // Add the necessary plugin to dayjs
+  dayjs.extend(advancedFormat);
+  const minStartTime = 1;
+  const minEndTime = 1;
+  const maxEndDate = 7;
+  const reservNowPrice = 270;
+
+  const currentDate = dayjs();
+  const [start, setStart] = useState(currentDate.add(minStartTime, "hour"));
   const [end, setEnd] = useState("");
-
-  // Import the necessary Day.js plugins
-  dayjs.extend(utc);
-  dayjs.extend(timezone);
-  dayjs.extend(customParseFormat);
-  dayjs.extend(localizedFormat);
-
-  // Get the current date and time
-  const currentDateTime = dayjs();
-
-  // Calculate the minimum selectable date and time
-  const minStartDateTime = currentDateTime.add(minStart, "hour");
-
-  // Function to calculate the duration in hours
-  const calculateDurationInHours = (startDate, endDate) => {
-    const durationInMilliseconds = endDate.diff(startDate);
-    const durationInHours = Math.floor(
-      durationInMilliseconds / (1000 * 60 * 60)
-    );
-    return durationInHours;
-  };
-
-  // Function to handle the start date and time change
-  const handleStartChange = (newValue) => {
-    // Set the selected date and time as the new value
-    setStart(newValue);
-
-    const durationInHours = calculateDurationInHours(newValue, end);
-    setDuration(durationInHours);
-
-    // Calculate the minimum selectable end date and time
-    const minEndDateTime = newValue.add(1, "hour");
-
-    // Check if the current end date and time is before the new minimum
-    if (end.isBefore(minEndDateTime)) {
-      // Set the new minimum as the end date and time
-      setEnd(minEndDateTime);
-    }
-  };
-
-  const handleEndChange = (newValue) => {
-    // Set the selected date and time as the new value
-    setEnd(newValue);
-
-    // Calculate the maximum selectable end date
-    const maxEndDateTime = start.add(7, "day");
-
-    // Calculate the duration
-    const durationInHours = calculateDurationInHours(start, newValue);
-    setDuration(durationInHours);
-
-    // Check if the selected end date is after the maximum selectable end date
-    if (newValue.isAfter(maxEndDateTime)) {
-      // Set the maximum selectable end date as the new value
-      setEnd(maxEndDateTime);
-    }
-  };
-
-  // For booking an event centre
   const [bookingForm, setBookingForm] = useState({
     event_centre_id: "",
     userId: "",
@@ -93,25 +31,25 @@ const DetailsCardRight = ({ centreDetails, reviewData, id }) => {
     duration: "",
     notes: "",
   });
+  const calculateDurationInHours = () => {
+    const duration = start && end &&  end.diff(start, "hour");
+    return duration;
+  };
+
+  // Example usage
+  const durationInHours = calculateDurationInHours();
 
   const bookingHandleSubmit = async (e) => {
     e.preventDefault();
 
-    const startDateTime = start.format("YYYY-MM-DDTHH:mm");
-    const endDateTime = end.format("YYYY-MM-DDTHH:mm");
-
-    const durationInHours = endDateTime.diff(startDateTime, "hours");
-
-    const payload = {
-      start_date: startDateTime.format("YYYY-MM-DDTHH:mm"),
-      end_date: endDateTime.format("YYYY-MM-DDTHH:mm"),
-      duration: durationInHours.toString(),
-      // Other data to include in the payload
-    };
-
-    const requestData = {
-      ...bookingForm,
-      ...payload,
+    // Retrieve the form data from the state
+    const formData = {
+      start_date: start,
+      end_date: end,
+      notes: bookingForm.notes,
+      event_centre_id: id,
+      userId: "64958637db3d3493ebaf8c84",
+      duration: "2",
     };
 
     try {
@@ -120,41 +58,41 @@ const DetailsCardRight = ({ centreDetails, reviewData, id }) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(requestData),
+        body: JSON.stringify(formData),
       });
+
+      if (!response.ok) {
+        // Check if the response has an error status code
+        throw new Error("Booking request failed");
+      }
 
       const data = await response.json();
 
       console.log("Response:", response);
       console.log("Data:", data);
 
-      if (response.ok) {
-        console.log("Booking successful");
-        window.alert("Booking successful");
-        window.location.reload();
-      } else {
-        console.log("Booking failed:", data);
-        window.alert("Booking failed. Please try again.");
-      }
+      console.log("Booking successful");
+      window.alert("Booking successful");
+      window.location.reload();
     } catch (error) {
       console.error(error);
       window.alert("An error occurred. Please try again.");
     }
 
+    // Reset the form fields
+    setStart("");
+    setEnd("");
     setBookingForm({
-      event_centre_id: id,
-      userId: "64808477095b7ab4ace42779",
-      end_date: "",
-      start_date: "",
-      duration: "",
+      ...bookingForm,
       notes: "",
     });
   };
 
   const bookingHandleChange = (e) => {
+    const { name, value } = e.target;
     setBookingForm((prevData) => ({
       ...prevData,
-      [e.target.name]: e.target.value,
+      [name]: value,
     }));
   };
 
@@ -180,7 +118,7 @@ const DetailsCardRight = ({ centreDetails, reviewData, id }) => {
                     textDecoration: "underline",
                     marginLeft: "5px",
                     color: "grey",
-                    fontWeight: "normal"
+                    fontWeight: "normal",
                   }}
                 >
                   {reviewData.length} Reviews
@@ -197,15 +135,14 @@ const DetailsCardRight = ({ centreDetails, reviewData, id }) => {
                   <DateTimePicker
                     label="Start Date and Time"
                     value={start}
-                    onChange={handleStartChange}
-                    minDateTime={minStartDateTime}
+                    onChange={setStart}
+                    minDateTime={currentDate.add(minStartTime, "hour")}
                   />
                   <DateTimePicker
                     label="End Date and Time"
-                    // value={start.add(minEnd, "hour")}
-                    onChange={handleEndChange}
-                    minDateTime={start.add(minEnd, "hour")}
-                    maxDateTime={start.add(Days, "day")}
+                    onChange={setEnd}
+                    minDateTime={start.add(minEndTime, "hour")}
+                    maxDateTime={start.add(maxEndDate, "day")}
                   />
                 </DemoContainer>
               </LocalizationProvider>
@@ -223,6 +160,8 @@ const DetailsCardRight = ({ centreDetails, reviewData, id }) => {
                 <input
                   type="text"
                   name="notes"
+                  value={bookingForm.notes}
+                  onChange={bookingHandleChange}
                   style={{
                     width: "100%",
                     paddingLeft: "0",
@@ -231,18 +170,11 @@ const DetailsCardRight = ({ centreDetails, reviewData, id }) => {
                     borderBottomStyle: "solid",
                     outline: "none",
                   }}
-                  value={bookingForm.notes}
-                  onChange={bookingHandleChange}
                 />
               </div>
             </div>
             <div className="book-btn">
-              <button
-                type="submit"
-                disabled={start === "" || end === "" ? true : false}
-              >
-                Book
-              </button>
+              <button type="submit">Book</button>
             </div>
           </form>
           <div
@@ -256,10 +188,10 @@ const DetailsCardRight = ({ centreDetails, reviewData, id }) => {
                 </div>
                 <div className="compilation">
                   <button>
-                    {centreDetails.price} * {duration} hours
+                    {centreDetails.price} * {durationInHours} hours
                   </button>
                   <div className="disAlCenter">
-                    <TbCurrencyNaira /> {centreDetails.price * duration}
+                    <TbCurrencyNaira /> {centreDetails.price * durationInHours}
                   </div>
                 </div>
                 <div className="compilation">
@@ -273,7 +205,7 @@ const DetailsCardRight = ({ centreDetails, reviewData, id }) => {
                   <div>Total</div>
                   <div className="disAlCenter">
                     <TbCurrencyNaira />{" "}
-                    {reservNowPrice + centreDetails.price * duration}
+                    {reservNowPrice + centreDetails.price * durationInHours}
                   </div>
                 </div>
               </>
@@ -285,4 +217,4 @@ const DetailsCardRight = ({ centreDetails, reviewData, id }) => {
   );
 };
 
-export default DetailsCardRight;
+export default BookingForm;
