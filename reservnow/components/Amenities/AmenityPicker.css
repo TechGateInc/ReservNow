@@ -10,7 +10,7 @@
 
 .amenity-card{
     background-color: white;
-    width: 30%;
+    width: 230px;
     margin-bottom: 40px;
     height: 100px;
     display: flex;
@@ -24,12 +24,13 @@
 
 .AmenityTypeHolder{}
 
-.amenity-list{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
+.amenity-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+   
+  }
+  
 
 .amenityActive{
     border: 2px solid black;
