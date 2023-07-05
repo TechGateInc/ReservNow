@@ -1,16 +1,21 @@
-
-
-.AmenityHolder{
+.AmmenityHolder{
+    /* height: 100vh; */
     margin-left: 20%;
     margin-right: 20%;
     padding-bottom: 60px;
-    /* background-color: red; */
 }
 
 
-.amenity-card{
+.centreTypeHolder{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 50px;
+}
+
+.centreTypeCard{
     background-color: white;
-    width: 30%;
+    width: 230px;
     margin-bottom: 40px;
     height: 100px;
     display: flex;
@@ -22,15 +27,6 @@
     cursor: pointer;
 }
 
-.AmenityTypeHolder{}
-
-.amenity-list{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-
-.amenityActive{
+.centreActive{
     border: 2px solid black;
 }
