@@ -8,7 +8,7 @@ import Events from "../LocationsCarousel/Events";
 import LoginModal from "@/components/modals/Login Modal/LoginModal";
 import config from "@/config";
 
-const Header = ({}) => {
+const Header = () => {
   const [emailVerification, setEmailVerification] = useState(false);
 
   const [centres, getCentres] = useState(null);
@@ -128,9 +128,8 @@ const Header = ({}) => {
       onScroll={handleScroll}
     >
       <div
-        className={`extended-content  ${
-          isLocationExtended ? "slide-down" : ""
-        }`}
+        className={`extended-content  ${isLocationExtended ? "slide-down" : ""
+          }`}
       >
         <div className="locationCardHolder">
           {centres &&

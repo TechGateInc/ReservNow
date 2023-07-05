@@ -8,8 +8,6 @@ import { SignupPopup } from "../Popup/Popup";
 import EmailVerification from "../Email Verification Modal/EmailVerification";
 import PasswordModal from "../Password Modal/PasswordModal";
 import SignUpModal from "../Sign Up Modal/SignUpModal";
-import { useAuth } from '../../../Context/context';
-import { loginRequest, loginSuccess, loginFailure, logout } from '../../../Context/actions';
 
 export default function LoginModal({
   emailVerification,
@@ -22,7 +20,6 @@ export default function LoginModal({
   const [emailFormData, setEmailFormData] = useState({ email: "" });
   const [emailData, setEmailData] = useState([]);
 
-  const { state, dispatch } = useAuth();
 
   //For checking if email exist
   const emailHandleSubmit = async (e) => {

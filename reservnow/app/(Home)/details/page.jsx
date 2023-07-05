@@ -11,7 +11,6 @@ import ContactOwner from "@/components/Contact Venue Owner/ContactOwner";
 import ThingsToKnow from "@/components/Things To Know/ThingsToKnow";
 import { useEffect, useState } from "react";
 import { AiFillStar } from "react-icons/ai";
-import { useAuth } from "@/Context/context";
 import LoginModal from "@/components/modals/Login Modal/LoginModal";
 import { useSearchParams } from "next/navigation";
 import config from "@/config";
@@ -20,7 +19,6 @@ import { DetailsSkeleton } from "@/components/Skeleton/Skeleton";
 export default function Details() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
-  const { state } = useAuth();
   const { isLoggedIn } = state;
   const [emailVerification, setEmailVerification] = useState(false);
   const [centreDetails, setCentreDetails] = useState(""); // to get the centre data from db
