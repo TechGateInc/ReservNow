@@ -1,23 +1,13 @@
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
-import { setupListeners } from '@reduxjs/toolkit/query';
-import { eventCentreApi } from './features/eventCentreHome/EventCentreSlice';
-import { searchCentreApi } from './features/eventCentreHome/SearchCentreSlice';
+import { configureStore } from "@reduxjs/toolkit";
+import { apiSlice } from "./api/apiSlice";
+import authReducer from "./features/auth/authSlice";
 
-
-const store = configureStore({
+export const store = configureStore({
   reducer: {
-    [eventCentreApi.reducerPath]: eventCentreApi.reducer,
-    [searchCentreApi.reducerPath]: searchCentreApi.reducer,
+    [apiSlice.reducerPath]: apiSlice.reducer,
+    auth: authReducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware()
-      .concat(eventCentreApi.middleware)
-      .concat(searchCentreApi.middleware),
+    getDefaultMiddleware().concat(apiSlice.middleware),
+  devTools: true,
 });
-
-store.dispatch(eventCentreApi.middleware);
-store.dispatch(searchCentreApi.middleware);
-
-setupListeners(store.dispatch);
-
-export default store;

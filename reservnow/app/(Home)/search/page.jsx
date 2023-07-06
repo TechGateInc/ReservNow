@@ -4,9 +4,12 @@ import { useEffect, useState } from "react";
 import CentreCard from "@/components/CentreGallery/CentreCard";
 import config from "@/config";
 import { Skeleton } from "@/components/Skeleton/Skeleton";
+<<<<<<< HEAD:reservnow/app/(Home)/search/page.jsx
 import { TfiFaceSad } from "react-icons/tfi";
 import { useGetFilteredCentresMutation } from "@/features/eventCentreHome/SearchCentreSlice";
 
+=======
+>>>>>>> feat-auth:reservnow/app/search/page.jsx
 
 const SearchPage = () => {
   // const [filterdCentres, getFilteredCentres] = useState(null);

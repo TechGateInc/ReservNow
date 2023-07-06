@@ -11,30 +11,30 @@ import ContactOwner from "@/components/Contact Venue Owner/ContactOwner";
 import ThingsToKnow from "@/components/Things To Know/ThingsToKnow";
 import { useEffect, useState } from "react";
 import { AiFillStar } from "react-icons/ai";
-import { useAuth } from "@/Context/context";
 import LoginModal from "@/components/modals/Login Modal/LoginModal";
 import { useSearchParams } from "next/navigation";
 import config from "@/config";
 import { DetailsSkeleton } from "@/components/Skeleton/Skeleton";
+import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "@/features/auth/authSlice";
 
 export default function Details() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
-  const { state } = useAuth();
-  const { isLoggedIn } = state;
   const [emailVerification, setEmailVerification] = useState(false);
+
+  // const user = useSelector(selectCurrentUser);
+  // const router = useRouter();
+
+  // if (!user) {
+  //   router.push("/login", undefined, { shallow: true });
+  //   return null;
+  // }
+
   const [centreDetails, setCentreDetails] = useState(""); // to get the centre data from db
   const [reviewData, setReviewData] = useState(""); // to get the review data from db
   const [isLoading, setIsLoading] = useState(true);
-
-  const handleBook = () => {
-    if (isLoggedIn) {
-      // Perform add to cart action
-    } else {
-      // Show login modal or trigger login popup
-      setEmailVerification(true);
-    }
-  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -75,13 +75,6 @@ export default function Details() {
     }
   };
 
-  // useEffect(() => {
-  //   if (isLoading === true && centreDetails.name != "") {
-  //     document.body.classList.add("popup-open");
-  //   } else {
-  //     document.body.classList.remove("popup-open");
-  //   }
-  // }, [isLoading]);
   useEffect(() => {
     let scrollPosition = 0;
 
@@ -94,9 +87,8 @@ export default function Details() {
     if (isLoading === true && centreDetails.name != "") {
       scrollPosition = window.scrollY;
       document.body.classList.add("popup-open");
-      document.body.style.paddingRight = `${
-        window.innerWidth - document.documentElement.clientWidth
-      }px`;
+      document.body.style.paddingRight = `${window.innerWidth - document.documentElement.clientWidth
+        }px`;
       window.addEventListener("scroll", handleScroll);
       return () => {
         document.body.style.overflow = "";

@@ -4,88 +4,13 @@ import { IoArrowBackCircle } from "react-icons/io5";
 import { IoIosArrowBack } from "react-icons/io";
 import { AiOutlineClose } from "react-icons/ai";
 import { MdCancel } from "react-icons/md";
+import EmailVerification from "../Email Verification Modal/EmailVerification";
 
 if (typeof document !== "undefined") {
   const AOS = require("aos");
   require("aos/dist/aos.css");
-  // AOS.init();
-  AOS.init({ disable: true });
-}
-
-export function EmailVerificationPopup(props) {
-  return props.trigger ? (
-    <div className={styles["popup-modal"]}>
-      <div className={styles["popup-modal-inner"]}>
-        <button
-          className={styles["close-btn"]}
-          onClick={() => {
-            props.setTrigger(false);
-            props.setEmailFormData({ email: "" });
-          }}
-        >
-          <div className={styles["cancel-icon"]}>
-            <MdCancel />
-          </div>
-        </button>
-        {props.children}
-      </div>
-    </div>
-  ) : null;
-}
-
-export function PasswordPopup(props) {
-  return props.trigger ? (
-    <div className={styles["popup-modal"]}>
-      <div className={styles["popup-modal-inner"]}>
-        <button
-          className={styles["back-btn"]}
-          onClick={() => {
-            props.setEmailVerification(true);
-            props.setTrigger(false);
-            props.setPasswordFormData({ password: "" });
-          }}
-        >
-          <div className={styles["back-icon"]}>
-            <IoArrowBackCircle />
-          </div>
-        </button>
-        {props.children}
-      </div>
-    </div>
-  ) : (
-    ""
-  );
-}
-
-export function SignupPopup(props) {
-  return props.trigger ? (
-    <div className={styles["popup-modal"]}>
-      <div className={styles["popup-modal-inner"]}>
-        <button
-          className={styles["back-btn"]}
-          onClick={() => {
-            props.setEmailVerification(true);
-            props.setTrigger(false);
-            props.setSignUpFormData({
-              name: "",
-              email: "",
-              password: "",
-              phoneNo: "",
-            });
-          }}
-        >
-          <div className={styles["back-icon"]}>
-            <IoArrowBackCircle />
-          </div>
-          Finish Signing up
-          <div></div>
-        </button>
-        {props.children}
-      </div>
-    </div>
-  ) : (
-    ""
-  );
+  AOS.init();
+  // AOS.init({ disable: true });
 }
 
 export function DetailsGalleryPopup(props) {
