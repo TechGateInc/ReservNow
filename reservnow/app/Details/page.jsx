@@ -18,6 +18,8 @@ import { DetailsSkeleton } from "@/components/Skeleton/Skeleton";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "@/features/auth/authSlice";
+import RequireAuth from "@/features/auth/requireAuth";
+import RAProvider from "@/features/auth/Provider";
 
 export default function Details() {
   const searchParams = useSearchParams();
@@ -101,6 +103,7 @@ export default function Details() {
   }, [isLoading]);
 
   return (
+  <RAProvider>
     <div className={styles["details-root"]}>
       {isLoading && centreDetails.name != "" ? (
         <DetailsSkeleton />
@@ -168,5 +171,5 @@ export default function Details() {
         </div>
       )}
     </div>
-  );
+  </RAProvider>);
 }
