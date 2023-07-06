@@ -1,7 +1,14 @@
 import { AuthProvider } from "@/Context/context"
 
-export default function Landing(){
-    return(
-        <div></div>
-    )
+import CentreGallery from "@/components/CentreGallery/CentreGallery";
+import { store } from "@/store";
+import { Provider } from "react-redux";
+
+export default function Home() {
+  return (
+    <Provider store={store}>
+      <CentreGallery />
+      </Provider>
+
+  );
 }

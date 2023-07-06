@@ -1,21 +1,18 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
-import { AuthProvider } from "@/Context/context";
-import { Providers } from "@/features/Provider";
+import Footer from "@/components/Footer/Footer";
+import Header from "@/components/Header/Header";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <title>ReservNow</title>
       <body className={inter.className}>
-        <AuthProvider>
-          <Providers>
-            {/* <Header /> */}
-            <div>{children}</div>
-            {/* <Footer /> */}
-          </Providers>
-        </AuthProvider>
+          {/* <Header /> */}
+          <div style={{ marginBottom: "100px" }}>{children}</div>
+          {/* <Footer /> */}
       </body>
     </html>
   );
