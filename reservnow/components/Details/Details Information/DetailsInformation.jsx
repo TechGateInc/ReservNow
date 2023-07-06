@@ -1,6 +1,6 @@
 "use client";
 
-import "./detailsCardLeft.css";
+import "./detailsInformation.css";
 import { useState, useEffect } from "react";
 import React from "react";
 import { AmenitiesPopup } from "@/components/modals/Popup/Popup";
@@ -10,7 +10,11 @@ import { BsFan } from "react-icons/bs";
 import { MdArrowForwardIos } from "react-icons/md";
 import config from "@/config";
 
+<<<<<<< HEAD:reservnow/components/Details Card Left/DetailsCardLeft.jsx
 const DetailsCardLeft = ({ centreDetails, content }) => {
+=======
+const DetailsInformation = ({ centreDetails }) => {
+>>>>>>> staging:reservnow/components/Details/Details Information/DetailsInformation.jsx
   const [amenities, setAmenities] = useState(false); // to activate the amenities popup
   const [description, setDescription] = useState(false);
   const [groupedAmenities, setGroupedAmenities] = useState({});
@@ -213,4 +217,4 @@ const DetailsCardLeft = ({ centreDetails, content }) => {
   );
 };
 
-export default DetailsCardLeft;
+export default DetailsInformation;

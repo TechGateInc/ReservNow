@@ -2,13 +2,13 @@
 
 import styles from "./page.module.css";
 import React from "react";
-import DetailsGallery from "@/components/Details Gallery/DetailsGallery";
-import DetailsCardLeft from "@/components/Details Card Left/DetailsCardLeft";
-import DetailsCardRight from "@/components/Details Card Right/DetailsCardRight";
-import MapSection from "@/components/Map Section/MapSection";
-import ReviewSection from "@/components/Review Section/ReviewSection";
-import ContactOwner from "@/components/Contact Venue Owner/ContactOwner";
-import ThingsToKnow from "@/components/Things To Know/ThingsToKnow";
+import DetailsGallery from "@/components/Details/Details Gallery/DetailsGallery";
+import DetailsInformation from "@/components/Details/Details Information/DetailsInformation";
+import BookingForm from "@/components/Details/Booking Form/BookingForm";
+import MapSection from "@/components/Details/Map Section/MapSection";
+import ReviewSection from "@/components/Details/Review Section/ReviewSection";
+import ContactOwner from "@/components/Details/Contact Venue Owner/ContactOwner";
+import ThingsToKnow from "@/components/Details/Things To Know/ThingsToKnow";
 import { useEffect, useState } from "react";
 import { AiFillStar } from "react-icons/ai";
 import { useAuth } from "@/Context/context";
@@ -98,13 +98,7 @@ export default function Details() {
     }
   };
 
-  // useEffect(() => {
-  //   if (isLoading === true && centreDetails.name != "") {
-  //     document.body.classList.add("popup-open");
-  //   } else {
-  //     document.body.classList.remove("popup-open");
-  //   }
-  // }, [isLoading]);
+  // to stop the page from scrolling when a popup is opened 
   useEffect(() => {
     let scrollPosition = 0;
 
@@ -160,13 +154,10 @@ export default function Details() {
             <DetailsGallery />
             <div className={styles["details-card"]}>
               <div className={styles["left"]}>
-                <DetailsCardLeft
-                  centreDetails={centreDetails}
-                  content={content}
-                />
+                <DetailsInformation centreDetails={centreDetails} />
               </div>
               <div className={styles["right"]}>
-                <DetailsCardRight
+                <BookingForm
                   centreDetails={centreDetails}
                   reviewData={reviewData}
                   id={id}
