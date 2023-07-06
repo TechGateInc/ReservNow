@@ -3,7 +3,7 @@
 import "./detailsGallery.css";
 import { useState, useEffect } from "react";
 import { TfiGallery } from "react-icons/tfi";
-import { DetailsGalleryPopup } from "../modals/Popup/Popup";
+import { DetailsGalleryPopup } from "../../modals/Popup/Popup";
 
 const DetailsGallery = () => {
   const [gallery, setGallery] = useState(false);
