@@ -10,7 +10,7 @@ import config from "@/config";
 import { Provider } from "react-redux";
 import { store } from "@/store";
 
-const Header = ({ }) => {
+const Header = () => {
   const [emailVerification, setEmailVerification] = useState(false);
 
   const [centres, getCentres] = useState(null);
@@ -178,20 +178,23 @@ const Header = ({ }) => {
               />
             </Link>
           </div>
-          <div className="SearchBarHolder">
-            <Search
-              dropdownToggle={dropdownToggle}
-              extendToggle={extendToggle}
-              isCapacityOpen={isCapacityOpen}
-              location={location}
-              handleRemove={handleRemove}
-              setLocation={setLocation}
-              removeCapacityMenu={removeCapacityMenu}
-            />
-          </div>
-          <div className="ProfileSection">
-            <div className="ReserveLink">
+        <div className="SearchBarHolder">
+          <Search
+            dropdownToggle={dropdownToggle}
+            extendToggle={extendToggle}
+            isCapacityOpen={isCapacityOpen}
+            location={location}
+            handleRemove={handleRemove}
+            setLocation={setLocation}
+            removeCapacityMenu={removeCapacityMenu}
+          />
+        </div>
+        <div className="ProfileSection">
+          <div className="ReserveLink">
+            <Link href={"/newcentre"}>
               <p style={{ fontSize: 12, color: "black" }}> Add Event Centre</p>
+            </Link>
+          
             </div>
             <div className="profileHolder" onClick={() => dropdownToggle("menu")}>
               <div className="profileHolderIcons">

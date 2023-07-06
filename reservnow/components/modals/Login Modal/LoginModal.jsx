@@ -11,7 +11,6 @@ export default function LoginModal({ emailVerification, setEmailVerification }) 
   const [openRegistrationModal, setOpenRegistrationModal] = useState(false);
   const [email, setEmail] = useState('')
 
-
   return (
     <div className={styles["login-modal-root"]}>
       <EmailVerificationModal

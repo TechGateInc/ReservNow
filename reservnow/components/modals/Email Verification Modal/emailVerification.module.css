@@ -83,3 +83,27 @@
 .email-options button .text {
   font-weight: 600;
 }
+
+.LoginFormHolder2{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.LoginForm2{
+  width: 50%;
+  margin-top: 70px;
+  border: 1px solid rgb(210, 210, 210);
+  padding: 20px;
+  padding-left: 40px;
+  padding-right: 40px;
+  margin-bottom: 40px;
+  border-radius: 8px;
+
+}
+
+.email-modal-header2 {
+  margin-top: 2%;
+  text-align: center;
+  font-weight: 600;
+}

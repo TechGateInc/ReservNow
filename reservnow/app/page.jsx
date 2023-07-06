@@ -1,14 +1,6 @@
-"use client"
 
-import CentreGallery from "@/components/CentreGallery/CentreGallery";
-import { store } from "@/store";
-import { Provider } from "react-redux";
-
-export default function Home() {
-  return (
-    <Provider store={store}>
-      <CentreGallery />
-      </Provider>
-
-  );
+export default function Landing(){
+    return(
+        <div></div>
+    )
 }

@@ -1,0 +1,39 @@
+.finish-setup-root {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+.finish-setup-container {
+  width: 90%;
+  height: 100%;
+  display: flex;
+}
+.finish-setup-root .left {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.finish-setup-root .right {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.finish-setup-root .right img {
+  height: 90%;
+  width: 70%;
+}
+.left .finish-setup-header {
+  font-size: 40px;
+  font-weight: 600;
+}
+.left .finish-setup-footer {
+  font-size: 18px;
+}

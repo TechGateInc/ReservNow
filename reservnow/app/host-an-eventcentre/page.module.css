@@ -1,0 +1,174 @@
+.host-root {
+  width: 100%;
+  height: 100vh;
+}
+
+.host-header {
+  height: 15vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  width: 100%;
+  padding-left: 50px;
+  padding-right: 50px;
+  background-color: white;
+  z-index: 10;
+}
+.host-header button {
+  padding: 8px;
+  border: none;
+  background-color: white;
+  border-radius: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.host-header button:hover {
+  cursor: pointer;
+  background-color: #f6f2f0;
+}
+.host-content {
+  height: 85vh;
+  padding-top: 8%;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+.host-footer {
+  height: 10vh;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 20px;
+
+  background-color: white;
+}
+.page-loader {
+  height: 4px;
+  width: 100%;
+  background-color: black;
+}
+
+.loader-background {
+  background-color: rgb(201, 201, 201);
+  width: 100%;
+  height: 4px;
+}
+
+.pagefooter-section {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.get-started-btn {
+  padding: 15px;
+  padding-right: 30px;
+  padding-left: 30px;
+  font-size: 16px;
+  font-weight: 600;
+  background-color: #e61e4d;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+}
+.next-btn {
+  background-color: black;
+  color: white;
+  padding: 15px;
+  padding-right: 30px;
+  padding-left: 30px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.next-btn:disabled{
+  background-color: grey;
+  cursor: default;
+}
+.disabled {
+  background-color: grey;
+  cursor: default;
+}
+.host-footer .back-btn {
+  margin-left: 30px;
+  font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
+  background-color: white;
+  border: none;
+}
+
+/* Apply transitions to the loader */
+/* Apply transitions to the loader */
+.page-loader {
+  transition: width 0.3s ease-in-out;
+}
+
+.loader-zero-width {
+  width: 0%;
+}
+
+.loader-medium-width {
+  width: 0%;
+  animation: 1s ease-in-out forwards;
+}
+
+.loader-medium2-width {
+  width: 7.5%;
+  animation: 1s ease-in-out forwards;
+}
+
+.loader-medium3-width {
+  width: 15%;
+  animation: 3s ease-in-out forwards;
+}
+
+.loader-medium4-width {
+  width: 22.5%;
+  animation: 3s ease-in-out forwards;
+}
+
+.loader-medium5-width {
+  width: 30%;
+  animation: 3s ease-in-out forwards;
+}
+.loader-medium6-width {
+  width: 37.5%;
+  animation: 3s ease-in-out forwards;
+}
+.loader-medium7-width {
+  width: 45%;
+  animation: 3s ease-in-out forwards;
+}
+.loader-medium8-width {
+  width: 52.5%;
+  animation: 3s ease-in-out forwards;
+}
+.loader-medium9-width {
+  width: 60%;
+  animation: 3s ease-in-out forwards;
+}
+.loader-medium10-width {
+  width: 67.5%;
+  animation: 3s ease-in-out forwards;
+}
+.loader-medium11-width {
+  width: 75%;
+  animation: 3s ease-in-out forwards;
+}
+.loader-medium12-width {
+  width: 82.5%;
+  animation: 3s ease-in-out forwards;
+}
+.loader-medium13-width {
+  width: 90%;
+  animation: 3s ease-in-out forwards;
+}
+.loader-full-width {
+  width: 100%;
+  animation: 3s ease-in-out forwards;
+}
