@@ -10,11 +10,13 @@ import { BsFan } from "react-icons/bs";
 import { MdArrowForwardIos } from "react-icons/md";
 import config from "@/config";
 
-const DetailsCardLeft = ({ centreDetails }) => {
+const DetailsCardLeft = ({ centreDetails, content }) => {
   const [amenities, setAmenities] = useState(false); // to activate the amenities popup
   const [description, setDescription] = useState(false);
   const [groupedAmenities, setGroupedAmenities] = useState({});
   const [getCategory, setGetCategory] = useState([]);
+
+  console.log(content)
 
   useEffect(() => {
     if (centreDetails.amenities) {
@@ -31,7 +33,7 @@ const DetailsCardLeft = ({ centreDetails }) => {
 
       // Step 3: Sort item names within each category alphabetically
       for (const category in grouped) {
-        grouped[category].sort((a, b) => a.name.localeCompare(b.name));
+        // grouped[category].sort((a, b) => a.name.localeCompare(b.name));
       }
 
       setGroupedAmenities(grouped);
@@ -82,10 +84,10 @@ const DetailsCardLeft = ({ centreDetails }) => {
     <div className="details-card-root" key={centreDetails._id}>
       <div className="details-card-left">
         <div className="details-card-header">
-          {centreDetails && centreDetails.venueOwner && (
+          {content && content.venueOwner && (
             <div className="left">
-              <p>{centreDetails.venueOwner.name}</p>
-              <span>Contact: {centreDetails.venueOwner.phoneNo}</span>
+              <p>{content.venueOwner.name}</p>
+              <span>Contact: {content.venueOwner.phoneNo}</span>
             </div>
           )}
           <div className="right">

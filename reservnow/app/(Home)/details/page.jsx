@@ -16,10 +16,33 @@ import LoginModal from "@/components/modals/Login Modal/LoginModal";
 import { useSearchParams } from "next/navigation";
 import config from "@/config";
 import { DetailsSkeleton } from "@/components/Skeleton/Skeleton";
+import { useGetDetailsQuery } from "@/features/Event Centre Details/DetailSlice";
+import { useGetReviewQuery } from "@/features/Review data/ReviewSlice";
 
 export default function Details() {
+  /* rtkquery practice */
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
+  const {
+    data: details,
+    loading: detailsLoading,
+    isSuccess: detailsSuccess,
+    isError: detailsError,
+    error: detailsErrorData,
+  } = useGetDetailsQuery(id);
+
+  const {
+    data: review,
+    loading: reviewLoading,
+    isSuccess: reviewSuccess,
+    isError: reviewError,
+    error: reviewErrorData,
+  } = useGetReviewQuery(id);
+
+  const content = details;
+  // const reviewnewData = review;
+  // console.log(reviewnewData)
+
   const { state } = useAuth();
   const { isLoggedIn } = state;
   const [emailVerification, setEmailVerification] = useState(false);
@@ -137,7 +160,10 @@ export default function Details() {
             <DetailsGallery />
             <div className={styles["details-card"]}>
               <div className={styles["left"]}>
-                <DetailsCardLeft centreDetails={centreDetails} />
+                <DetailsCardLeft
+                  centreDetails={centreDetails}
+                  content={content}
+                />
               </div>
               <div className={styles["right"]}>
                 <DetailsCardRight
