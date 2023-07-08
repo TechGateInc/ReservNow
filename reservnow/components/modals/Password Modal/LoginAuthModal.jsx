@@ -21,6 +21,7 @@ export function LoginAuthModal(props) {
                 <LoginAuthForm
                     email={props.email}
                     setEmail={props.setEmail}
+                    setTrigger={props.setTrigger}
                 />
             </div>
         </div>

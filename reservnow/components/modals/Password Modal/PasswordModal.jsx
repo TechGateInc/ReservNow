@@ -4,8 +4,7 @@ import { useDispatch } from "react-redux";
 import { useLoginMutation } from "@/features/auth/authApiSlice";
 import { setCredentials } from "@/features/auth/authSlice";
 
-export default function LoginAuthForm({ email, setEmail }) {
-  console.log(email);
+export default function LoginAuthForm({ email, setEmail, setTrigger }) {
 
   const [password, setPassword] = useState('')
   const passwordRef = useRef()
@@ -26,12 +25,11 @@ export default function LoginAuthForm({ email, setEmail }) {
   const handleLogin = async (e) => {
     e.preventDefault()
     try {
-      console.log('Test');
       const userData = await login({ email, password }).unwrap()
-      console.log(userData);
       dispatch(setCredentials({ ...userData, user }))
-      // setEmail('')
+      setEmail('')
       setPassword('')
+      setTrigger(false)
     } catch (err) {
       if (!err?.response) {
         setErrMsg('No Server Response')

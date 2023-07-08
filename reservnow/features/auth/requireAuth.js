@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 const RequireAuth = ({ children }) => {
   const token = useSelector(selectCurrentToken);
   const router = useRouter();
+  console.log(token);
 
   if (!token) {
     router.push("/login", undefined, { shallow: true });
