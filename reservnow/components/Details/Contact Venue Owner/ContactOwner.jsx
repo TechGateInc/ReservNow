@@ -4,12 +4,12 @@ import { AiFillStar } from "react-icons/ai";
 import { VscVerifiedFilled } from "react-icons/vsc";
 import { BsShield } from "react-icons/bs";
 
-const ContactOwner = ({ centreDetails, reviewData }) => {
+const ContactOwner = ({  eventCentre, review }) => {
   // Assuming centreDetails.venueOwner.createdAt is a valid date string
   const createdAt = dayjs(
-    centreDetails &&
-      centreDetails.venueOwner &&
-      centreDetails.venueOwner.createdAt
+    eventCentre &&
+    eventCentre.venueOwner &&
+    eventCentre.venueOwner.createdAt
   );
 
   // Format the date as "MMMM YYYY" (e.g., "June 2023")
@@ -21,9 +21,9 @@ const ContactOwner = ({ centreDetails, reviewData }) => {
           <div className="left">
             <img src="/images/details.jpg" alt="" />
           </div>
-          {centreDetails && centreDetails.venueOwner && (
+          {eventCentre && eventCentre.venueOwner && (
             <div className="right">
-              <h3>Hosted By {centreDetails.venueOwner.name}</h3>
+              <h3>Hosted By {eventCentre.venueOwner.name}</h3>
               <span>Joined in {formattedDate}</span>
             </div>
           )}
@@ -32,7 +32,7 @@ const ContactOwner = ({ centreDetails, reviewData }) => {
           <div className="reviews">
             <AiFillStar />
             <div className="text" style={{ marginLeft: "5px" }}>
-              {reviewData.length} reviews
+              {review.length} reviews
             </div>
           </div>
           <div className="identity-veri">
@@ -42,10 +42,10 @@ const ContactOwner = ({ centreDetails, reviewData }) => {
             </div>
           </div>
         </div>
-        {centreDetails && centreDetails.venueOwner && (
+        {eventCentre && eventCentre.venueOwner && (
           <div className="about-venue-owner">
             <div className="title">
-              <p>About {centreDetails.venueOwner.name}</p>
+              <p>About {eventCentre.venueOwner.name}</p>
             </div>
             <div className="contents">Policy Number: 110011</div>
             <div className="contents">Language(s): English</div>

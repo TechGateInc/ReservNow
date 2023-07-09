@@ -6,7 +6,7 @@ import { AiFillStar } from "react-icons/ai";
 import { Rating } from "@/components/Ratings Star/RatingStar";
 import { ReviewPopup } from "@/components/modals/Popup/Popup";
 
-const ReviewSection = ({ centreDetails, reviewData }) => {
+const ReviewSection = ({ review, eventCentre }) => {
   const [Review, setReview] = useState(false); // to activate the review popup
 
   return (
@@ -21,15 +21,15 @@ const ReviewSection = ({ centreDetails, reviewData }) => {
                 className="rating"
                 style={{ marginLeft: "5px", marginRight: "5px" }}
               >
-                {centreDetails.rating} .
+                {eventCentre.rating} .
               </span>
-              {reviewData.length} Reviews
+              {review.length} Reviews
             </b>
           </div>
         </div>
         <div className="review-section-content">
-          {reviewData ? (
-            reviewData.length === 0 ? (
+          {review ? (
+            review.length === 0 ? (
               <div
                 style={{
                   width: "100%",
@@ -42,7 +42,7 @@ const ReviewSection = ({ centreDetails, reviewData }) => {
                 No Reviews
               </div>
             ) : (
-              reviewData.map((item, index) => (
+              review.map((item, index) => (
                 <div className="review-card" key={index}>
                   <div className="review-card-header">
                     <img src="/images/details.jpg" alt="" />
