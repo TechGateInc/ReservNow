@@ -84,7 +84,7 @@ const DetailsInformation = ({ eventCentre }) => {
         <div className="details-card-header">
           {eventCentre && eventCentre.venueOwner && (
             <div className="left">
-              <p>{eventCentre.venueOwner}</p>
+              <p>{eventCentre.venueOwner.name}</p>
               <span>Contact: {eventCentre.venueOwner.phoneNo}</span>
             </div>
           )}
