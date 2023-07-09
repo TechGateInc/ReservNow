@@ -109,6 +109,7 @@ const HostAnEventCentrePage = ({}) => {
                 selectedFiles={selectedFiles}
                 name={name}
                 price={price}
+                description={description}
               />
             )}
           </div>

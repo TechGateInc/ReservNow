@@ -31,8 +31,6 @@ export default function Details() {
     error: eventCentreErrorData,
   } = useGetEventCentreQuery(id);
 
-  console.log(eventCentre)
-
   const {
     data: review,
     loading: reviewLoading,

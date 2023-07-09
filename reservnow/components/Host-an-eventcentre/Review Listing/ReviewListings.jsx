@@ -1,12 +1,16 @@
+"use client";
+
 import "./reviewListings.css";
 import { BsClipboardCheck } from "react-icons/bs";
 import { BsCalendarEvent } from "react-icons/bs";
 import { LuEdit3 } from "react-icons/lu";
 import { AiFillStar } from "react-icons/ai";
+import { ReviewListingModal } from "@/components/modals/Review Listing Modal/ReviewListingModal";
+import { useState } from "react";
 
-const ReviewListings = ({ selectedFiles, name, price }) => {
-  console.log(selectedFiles);
+const ReviewListings = ({ selectedFiles, name, price, description }) => {
   const firstImage = selectedFiles[0];
+  const [isReview, setIsReview] = useState(false);
 
   return (
     <div className="review-listing-root">
@@ -17,17 +21,23 @@ const ReviewListings = ({ selectedFiles, name, price }) => {
         </div>
         <div className="review-listing-content">
           <div className="left">
-            <div className="review-card">
-                <div className="show-preview-header">
-                    <div className="text">Show Preview</div>
-                </div>
+            <div
+              className="review-card"
+              onClick={() => setIsReview(true)}
+              style={{ cursor: "pointer" }}
+            >
+              <div className="show-preview-header">
+                <div className="text">Show Preview</div>
+              </div>
               <div className="image-container">
                 <img src={URL.createObjectURL(firstImage)} alt="First Image" />
               </div>
               <div className="content">
                 <div className="top">
                   <div>{name}</div>
-                  <div style={{display: "flex", alignItems: "center"}}>New <AiFillStar style={{marginLeft: "5px"}}/></div>
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    New <AiFillStar style={{ marginLeft: "5px" }} />
+                  </div>
                 </div>
                 <div className="bottom">
                   ₦{price}
@@ -115,6 +125,13 @@ const ReviewListings = ({ selectedFiles, name, price }) => {
           </div>
         </div>
       </div>
+      <ReviewListingModal
+        trigger={isReview}
+        setTrigger={setIsReview}
+        firstImage={firstImage}
+        name={name}
+        description={description}
+      />
     </div>
   );
 };

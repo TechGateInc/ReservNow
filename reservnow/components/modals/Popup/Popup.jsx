@@ -1,6 +1,5 @@
 "use client";
 import styles from "./popup.module.css";
-import { IoArrowBackCircle } from "react-icons/io5";
 import { IoIosArrowBack } from "react-icons/io";
 import { AiOutlineClose } from "react-icons/ai";
 import { MdCancel } from "react-icons/md";

@@ -10,7 +10,7 @@ export default function RootLayout({ children }) {
       <title>ReservNow</title>
       <body className={inter.className}>
         <Providers>
-          <div style={{ marginBottom: "100px" }}>{children}</div>
+          <div>{children}</div>
         </Providers>
       </body>
     </html>
