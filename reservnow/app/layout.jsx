@@ -11,9 +11,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <title>ReservNow</title>
       <body className={inter.className}>
-          {/* <Header /> */}
           <div>{children}</div>
-          {/* <Footer /> */}
       </body>
     </html>
   );
