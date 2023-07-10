@@ -3,9 +3,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./LocationPicker.css";
 
-const LocationPicker = () => {
-  const [address, setAddress] = useState("");
+const LocationPicker = ({address, setAddress}) => {
+  
   const defaultLocation = "New York, NY";
+  const [searchResult, setSearchResult] = useState("");
 
   useEffect(() => {
     setAddress(defaultLocation);

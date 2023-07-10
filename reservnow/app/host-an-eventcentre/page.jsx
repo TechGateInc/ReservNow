@@ -34,6 +34,7 @@ const HostAnEventCentrePage = ({}) => {
   const [isRadioButtonSelected, setIsRadioButtonSelected] = useState(false);
   const [descriptionsPick, setDescriptionsPick] = useState([]);
   const [activeAmenities, setActiveAmenities] = useState([]);
+  const [address, setAddress] = useState("");
 
   return (
     <div className={styles["host-root"]}>
@@ -59,7 +60,10 @@ const HostAnEventCentrePage = ({}) => {
                 setActiveType={setActiveType}
               />
             )}
-            {active === "LocationPicker" && <LocationPicker />}
+            {active === "LocationPicker" && <LocationPicker 
+            address={address} setAddress={setAddress}
+            
+            />}
             {active === "Capacity" && (
               <Capacity capacity={capacity} setCapacity={setCapacity} />
             )}
@@ -199,6 +203,7 @@ const HostAnEventCentrePage = ({}) => {
               <button
                 className={styles["back-btn"]}
                 onClick={() => setActive("CentreTypePicker")}
+                disabled={!address}
               >
                 Back
               </button>
