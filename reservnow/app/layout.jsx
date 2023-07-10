@@ -11,9 +11,9 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <title>ReservNow</title>
       <body className={inter.className}>
-          <Header />
-          <div style={{ marginTop: "100px", marginBottom: "100px" }}>{children}</div>
-          <Footer />
+          {/* <Header /> */}
+          <div>{children}</div>
+          {/* <Footer /> */}
       </body>
     </html>
   );

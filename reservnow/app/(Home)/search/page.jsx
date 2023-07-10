@@ -4,12 +4,9 @@ import { useEffect, useState } from "react";
 import CentreCard from "@/components/CentreGallery/CentreCard";
 import config from "@/config";
 import { Skeleton } from "@/components/Skeleton/Skeleton";
-<<<<<<< HEAD:reservnow/app/(Home)/search/page.jsx
 import { TfiFaceSad } from "react-icons/tfi";
 import { useGetFilteredCentresMutation } from "@/features/eventCentreHome/SearchCentreSlice";
 
-=======
->>>>>>> feat-auth:reservnow/app/search/page.jsx
 
 const SearchPage = () => {
   // const [filterdCentres, getFilteredCentres] = useState(null);
@@ -47,18 +44,32 @@ const SearchPage = () => {
   // }, []);
   const [getFilteredCentres, { data }] = useGetFilteredCentresMutation();
 
+  
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
     const location = searchParams.get("l");
     const capacity = searchParams.get("c");
 
-    if (location && capacity) {
-      // Call the mutation
-      getFilteredCentres({ location, capacity });
-    }
+    const fetchData = async () => {
+      try {
+        setIsLoading(true);
+        if (location && capacity) {
+          // Call the mutation
+          await getFilteredCentres({ location, capacity });
+        }
+        setIsLoading(false);
+      } catch (error) {
+        setIsLoading(false);
+        setErrorMessage("An error occurred while fetching data.");
+        console.error(error);
+      }
+    };
+
+    fetchData();
   }, []);
 
   console.log(data)
+  
 
   return (
     <div className={styles["searchPageHolder"]}>
@@ -87,8 +98,8 @@ const SearchPage = () => {
             <Skeleton />
           </div>
         ) : (
-          filterdCentres &&
-          filterdCentres.map((centre, index) => (
+          data &&
+          data.map((centre, index) => (
             <CentreCard key={index} centre={centre} />
           ))
         )}

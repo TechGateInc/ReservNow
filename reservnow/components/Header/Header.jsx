@@ -190,9 +190,12 @@ const Header = ({}) => {
             />
           </div>
           <div className="ProfileSection">
+            <Link href={"/newcentre"} style={{textDecoration:"none"}}>
             <div className="ReserveLink">
               <p style={{ fontSize: 12, color: "black" }}> Add Event Centre</p>
             </div>
+            </Link>
+           
             <div className="profileHolder" onClick={() => dropdownToggle("menu")}>
               <div className="profileHolderIcons">
                 <div>

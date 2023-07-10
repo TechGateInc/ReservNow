@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { apiSlice } from "@/api/apiSlice";
 
-export const searchCentreApi = createApi({
+export const searchCentreApi = apiSlice.injectEndpoints({
   reducerPath: "searchCentreApi",
   baseQuery: fetchBaseQuery({ baseUrl: `http://localhost:5500` }),
   endpoints: (builder) => ({
