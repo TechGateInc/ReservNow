@@ -4,7 +4,7 @@ import "../CentreGallery/CentreGallery.css";
 import config from "@/config";
 import CentreCard from "./CentreCard";
 import { Skeleton } from "../Skeleton/Skeleton";
-import { useGetAllCentresQuery } from "../../features/eventCentreHome/EventCentreSlice"
+import { useGetAllCentresQuery } from "@/features/Event Centre/eventCentreSlice";
 // import { useGetReviewQuery } from "@/features/Details/reviewSlice";
 
 const CentreGallery = () => {

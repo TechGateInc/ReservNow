@@ -5,7 +5,7 @@ import CentreCard from "@/components/CentreGallery/CentreCard";
 import config from "@/config";
 import { Skeleton } from "@/components/Skeleton/Skeleton";
 import { TfiFaceSad } from "react-icons/tfi";
-import { useGetFilteredCentresMutation } from "@/features/eventCentreHome/SearchCentreSlice";
+import { useGetFilteredCentresMutation } from "@/features/searchEventCentre/SearchCentreSlice";
 
 
 const SearchPage = () => {
