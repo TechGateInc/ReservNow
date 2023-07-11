@@ -125,10 +125,7 @@ const Header = ({}) => {
 
   return (
     <Provider store={store}>
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/feat-detailSlice
       <div
         ref={navbarRef}
         className={`navbar ${isLocationExtended ? "extended" : ""}`}
@@ -195,15 +192,6 @@ const Header = ({}) => {
             />
           </div>
           <div className="ProfileSection">
-<<<<<<< HEAD
-            <Link href={"/newcentre"} style={{textDecoration:"none"}}>
-            <div className="ReserveLink">
-              <p style={{ fontSize: 12, color: "black" }}> Add Event Centre</p>
-            </div>
-            </Link>
-           
-            <div className="profileHolder" onClick={() => dropdownToggle("menu")}>
-=======
             <Link
               href="/newcentre"
               style={{ textDecoration: "none" }}
@@ -218,7 +206,6 @@ const Header = ({}) => {
               className="profileHolder"
               onClick={() => dropdownToggle("menu")}
             >
->>>>>>> origin/feat-detailSlice
               <div className="profileHolderIcons">
                 <div>
                   <img
