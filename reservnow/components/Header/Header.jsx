@@ -125,22 +125,27 @@ const Header = ({}) => {
 
   return (
     <Provider store={store}>
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/feat-detailSlice
       <div
         ref={navbarRef}
         className={`navbar ${isLocationExtended ? "extended" : ""}`}
         onScroll={handleScroll}
       >
         <div
-          className={`extended-content  ${isLocationExtended ? "slide-down" : ""
-            }`}
+          className={`extended-content  ${
+            isLocationExtended ? "slide-down" : ""
+          }`}
         >
           <div className="locationCardHolder">
             {centres &&
               [...new Set(centres.map((centre) => centre.city))]
                 .map((city) => ({
                   city,
-                  count: centres.filter((centre) => centre.city === city).length,
+                  count: centres.filter((centre) => centre.city === city)
+                    .length,
                 }))
                 .sort((a, b) => b.count - a.count)
                 .slice(0, 6) // Get only the top 6 values
@@ -190,6 +195,7 @@ const Header = ({}) => {
             />
           </div>
           <div className="ProfileSection">
+<<<<<<< HEAD
             <Link href={"/newcentre"} style={{textDecoration:"none"}}>
             <div className="ReserveLink">
               <p style={{ fontSize: 12, color: "black" }}> Add Event Centre</p>
@@ -197,6 +203,22 @@ const Header = ({}) => {
             </Link>
            
             <div className="profileHolder" onClick={() => dropdownToggle("menu")}>
+=======
+            <Link
+              href="/newcentre"
+              style={{ textDecoration: "none" }}
+            >
+              <div className="ReserveLink">
+                <p style={{ fontSize: 12, color: "black" }}>
+                  Add Event Centre
+                </p>
+              </div>
+            </Link>
+            <div
+              className="profileHolder"
+              onClick={() => dropdownToggle("menu")}
+            >
+>>>>>>> origin/feat-detailSlice
               <div className="profileHolderIcons">
                 <div>
                   <img

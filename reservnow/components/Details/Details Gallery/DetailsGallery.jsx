@@ -3,7 +3,7 @@
 import "./detailsGallery.css";
 import { useState, useEffect } from "react";
 import { TfiGallery } from "react-icons/tfi";
-import { DetailsGalleryPopup } from "../modals/Popup/Popup";
+import { DetailsGalleryPopup } from "../../modals/Popup/Popup";
 
 const DetailsGallery = () => {
   const [gallery, setGallery] = useState(false);
@@ -36,7 +36,7 @@ const DetailsGallery = () => {
 
   return (
     <div className="details-gallery-root">
-      <div className="details-image-container">
+      <div className="details-image-container" onClick={() => setGallery(true)} style={{cursor: "pointer"}}>
         <div className="details-image-right">
           <img src="/images/details.jpg" alt="" />
         </div>

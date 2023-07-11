@@ -1,9 +1,9 @@
 "use client";
 
 import "./thingsToKnow.css";
-import { CentreRulesPopup } from "../modals/Popup/Popup";
-import { SafetyPropertyPopup } from "../modals/Popup/Popup";
-import { CancellationPolicyPopup } from "../modals/Popup/Popup";
+import { CentreRulesPopup } from "../../modals/Popup/Popup";
+import { SafetyPropertyPopup } from "../../modals/Popup/Popup";
+import { CancellationPolicyPopup } from "../../modals/Popup/Popup";
 import { MdArrowForwardIos } from "react-icons/md";
 import { useState, useEffect } from "react";
 

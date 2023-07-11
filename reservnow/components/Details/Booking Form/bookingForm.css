@@ -47,6 +47,9 @@
   font-size: 18px;
   cursor: pointer;
 }
+.book-btn button:hover{
+  background-color: #ff003c;
+}
 .book-btn button:disabled{
     background-color: grey;
     cursor: auto;
