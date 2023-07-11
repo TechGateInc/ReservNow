@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
-import { eventCentreApi } from './features/eventCentreHome/EventCentreSlice';
-import { searchCentreApi } from './features/eventCentreHome/SearchCentreSlice';
+import { eventCentreApi } from './features/searchEventCentre/EventCentreSlice';
+import { searchCentreApi } from './features/searchEventCentre/SearchCentreSlice';
 
 const rootReducer = combineReducers({
       eventCentre: eventCentreApi,

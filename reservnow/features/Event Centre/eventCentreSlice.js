@@ -7,8 +7,11 @@ export const eventCentreSlice = apiSlice.injectEndpoints({
         return `/eventcentre/${id}`;
       },
     }),
+    getAllCentres: builder.query({
+      query: () => "/eventcentre",
+    }),
   }),
   overrideExisting: true,
 });
 
-export const { useGetEventCentreQuery } = eventCentreSlice;
+export const { useGetEventCentreQuery, useGetAllCentresQuery } = eventCentreSlice;
