@@ -203,7 +203,7 @@ const HostAnEventCentrePage = ({}) => {
               <button
                 className={styles["back-btn"]}
                 onClick={() => setActive("CentreTypePicker")}
-                disabled={!address}
+              
               >
                 Back
               </button>
@@ -212,6 +212,7 @@ const HostAnEventCentrePage = ({}) => {
               <button
                 onClick={() => setActive("Capacity")}
                 className={styles["next-btn"]}
+                disabled={!address}
               >
                 Next
               </button>
