@@ -19,6 +19,7 @@ import DescriptionInfo from "@/components/Host-an-eventcentre/CentreDescriptionI
 import DescriptionPicker from "@/components/Host-an-eventcentre/CentreDescriptionPicker/DescriptionPicker";
 import CentreTypePicker from "@/components/Host-an-eventcentre/CentreType/CentreTypePicker";
 import ReviewListings from "@/components/Host-an-eventcentre/Review Listing/ReviewListings";
+import { useCreateProgressMutation } from "@/features/progress/progressSlice";
 
 const HostAnEventCentrePage = ({}) => {
   const [active, setActive] = useState("Overview");
@@ -34,6 +35,30 @@ const HostAnEventCentrePage = ({}) => {
   const [isRadioButtonSelected, setIsRadioButtonSelected] = useState(false);
   const [descriptionsPick, setDescriptionsPick] = useState([]);
   const [activeAmenities, setActiveAmenities] = useState([]);
+
+  const [createProgress] = useCreateProgressMutation();
+  const bookingHandleSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = {
+      name: name,
+      address: "",
+      capacity: capacity,
+      price: price,
+      description: description,
+      city: "",
+      state: "",
+      venueOwner: "",
+      amenities: "",
+    };
+
+    try {
+      await createProgress(formData);
+    } catch (error) {
+      console.error(error);
+      window.alert("An error occurred. Please try again.");
+    }
+  };
 
   return (
     <div className={styles["host-root"]}>
