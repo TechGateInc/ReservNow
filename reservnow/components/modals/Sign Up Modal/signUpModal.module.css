@@ -21,12 +21,10 @@
 }
 
 .signup-modal-form button:disabled {
-    background-color: grey;
-  }
+  background-color: grey;
+}
 
 .signup-modal-form p {
   margin-top: 5%;
   font-size: 12px;
 }
-
-

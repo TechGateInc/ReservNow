@@ -4,6 +4,7 @@ import { EmailForm } from "./EmailForm"
 import { Provider } from "react-redux"
 import { store } from "@/store"
 import { LoginAuth } from "./LoginAuth"
+import { RegistrationForm } from "./RegistrationForm"
 
 const LoginForm = () => {
   const [email, setEmail] = useState('')
@@ -19,19 +20,26 @@ const LoginForm = () => {
           setTrigger={setIsEmailStep}
           email={email}
           setEmail={setEmail}
-          loginModalTrigger={isAuthStep}
-          setLoginModalTrigger={setIsAuthStep}
-          registrationModalTrigger={isRegistrationStep}
-          setRegistrationModalTrigger={setIsRegistrationStep} />
+          loginFormTrigger={isAuthStep}
+          setLoginFormTrigger={setIsAuthStep}
+          registrationFormTrigger={isRegistrationStep}
+          setRegistrationFormTrigger={setIsRegistrationStep} />
         <LoginAuth
-          emailModalTrigger={isEmailStep}
-          setEmailModalTrigger={setIsEmailStep}
+          emailFormTrigger={isEmailStep}
+          setEmailFormTrigger={setIsEmailStep}
           email={email}
           setEmail={setEmail}
           trigger={isAuthStep}
           setTrigger={setIsAuthStep}
-          registrationModalTrigger={isRegistrationStep}
-          setRegistrationModalTrigger={setIsRegistrationStep} />
+          registrationFormTrigger={isRegistrationStep}
+          setRegistrationFormTrigger={setIsRegistrationStep} />
+        <RegistrationForm
+          trigger={isRegistrationStep}
+          setTrigger={setIsRegistrationStep}
+          email={email}
+          setEmail={setEmail}
+          emailFormTrigger={isEmailStep}
+          setEmailFormTrigger={setIsEmailStep} />
       </div>
     </Provider>
 

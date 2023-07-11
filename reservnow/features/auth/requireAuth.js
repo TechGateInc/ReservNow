@@ -1,18 +1,21 @@
+import { useRouter, usePathname } from "next/navigation";
 import { useSelector } from "react-redux";
-import { selectCurrentToken } from "./authSlice";
-import { useRouter } from "next/navigation";
+import { selectCurrentToken, selectCurrentUser } from "./authSlice";
 
 const RequireAuth = ({ children }) => {
-  const token = useSelector(selectCurrentToken);
   const router = useRouter();
-  console.log(token);
+  const isAuthenticated = useSelector(selectCurrentToken);
+  const pathname = usePathname();
+  const currentPath = pathname;
 
-  if (!token) {
-    router.push("/login", undefined, { shallow: true });
+  if (!isAuthenticated) {
+    router.replace(
+      `/login?redirect=${encodeURIComponent(currentPath)}`,
+      undefined,
+      { shallow: true }
+    );
     return null;
   }
-
   return children;
 };
-
 export default RequireAuth;

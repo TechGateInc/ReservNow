@@ -1,4 +1,4 @@
-import LoginAuthForm from "./PasswordModal";
+import LoginAuthForm from "./LoginAuthForm";
 import styles from "../Login Modal/loginModal.module.css";
 import { IoArrowBackCircle } from "react-icons/io5";
 
@@ -11,7 +11,6 @@ export function LoginAuthModal(props) {
                     onClick={() => {
                         props.setOpenEmailModal(true);
                         props.setTrigger(false);
-                        props.setPassword('');
                     }}
                 >
                     <div className={styles["back-icon"]}>
@@ -22,6 +21,7 @@ export function LoginAuthModal(props) {
                     email={props.email}
                     setEmail={props.setEmail}
                     setTrigger={props.setTrigger}
+                    setEmailModalTrigger={props.setOpenEmailModal}
                 />
             </div>
         </div>
