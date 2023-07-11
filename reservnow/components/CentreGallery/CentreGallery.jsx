@@ -4,6 +4,8 @@ import "../CentreGallery/CentreGallery.css";
 import config from "@/config";
 import CentreCard from "./CentreCard";
 import { Skeleton } from "../Skeleton/Skeleton";
+import { useGetAllCentresQuery } from "../../features/eventCentreHome/EventCentreSlice"
+// import { useGetReviewQuery } from "@/features/Details/reviewSlice";
 
 const CentreGallery = () => {
   const [centres, getCentres] = useState(null);
@@ -42,6 +44,13 @@ const CentreGallery = () => {
     setIsImageClicked(!isImageClicked);
   };
 
+  const { data } = useGetAllCentresQuery();
+
+  // const {data : review} = useGetReviewQuery();
+
+  // console.log(review)
+  console.log(data)
+
   return (
     <div className="galleryHolder">
       <div className="galleryCardHolder">
@@ -61,8 +70,8 @@ const CentreGallery = () => {
             <Skeleton />
           </div>
         ) : (
-          centres &&
-          centres.map((centre, index) => (
+          data &&
+          data.map((centre, index) => (
             <CentreCard key={index} centre={centre} />
           ))
         )}

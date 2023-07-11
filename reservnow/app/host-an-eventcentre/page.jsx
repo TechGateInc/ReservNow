@@ -35,6 +35,7 @@ const HostAnEventCentrePage = ({}) => {
   const [isRadioButtonSelected, setIsRadioButtonSelected] = useState(false);
   const [descriptionsPick, setDescriptionsPick] = useState([]);
   const [activeAmenities, setActiveAmenities] = useState([]);
+  const [address, setAddress] = useState("");
 
   const [createProgress] = useCreateProgressMutation();
   const bookingHandleSubmit = async (e) => {
@@ -84,7 +85,10 @@ const HostAnEventCentrePage = ({}) => {
                 setActiveType={setActiveType}
               />
             )}
-            {active === "LocationPicker" && <LocationPicker />}
+            {active === "LocationPicker" && <LocationPicker 
+            address={address} setAddress={setAddress}
+            
+            />}
             {active === "Capacity" && (
               <Capacity capacity={capacity} setCapacity={setCapacity} />
             )}
@@ -225,6 +229,7 @@ const HostAnEventCentrePage = ({}) => {
               <button
                 className={styles["back-btn"]}
                 onClick={() => setActive("CentreTypePicker")}
+              
               >
                 Back
               </button>
@@ -233,6 +238,7 @@ const HostAnEventCentrePage = ({}) => {
               <button
                 onClick={() => setActive("Capacity")}
                 className={styles["next-btn"]}
+                disabled={!address}
               >
                 Next
               </button>

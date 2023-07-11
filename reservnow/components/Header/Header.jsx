@@ -125,6 +125,7 @@ const Header = ({}) => {
 
   return (
     <Provider store={store}>
+
       <div
         ref={navbarRef}
         className={`navbar ${isLocationExtended ? "extended" : ""}`}

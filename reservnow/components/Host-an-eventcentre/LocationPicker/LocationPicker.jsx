@@ -3,9 +3,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./LocationPicker.css";
 
-const LocationPicker = () => {
-  const [address, setAddress] = useState("");
+const LocationPicker = ({address, setAddress}) => {
+  
   const defaultLocation = "New York, NY";
+  const [searchResult, setSearchResult] = useState("");
 
   useEffect(() => {
     setAddress(defaultLocation);
@@ -23,10 +24,25 @@ const LocationPicker = () => {
   const handleGetLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
-        (position) => {
+        async (position) => {
           const { latitude, longitude } = position.coords;
           const location = `${latitude},${longitude}`;
+          setSearchResult(location); // Update the search result state
           loadMap(location);
+  
+          try {
+            const response = await fetch(
+              `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`
+            );
+            const data = await response.json();
+            if (data.address) {
+              const { road, city, state, postcode, country } = data.address;
+              const address = `${road}, ${city}, ${state}, ${postcode}, ${country}`;
+              setAddress(address); // Update the address state with the obtained address
+            }
+          } catch (error) {
+            console.error("Error geocoding coordinates:", error);
+          }
         },
         (error) => {
           console.error("Error getting location:", error);
