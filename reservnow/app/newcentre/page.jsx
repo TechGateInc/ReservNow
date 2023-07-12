@@ -8,7 +8,7 @@ import { useSpring, animated } from "react-spring";
 import EstimateModal from "@/components/modals/EstimateModal/EstimateModal";
 import Link from "next/link";
 
-const newCentrePage = ({}) => {
+const NewCentrePage = ({ }) => {
   const [money, setMoney] = useState(5000);
   const [hours, setHours] = useState(1);
   const [isSliderReady, setSliderReady] = useState(false);
@@ -22,12 +22,6 @@ const newCentrePage = ({}) => {
     setHours(newValue);
     setMoney(newValue * 5000);
   };
-
-  // const moneyAnimation = useSpring({
-  //   number: money,
-  //   from: { number: 0 },
-  //   config: { duration: 4000 },
-  // });
 
   useEffect(() => {
     setSliderReady(true);
@@ -68,7 +62,7 @@ const newCentrePage = ({}) => {
         </div>
         <div className={styles["pageHeaderBtn"]}>
           <p>Ready to Reserv it?</p>
-          <Link href={"/host-an-eventcentre"} style={{textDecoration: "none"}}>
+          <Link href={"/host-an-eventcentre"} style={{ textDecoration: "none" }}>
             <div className={styles["setUpBtn"]}>ReserveNov SetUp</div>
           </Link>
         </div>
@@ -79,9 +73,6 @@ const newCentrePage = ({}) => {
           <p className={styles["ReservText2"]}>You Could Earn</p>
           <p className={styles["ReservText2"]}>
             ₦
-            {/* <animated.span>
-              {moneyAnimation.number.interpolate((val) => Math.floor(val))}
-            </animated.span> */}
           </p>
           <p style={{ marginTop: 20 }}>
             {hours} hours at an estimated ₦5000 an hour
@@ -123,4 +114,8 @@ const newCentrePage = ({}) => {
   );
 };
 
-export default newCentrePage;
+// const RequireAuthNewCentrePage = <NewCentrePage />;
+
+export default NewCentrePage;
+
+// export default newCentrePage;

@@ -1,11 +1,12 @@
 "use client";
-import HomeLayout from "./layout";
+
 import CentreGallery from "@/components/CentreGallery/CentreGallery";
+import { store } from "@/store";
+import { Provider } from "react-redux";
 
 export default function Home() {
   return (
-
-    <CentreGallery />
+    <Provider store={store}><CentreGallery /></Provider>
 
   );
 }

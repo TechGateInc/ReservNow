@@ -1,11 +1,12 @@
-import { apislice } from " . . / .. /app/api/apislice";
+import { apiSlice } from "@/api/apiSlice";
 
-export const eventCentersApiSlice = apislice.injectEndpoints({
-  endpoints: (builder) => ({
-    getUsers: builder.query({
-      query: () => ("/eventcentre" ? keepUnusedDataFor : 5),
+export const eventCentresApiSlice = apiSlice.injectEndpoints({
+  endpoints: (build) => ({
+    getEventCentres: build.query({
+      query: () => ({ url: "/eventcentre" }),
+      keepUnusedDataFor: 60,
     }),
   }),
 });
 
-export const { useGetEventCentersQuery } = eventCentersApiSlice;
+export const { useGetEventCentresQuery } = eventCentresApiSlice;

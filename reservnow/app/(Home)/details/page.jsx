@@ -11,29 +11,15 @@ import ContactOwner from "@/components/Details/Contact Venue Owner/ContactOwner"
 import ThingsToKnow from "@/components/Details/Things To Know/ThingsToKnow";
 import { useEffect, useState } from "react";
 import { AiFillStar } from "react-icons/ai";
-import LoginModal from "@/components/modals/Login Modal/LoginModal";
 import { useSearchParams } from "next/navigation";
 import config from "@/config";
 import { DetailsSkeleton } from "@/components/Skeleton/Skeleton";
-import { useRouter } from "next/router";
-import { useSelector } from "react-redux";
-import { selectCurrentUser } from "@/features/auth/authSlice";
-import RequireAuth from "@/features/auth/requireAuth";
-import RAProvider from "@/features/auth/Provider";
+import { Provider } from "react-redux";
+import { store } from "@/store";
 
 export default function Details() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
-  const [emailVerification, setEmailVerification] = useState(false);
-
-  // const user = useSelector(selectCurrentUser);
-  // const router = useRouter();
-
-  // if (!user) {
-  //   router.push("/login", undefined, { shallow: true });
-  //   return null;
-  // }
-
   const [centreDetails, setCentreDetails] = useState(""); // to get the centre data from db
   const [reviewData, setReviewData] = useState(""); // to get the review data from db
   const [isLoading, setIsLoading] = useState(true);
@@ -102,8 +88,7 @@ export default function Details() {
     }
   }, [isLoading]);
 
-  return (
-  <RAProvider>
+  return (<Provider store={store}>
     <div className={styles["details-root"]}>
       {isLoading && centreDetails.name != "" ? (
         <DetailsSkeleton />
@@ -164,12 +149,8 @@ export default function Details() {
           <div className="things-to-know-section">
             <ThingsToKnow />
           </div>
-          <LoginModal
-            emailVerification={emailVerification}
-            setEmailVerification={setEmailVerification}
-          />
         </div>
       )}
-    </div>
-  </RAProvider>);
+    </div></Provider>
+  );
 }

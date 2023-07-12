@@ -11,6 +11,9 @@ import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import config from "@/config";
 import dayjs from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
+import LoginModal from "@/components/modals/Auth Modal/LoginModal";
+import { useSelector } from "react-redux";
+import { selectCurrentToken } from "@/features/auth/authSlice";
 
 const BookingForm = ({ centreDetails, reviewData, id }) => {
   // Add the necessary plugin to dayjs
@@ -32,7 +35,7 @@ const BookingForm = ({ centreDetails, reviewData, id }) => {
     notes: "",
   });
   const calculateDurationInHours = () => {
-    const duration = start && end &&  end.diff(start, "hour");
+    const duration = start && end && end.diff(start, "hour");
     return duration;
   };
 
@@ -96,124 +99,137 @@ const BookingForm = ({ centreDetails, reviewData, id }) => {
     }));
   };
 
+  const [trigger, setTrigger] = useState(false);
+  const token = useSelector(selectCurrentToken);
+
+  const isUserLoggedIn = () => {
+    if (!token) {
+      setTrigger(true)
+    }
+  }
+
   return (
-    <div className="card-right-root" key={centreDetails._id}>
-      <div className="details-card-right">
-        <div className="details-card-right-inner">
-          <div className="card-right-header">
-            <div className="price">
-              <TbCurrencyNaira /> {centreDetails.price}
-              <p>hour</p>
-            </div>
-            <div className="review" style={{ fontSize: "14px" }}>
-              <b>
-                <AiFillStar />
-                <span className="rating" style={{ marginLeft: "5px" }}>
-                  {centreDetails.rating} .
-                </span>
-                <div
-                  style={{
-                    border: "none",
-                    background: "white",
-                    textDecoration: "underline",
-                    marginLeft: "5px",
-                    color: "grey",
-                    fontWeight: "normal",
-                  }}
-                >
-                  {reviewData.length} Reviews
-                </div>
-              </b>
-            </div>
-          </div>
-          <form onSubmit={bookingHandleSubmit}>
-            <div className="card-right-content">
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DemoContainer
-                  components={["DateTimePicker", "DateTimePicker"]}
-                >
-                  <DateTimePicker
-                    label="Start Date and Time"
-                    value={start}
-                    onChange={setStart}
-                    minDateTime={currentDate.add(minStartTime, "hour")}
-                  />
-                  <DateTimePicker
-                    label="End Date and Time"
-                    onChange={setEnd}
-                    minDateTime={start.add(minEndTime, "hour")}
-                    maxDateTime={start.add(maxEndDate, "day")}
-                  />
-                </DemoContainer>
-              </LocalizationProvider>
-              <div className="form-content" style={{ width: "100%" }}>
-                <label
-                  htmlFor=""
-                  style={{ fontSize: "14px" }}
-                  className="disJusSpaBet"
-                >
-                  Notes{" "}
-                  <div style={{ fontSize: "12px", color: "grey" }}>
-                    *optional
+      <div className="card-right-root" key={centreDetails._id}>
+        <div className="details-card-right">
+          <div className="details-card-right-inner">
+            <div className="card-right-header">
+              <div className="price">
+                <TbCurrencyNaira /> {centreDetails.price}
+                <p>hour</p>
+              </div>
+              <div className="review" style={{ fontSize: "14px" }}>
+                <b>
+                  <AiFillStar />
+                  <span className="rating" style={{ marginLeft: "5px" }}>
+                    {centreDetails.rating} .
+                  </span>
+                  <div
+                    style={{
+                      border: "none",
+                      background: "white",
+                      textDecoration: "underline",
+                      marginLeft: "5px",
+                      color: "grey",
+                      fontWeight: "normal",
+                    }}
+                  >
+                    {reviewData.length} Reviews
                   </div>
-                </label>
-                <input
-                  type="text"
-                  name="notes"
-                  value={bookingForm.notes}
-                  onChange={bookingHandleChange}
-                  style={{
-                    width: "100%",
-                    paddingLeft: "0",
-                    borderBottomColor: "black",
-                    borderBottomWidth: "1px",
-                    borderBottomStyle: "solid",
-                    outline: "none",
-                  }}
-                />
+                </b>
               </div>
             </div>
-            <div className="book-btn">
-              <button type="submit">Book</button>
+            <div >
+              <div className="card-right-content">
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DemoContainer
+                    components={["DateTimePicker", "DateTimePicker"]}
+                  >
+                    <DateTimePicker
+                      label="Start Date and Time"
+                      value={start}
+                      onChange={setStart}
+                      minDateTime={currentDate.add(minStartTime, "hour")}
+                    />
+                    <DateTimePicker
+                      label="End Date and Time"
+                      onChange={setEnd}
+                      minDateTime={start.add(minEndTime, "hour")}
+                      maxDateTime={start.add(maxEndDate, "day")}
+                    />
+                  </DemoContainer>
+                </LocalizationProvider>
+                <div className="form-content" style={{ width: "100%" }}>
+                  <label
+                    htmlFor=""
+                    style={{ fontSize: "14px" }}
+                    className="disJusSpaBet"
+                  >
+                    Notes{" "}
+                    <div style={{ fontSize: "12px", color: "grey" }}>
+                      *optional
+                    </div>
+                  </label>
+                  <input
+                    type="text"
+                    name="notes"
+                    value={bookingForm.notes}
+                    onChange={bookingHandleChange}
+                    style={{
+                      width: "100%",
+                      paddingLeft: "0",
+                      borderBottomColor: "black",
+                      borderBottomWidth: "1px",
+                      borderBottomStyle: "solid",
+                      outline: "none",
+                    }}
+                  />
+                </div>
+              </div>
+              <div className="book-btn">
+                <button type="submit" onClick={isUserLoggedIn}>Book</button>
+              </div>
             </div>
-          </form>
-          <div
-            className="card-right-footer"
-            style={{ marginTop: "4%", fontSize: "14px", color: "grey" }}
-          >
-            {start && end && (
-              <>
-                <div style={{ textAlign: "center" }}>
-                  You won't be charged yet
-                </div>
-                <div className="compilation">
-                  <button>
-                    {centreDetails.price} * {durationInHours} hours
-                  </button>
-                  <div className="disAlCenter">
-                    <TbCurrencyNaira /> {centreDetails.price * durationInHours}
+            <div
+              className="card-right-footer"
+              style={{ marginTop: "4%", fontSize: "14px", color: "grey" }}
+            >
+              {start && end && (
+                <>
+                  <div style={{ textAlign: "center" }}>
+                    You won't be charged yet
                   </div>
-                </div>
-                <div className="compilation">
-                  <button>Reserve Now Fee</button>
-                  <div className="disAlCenter">
-                    <TbCurrencyNaira /> {reservNowPrice}
+                  <div className="compilation">
+                    <button>
+                      {centreDetails.price} * {durationInHours} hours
+                    </button>
+                    <div className="disAlCenter">
+                      <TbCurrencyNaira /> {centreDetails.price * durationInHours}
+                    </div>
                   </div>
-                </div>
-                <hr style={{ marginTop: "10%" }} />
-                <div className="total">
-                  <div>Total</div>
-                  <div className="disAlCenter">
-                    <TbCurrencyNaira />{" "}
-                    {reservNowPrice + centreDetails.price * durationInHours}
+                  <div className="compilation">
+                    <button>Reserve Now Fee</button>
+                    <div className="disAlCenter">
+                      <TbCurrencyNaira /> {reservNowPrice}
+                    </div>
                   </div>
-                </div>
-              </>
-            )}
+                  <hr style={{ marginTop: "10%" }} />
+                  <div className="total">
+                    <div>Total</div>
+                    <div className="disAlCenter">
+                      <TbCurrencyNaira />
+                      {reservNowPrice + centreDetails.price * durationInHours}
+                    </div>
+                  </div>
+                </>
+              )}
+            </div>
           </div>
         </div>
+        <LoginModal
+          showLoginModal={trigger}
+          setShowLoginModal={setTrigger}
+        />
       </div>
-    </div>
   );
 };
 
