@@ -17,6 +17,8 @@ export const progressSlice = apiSlice.injectEndpoints({
         city,
         state,
         venueOwner,
+        descriptionPicker,
+        centreType,
         amenities,
       }) => ({
         url: "/progress",
@@ -31,11 +33,14 @@ export const progressSlice = apiSlice.injectEndpoints({
           state,
           venueOwner,
           amenities,
+          descriptionPicker,
+          centreType,
         },
       }),
     }),
     updateProgress: builder.mutation({
       query: (params) => {
+        console.log(params.descriptionPick)
         return {
           url: `/progress/${params.progressId}`,
           method: "PUT",
@@ -49,6 +54,8 @@ export const progressSlice = apiSlice.injectEndpoints({
             state: params.state,
             venueOwner: params.venueOwner,
             amenities: params.amenities,
+            descriptionPicker: params.descriptionPicker,
+            centreType: params.centreType,
           },
         };
       },
