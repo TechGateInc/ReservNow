@@ -36,7 +36,6 @@ export const progressSlice = apiSlice.injectEndpoints({
     }),
     updateProgress: builder.mutation({
       query: (params) => {
-        console.log(params.capacity); // Log the capacity value
         return {
           url: `/progress/${params.progressId}`,
           method: "PUT",

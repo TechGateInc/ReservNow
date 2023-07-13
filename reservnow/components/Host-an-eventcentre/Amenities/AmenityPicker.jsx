@@ -5,7 +5,6 @@ import { useGetAmenityQuery } from "@/features/amenity/amenitySlice";
 
 const AmenityPicker = ({ activeAmenities, setActiveAmenities }) => {
   const { data: amenity, isLoading, isError } = useGetAmenityQuery();
-  console.log(amenity);
 
   const amenityByCategory = {};
 
@@ -32,17 +31,17 @@ const AmenityPicker = ({ activeAmenities, setActiveAmenities }) => {
   });
 
   const AmenityCard = ({ amenityItem }) => {
-    const isActive = activeAmenities.includes(amenityItem.name);
+    const isActive = activeAmenities.includes(amenityItem._id);
 
     const handleClick = () => {
       if (isActive) {
         setActiveAmenities((prevAmenities) =>
-          prevAmenities.filter((a) => a !== amenityItem.name)
+          prevAmenities.filter((a) => a !== amenityItem._id)
         );
       } else {
         setActiveAmenities((prevAmenities) => [
           ...prevAmenities,
-          amenityItem.name,
+          amenityItem._id,
         ]);
       }
     };
@@ -67,7 +66,7 @@ const AmenityPicker = ({ activeAmenities, setActiveAmenities }) => {
       <div className="AmenityTypeHolder">
         {Object.entries(amenityByCategory).map(([category, amenities]) => (
           <div key={category}>
-            <h2 style={{marginBottom:30}}>{category}</h2>
+            <h2 style={{ marginBottom: 30 }}>{category}</h2>
             <div className="amenity-list">
               {amenities.map((amenityItem, index) => (
                 <AmenityCard key={index} amenityItem={amenityItem} />
