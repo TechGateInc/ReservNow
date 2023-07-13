@@ -3,8 +3,8 @@ import { apiSlice } from "@/api/apiSlice";
 export const progressSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getProgress: builder.query({
-      query: () => {
-        return "/progress";
+      query: (id) => {
+        return `/progress/venueOwner/${id}`;
       },
     }),
     createProgress: builder.mutation({
@@ -19,7 +19,7 @@ export const progressSlice = apiSlice.injectEndpoints({
         venueOwner,
         amenities,
       }) => ({
-        url: "/posting",
+        url: "/progress",
         method: "POST",
         body: {
           name,
@@ -34,8 +34,32 @@ export const progressSlice = apiSlice.injectEndpoints({
         },
       }),
     }),
+    updateProgress: builder.mutation({
+      query: (params) => {
+        console.log(params.capacity); // Log the capacity value
+        return {
+          url: `/progress/${params.progressId}`,
+          method: "PUT",
+          body: {
+            name: params.name,
+            address: params.address,
+            capacity: params.capacity,
+            price: params.price,
+            description: params.description,
+            city: params.city,
+            state: params.state,
+            venueOwner: params.venueOwner,
+            amenities: params.amenities,
+          },
+        };
+      },
+    }),
   }),
   overrideExisting: true,
 });
 
-export const { useGetProgressQuery, useCreateProgressMutation } = progressSlice;
+export const {
+  useGetProgressQuery,
+  useCreateProgressMutation,
+  useUpdateProgressMutation,
+} = progressSlice;

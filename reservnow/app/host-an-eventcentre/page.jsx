@@ -19,7 +19,11 @@ import DescriptionInfo from "@/components/Host-an-eventcentre/CentreDescriptionI
 import DescriptionPicker from "@/components/Host-an-eventcentre/CentreDescriptionPicker/DescriptionPicker";
 import CentreTypePicker from "@/components/Host-an-eventcentre/CentreType/CentreTypePicker";
 import ReviewListings from "@/components/Host-an-eventcentre/Review Listing/ReviewListings";
-import { useCreateProgressMutation } from "@/features/progress/progressSlice";
+import {
+  useCreateProgressMutation,
+  useGetProgressQuery,
+  useUpdateProgressMutation,
+} from "@/features/progress/progressSlice";
 
 const HostAnEventCentrePage = ({}) => {
   const [active, setActive] = useState("Overview");
@@ -36,28 +40,63 @@ const HostAnEventCentrePage = ({}) => {
   const [descriptionsPick, setDescriptionsPick] = useState([]);
   const [activeAmenities, setActiveAmenities] = useState([]);
   const [address, setAddress] = useState("");
+  const [progressId, setProgressId] = useState("");
+
+  const id = "64958637db3d3493ebaf8c84";
+
+  const {
+    data: progress,
+    loading: progressLoading,
+    isSuccess: progressSuccess,
+    isError: progressError,
+    error: progressErrorData,
+  } = useGetProgressQuery(id);
+
+  useEffect(() => {
+    if (progressSuccess === true && progress) {
+      setName(progress.name);
+      setAddress(progress.address);
+      setCapacity(progress.capacity);
+      setPrice(progress.price);
+      setDescription(progress.description);
+      setProgressId(progress._id);
+    }
+  }, [progressSuccess, progress]);
 
   const [createProgress] = useCreateProgressMutation();
-  const bookingHandleSubmit = async (e) => {
+  const [updateProgress] = useUpdateProgressMutation(progressId);
+
+  const progressHandleSubmit = async (e) => {
     e.preventDefault();
 
     const formData = {
       name: name,
-      address: "",
+      address: address,
       capacity: capacity,
       price: price,
       description: description,
       city: "",
       state: "",
-      venueOwner: "",
-      amenities: "",
+      venueOwner: id,
+      amenities: "648b19dc62918310439c0c58",
     };
 
-    try {
-      await createProgress(formData);
-    } catch (error) {
-      console.error(error);
-      window.alert("An error occurred. Please try again.");
+    if (progressSuccess === true) {
+      try {
+        await updateProgress({ progressId, ...formData }); // Call the update mutation
+        window.alert("Progress updated successfully");
+      } catch (error) {
+        console.error(error);
+        window.alert("An error occurred. Please try again.");
+      }
+    } else {
+      try {
+        await createProgress(formData); // Call the create mutation
+        window.alert("Progress created successfully");
+      } catch (error) {
+        console.error(error);
+        window.alert("An error occurred. Please try again.");
+      }
     }
   };
 
@@ -72,7 +111,7 @@ const HostAnEventCentrePage = ({}) => {
               style={{ height: "22px" }}
             />
             <Link href={"/newcentre"}>
-              <button>Exit</button>
+              <button onClick={progressHandleSubmit}>Save & Exit</button>
             </Link>
           </div>
           <div className={styles["host-content"]}>
@@ -85,10 +124,9 @@ const HostAnEventCentrePage = ({}) => {
                 setActiveType={setActiveType}
               />
             )}
-            {active === "LocationPicker" && <LocationPicker 
-            address={address} setAddress={setAddress}
-            
-            />}
+            {active === "LocationPicker" && (
+              <LocationPicker address={address} setAddress={setAddress} />
+            )}
             {active === "Capacity" && (
               <Capacity capacity={capacity} setCapacity={setCapacity} />
             )}
@@ -109,7 +147,12 @@ const HostAnEventCentrePage = ({}) => {
               />
             )}
             {active === "NamePicker" && (
-              <NamePicker name={name} setName={setName} />
+              <NamePicker
+                name={name}
+                setName={setName}
+                progress={progress}
+                progressSuccess={progressSuccess}
+              />
             )}
             {active === "DescriptionInfo" && (
               <DescriptionInfo
@@ -229,7 +272,6 @@ const HostAnEventCentrePage = ({}) => {
               <button
                 className={styles["back-btn"]}
                 onClick={() => setActive("CentreTypePicker")}
-              
               >
                 Back
               </button>
@@ -253,7 +295,10 @@ const HostAnEventCentrePage = ({}) => {
             )}
             {active === "Capacity" && (
               <button
-                onClick={() => setActive("StandOut")}
+                onClick={(e) => {
+                  setActive("LocationPicker");
+                  progressHandleSubmit(e);
+                }}
                 className={styles["next-btn"]}
                 disabled={capacity < 20}
               >

@@ -13,7 +13,6 @@ import { useEffect, useState } from "react";
 import { AiFillStar } from "react-icons/ai";
 import LoginModal from "@/components/modals/Login Modal/LoginModal";
 import { useSearchParams } from "next/navigation";
-import config from "@/config";
 import { DetailsSkeleton } from "@/components/Skeleton/Skeleton";
 import { useGetEventCentreQuery } from "@/features/Event Centre/eventCentreSlice";
 import { useGetReviewQuery } from "@/features/Review/reviewSlice";
@@ -30,7 +29,6 @@ export default function Details() {
     isError: eventCentreError,
     error: eventCentreErrorData,
   } = useGetEventCentreQuery(id);
-
   const {
     data: review,
     loading: reviewLoading,

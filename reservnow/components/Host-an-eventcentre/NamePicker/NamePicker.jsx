@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./NamePicker.css";
 
-const NamePicker = ({ name, setName }) => {
-  const handleInputChange = (event) => {
-    const inputName = event.target.value;
+const NamePicker = ({ name, setName, progress, progressSuccess }) => {
+
+  const handleInputChange = (e) => {
+    const inputName = e.target.value;
     if (inputName.length <= 32) {
       setName(inputName);
     }
@@ -29,9 +30,7 @@ const NamePicker = ({ name, setName }) => {
           className="NametextArea"
           style={{ resize: "none", fontSize: 20 }} // Disable resizing
         />
-        <p style={{ marginTop: 20, color: "grey" }}>
-          {name.length} / 32
-        </p>
+        <p style={{ marginTop: 20, color: "grey" }}></p>
       </div>
     </div>
   );
