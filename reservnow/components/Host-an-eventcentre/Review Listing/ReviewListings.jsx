@@ -8,7 +8,7 @@ import { AiFillStar } from "react-icons/ai";
 import { ReviewListingModal } from "@/components/modals/Review Listing Modal/ReviewListingModal";
 import { useState } from "react";
 
-const ReviewListings = ({ selectedFiles, name, price, description }) => {
+const ReviewListings = ({ selectedFiles, name, price, description, address }) => {
   const firstImage = selectedFiles[0];
   const [isReview, setIsReview] = useState(false);
 
@@ -131,6 +131,7 @@ const ReviewListings = ({ selectedFiles, name, price, description }) => {
         firstImage={firstImage}
         name={name}
         description={description}
+        address={address}
       />
     </div>
   );

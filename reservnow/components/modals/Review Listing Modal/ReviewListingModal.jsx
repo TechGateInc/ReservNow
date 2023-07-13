@@ -51,7 +51,7 @@ export function ReviewListingModal(props) {
                   Location
                 </div>
                 <div className="text">
-                  Kusenla Rd, Lekki Penninsula II 106104, Lekki, Lagos, Nigeria
+                 {props.address}
                 </div>
                 <div className="policy">
                   We’ll only share your address with guests who are booked as

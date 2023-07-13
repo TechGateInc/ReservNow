@@ -139,6 +139,7 @@ const HostAnEventCentrePage = ({}) => {
                 name={name}
                 price={price}
                 description={description}
+                address={address}
               />
             )}
           </div>
