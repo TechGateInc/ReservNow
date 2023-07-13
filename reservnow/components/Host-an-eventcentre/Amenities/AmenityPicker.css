@@ -22,7 +22,9 @@
     cursor: pointer;
 }
 
-.AmenityTypeHolder{}
+.AmenityTypeHolder{
+    margin-top: 70px;
+}
 
 .amenity-list {
     display: grid;

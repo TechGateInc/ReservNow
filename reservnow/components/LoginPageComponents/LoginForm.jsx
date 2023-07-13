@@ -1,6 +1,41 @@
 import styles from "../modals/Email Verification Modal/emailVerification.module.css"
+import { useState } from "react";
 
 const LoginForm = ({}) => {
+  const [openLoginAuthModal, setOpenLoginAuthModal] = useState(false);
+  const [openRegistrationModal, setOpenRegistrationModal] = useState(false);
+  const [email, setEmail] = useState('')
+
+
+  const handleEmailVerification = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(
+        `${config.baseURL}/user/check-email/${email}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      // Handle response
+      const data = await response.json();
+      console.log(data);
+      if (response.ok) {
+        setOpenEmailModal(false);
+        setOpenLoginAuthModal(true);
+      } else {
+        setOpenEmailModal(false);
+        setOpenRegistrationModal(true);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleEmailChange = (e) => setEmail(e.target.value)
+
   return (
     <div className={styles["LoginFormHolder2"]}>
         <div className={styles["LoginForm2"]}>
@@ -26,8 +61,8 @@ const LoginForm = ({}) => {
                 type="text"
                 placeholder="Email"
                 name="email"
-                // value={formData.email}
-                // onChange={handleChange}
+                value={email}
+                onChange={handleEmailChange}
               />
             </div>
             <p>
@@ -36,8 +71,8 @@ const LoginForm = ({}) => {
             </p>
             <div className={styles["submit-btn"]}>
               <button
-                // onClick={handleSubmit}
-                // disabled={formData.email === "" ? true : false}
+                onClick={handleEmailVerification}
+                disabled={email === "" ? true : false}
               >
                 Continue
               </button>
