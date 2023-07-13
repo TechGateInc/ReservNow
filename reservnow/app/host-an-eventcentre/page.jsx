@@ -61,6 +61,7 @@ const HostAnEventCentrePage = ({}) => {
       setActiveAmenities(progress.amenities);
       setProgressId(progress._id);
       setActiveType(progress.centreType)
+      setDescriptionsPick(progress.descriptionPicker)
     }
   }, [progressSuccess, progress]);
 
