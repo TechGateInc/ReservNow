@@ -9,7 +9,7 @@ const LocationPicker = ({address, setAddress}) => {
   const [searchResult, setSearchResult] = useState("");
 
   useEffect(() => {
-    setAddress(defaultLocation);
+    setAddress(address != "" ? address : defaultLocation);
     loadMap(defaultLocation);
   }, []);
 

@@ -9,7 +9,7 @@ export default function HomeLayout({ children }) {
   return (
     <div>
         <Header />
-        <div style={{ }}>
+        <div style={{ marginBottom: "40px" }}>
           {children}
         </div>
         <Footer />
