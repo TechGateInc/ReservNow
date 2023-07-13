@@ -8,6 +8,7 @@ export const amenitySlice = apiSlice.injectEndpoints({
       },
     }),
   }),
+  overrideExisting: true,
 });
 
 export const { useGetAmenityQuery } = amenitySlice;
