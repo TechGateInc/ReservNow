@@ -1,4 +1,5 @@
 "use client";
+
 import styles from "./loginModal.module.css";
 import { useState } from "react";
 import { EmailVerificationModal } from "./Email Verification Modal/EmailVerificationModal";
@@ -15,7 +16,7 @@ export default function LoginModal({ showLoginModal, setShowLoginModal }) {
     <div className={styles["login-modal-root"]}>
       <EmailVerificationModal
         trigger={showLoginModal}
-        setTrigger={showLoginModal}
+        setTrigger={setShowLoginModal}
         email={email}
         setEmail={setEmail}
         signInModalTrigger={setShowSignInModal}

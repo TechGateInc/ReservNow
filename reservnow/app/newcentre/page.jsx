@@ -106,7 +106,7 @@ const NewCentrePage = ({ }) => {
               boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px",
             }}
             loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
+            referrerPolicy="no-referrer-when-downgrade"
           ></iframe>
         </div>
       </div>

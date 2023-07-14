@@ -1,21 +1,31 @@
 import { useRouter, usePathname } from "next/navigation";
-import { useSelector } from "react-redux";
-import { selectCurrentToken, selectCurrentUser } from "./authSlice";
+import { useContext, useEffect } from "react";
+import useAuth from "@/hooks/useAuth";
+import AuthContext, { AuthProvider } from "@/context/AuthProvider";
 
 const RequireAuth = ({ children }) => {
   const router = useRouter();
-  const isAuthenticated = useSelector(selectCurrentToken);
+  const { auth } = useContext(AuthContext);
+  const isAuthenticated = auth?.token;
+  console.log(isAuthenticated);
   const pathname = usePathname();
   const currentPath = pathname;
 
+  useEffect(() => {
+    if (!isAuthenticated) {
+      router.replace(
+        `/login?redirect=${encodeURIComponent(currentPath)}`,
+        undefined,
+        { shallow: true }
+      );
+    }
+  }, [isAuthenticated, router, currentPath]);
+
   if (!isAuthenticated) {
-    router.replace(
-      `/login?redirect=${encodeURIComponent(currentPath)}`,
-      undefined,
-      { shallow: true }
-    );
     return null;
   }
-  return children;
+
+  return <AuthProvider>{children}</AuthProvider>;
 };
+
 export default RequireAuth;
