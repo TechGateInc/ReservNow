@@ -10,8 +10,43 @@ export const eventCentreSlice = apiSlice.injectEndpoints({
     getAllCentres: builder.query({
       query: () => "/eventcentre",
     }),
+    createEventCentre: builder.mutation({
+      query: ({
+        name,
+        address,
+        capacity,
+        price,
+        description,
+        city,
+        state,
+        venueOwner,
+        descriptionPicker,
+        centreType,
+        amenities,
+      }) => ({
+        url: "/eventcentre",
+        method: "POST",
+        body: {
+          name,
+          address,
+          capacity,
+          price,
+          description,
+          city,
+          state,
+          venueOwner,
+          amenities,
+          descriptionPicker,
+          centreType,
+        },
+      }),
+    }),
   }),
   overrideExisting: true,
 });
 
-export const { useGetEventCentreQuery, useGetAllCentresQuery } = eventCentreSlice;
+export const {
+  useGetEventCentreQuery,
+  useGetAllCentresQuery,
+  useCreateEventCentreMutation,
+} = eventCentreSlice;

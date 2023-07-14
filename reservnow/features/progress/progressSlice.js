@@ -40,7 +40,7 @@ export const progressSlice = apiSlice.injectEndpoints({
     }),
     updateProgress: builder.mutation({
       query: (params) => {
-        console.log(params.descriptionPick)
+        console.log(params.descriptionPick);
         return {
           url: `/progress/${params.progressId}`,
           method: "PUT",
@@ -60,6 +60,12 @@ export const progressSlice = apiSlice.injectEndpoints({
         };
       },
     }),
+    deleteProgress: builder.mutation({
+      query: (progressId) => ({
+        url: `/progress/${progressId}`,
+        method: "DELETE",
+      }),
+    }),
   }),
   overrideExisting: true,
 });
@@ -68,4 +74,5 @@ export const {
   useGetProgressQuery,
   useCreateProgressMutation,
   useUpdateProgressMutation,
+  useDeleteProgressMutation,
 } = progressSlice;

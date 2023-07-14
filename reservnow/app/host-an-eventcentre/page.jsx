@@ -23,10 +23,11 @@ import {
   useCreateProgressMutation,
   useGetProgressQuery,
   useUpdateProgressMutation,
+  useDeleteProgressMutation,
 } from "@/features/progress/progressSlice";
+import { useCreateEventCentreMutation } from "@/features/Event Centre/eventCentreSlice";
 
 const HostAnEventCentrePage = ({}) => {
-  const [active, setActive] = useState("Overview");
   const [selectedFiles, setSelectedFiles] = useState([]);
   const isSubmitDisabled = selectedFiles.length < 5;
   const coverPhoto = selectedFiles.length > 0 ? selectedFiles[0] : null;
@@ -49,7 +50,12 @@ const HostAnEventCentrePage = ({}) => {
     isSuccess: progressSuccess,
     isError: progressError,
     error: progressErrorData,
+    refetch: refetchProgress,
   } = useGetProgressQuery(id);
+
+  const handleReload = () => {
+    refetchProgress();
+  };
 
   useEffect(() => {
     if (progressSuccess === true && progress) {
@@ -60,12 +66,58 @@ const HostAnEventCentrePage = ({}) => {
       setDescription(progress.description);
       setActiveAmenities(progress.amenities);
       setProgressId(progress._id);
-      setActiveType(progress.centreType)
+      setActiveType(progress.centreType);
+      setDescriptionsPick(progress.descriptionPicker);
     }
   }, [progressSuccess, progress]);
 
+  const [active, setActive] = useState("Overview");
+
+  useEffect(() => {
+    if (progressSuccess === true) {
+      setActive(determineInitialState());
+    }
+  }, [progressSuccess]);
+
+  const determineInitialState = () => {
+    if (progress.centreType !== "" && progress.address === "") {
+      return "CentreTypePicker";
+    } else if (progress.address !== "" && progress.capacity === 10) {
+      return "LocationPicker";
+    } else if (progress.capacity > 10 && progress.amenities.length === 0) {
+      return "Capacity";
+    } else if (progress.amenities.length > 0 && progress.name === "") {
+      return "AmenityPicker";
+    } else if (progress.name !== "" && progress.description === "") {
+      return "NamePicker";
+    } else if (
+      progress.description !== "" &&
+      progress.descriptionPicker.length === 0
+    ) {
+      return "DescriptionInfo";
+    } else if (progress.descriptionPicker.length > 0 && progress.price === 0) {
+      return "DescriptionPicker";
+    } else if (progress.price > 0) {
+      return "PricePicker";
+    }
+    return "Overview";
+  };
+
   const [createProgress] = useCreateProgressMutation();
   const [updateProgress] = useUpdateProgressMutation(progressId);
+  const [deleteProgress] = useDeleteProgressMutation(progressId);
+
+  const handleProgressDelete = async () => {
+    try {
+      await deleteProgress(progressId);
+      // Handle success
+      console.log("Progress deleted successfully");
+    } catch (error) {
+      // Handle error
+      console.error(error);
+      window.alert("An error occurred. Please try again.");
+    }
+  };
 
   const progressHandleSubmit = async (e) => {
     e.preventDefault();
@@ -83,11 +135,12 @@ const HostAnEventCentrePage = ({}) => {
       descriptionPicker: descriptionsPick,
       centreType: activeType,
     };
+    handleReload();
 
     if (progressSuccess === true) {
       try {
         await updateProgress({ progressId, ...formData }); // Call the update mutation
-        // window.alert("Progress updated successfully");
+        handleReload();
       } catch (error) {
         console.error(error);
         window.alert("An error occurred. Please try again.");
@@ -95,11 +148,38 @@ const HostAnEventCentrePage = ({}) => {
     } else {
       try {
         await createProgress(formData); // Call the create mutation
-        window.alert("Progress created successfully");
+        handleReload();
       } catch (error) {
         console.error(error);
         window.alert("An error occurred. Please try again.");
       }
+    }
+  };
+
+  const [createEventCentre] = useCreateEventCentreMutation();
+  const eventCentreHandleSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = {
+      name: name,
+      address: address,
+      capacity: capacity,
+      price: price,
+      description: description,
+      city: "",
+      state: "",
+      venueOwner: id,
+      amenities: activeAmenities,
+      descriptionPicker: descriptionsPick,
+      centreType: activeType,
+    };
+
+    try {
+      await createEventCentre(formData); // Call the create mutation
+      window.alert("Event centre created successfully");
+    } catch (error) {
+      console.error(error);
+      window.alert("An error occurred. Please try again.");
     }
   };
 
@@ -496,7 +576,10 @@ const HostAnEventCentrePage = ({}) => {
             )}
             {active === "ReviewListings" && (
               <button
-                onClick={() => setActive("")}
+                onClick={(e) => {
+                  handleProgressDelete(e);
+                  eventCentreHandleSubmit(e);
+                }}
                 className={styles["next-btn"]}
               >
                 Next

@@ -30,7 +30,7 @@ const ReviewListings = ({ selectedFiles, name, price, description, address }) =>
                 <div className="text">Show Preview</div>
               </div>
               <div className="image-container">
-                <img src={URL.createObjectURL(firstImage)} alt="First Image" />
+                {/* <img src={URL.createObjectURL(firstImage)} alt="First Image" /> */}
               </div>
               <div className="content">
                 <div className="top">
