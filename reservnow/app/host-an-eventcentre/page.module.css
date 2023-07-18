@@ -160,11 +160,7 @@
   animation: 3s ease-in-out forwards;
 }
 .loader-medium12-width {
-  width: 82.5%;
-  animation: 3s ease-in-out forwards;
-}
-.loader-medium13-width {
-  width: 90%;
+  width: 88%;
   animation: 3s ease-in-out forwards;
 }
 .loader-full-width {

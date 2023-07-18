@@ -10,7 +10,6 @@ import UploadGallery from "@/components/Host-an-eventcentre/Upload Gallery/Uploa
 import StandOut from "@/components/Host-an-eventcentre/Stand Out/StandOut";
 import FinishSetup from "@/components/Host-an-eventcentre/Finish Setup/FinishSetup";
 import Capacity from "@/components/Host-an-eventcentre/Capacity/Capacity";
-import Legal from "@/components/Host-an-eventcentre/Legal/Legal";
 import AmenityPicker from "@/components/Host-an-eventcentre/Amenities/AmenityPicker";
 import LocationPicker from "@/components/Host-an-eventcentre/LocationPicker/LocationPicker";
 import PricePicker from "@/components/Host-an-eventcentre/PricePicker/PricePicker";
@@ -37,7 +36,6 @@ const HostAnEventCentrePage = ({}) => {
   const [description, setDescription] = useState("");
   const [name, setName] = useState("");
   const [capacity, setCapacity] = useState(10);
-  const [isRadioButtonSelected, setIsRadioButtonSelected] = useState(false);
   const [descriptionsPick, setDescriptionsPick] = useState([]);
   const [activeAmenities, setActiveAmenities] = useState([]);
   const [address, setAddress] = useState("");
@@ -253,12 +251,6 @@ const HostAnEventCentrePage = ({}) => {
             {active === "PricePicker" && (
               <PricePicker price={price} setPrice={setPrice} />
             )}
-            {active === "Legal" && (
-              <Legal
-                isRadioButtonSelected={isRadioButtonSelected}
-                setIsRadioButtonSelected={setIsRadioButtonSelected}
-              />
-            )}
             {active === "ReviewListings" && (
               <ReviewListings
                 selectedFiles={selectedFiles}
@@ -301,11 +293,7 @@ const HostAnEventCentrePage = ({}) => {
                   ? styles["loader-medium11-width"]
                   : active === "PricePicker"
                   ? styles["loader-medium12-width"]
-                  : active === "Legal"
-                  ? styles["loader-medium13-width"]
                   : styles["loader-full-width"]
-
-                // : styles["loader-full-width"]
               }`}
             ></div>
           </div>
@@ -540,7 +528,7 @@ const HostAnEventCentrePage = ({}) => {
             {active === "PricePicker" && (
               <button
                 onClick={(e) => {
-                  setActive("Legal");
+                  setActive("ReviewListings");
                   progressHandleSubmit(e);
                 }}
                 className={styles["next-btn"]}
@@ -549,27 +537,10 @@ const HostAnEventCentrePage = ({}) => {
                 Next
               </button>
             )}
-            {active === "Legal" && (
-              <button
-                className={styles["back-btn"]}
-                onClick={() => setActive("PricePicker")}
-              >
-                Back
-              </button>
-            )}
-            {active === "Legal" && (
-              <button
-                onClick={() => setActive("ReviewListings")}
-                className={styles["next-btn"]}
-                disabled={!isRadioButtonSelected}
-              >
-                Next
-              </button>
-            )}
             {active === "ReviewListings" && (
               <button
                 className={styles["back-btn"]}
-                onClick={() => setActive("Legal")}
+                onClick={() => setActive("PricePicker")}
               >
                 Back
               </button>
