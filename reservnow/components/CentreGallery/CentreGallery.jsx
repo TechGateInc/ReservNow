@@ -1,6 +1,6 @@
 "use client";
 
-import "../CentreGallery/CentreGallery.css";
+import "./CentreGallery.css";
 import CentreCard from "./CentreCard";
 import { Skeleton } from "../Skeleton/Skeleton";
 import { useGetEventCentresQuery } from "@/features/eventCenter/eventCenter";

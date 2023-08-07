@@ -7,6 +7,9 @@ import { useState, useEffect } from "react";
 import { useSpring, animated } from "react-spring";
 import EstimateModal from "@/components/modals/EstimateModal/EstimateModal";
 import Link from "next/link";
+import { Provider } from "react-redux";
+import store, { persistor } from "@/store";
+import { PersistGate } from "redux-persist/integration/react";
 
 const NewCentrePage = ({ }) => {
   const [money, setMoney] = useState(5000);
@@ -49,68 +52,70 @@ const NewCentrePage = ({ }) => {
     );
   }
   return (
-    <div>
-      <div className={styles["newPageHeader"]}>
-        <div>
-          <Link href={"/"}>
-            <img
-              src="/images/RNL.svg"
-              alt="ReservNow"
-              style={{ height: "22px" }}
-            />
-          </Link>
-        </div>
-        <div className={styles["pageHeaderBtn"]}>
-          <p>Ready to Reserv it?</p>
-          <Link href={"/host-an-eventcentre"} style={{ textDecoration: "none" }}>
-            <div className={styles["setUpBtn"]}>ReserveNov SetUp</div>
-          </Link>
-        </div>
-      </div>
-      <div className={styles["newPageHolder"]}>
-        <div className={styles["newPageText"]}>
-          <p className={styles["ReservText"]}>Reserv It.</p>
-          <p className={styles["ReservText2"]}>You Could Earn</p>
-          <p className={styles["ReservText2"]}>
-            ₦
-          </p>
-          <p style={{ marginTop: 20 }}>
-            {hours} hours at an estimated ₦5000 an hour
-          </p>
-          <div className={styles["slider"]}>
-            <DiscreteSlider />
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <div className={styles["newPageHeader"]}>
+          <div>
+            <Link href={"/"}>
+              <img
+                src="/images/RNL.svg"
+                alt="ReservNow"
+                style={{ height: "22px" }}
+              />
+            </Link>
           </div>
-          <p className={styles["newpageLink"]}>
-            Learn how we estimate our earnings
-          </p>
+          <div className={styles["pageHeaderBtn"]}>
+            <p>Ready to Reserv it?</p>
+            <Link href={"/host-an-eventcentre"} style={{ textDecoration: "none" }}>
+              <div className={styles["setUpBtn"]}>ReserveNov SetUp</div>
+            </Link>
+          </div>
+        </div>
+        <div className={styles["newPageHolder"]}>
+          <div className={styles["newPageText"]}>
+            <p className={styles["ReservText"]}>Reserv It.</p>
+            <p className={styles["ReservText2"]}>You Could Earn</p>
+            <p className={styles["ReservText2"]}>
+              ₦
+            </p>
+            <p style={{ marginTop: 20 }}>
+              {hours} hours at an estimated ₦5000 an hour
+            </p>
+            <div className={styles["slider"]}>
+              <DiscreteSlider />
+            </div>
+            <p className={styles["newpageLink"]}>
+              Learn how we estimate our earnings
+            </p>
 
-          <div
-            className={styles["estimateSearch"]}
-            onClick={() => setEstimateModal(true)}
-          >
-            <p>Estimate Search</p>
+            <div
+              className={styles["estimateSearch"]}
+              onClick={() => setEstimateModal(true)}
+            >
+              <p>Estimate Search</p>
+            </div>
+            <EstimateModal
+              estimateModal={estimateModal}
+              setEstimateModal={setEstimateModal}
+            />
           </div>
-          <EstimateModal
-            estimateModal={estimateModal}
-            setEstimateModal={setEstimateModal}
-          />
+          <div className={styles["newPageMap"]}>
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.98764031009!2d3.715570274482604!3d6.892081118771481!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103bd81639e54ec3%3A0x9129b4a8c8367e52!2sBabcock%20University%20Ilishan%20Remo!5e0!3m2!1sen!2sng!4v1687361249418!5m2!1sen!2sng"
+              width="600"
+              height="530"
+              style={{
+                border: "none",
+                borderRadius: 20,
+                boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px",
+              }}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
         </div>
-        <div className={styles["newPageMap"]}>
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.98764031009!2d3.715570274482604!3d6.892081118771481!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103bd81639e54ec3%3A0x9129b4a8c8367e52!2sBabcock%20University%20Ilishan%20Remo!5e0!3m2!1sen!2sng!4v1687361249418!5m2!1sen!2sng"
-            width="600"
-            height="530"
-            style={{
-              border: "none",
-              borderRadius: 20,
-              boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px",
-            }}
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-          ></iframe>
-        </div>
-      </div>
-    </div>
+      </PersistGate>
+    </Provider>
   );
 };
 

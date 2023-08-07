@@ -1,0 +1,15 @@
+.loginCard-root {
+  width: 600px;
+  height: auto;
+  padding: 20px;
+  border-radius: 6px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.back-btn {
+  font-size: 20px;
+}
+
+.back-btn:hover {
+  color: #ffc0cb;
+  cursor: pointer;
+}

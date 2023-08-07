@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import "../Footer/footer.css";
+import "./footer.css";
 import { AiFillCaretUp, AiOutlineClose } from "react-icons/ai";
 
 if (typeof document !== "undefined") {

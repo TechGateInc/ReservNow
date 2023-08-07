@@ -4,7 +4,7 @@ import { IoArrowBackCircle } from "react-icons/io5";
 import { IoIosArrowBack } from "react-icons/io";
 import { AiOutlineClose } from "react-icons/ai";
 import { MdCancel } from "react-icons/md";
-import EmailVerification from "../Email Verification Modal/EmailVerification";
+import EmailVerification from "../Auth Modal/Email Verification Modal/EmailVerificationForm";
 
 if (typeof document !== "undefined") {
   const AOS = require("aos");

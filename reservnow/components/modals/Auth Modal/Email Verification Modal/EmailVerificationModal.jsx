@@ -1,6 +1,6 @@
-import EmailVerificationForm from "./EmailVerification";
-import styles from "../Login Modal/loginModal.module.css";
-import { MdCancel } from "react-icons/md";
+import EmailVerificationForm from "./EmailVerificationForm";
+import styles from "../loginModal.module.css";
+import { AiOutlineClose } from "react-icons/ai";
 
 export function EmailVerificationModal(props) {
 
@@ -15,15 +15,15 @@ export function EmailVerificationModal(props) {
                     }}
                 >
                     <div className={styles["cancel-icon"]}>
-                        <MdCancel />
+                        <AiOutlineClose />
                     </div>
                 </button>
                 <EmailVerificationForm
                     email={props.email}
                     setEmail={props.setEmail}
-                    setOpenEmailModal={props.setTrigger}
-                    setOpenLoginAuthModal={props.setOpenLoginAuthModal}
-                    setOpenRegistrationModal={props.setOpenRegistrationModal}
+                    emailModalTrigger={props.setTrigger}
+                    signInModalTrigger={props.signInModalTrigger}
+                    signUpModalTrigger={props.signUpModalTrigger}
                 />
             </div>
         </div>

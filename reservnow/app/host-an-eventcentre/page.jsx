@@ -18,10 +18,10 @@ import DescriptionInfo from "@/components/Host-an-eventcentre/CentreDescriptionI
 import DescriptionPicker from "@/components/Host-an-eventcentre/CentreDescriptionPicker/DescriptionPicker";
 import CentreTypePicker from "@/components/Host-an-eventcentre/CentreType/CentreTypePicker";
 import ReviewListings from "@/components/Host-an-eventcentre/Review Listing/ReviewListings";
-import { store } from "@/store";
 import { Provider } from "react-redux";
-import RequireAuth from "@/features/auth/requireAuth";
-
+import store, { persistor } from "@/store";
+import { PersistGate } from "redux-persist/integration/react";
+import PrivateRoute from "@/features/auth/PrivateRoute";
 
 const HostAnEventCentrePage = () => {
   const [active, setActive] = useState("Overview");
@@ -40,7 +40,7 @@ const HostAnEventCentrePage = () => {
 
   return (
     <Provider store={store}>
-      <RequireAuth>
+      <PersistGate loading={null} persistor={persistor}>
         <div className={styles["host-root"]}>
           <div className={styles["host-container"]}>
             <div className={styles["host-top"]}>
@@ -404,9 +404,16 @@ const HostAnEventCentrePage = () => {
             </div>
           </div>
         </div>
-      </RequireAuth>
+      </PersistGate>
     </Provider>
   );
 };
 
-export default HostAnEventCentrePage
+const WrappedPage = () => {
+  return (
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <PrivateRoute component={HostAnEventCentrePage} /></PersistGate></Provider>
+  );
+};
+export default WrappedPage

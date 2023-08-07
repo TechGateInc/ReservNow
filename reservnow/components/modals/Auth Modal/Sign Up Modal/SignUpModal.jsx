@@ -1,9 +1,9 @@
 import { useState } from "react";
-import styles from "../Login Modal/loginModal.module.css";
-import SignUpModal from "../Sign Up Modal/SignUpModal";
-import { IoArrowBackCircle } from "react-icons/io5";
+import styles from "../loginModal.module.css";
+import SignUpForm from "./SignUpForm";
+import { AiOutlineClose } from "react-icons/ai";
 
-export function RegistrationModal(props) {
+export function SignUpModal(props) {
     const [signUpFormData, setSignUpFormData] = useState({
         name: "",
         email: "",
@@ -43,23 +43,17 @@ export function RegistrationModal(props) {
                 <button
                     className={styles["back-btn"]}
                     onClick={() => {
-                        props.setEmailVerification(true);
+                        props.checkEmailModalTrigger(true);
                         props.setTrigger(false);
-                        props.setSignUpFormData({
-                            name: "",
-                            email: "",
-                            password: "",
-                            phoneNo: "",
-                        });
                     }}
                 >
                     <div className={styles["back-icon"]}>
-                        <IoArrowBackCircle />
+                        <AiOutlineClose />
                     </div>
                     Finish Signing up
                     <div></div>
                 </button>
-                <SignUpModal
+                <SignUpForm
                     formData={signUpFormData}
                     handleChange={signUpHandleChange}
                     handleSubmit={signUpHandleSubmit}

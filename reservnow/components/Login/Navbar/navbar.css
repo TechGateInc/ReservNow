@@ -1,0 +1,99 @@
+.header2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-left: 5%;
+  padding-right: 5%;
+  height: 60px;
+  align-items: center;
+  border-bottom: 2px solid rgb(233, 233, 233);
+}
+.ProfileSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 25%;
+  align-items: center;
+  margin-left: 5%;
+}
+.profileHolderIcons {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid rgb(209, 208, 208);
+  width: 70px;
+  justify-content: space-around;
+  border-radius: 20px;
+  align-items: center;
+  height: 30px;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.ReserveLink {
+  background-color: white;
+  padding: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.ReserveLink:hover {
+  background-color: rgb(231, 231, 231);
+}
+
+.profileHolderIcons:hover {
+  transform: scale(1.1);
+}
+
+.DropdownContent {
+  position: absolute;
+  margin-top: 20px;
+  right: 50px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  background-color: white;
+  z-index: 1;
+}
+
+.DropdownContent2 {
+  position: absolute;
+  margin-top: 300px;
+  right: 450px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  background-color: white;
+  z-index: 1;
+  color: black;
+}
+
+.contentSection2 {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid rgb(230, 230, 230);
+}
+
+.contentSection1 {
+  display: flex;
+  flex-direction: column;
+}
+
+.DropdownLinks {
+  /* margin: 5px; */
+  cursor: pointer;
+  padding: 10px;
+  text-decoration: none;
+  color: black;
+}
+
+.DropdownLinks:hover {
+  background-color: rgb(238, 234, 234);
+}
+
+.DropdownLinks2:hover {
+  background-color: rgb(238, 234, 234);
+}

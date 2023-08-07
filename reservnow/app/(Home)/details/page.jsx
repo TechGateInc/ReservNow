@@ -11,12 +11,12 @@ import ContactOwner from "@/components/Details/Contact Venue Owner/ContactOwner"
 import ThingsToKnow from "@/components/Details/Things To Know/ThingsToKnow";
 import { useEffect, useState } from "react";
 import { AiFillStar } from "react-icons/ai";
-import LoginModal from "@/components/modals/Login Modal/LoginModal";
 import { useSearchParams } from "next/navigation";
 import config from "@/config";
 import { DetailsSkeleton } from "@/components/Skeleton/Skeleton";
 import { Provider } from "react-redux";
-import { store } from "@/store";
+import store, { persistor } from "@/store";
+import { PersistGate } from "redux-persist/integration/react";
 
 export default function Details() {
   const searchParams = useSearchParams();
@@ -89,69 +89,73 @@ export default function Details() {
     }
   }, [isLoading]);
 
-  return (<Provider store={store}>
-    <div className={styles["details-root"]}>
-      {isLoading && centreDetails.name != "" ? (
-        <DetailsSkeleton />
-      ) : (
-        <div className={styles["details-root-cont"]}>
-          <div className={styles["details-header"]}>
-            <h1>{centreDetails.name}</h1>
-            <div className={styles["details-sub-header"]}>
-              <b>
-                <AiFillStar />
-                <span className={styles["rating"]}>
-                  {centreDetails.rating} .
-                </span>
-                <span className={styles["review-btn"]} onClick={reviewSection}>
-                  {reviewData.length} Reviews
-                </span>
-                .
-              </b>
+  return (
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <div className={styles["details-root"]}>
+          {isLoading && centreDetails.name != "" ? (
+            <DetailsSkeleton />
+          ) : (
+            <div className={styles["details-root-cont"]}>
+              <div className={styles["details-header"]}>
+                <h1>{centreDetails.name}</h1>
+                <div className={styles["details-sub-header"]}>
+                  <b>
+                    <AiFillStar />
+                    <span className={styles["rating"]}>
+                      {centreDetails.rating} .
+                    </span>
+                    <span className={styles["review-btn"]} onClick={reviewSection}>
+                      {reviewData.length} Reviews
+                    </span>
+                    .
+                  </b>
 
-              <span className={styles["location"]}>
-                {centreDetails.city}, {centreDetails.state}
-              </span>
-            </div>
-          </div>
-          <div className={styles["details-content"]}>
-            <DetailsGallery />
-            <div className={styles["details-card"]}>
-              <div className={styles["left"]}>
-                <DetailsInformation centreDetails={centreDetails} />
+                  <span className={styles["location"]}>
+                    {centreDetails.city}, {centreDetails.state}
+                  </span>
+                </div>
               </div>
-              <div className={styles["right"]}>
-                <BookingForm
+              <div className={styles["details-content"]}>
+                <DetailsGallery />
+                <div className={styles["details-card"]}>
+                  <div className={styles["left"]}>
+                    <DetailsInformation centreDetails={centreDetails} />
+                  </div>
+                  <div className={styles["right"]}>
+                    <BookingForm
+                      centreDetails={centreDetails}
+                      reviewData={reviewData}
+                      id={id}
+                    />
+                  </div>
+                </div>
+                <hr style={{ marginTop: "20px", marginBottom: "20px" }} />
+                <div className={styles["review-section"]}>
+                  <ReviewSection
+                    centreDetails={centreDetails}
+                    reviewData={reviewData}
+                  />
+                </div>
+              </div>
+              <div className={styles["map-container"]}>
+                <MapSection centreDetails={centreDetails} />
+              </div>
+              <hr />
+              <div className={styles["contact-container"]}>
+                <ContactOwner
                   centreDetails={centreDetails}
                   reviewData={reviewData}
-                  id={id}
                 />
               </div>
+              <hr />
+              <div className="things-to-know-section">
+                <ThingsToKnow />
+              </div>
             </div>
-            <hr style={{ marginTop: "20px", marginBottom: "20px" }} />
-            <div className={styles["review-section"]}>
-              <ReviewSection
-                centreDetails={centreDetails}
-                reviewData={reviewData}
-              />
-            </div>
-          </div>
-          <div className={styles["map-container"]}>
-            <MapSection centreDetails={centreDetails} />
-          </div>
-          <hr />
-          <div className={styles["contact-container"]}>
-            <ContactOwner
-              centreDetails={centreDetails}
-              reviewData={reviewData}
-            />
-          </div>
-          <hr />
-          <div className="things-to-know-section">
-            <ThingsToKnow />
-          </div>
+          )}
         </div>
-      )}
-    </div></Provider>
+      </PersistGate>
+    </Provider>
   );
 }

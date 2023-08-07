@@ -77,7 +77,7 @@
 }
 
 .cancel-icon:hover {
-  color: #ff3259;
+  color: #ffc0cb;
   cursor: pointer;
 }
 
@@ -98,6 +98,6 @@
 }
 
 .back-icon:hover {
-  color: #ff3259;
+  color: #ffc0cb;
   cursor: pointer;
 }

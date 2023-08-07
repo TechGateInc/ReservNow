@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 
-import "../CentreGallery/CentreGallery.css";
+import "./CentreGallery.css";
 import {
   AiFillStar,
   AiFillCreditCard,

@@ -11,7 +11,7 @@ import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import config from "@/config";
 import dayjs from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
-import LoginModal from "@/components/modals/Login Modal/LoginModal";
+import LoginModal from "@/components/modals/Auth Modal/LoginModal";
 import { useSelector } from "react-redux";
 import { selectCurrentToken } from "@/features/auth/authSlice";
 
@@ -226,8 +226,8 @@ const BookingForm = ({ centreDetails, reviewData, id }) => {
           </div>
         </div>
         <LoginModal
-          emailVerification={trigger}
-          setEmailVerification={setTrigger}
+          showLoginModal={trigger}
+          setShowLoginModal={setTrigger}
         />
       </div>
   );

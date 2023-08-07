@@ -2,7 +2,7 @@
 import config from "@/config";
 import styles from "./emailVerification.module.css";
 
-export default function EmailVerificationForm({ email, setEmail, setOpenEmailModal, setOpenLoginAuthModal, setOpenRegistrationModal }) {
+export default function EmailVerificationForm({ email, setEmail, emailModalTrigger, signInModalTrigger, signUpModalTrigger }) {
 
   const handleEmailVerification = async (e) => {
     e.preventDefault();
@@ -20,11 +20,11 @@ export default function EmailVerificationForm({ email, setEmail, setOpenEmailMod
       const data = await response.json();
       console.log(data);
       if (response.ok) {
-        setOpenEmailModal(false);
-        setOpenLoginAuthModal(true);
+        emailModalTrigger(false);
+        signInModalTrigger(true);
       } else {
-        setOpenEmailModal(false);
-        setOpenRegistrationModal(true);
+        emailModalTrigger(false);
+        signUpModalTrigger(true);
       }
     } catch (error) {
       console.error(error);
