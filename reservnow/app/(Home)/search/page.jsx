@@ -9,39 +9,9 @@ import { useGetFilteredCentresMutation } from "@/features/searchEventCentre/Sear
 
 
 const SearchPage = () => {
-  // const [filterdCentres, getFilteredCentres] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
-  // useEffect(() => {
-  //   const fetchCentres = async () => {
-  //     const searchParams = new URLSearchParams(window.location.search);
-  //     const location = searchParams.get("l");
-  //     const capacity = searchParams.get("c");
-  //     // Post the params to the backend
-  //     try {
-  //       const response = await fetch(`${config.baseURL}/eventcentre/search`, {
-  //         method: "POST",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: JSON.stringify({ location, capacity }),
-  //       });
 
-  //       const data = await response.json();
-  //       if (response.ok) {
-  //         getFilteredCentres(data);
-  //         console.log("request success");
-  //         setIsLoading(false);
-  //       } else {
-  //         setErrorMessage(data.message);
-  //       }
-  //     } catch (error) {
-  //       console.log("Error:", error);
-  //     }
-  //   };
-
-  //   fetchCentres();
-  // }, []);
   const [getFilteredCentres, { data }] = useGetFilteredCentresMutation();
 
   
@@ -49,13 +19,14 @@ const SearchPage = () => {
     const searchParams = new URLSearchParams(window.location.search);
     const location = searchParams.get("l");
     const capacity = searchParams.get("c");
+    const ctype = searchParams.get("t")
 
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        if (location && capacity) {
+        if (location && capacity && ctype) {
           // Call the mutation
-          await getFilteredCentres({ location, capacity });
+          await getFilteredCentres({ location, capacity, ctype });
         }
         setIsLoading(false);
       } catch (error) {
@@ -68,7 +39,7 @@ const SearchPage = () => {
     fetchData();
   }, []);
 
-  console.log(data)
+  // console.log(data)
   
 
   return (

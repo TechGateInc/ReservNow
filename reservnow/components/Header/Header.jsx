@@ -14,6 +14,7 @@ const Header = ({}) => {
   const [emailVerification, setEmailVerification] = useState(false);
 
   const [centres, getCentres] = useState(null);
+  const [centreType, getCentreTypes] = useState(null);
 
   useEffect(() => {
     const fetchCentres = async () => {
@@ -42,14 +43,32 @@ const Header = ({}) => {
     fetchCentres();
   }, []);
 
-  const eventTypes = [
-    "Weddings",
-    "Concerts",
-    "Parties",
-    "Seminars",
-    "Graduation",
-    "Corperate Events",
-  ];
+  useEffect(() => {
+    const fetchCentreTypes = async () => {
+      try {
+        const response = await fetch(`${config.baseURL}/centretype/`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        if (response.ok) {
+          const data = await response.json();
+          getCentreTypes(data);
+          // setIsLoading(false);
+        } else {
+          const errorData = await response.json();
+          throw new Error(
+            errorData.message || "Error occurred while fetching centres"
+          );
+        }
+      } catch (error) {
+        console.log("Error:", error.message);
+      }
+    };
+
+    fetchCentreTypes();
+  }, []);
 
   const [isCapacityOpen, setIsCapacityOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -69,13 +88,18 @@ const Header = ({}) => {
   const extendToggle = (type) => {
     if (type === "location") {
       setIsLocationExtended(!isLocationExtended);
-    } else if (type === "event") {
+      setIsEventExtended(false); // Ensure isEventExtended is set to false
+    } else if (type === "ctype") {
       setIsEventExtended(!isEventExtended);
+      setIsLocationExtended(false); // Ensure isLocationExtended is set to false
     }
   };
-
   const removeLocationExtend = () => {
     setIsLocationExtended(false);
+  };
+
+  const removeTypeExtend = () => {
+    setIsEventExtended(false);
   };
 
   const removeCapacityMenu = () => {
@@ -123,9 +147,18 @@ const Header = ({}) => {
     setLocation(null);
   };
 
+  const [ctype, setType] = useState(null);
+
+  const handleType = (label) => {
+    setType(label);
+  };
+
+  const handleRemove2 = () => {
+    setType(null);
+  };
+
   return (
     <Provider store={store}>
-
       <div
         ref={navbarRef}
         className={`navbar ${isLocationExtended ? "extended" : ""}`}
@@ -157,17 +190,18 @@ const Header = ({}) => {
           </div>
         </div>
         <div
-          className={`extended-content  ${isEventExtended ? "slide-down" : ""}`}
+          className={`extended-content locCard  ${isEventExtended ? "slide-down" : ""}`}
         >
-          <div className="locationCardHolder">
-            {eventTypes.map((button2, index) => (
+          {centreType?.map((item, index) => (
+            
               <Events
                 key={index}
-                label={button2}
-                onClick={() => handleDuplicate2(button2)}
+                label={item.name}
+                handleType={handleType}
+                removeTypeExtend={removeTypeExtend}
               />
-            ))}
-          </div>
+          
+          ))}
         </div>
 
         <div className="header">
@@ -189,17 +223,15 @@ const Header = ({}) => {
               handleRemove={handleRemove}
               setLocation={setLocation}
               removeCapacityMenu={removeCapacityMenu}
+              ctype={ctype}
+              setType={setType}
+              handleRemove2={handleRemove2}
             />
           </div>
           <div className="ProfileSection">
-            <Link
-              href="/newcentre"
-              style={{ textDecoration: "none" }}
-            >
+            <Link href="/newcentre" style={{ textDecoration: "none" }}>
               <div className="ReserveLink">
-                <p style={{ fontSize: 12, color: "black" }}>
-                  Add Event Centre
-                </p>
+                <p style={{ fontSize: 12, color: "black" }}>Add Event Centre</p>
               </div>
             </Link>
             <div
