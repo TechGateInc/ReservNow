@@ -1,0 +1,46 @@
+.DescPicker{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+  
+}
+
+.descpills{
+    width: 600px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.descpill{
+     display: flex;
+     flex-direction: row;
+     width: 30%;
+     border: 1px solid grey;
+     justify-content: space-around;
+     margin-bottom: 20px;
+     height: 50px;
+     align-items: center;
+     border-radius: 5px;
+     cursor: pointer;
+}
+
+.descpill:hover{
+    border: 2px solid black;
+}
+
+.desc-active{
+    border: 2px solid black;
+
+}
+
+.descPrompt2{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 50px;
+    margin-bottom: 50px;
+
+}

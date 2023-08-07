@@ -1,0 +1,75 @@
+.mapholder{
+  
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: -30px;
+    width: 54%;
+    margin-left: 23%;
+    padding-bottom: 100px;
+    margin-top: 60px;
+}
+
+.searchHolder{
+    background-color: white;
+    width: 500px;
+    padding-left: 15px;
+    padding-right: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: centre;
+    justify-content: center;
+    border-radius: 30px;
+    position: absolute;
+    top: 200px;
+    padding-bottom: 10px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.mapContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 110px;
+}
+
+  .mapSearchBtn{
+    background-color: pink;
+    color: white;
+    border: none;
+    padding: 5px;
+    width: 140px;
+    border-radius: 5px;
+    margin-right: 10px;
+
+
+  }
+
+  .hiddenMapSection{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    opacity: 0;
+    height:0px;
+    transition: height 0.3s ease;
+
+
+  }
+
+  .hiddenMapSection.show {
+    height: 100px;
+    opacity: 1;
+   
+  }
+
+  .imnput{
+    position: relative;
+    top: 10px;
+  }
+
+  .locationLink{
+    margin-left: 10px;
+    text-decoration: underline;
+  }
+

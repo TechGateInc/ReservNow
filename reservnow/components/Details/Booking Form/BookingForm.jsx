@@ -8,11 +8,13 @@ import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
-import config from "@/config";
 import dayjs from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
+import { useCreateBookingMutation } from "@/features/booking/bookingSlice";
 
-const BookingForm = ({ centreDetails, reviewData, id }) => {
+const BookingForm = ({ id, eventCentre, review }) => {
+  const [createBooking] = useCreateBookingMutation();
+
   // Add the necessary plugin to dayjs
   dayjs.extend(advancedFormat);
   const minStartTime = 1;
@@ -32,7 +34,7 @@ const BookingForm = ({ centreDetails, reviewData, id }) => {
     notes: "",
   });
   const calculateDurationInHours = () => {
-    const duration = start && end &&  end.diff(start, "hour");
+    const duration = start && end && end.diff(start, "hour");
     return duration;
   };
 
@@ -42,10 +44,9 @@ const BookingForm = ({ centreDetails, reviewData, id }) => {
   const bookingHandleSubmit = async (e) => {
     e.preventDefault();
 
-    // Retrieve the form data from the state
     const formData = {
-      start_date: start,
-      end_date: end,
+      start_date: dayjs(start),
+      end_date: dayjs(end),
       notes: bookingForm.notes,
       event_centre_id: id,
       userId: "64958637db3d3493ebaf8c84",
@@ -53,25 +54,7 @@ const BookingForm = ({ centreDetails, reviewData, id }) => {
     };
 
     try {
-      const response = await fetch(`${config.baseURL}/booking/newbooking`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (!response.ok) {
-        // Check if the response has an error status code
-        throw new Error("Booking request failed");
-      }
-
-      const data = await response.json();
-
-      console.log("Response:", response);
-      console.log("Data:", data);
-
-      console.log("Booking successful");
+      await createBooking(formData);
       window.alert("Booking successful");
       window.location.reload();
     } catch (error) {
@@ -79,7 +62,6 @@ const BookingForm = ({ centreDetails, reviewData, id }) => {
       window.alert("An error occurred. Please try again.");
     }
 
-    // Reset the form fields
     setStart("");
     setEnd("");
     setBookingForm({
@@ -97,19 +79,19 @@ const BookingForm = ({ centreDetails, reviewData, id }) => {
   };
 
   return (
-    <div className="card-right-root" key={centreDetails._id}>
+    <div className="card-right-root" key={eventCentre._id}>
       <div className="details-card-right">
         <div className="details-card-right-inner">
           <div className="card-right-header">
             <div className="price">
-              <TbCurrencyNaira /> {centreDetails.price}
+              <TbCurrencyNaira /> {eventCentre.price}
               <p>hour</p>
             </div>
             <div className="review" style={{ fontSize: "14px" }}>
               <b>
                 <AiFillStar />
                 <span className="rating" style={{ marginLeft: "5px" }}>
-                  {centreDetails.rating} .
+                  {eventCentre.rating} .
                 </span>
                 <div
                   style={{
@@ -121,7 +103,7 @@ const BookingForm = ({ centreDetails, reviewData, id }) => {
                     fontWeight: "normal",
                   }}
                 >
-                  {reviewData.length} Reviews
+                  {review.length} Reviews
                 </div>
               </b>
             </div>
@@ -188,10 +170,10 @@ const BookingForm = ({ centreDetails, reviewData, id }) => {
                 </div>
                 <div className="compilation">
                   <button>
-                    {centreDetails.price} * {durationInHours} hours
+                    {eventCentre.price} * {durationInHours} hours
                   </button>
                   <div className="disAlCenter">
-                    <TbCurrencyNaira /> {centreDetails.price * durationInHours}
+                    <TbCurrencyNaira /> {eventCentre.price * durationInHours}
                   </div>
                 </div>
                 <div className="compilation">
@@ -205,7 +187,7 @@ const BookingForm = ({ centreDetails, reviewData, id }) => {
                   <div>Total</div>
                   <div className="disAlCenter">
                     <TbCurrencyNaira />{" "}
-                    {reservNowPrice + centreDetails.price * durationInHours}
+                    {reservNowPrice + eventCentre.price * durationInHours}
                   </div>
                 </div>
               </>

@@ -1,0 +1,51 @@
+.overview-root {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+.host-content-left {
+  width: 50%;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+}
+.host-content-left .text {
+  font-size: 50px;
+  font-weight: 600;
+}
+.host-content-right {
+  width: 50%;
+  padding: 20px;
+  font-size: 20px;
+}
+.host-content-right .line {
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+.host-content-right .line hr {
+  margin-top: 40px;
+  margin-bottom: 40px;
+  height: 1px !important;
+  background-color: #dddddd;
+}
+.text-container {
+  display: flex;
+}
+.text-container .text {
+  width: 70%;
+}
+.text-container .icon-container {
+  width: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.text-container .top {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+}
+.icon-container img {
+  height: 100px;
+  width: 100px;
+}

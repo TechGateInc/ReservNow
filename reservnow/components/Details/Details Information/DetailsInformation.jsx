@@ -8,35 +8,49 @@ import { DescriptionPopup } from "@/components/modals/Popup/Popup";
 import { IoPeopleOutline } from "react-icons/io5";
 import { BsFan } from "react-icons/bs";
 import { MdArrowForwardIos } from "react-icons/md";
-import config from "@/config";
+import { useGetAmenityCategoryQuery } from "@/features/amenityCategory/amenityCategorySlice";
 
-const DetailsInformation = ({ centreDetails }) => {
+const DetailsInformation = ({ eventCentre }) => {
   const [amenities, setAmenities] = useState(false); // to activate the amenities popup
   const [description, setDescription] = useState(false);
   const [groupedAmenities, setGroupedAmenities] = useState({});
-  const [getCategory, setGetCategory] = useState([]);
+
+  const {
+    data: amenity,
+    loading: amenityLoading,
+    isSuccess: amenitySuccess,
+    isError: amenityError,
+    error: amenityErrorData,
+  } = useGetAmenityCategoryQuery();
 
   useEffect(() => {
-    if (centreDetails.amenities) {
+    if (eventCentre.amenities) {
       // Step 1: Group amenities by category
-      const grouped = centreDetails.amenities.reduce((result, item) => {
+      const grouped = eventCentre.amenities.reduce((result, item) => {
         if (!result[item.category]) {
           result[item.category] = [];
         }
         result[item.category].push(item);
         return result;
       }, {});
-
       // Step 2: Sort categories alphabetically
 
       // Step 3: Sort item names within each category alphabetically
       for (const category in grouped) {
-        grouped[category].sort((a, b) => a.name.localeCompare(b.name));
+        if (grouped && grouped[category] && Array.isArray(grouped[category])) {
+          grouped[category].sort((a, b) => {
+            if (a && a.name && b && b.name) {
+              return a.name.localeCompare(b.name);
+            }
+            // Handle cases where `name` property is missing or not a string
+            return 0; // Or choose a default sorting behavior
+          });
+        }
       }
 
       setGroupedAmenities(grouped);
     }
-  }, [centreDetails.amenities]);
+  }, [eventCentre.amenities]);
 
   useEffect(() => {
     let scrollPosition = 0;
@@ -64,28 +78,14 @@ const DetailsInformation = ({ centreDetails }) => {
     }
   }, [amenities, description]);
 
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const response = await fetch(`${config.baseURL}/amenitycategory`);
-        const jsonData = await response.json();
-        setGetCategory(jsonData);
-      } catch (error) {
-        console.log("Error fetching category data:", error);
-      }
-    };
-
-    fetchCategories();
-  }, []);
-
   return (
-    <div className="details-card-root" key={centreDetails._id}>
+    <div className="details-card-root" key={eventCentre._id}>
       <div className="details-card-left">
         <div className="details-card-header">
-          {centreDetails && centreDetails.venueOwner && (
+          {eventCentre && eventCentre.venueOwner && (
             <div className="left">
-              <p>{centreDetails.venueOwner.name}</p>
-              <span>Contact: {centreDetails.venueOwner.phoneNo}</span>
+              <p>{eventCentre.venueOwner.name}</p>
+              <span>Contact: {eventCentre.venueOwner.phoneNo}</span>
             </div>
           )}
           <div className="right">
@@ -111,8 +111,7 @@ const DetailsInformation = ({ centreDetails }) => {
                 marginTop: "4px",
               }}
             >
-              {centreDetails.address}, {centreDetails.city},{" "}
-              {centreDetails.state}
+              {eventCentre.address}, {eventCentre.city}, {eventCentre.state}
             </div>
           </div>
           <div className="card-middle-content">
@@ -128,13 +127,13 @@ const DetailsInformation = ({ centreDetails }) => {
                 marginTop: "4px",
               }}
             >
-              {centreDetails.capacity}
+              {eventCentre.capacity}
             </div>
           </div>
         </div>
         <hr className="line" />
-        <div className="details-card-footer">{centreDetails.description}</div>
-        {centreDetails && centreDetails.description.length > 150 && (
+        <div className="details-card-footer">{eventCentre.description}</div>
+        {eventCentre && eventCentre.description.length > 150 && (
           <div className="desc-show-more" onClick={() => setDescription(true)}>
             Show more <MdArrowForwardIos />
           </div>
@@ -143,15 +142,15 @@ const DetailsInformation = ({ centreDetails }) => {
           <div
             style={{ textAlign: "justify", padding: "10px", lineHeight: "1.5" }}
           >
-            {centreDetails.description}
+            {eventCentre.description}
           </div>
         </DescriptionPopup>
         <hr className="line" />
         <div className="details-card-amenities">
           <div className="amenities-title">What this place offers</div>
           <div className="amenities-content">
-            {centreDetails.amenities &&
-              centreDetails.amenities.slice(0, 10).map((item) => (
+            {eventCentre.amenities &&
+              eventCentre.amenities.slice(0, 10).map((item) => (
                 <div className="amenities-item" key={item._id}>
                   <div className="amenities-icon">
                     <BsFan />
@@ -165,10 +164,10 @@ const DetailsInformation = ({ centreDetails }) => {
                 </div>
               ))}
           </div>
-          {centreDetails.amenities && centreDetails.amenities.length > 1 && (
+          {eventCentre.amenities && eventCentre.amenities.length > 1 && (
             <div className="amenities-viewAll-btn">
               <button onClick={() => setAmenities(true)}>
-                Show all {centreDetails.amenities.length} amenities
+                Show all {eventCentre.amenities.length} amenities
               </button>
             </div>
           )}
@@ -178,17 +177,17 @@ const DetailsInformation = ({ centreDetails }) => {
               <div className="amenities-content">
                 {Object.keys(groupedAmenities).map((categoryId) => {
                   // Find the category name using the categoryId
-                  const category = getCategory.find(
-                    (cat) => cat._id === categoryId
-                  );
+                  const category =
+                    amenitySuccess === true &&
+                    amenity.find((cat) => cat._id === categoryId);
                   return (
                     <React.Fragment key={categoryId}>
                       <div className="category-header">
                         {category ? category.name : ""}
                       </div>
                       {groupedAmenities[categoryId].map((item) => (
-                        <div style={{ width: "100%" }}>
-                          <div className="amenities-item1" key={item._id}>
+                        <div style={{ width: "100%" }} key={item._id}>
+                          <div className="amenities-item1">
                             <div className="amenities-icon">
                               <BsFan />
                             </div>

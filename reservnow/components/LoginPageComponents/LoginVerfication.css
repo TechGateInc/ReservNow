@@ -1,0 +1,84 @@
+.verificationHolder{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.verificationForm{
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+    border-radius: 10px;
+    border: 1px solid rgb(173, 173, 173);
+}
+
+.verifyName{
+    height: 70px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid rgb(220, 220, 220);
+}
+
+.verifyInfoSection{
+    
+    width: 90%;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+ 
+
+}
+
+.accountSection{
+   
+    width: 90%;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    padding-top: 10px;
+
+}
+
+.loginformLink{
+  
+   margin-left: 5px;
+   text-decoration: underline;
+   cursor: pointer;
+  
+}
+
+.VerificationLoginBtn{
+    margin-top: 30px;
+    width: 100%;
+    height: 45px;
+    background-color: pink;
+    border: none;
+    border-radius: 2px;
+    color: white;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.verifyInfo {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.verifyInfo p{
+    margin-left: 10px;
+}
+
+.profilePicture{
+    margin-top: 30px;
+}

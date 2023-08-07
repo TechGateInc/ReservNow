@@ -1,0 +1,23 @@
+.DescPickerPage{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+   
+}
+
+.descPrompt{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.DesctextArea{
+    width: 600px;
+    border: 2px solid rgb(211, 211, 211);
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 20;
+}

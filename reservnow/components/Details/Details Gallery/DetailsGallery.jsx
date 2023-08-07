@@ -36,7 +36,7 @@ const DetailsGallery = () => {
 
   return (
     <div className="details-gallery-root">
-      <div className="details-image-container">
+      <div className="details-image-container" onClick={() => setGallery(true)} style={{cursor: "pointer"}}>
         <div className="details-image-right">
           <img src="/images/details.jpg" alt="" />
         </div>

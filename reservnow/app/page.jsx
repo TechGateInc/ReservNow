@@ -1,13 +1,14 @@
-"use client"
+import { AuthProvider } from "@/Context/context"
 
 import CentreGallery from "@/components/CentreGallery/CentreGallery";
-import { AuthProvider } from '../Context/context';
-
+import { store } from "@/store";
+import { Provider } from "react-redux";
 
 export default function Home() {
   return (
-    <AuthProvider>
-    <CentreGallery />
-    </AuthProvider>
+    <Provider store={store}>
+      <CentreGallery />
+      </Provider>
+
   );
 }

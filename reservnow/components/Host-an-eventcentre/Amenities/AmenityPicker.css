@@ -1,0 +1,39 @@
+
+
+.AmenityHolder{
+    margin-left: 20%;
+    margin-right: 20%;
+    padding-bottom: 60px;
+    /* background-color: red; */
+}
+
+
+.amenity-card{
+    background-color: white;
+    width: 230px;
+    margin-bottom: 40px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 20px;
+    border: 2px solid rgb(202, 202, 202);
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.AmenityTypeHolder{
+    margin-top: 70px;
+}
+
+.amenity-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+   
+  }
+  
+
+.amenityActive{
+    border: 2px solid black;
+}
