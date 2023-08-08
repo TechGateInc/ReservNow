@@ -5,7 +5,6 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
-import { useGetReviewQuery } from "@/features/review/reviewSlice";
 import { Providers } from "@/Provider";
 
 import DetailsGallery from "@/components/Details/Details Gallery/DetailsGallery";
@@ -20,6 +19,7 @@ import LoginModal from "@/components/modals/Auth Modal/LoginModal";
 import { AiFillStar } from "react-icons/ai";
 import { DetailsSkeleton } from "@/components/Skeleton/Skeleton";
 import { useGetEventCentreQuery } from "@/features/eventCenter/eventCenterSlice";
+import { useGetReviewQuery } from "@/features/review/reviewSlice";
 
 export default function Details() {
   const searchParams = useSearchParams();

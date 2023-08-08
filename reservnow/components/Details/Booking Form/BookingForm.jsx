@@ -118,7 +118,7 @@ const BookingForm = ({ id, eventCentre, review }) => {
                     fontWeight: "normal",
                   }}
                 >
-                  {review.length} Reviews
+                  {review?.length} Reviews
                 </div>
               </b>
             </div>
