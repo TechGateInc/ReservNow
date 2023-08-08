@@ -1,7 +1,13 @@
 "use client";
 
-import "./bookingForm.css";
 import { useState } from "react";
+import { useSelector } from "react-redux";
+
+import "./bookingForm.css";
+
+import { useCreateBookingMutation } from "@/features/booking/bookingSlice";
+import { selectCurrentToken } from "@/features/auth/authSlice";
+
 import { AiFillStar } from "react-icons/ai";
 import { TbCurrencyNaira } from "react-icons/tb";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
@@ -10,7 +16,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import dayjs from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
-import { useCreateBookingMutation } from "@/features/booking/bookingSlice";
+import LoginModal from "@/components/modals/Auth Modal/LoginModal";
 
 const BookingForm = ({ id, eventCentre, review }) => {
   const [createBooking] = useCreateBookingMutation();
@@ -78,6 +84,15 @@ const BookingForm = ({ id, eventCentre, review }) => {
     }));
   };
 
+  const [trigger, setTrigger] = useState(false);
+  const token = useSelector(selectCurrentToken);
+
+  const isUserLoggedIn = () => {
+    if (!token) {
+      setTrigger(true)
+    }
+  }
+
   return (
     <div className="card-right-root" key={eventCentre._id}>
       <div className="details-card-right">
@@ -108,7 +123,7 @@ const BookingForm = ({ id, eventCentre, review }) => {
               </b>
             </div>
           </div>
-          <form onSubmit={bookingHandleSubmit}>
+          <div >
             <div className="card-right-content">
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DemoContainer
@@ -156,9 +171,9 @@ const BookingForm = ({ id, eventCentre, review }) => {
               </div>
             </div>
             <div className="book-btn">
-              <button type="submit">Book</button>
+              <button type="submit" onClick={isUserLoggedIn}>Book</button>
             </div>
-          </form>
+          </div>
           <div
             className="card-right-footer"
             style={{ marginTop: "4%", fontSize: "14px", color: "grey" }}
@@ -186,7 +201,7 @@ const BookingForm = ({ id, eventCentre, review }) => {
                 <div className="total">
                   <div>Total</div>
                   <div className="disAlCenter">
-                    <TbCurrencyNaira />{" "}
+                    <TbCurrencyNaira />
                     {reservNowPrice + eventCentre.price * durationInHours}
                   </div>
                 </div>
@@ -195,6 +210,10 @@ const BookingForm = ({ id, eventCentre, review }) => {
           </div>
         </div>
       </div>
+      <LoginModal
+        showLoginModal={trigger}
+        setShowLoginModal={setTrigger}
+      />
     </div>
   );
 };

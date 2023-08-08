@@ -1,14 +1,16 @@
 "use client";
 import React from "react";
+import { useState, useEffect } from "react";
+import Link from "next/link";
+
 import styles from "./page.module.css";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
-import { useState, useEffect } from "react";
-import { useSpring, animated } from "react-spring";
 import EstimateModal from "@/components/modals/EstimateModal/EstimateModal";
-import Link from "next/link";
 
-const newCentrePage = ({}) => {
+import { Providers } from "@/Provider";
+
+const NewCentrePage = ({ }) => {
   const [money, setMoney] = useState(5000);
   const [hours, setHours] = useState(1);
   const [isSliderReady, setSliderReady] = useState(false);
@@ -22,12 +24,6 @@ const newCentrePage = ({}) => {
     setHours(newValue);
     setMoney(newValue * 5000);
   };
-
-  // const moneyAnimation = useSpring({
-  //   number: money,
-  //   from: { number: 0 },
-  //   config: { duration: 4000 },
-  // });
 
   useEffect(() => {
     setSliderReady(true);
@@ -55,7 +51,7 @@ const newCentrePage = ({}) => {
     );
   }
   return (
-    <div>
+    <Providers>
       <div className={styles["newPageHeader"]}>
         <div>
           <Link href={"/"}>
@@ -68,7 +64,7 @@ const newCentrePage = ({}) => {
         </div>
         <div className={styles["pageHeaderBtn"]}>
           <p>Ready to Reserv it?</p>
-          <Link href={"/host-an-eventcentre"} style={{textDecoration: "none"}}>
+          <Link href={"/host-an-eventcentre"} style={{ textDecoration: "none" }}>
             <div className={styles["setUpBtn"]}>ReserveNov SetUp</div>
           </Link>
         </div>
@@ -79,9 +75,6 @@ const newCentrePage = ({}) => {
           <p className={styles["ReservText2"]}>You Could Earn</p>
           <p className={styles["ReservText2"]}>
             ₦
-            {/* <animated.span>
-              {moneyAnimation.number.interpolate((val) => Math.floor(val))}
-            </animated.span> */}
           </p>
           <p style={{ marginTop: 20 }}>
             {hours} hours at an estimated ₦5000 an hour
@@ -115,12 +108,12 @@ const newCentrePage = ({}) => {
               boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px",
             }}
             loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
+            referrerPolicy="no-referrer-when-downgrade"
           ></iframe>
         </div>
       </div>
-    </div>
+    </Providers>
   );
 };
 
-export default newCentrePage;
+export default NewCentrePage;

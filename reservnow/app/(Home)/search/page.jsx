@@ -37,10 +37,7 @@ const SearchPage = () => {
     };
 
     fetchData();
-  }, []);
-
-  // console.log(data)
-  
+  }, []);  
 
   return (
     <div className={styles["searchPageHolder"]}>

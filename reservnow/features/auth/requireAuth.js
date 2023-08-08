@@ -1,14 +1,27 @@
+import { useRouter, usePathname } from "next/navigation";
 import { useSelector } from "react-redux";
-import { selectCurrentToken } from "./authSlice";
-import { useRouter } from "next/navigation";
+import { selectCurrentToken, selectCurrentUser } from "./authSlice";
+import { useEffect } from "react";
 
 const RequireAuth = ({ children }) => {
-  const token = useSelector(selectCurrentToken);
   const router = useRouter();
+  const isAuthenticated = useSelector(selectCurrentToken);
+  const user = useSelector(selectCurrentUser)
+  const pathname = usePathname();
+  const currentPath = pathname;
 
-  if (!token) {
-    router.push("/login", undefined, { shallow: true });
-    return null;
+  useEffect(() => {
+    if (!isAuthenticated) {
+      router.replace(
+        `/login?redirect=${encodeURIComponent(currentPath)}`,
+        undefined,
+        { shallow: true }
+      );
+    }
+  }, [isAuthenticated, currentPath, router]);
+
+  if (!isAuthenticated) {
+    return null; // or render a loading state if desired
   }
 
   return children;

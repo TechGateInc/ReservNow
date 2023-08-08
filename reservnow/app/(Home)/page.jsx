@@ -1,7 +1,12 @@
 "use client";
-import HomeLayout from "./layout";
+
+import { Providers } from "@/Provider";
 import CentreGallery from "@/components/CentreGallery/CentreGallery";
 
 export default function Home() {
-  return <CentreGallery />;
+  return (
+    <Providers>
+      <CentreGallery />
+    </Providers>
+  );
 }

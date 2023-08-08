@@ -4,7 +4,7 @@ import Link from "next/link";
 import styles from "./signUpModal.module.css";
 import { useState } from "react";
 
-export default function SignUpModal({ formData, handleChange, handleSubmit }) {
+export default function SignUpForm({ formData, handleChange, handleSubmit }) {
   const [confirmPassword, setConfirmPassword] = useState("");
   const isFormFilled = () => {
     return (

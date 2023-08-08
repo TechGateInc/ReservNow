@@ -81,20 +81,19 @@
   border-radius: 20px;
   align-items: center;
   height: 30px;
-  padding-top: 5px;
   cursor: pointer;
   transition: transform 0.2s ease-in-out;
 }
 
 .ReserveLink {
   background-color: white;
-  padding: 5px;
-  border-radius: 5px;
+  padding: 10px;
+  border-radius: 10px;
   cursor: pointer;
 }
 
 .ReserveLink:hover {
-  background-color: rgb(231, 231, 231);
+  background-color: rgb(245, 245, 245);
 }
 
 .profileHolderIcons:hover {

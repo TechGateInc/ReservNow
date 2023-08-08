@@ -10,7 +10,6 @@ const CentreTypePicker = ({ activeType, setActiveType }) => {
     setActiveType(_id);
   };
 
-  console.log(activeType)
   return (
     <div className="AmmenityHolder">
       <p style={{ fontSize: "35px" }}>

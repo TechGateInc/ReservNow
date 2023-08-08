@@ -40,7 +40,6 @@ export const progressSlice = apiSlice.injectEndpoints({
     }),
     updateProgress: builder.mutation({
       query: (params) => {
-        console.log(params.descriptionPick)
         return {
           url: `/progress/${params.progressId}`,
           method: "PUT",

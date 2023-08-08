@@ -6,7 +6,7 @@ const Events = ({ label, handleType, removeTypeExtend }) => {
   }
   return (
     <div className="location-Cards" onClick={handleTypeClick}>
-      {label}
+      {label.name}
     </div>
   );
 };

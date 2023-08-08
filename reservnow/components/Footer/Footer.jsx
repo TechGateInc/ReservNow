@@ -1,14 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
-import "../Footer/footer.css";
+import "./footer.css";
 import { AiFillCaretUp, AiOutlineClose } from "react-icons/ai";
-
-if (typeof document !== "undefined") {
-  const AOS = require("aos");
-  require("aos/dist/aos.css");
-  // AOS.init({ disable: true });}
-  AOS.init();}
-
 
 const Footer = () => {
   const [isHidden, setIsHidden] = useState(true);
@@ -56,12 +49,10 @@ const Footer = () => {
       {!isHidden ? (
         <div
           className="hiddenSectionWrapper"
-        // data-aos="fade-down"
         >
           <div
             className={`hiddenSection ${isHidden ? "" : "active"}`}
-            data-aos={isHidden ? "fade-down" : "fade-up"}
-            data-aos-duration="700"
+            
           >
 
 
