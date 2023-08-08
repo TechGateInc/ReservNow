@@ -1,2 +1,0 @@
-# ReservNow
-Event Center Reservation
