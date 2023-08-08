@@ -18,8 +18,9 @@ import LoginModal from "@/components/modals/Auth Modal/LoginModal";
 
 import { AiFillStar } from "react-icons/ai";
 import { DetailsSkeleton } from "@/components/Skeleton/Skeleton";
+
 import { useGetEventCentreQuery } from "@/features/eventCenter/eventCenterSlice";
-import { useGetReviewQuery } from "@/features/review/reviewSlice";
+import { useGetReviewQuery } from "@/features/review/review-Slice";
 
 export default function Details() {
   const searchParams = useSearchParams();
