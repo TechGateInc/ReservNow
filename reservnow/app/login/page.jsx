@@ -1,13 +1,12 @@
 "use client"
 
-import { useState, useContext } from "react";
+import { useState } from "react";
 import "./login.css";
 import CheckEmailCard from "@/components/Login/CheckEmailCard";
 import SignInCard from "@/components/Login/SignInCard";
 import SignUpCard from "@/components/Login/SignUpCard";
-import { Provider } from "react-redux";
-import store from "@/store";
-import LoginVerification from "@/components/LoginPageComponents/LoginVerification";
+import { Providers } from "@/Provider";
+import LoginVerification from "@/components/Login/LoginVerification";
 
 export default () => {
     const [active, setActive] = useState(1);
@@ -16,7 +15,7 @@ export default () => {
     const [showSignInCard, setShowSignInCard] = useState(false)
     const [showSignUpCard, setShowSignUpCard] = useState(false)
     return (
-        <Provider store={store}>
+        <Providers>
             <div className="login-root">
                 {active === 1 && (
                     <LoginVerification setActive={setActive} />
@@ -44,7 +43,7 @@ export default () => {
                     />
                 </>}
             </div>
-        </Provider>
+        </Providers>
 
     );
 }
