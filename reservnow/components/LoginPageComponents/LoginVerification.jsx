@@ -29,7 +29,7 @@ const LoginVerification = ({ setActive }) => {
         </div>
         <div className="accountSection">
           <p>Not you ?</p>
-          <p onClick={() => setActive("Form")} className="loginformLink">
+          <p onClick={() => setActive(2)} className="loginformLink">
             Use another account
           </p>
         </div>
