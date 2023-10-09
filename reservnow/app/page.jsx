@@ -1,5 +1,4 @@
 import { AuthProvider } from "@/Context/context"
-
 import CentreGallery from "@/components/CentreGallery/CentreGallery";
 import { store } from "@/store";
 import { Provider } from "react-redux";
