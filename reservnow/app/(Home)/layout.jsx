@@ -7,7 +7,6 @@ export default function HomeLayout({ children }) {
     <div>
       <Header />
       <Providers>{children}</Providers>
-
       <Footer />
     </div>
   );
