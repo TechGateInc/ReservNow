@@ -1,12 +1,11 @@
 "use client";
-import styles from "./page.module.css";
-import { useEffect, useState } from "react";
-import CentreCard from "@/components/CentreGallery/CentreCard";
-import config from "@/config";
-import { Skeleton } from "@/components/Skeleton/Skeleton";
-import { TfiFaceSad } from "react-icons/tfi";
-import { useGetFilteredCentresMutation } from "@/features/searchEventCentre/SearchCentreSlice";
 
+import { useEffect, useState } from "react";
+
+import styles from "./page.module.css";
+import CentreCard from "@/components/CentreGallery/CentreCard";
+import { Skeleton } from "@/components/Skeleton/Skeleton";
+import { useGetFilteredCentresMutation } from "@/features/searchEventCentre/SearchCentreSlice";
 
 const SearchPage = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -14,12 +13,11 @@ const SearchPage = () => {
 
   const [getFilteredCentres, { data }] = useGetFilteredCentresMutation();
 
-  
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
     const location = searchParams.get("l");
     const capacity = searchParams.get("c");
-    const ctype = searchParams.get("t")
+    const ctype = searchParams.get("t");
 
     const fetchData = async () => {
       try {
@@ -37,7 +35,7 @@ const SearchPage = () => {
     };
 
     fetchData();
-  }, []);  
+  }, []);
 
   return (
     <div className={styles["searchPageHolder"]}>

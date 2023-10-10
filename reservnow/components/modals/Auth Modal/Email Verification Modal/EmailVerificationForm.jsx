@@ -1,9 +1,15 @@
 "use client";
-import config from "@/config";
+
 import styles from "./emailVerification.module.css";
+import config from "@/config";
 
-export default function EmailVerificationForm({ email, setEmail, emailModalTrigger, signInModalTrigger, signUpModalTrigger }) {
-
+export default function EmailVerificationForm({
+  email,
+  setEmail,
+  emailModalTrigger,
+  signInModalTrigger,
+  signUpModalTrigger,
+}) {
   const handleEmailVerification = async (e) => {
     e.preventDefault();
     try {
@@ -30,7 +36,7 @@ export default function EmailVerificationForm({ email, setEmail, emailModalTrigg
     }
   };
 
-  const handleEmailChange = (e) => setEmail(e.target.value)
+  const handleEmailChange = (e) => setEmail(e.target.value);
 
   return (
     <div className={styles["email-root"]}>

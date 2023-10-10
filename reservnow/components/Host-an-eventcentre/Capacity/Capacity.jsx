@@ -1,11 +1,12 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import "./capacity.css";
 import { AiOutlineMinus } from "react-icons/ai";
 import { IoAddOutline } from "react-icons/io5";
 import { MdError } from "react-icons/md";
 import { HiOutlineInformationCircle } from "react-icons/hi";
+
+import "./capacity.css";
 
 const Capacity = ({ capacity, setCapacity }) => {
   const [eventInfo, setEventInfo] = useState("");

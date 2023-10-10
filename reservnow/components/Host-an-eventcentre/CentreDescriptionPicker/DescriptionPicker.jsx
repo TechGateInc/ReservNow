@@ -1,14 +1,9 @@
-"use client"
-import React, { useState, useEffect } from "react";
 import "./DescriptionPicker.css";
-import {useGetDescriptionPickerQuery} from "@/features/descriptionPicker/descriptionPickerSlice"
+import { useGetDescriptionPickerQuery } from "@/features/descriptionPicker/descriptionPickerSlice";
 
-const DescriptionPicker = ({descriptionsPick, setDescriptionsPick}) => {
-  const {data : Descriptions } = useGetDescriptionPickerQuery();
-  console.log(descriptionsPick)
-
-
-
+const DescriptionPicker = ({ descriptionsPick, setDescriptionsPick }) => {
+  const { data: Descriptions } = useGetDescriptionPickerQuery();
+  console.log(descriptionsPick);
 
   const handleDescriptionClick = (_id) => {
     // Check if the clicked description is already selected
@@ -48,10 +43,12 @@ const DescriptionPicker = ({descriptionsPick, setDescriptionsPick}) => {
         </div>
         <div className="descpills">
           {Descriptions?.map((desc, index) => (
-            <div 
-            key={index}
-            className={`descpill ${descriptionsPick.includes(desc._id) ? "desc-active" : ""}`}
-            onClick={() => handleDescriptionClick(desc._id)}
+            <div
+              key={index}
+              className={`descpill ${
+                descriptionsPick.includes(desc._id) ? "desc-active" : ""
+              }`}
+              onClick={() => handleDescriptionClick(desc._id)}
             >
               <img src={desc.icon} width={25} alt="" />
               <p>{desc.name}</p>

@@ -3,7 +3,7 @@ import { setCredentials, logOut } from "@/features/auth/authSlice";
 import config from "@/config";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: config.hostedURL,
+  baseUrl: config.baseURL,
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const token = getState().auth.token;

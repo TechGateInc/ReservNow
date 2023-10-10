@@ -1,25 +1,20 @@
 "use client";
-import React, { useState, useEffect } from "react";
+
+import React from "react";
 import Link from "next/link";
+import { AiFillStar, AiOutlineCreditCard } from "react-icons/ai";
+import { IoLocationOutline } from "react-icons/io5";
+import { BsPeople } from "react-icons/bs";
 
 import "../CentreGallery/CentreGallery.css";
-import {
-  AiFillStar,
-  AiFillCreditCard,
-  AiOutlineCreditCard
-} from "react-icons/ai";
 import ImageSlider from "./ImageSlider";
-import { BsPeopleFill } from "react-icons/bs";
-import { MdLocationOn } from "react-icons/md";
-import { IoLocationOutline } from "react-icons/io5"
-import { BsPeople } from "react-icons/bs"
-
 
 const CentreCard = ({ centre }) => {
-
   return (
-    <Link href={`/details?id=${centre._id}`} style={{ textDecoration: "none", color: "black" }}>
-
+    <Link
+      href={`/details?id=${centre._id}`}
+      style={{ textDecoration: "none", color: "black" }}
+    >
       <div className="galleryCardV1">
         <div className="centreImageholder">
           <div className="imgSliderHold">
@@ -44,7 +39,9 @@ const CentreCard = ({ centre }) => {
             </div>
             <div className="centreDesc-content" style={{ fontSize: 13 }}>
               <AiOutlineCreditCard />{" "}
-              <p style={{ color: "gray", marginLeft: 10 }}>₦{centre.price}/hr</p>
+              <p style={{ color: "gray", marginLeft: 10 }}>
+                ₦{centre.price}/hr
+              </p>
             </div>
           </div>
           <div className="ratingSection">

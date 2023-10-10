@@ -1,11 +1,9 @@
-"use client";
 import "./CentreTypePicker.css";
-import React, { useState } from "react";
 import { useGetCentreTypeQuery } from "@/features/centreType/centreTypeSlice";
 
 const CentreTypePicker = ({ activeType, setActiveType }) => {
   const { data: centreType } = useGetCentreTypeQuery();
-  
+
   const handleTypeChange = (_id) => {
     setActiveType(_id);
   };
@@ -24,7 +22,6 @@ const CentreTypePicker = ({ activeType, setActiveType }) => {
             key={index}
             onClick={() => handleTypeChange(centreTypes._id)}
           >
-            <div>{/* <img src={centreTypes.icon} width={50} alt="" /> */}</div>
             <p>{centreTypes.name}</p>
           </div>
         ))}

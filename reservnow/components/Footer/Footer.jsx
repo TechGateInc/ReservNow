@@ -1,7 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
-import "./footer.css";
 import { AiFillCaretUp, AiOutlineClose } from "react-icons/ai";
+
+import "./footer.css";
 
 const Footer = () => {
   const [isHidden, setIsHidden] = useState(true);
@@ -28,8 +29,11 @@ const Footer = () => {
       <div className="footer">
         {isHidden ? (
           <div className="leftLinks">
-            <p>©2023 ReserveNow.inc</p><p>Terms</p><p>Sitemap</p>
-            <p>Privacy</p><p>Centres</p>
+            <p>©2023 ReserveNow.inc</p>
+            <p>Terms</p>
+            <p>Sitemap</p>
+            <p>Privacy</p>
+            <p>Centres</p>
           </div>
         ) : null}
         {isHidden ? (
@@ -47,19 +51,10 @@ const Footer = () => {
         ) : null}
       </div>
       {!isHidden ? (
-        <div
-          className="hiddenSectionWrapper"
-        >
-          <div
-            className={`hiddenSection ${isHidden ? "" : "active"}`}
-            
-          >
-
-
+        <div className="hiddenSectionWrapper">
+          <div className={`hiddenSection ${isHidden ? "" : "active"}`}>
             {/* Content of the hidden section */}
-            <div className="closeBtn" onClick={hideHiddenSection}
-
-            >
+            <div className="closeBtn" onClick={hideHiddenSection}>
               <AiOutlineClose style={{ fontSize: 15 }} />
             </div>
             <div className="hiddenFooterLinkHolder">

@@ -1,13 +1,13 @@
 "use client";
 
-import "./detailsInformation.css";
-import { useState, useEffect } from "react";
-import React from "react";
-import { AmenitiesPopup } from "@/components/modals/Popup/Popup";
-import { DescriptionPopup } from "@/components/modals/Popup/Popup";
+import React, { useState, useEffect } from "react";
 import { IoPeopleOutline } from "react-icons/io5";
 import { BsFan } from "react-icons/bs";
 import { MdArrowForwardIos } from "react-icons/md";
+
+import "./detailsInformation.css";
+import { AmenitiesPopup } from "@/components/modals/Popup/Popup";
+import { DescriptionPopup } from "@/components/modals/Popup/Popup";
 import { useGetAmenityCategoryQuery } from "@/features/amenityCategory/amenityCategorySlice";
 
 const DetailsInformation = ({ eventCentre }) => {

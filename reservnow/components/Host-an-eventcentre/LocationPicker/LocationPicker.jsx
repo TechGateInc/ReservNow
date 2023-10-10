@@ -1,10 +1,10 @@
-
 "use client";
+
 import React, { useState, useEffect, useRef } from "react";
+
 import "./LocationPicker.css";
 
-const LocationPicker = ({address, setAddress}) => {
-  
+const LocationPicker = ({ address, setAddress }) => {
   const defaultLocation = "New York, NY";
   const [searchResult, setSearchResult] = useState("");
 
@@ -29,7 +29,7 @@ const LocationPicker = ({address, setAddress}) => {
           const location = `${latitude},${longitude}`;
           setSearchResult(location); // Update the search result state
           loadMap(location);
-  
+
           try {
             const response = await fetch(
               `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`
@@ -88,49 +88,54 @@ const LocationPicker = ({address, setAddress}) => {
       <p style={{ fontSize: "35px", marginBottom: "10px" }}>
         Is the Pin in the right spot ?
       </p>
-      <p>Your address is only shared with guests after they have made their reservation</p>
+      <p>
+        Your address is only shared with guests after they have made their
+        reservation
+      </p>
       <div className="mapContainer">
         <div className="searchHolder" style={{ height: searchHolderHeight }}>
-          <div style={{ display: "flex", flexDirection: "row" }} className="imnput">
+          <div
+            style={{ display: "flex", flexDirection: "row" }}
+            className="imnput"
+          >
             <input
               type="text"
               placeholder="Enter an address"
               value={address}
               onChange={handleAddressChange}
-              style={{ border: "none", width: "100%", height:30 }}
+              style={{ border: "none", width: "100%", height: 30 }}
               onClick={handleInputClick}
             />
           </div>
-          
-            <div style={{ marginTop: 10 }} 
-            className={`hiddenMapSection ${
-              showHiddenSection ? "show" : ""}`
-            }
-             ref={hiddenSectionRef}>
-              {/* Contents of the hidden section */}
-              <button
-                onClick={() => {
-                  handleSearch();
-                  setShowHiddenSection(false);
-                  setSearchHolderHeight("50px");
-                }}
-                className="mapSearchBtn"
-              >
-                Search
-              </button>
-              or
-              <div
-                onClick={() => {
-                  handleGetLocation();
-                  setShowHiddenSection(false);
-                  setSearchHolderHeight("50px");
-                }}
-                className="locationLink"
-              >
-                Get Location via GPS
-              </div>
+
+          <div
+            style={{ marginTop: 10 }}
+            className={`hiddenMapSection ${showHiddenSection ? "show" : ""}`}
+            ref={hiddenSectionRef}
+          >
+            {/* Contents of the hidden section */}
+            <button
+              onClick={() => {
+                handleSearch();
+                setShowHiddenSection(false);
+                setSearchHolderHeight("50px");
+              }}
+              className="mapSearchBtn"
+            >
+              Search
+            </button>
+            or
+            <div
+              onClick={() => {
+                handleGetLocation();
+                setShowHiddenSection(false);
+                setSearchHolderHeight("50px");
+              }}
+              className="locationLink"
+            >
+              Get Location via GPS
             </div>
-        
+          </div>
         </div>
         <iframe
           id="map-iframe"

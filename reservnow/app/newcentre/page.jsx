@@ -2,15 +2,13 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-
-import styles from "./page.module.css";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
+
+import styles from "./page.module.css";
 import EstimateModal from "@/components/modals/EstimateModal/EstimateModal";
 
-import { Providers } from "@/Provider";
-
-const NewCentrePage = ({ }) => {
+const NewCentrePage = ({}) => {
   const [money, setMoney] = useState(5000);
   const [hours, setHours] = useState(1);
   const [isSliderReady, setSliderReady] = useState(false);
@@ -51,7 +49,7 @@ const NewCentrePage = ({ }) => {
     );
   }
   return (
-    <Providers>
+    <div className={styles["new-centre-root"]}>
       <div className={styles["newPageHeader"]}>
         <div>
           <Link href={"/"}>
@@ -64,7 +62,10 @@ const NewCentrePage = ({ }) => {
         </div>
         <div className={styles["pageHeaderBtn"]}>
           <p>Ready to Reserv it?</p>
-          <Link href={"/host-an-eventcentre"} style={{ textDecoration: "none" }}>
+          <Link
+            href={"/host-an-eventcentre"}
+            style={{ textDecoration: "none" }}
+          >
             <div className={styles["setUpBtn"]}>ReserveNov SetUp</div>
           </Link>
         </div>
@@ -73,9 +74,7 @@ const NewCentrePage = ({ }) => {
         <div className={styles["newPageText"]}>
           <p className={styles["ReservText"]}>Reserv It.</p>
           <p className={styles["ReservText2"]}>You Could Earn</p>
-          <p className={styles["ReservText2"]}>
-            ₦
-          </p>
+          <p className={styles["ReservText2"]}>₦</p>
           <p style={{ marginTop: 20 }}>
             {hours} hours at an estimated ₦5000 an hour
           </p>
@@ -112,7 +111,7 @@ const NewCentrePage = ({ }) => {
           ></iframe>
         </div>
       </div>
-    </Providers>
+    </div>
   );
 };
 

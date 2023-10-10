@@ -1,8 +1,9 @@
 "use client";
 
-import "./reviewSection.css";
 import { useState } from "react";
 import { AiFillStar } from "react-icons/ai";
+
+import "./reviewSection.css";
 import { Rating } from "@/components/Ratings Star/RatingStar";
 import { ReviewPopup } from "@/components/modals/Popup/Popup";
 

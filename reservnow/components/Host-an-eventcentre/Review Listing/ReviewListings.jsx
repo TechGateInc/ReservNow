@@ -1,14 +1,21 @@
 "use client";
 
-import "./reviewListings.css";
+import { useState } from "react";
 import { BsClipboardCheck } from "react-icons/bs";
 import { BsCalendarEvent } from "react-icons/bs";
 import { LuEdit3 } from "react-icons/lu";
 import { AiFillStar } from "react-icons/ai";
-import { ReviewListingModal } from "@/components/modals/Review Listing Modal/ReviewListingModal";
-import { useState } from "react";
 
-const ReviewListings = ({ selectedFiles, name, price, description, address }) => {
+import "./reviewListings.css";
+import { ReviewListingModal } from "@/components/modals/Review Listing Modal/ReviewListingModal";
+
+const ReviewListings = ({
+  selectedFiles,
+  name,
+  price,
+  description,
+  address,
+}) => {
   const firstImage = selectedFiles[0];
   const [isReview, setIsReview] = useState(false);
 

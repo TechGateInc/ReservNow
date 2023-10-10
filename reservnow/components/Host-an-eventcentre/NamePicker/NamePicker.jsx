@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from "react";
 import "./NamePicker.css";
 
 const NamePicker = ({ name, setName, progress, progressSuccess }) => {
-
   const handleInputChange = (e) => {
     const inputName = e.target.value;
     if (inputName.length <= 32) {

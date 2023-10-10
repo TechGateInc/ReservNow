@@ -1,7 +1,10 @@
-"use client"
+"use client";
+
 import { useState } from "react";
-import { EstimatePopup } from "../Popup/Popup";
+
 import "./estimatemodal.css";
+import { EstimatePopup } from "../Popup/Popup";
+
 const EstimateModal = ({ estimateModal, setEstimateModal }) => {
   const [selectedOption, setSelectedOption] = useState("");
 
@@ -18,7 +21,11 @@ const EstimateModal = ({ estimateModal, setEstimateModal }) => {
           </div>
           <div className="addressHolder selectHolder">
             <p>Capacity</p>
-            <select value={selectedOption} onChange={handleSelectChange} className="locationInput" >
+            <select
+              value={selectedOption}
+              onChange={handleSelectChange}
+              className="locationInput"
+            >
               <option value="">Select an option</option>
               <option value="option1">Option 1</option>
               <option value="option2">Option 2</option>

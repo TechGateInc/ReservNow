@@ -1,4 +1,5 @@
 import "./finishSetup.css";
+
 const FinishSetup = ({}) => {
   return (
     <div className="finish-setup-root">

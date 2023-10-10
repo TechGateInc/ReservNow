@@ -1,10 +1,11 @@
 "use client";
 
-import "./uploadGallery.css";
 import React, { useState, useRef } from "react";
 import { IoImagesOutline } from "react-icons/io5";
 import { BsTrash } from "react-icons/bs";
 import { IoAddSharp } from "react-icons/io5";
+
+import "./uploadGallery.css";
 
 const UploadGallery = ({
   selectedFiles,

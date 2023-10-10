@@ -1,6 +1,8 @@
 "use client";
+
+import React from "react";
+
 import "./AmenityPicker.css";
-import React, { useState } from "react";
 import { useGetAmenityQuery } from "@/features/amenity/amenitySlice";
 
 const AmenityPicker = ({ activeAmenities, setActiveAmenities }) => {
