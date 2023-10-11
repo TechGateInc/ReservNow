@@ -42,6 +42,8 @@ const HostAnEventCentrePage = ({}) => {
   const [address, setAddress] = useState("");
   const [progressId, setProgressId] = useState("");
 
+  
+
   const id = "64958637db3d3493ebaf8c84";
   const {
     data: progress,
