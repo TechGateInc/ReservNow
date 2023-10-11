@@ -1,0 +1,10 @@
+.scrollable-section {
+    overflow-x: auto;
+    white-space: nowrap;
+    /* Set a fixed or max width to limit the container's width if needed */
+  }
+  
+  .location-Cards {
+    display: inline-block;
+    /* Add any additional styling for the location cards */
+  }

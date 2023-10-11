@@ -31,7 +31,7 @@ const HostAnEventCentrePage = ({}) => {
   const isSubmitDisabled = selectedFiles.length < 5;
   const coverPhoto = selectedFiles.length > 0 ? selectedFiles[0] : null;
   const remainingPhotos = selectedFiles.slice(1);
-  const [activeType, setActiveType] = useState(null);
+  const [activeType, setActiveType] = useState("");
   const [price, setPrice] = useState(0);
   const [description, setDescription] = useState("");
   const [name, setName] = useState("");
@@ -62,6 +62,8 @@ const HostAnEventCentrePage = ({}) => {
       setDescription(progress.description);
       setActiveAmenities(progress.amenities);
       setProgressId(progress._id);
+      setActiveType(progress.centreType)
+      setDescriptionsPick(progress.descriptionPicker)
     }
   }, [progressSuccess, progress]);
 
@@ -81,6 +83,8 @@ const HostAnEventCentrePage = ({}) => {
       state: "",
       venueOwner: id,
       amenities: activeAmenities,
+      descriptionPicker: descriptionsPick,
+      centreType: activeType,
     };
 
     if (progressSuccess === true) {
@@ -422,7 +426,10 @@ const HostAnEventCentrePage = ({}) => {
             )}
             {active === "DescriptionPicker" && (
               <button
-                onClick={() => setActive("FinishSetup")}
+                onClick={(e) => {
+                  setActive("FinishSetup");
+                  progressHandleSubmit(e);
+                }}
                 className={styles["next-btn"]}
                 disabled={descriptionsPick.length === 0}
               >

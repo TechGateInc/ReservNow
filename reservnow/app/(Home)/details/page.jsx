@@ -86,7 +86,7 @@ export default function Details() {
                 <AiFillStar />
                 <span className={styles["rating"]}>{eventCentre.rating} .</span>
                 <span className={styles["review-btn"]} onClick={reviewSection}>
-                  {review.length} Reviews
+                  {review?.length} Reviews
                 </span>
                 .
               </b>

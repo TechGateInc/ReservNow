@@ -6,10 +6,10 @@ export const searchCentreApi = apiSlice.injectEndpoints({
   baseQuery: fetchBaseQuery({ baseUrl: `http://localhost:5500` }),
   endpoints: (builder) => ({
     getFilteredCentres: builder.mutation({
-      query: ({ location, capacity }) => ({
+      query: ({ location, capacity, ctype }) => ({
         url: "/eventcentre/search/",
         method: "POST",
-        body: { location, capacity },
+        body: { location, capacity, ctype },
       }),
     }),
   }),

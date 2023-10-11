@@ -5,7 +5,6 @@ import config from "@/config";
 import CentreCard from "./CentreCard";
 import { Skeleton } from "../Skeleton/Skeleton";
 import { useGetAllCentresQuery } from "@/features/Event Centre/eventCentreSlice";
-// import { useGetReviewQuery } from "@/features/Details/reviewSlice";
 
 const CentreGallery = () => {
   const [centres, getCentres] = useState(null);
@@ -45,11 +44,6 @@ const CentreGallery = () => {
   };
 
   const { data } = useGetAllCentresQuery();
-
-  // const {data : review} = useGetReviewQuery();
-
-  // console.log(review)
-  console.log(data)
 
   return (
     <div className="galleryHolder">

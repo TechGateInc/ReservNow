@@ -11,7 +11,10 @@ const Search = ({
   location,
   handleRemove,
   setLocation,
-  removeCapacityMenu
+  removeCapacityMenu,
+  ctype,
+  setType,
+  handleRemove2
 }) => {
 
   const [capacity, setCapacity] = useState(null);
@@ -36,12 +39,12 @@ const Search = ({
   const router = useRouter();
 
   const handleSearchClick = () => {
-    if (!location && !capacity) {
+    if (!location && !capacity && !ctype) {
       setSubmitButtonDisabled(false)
       return;
     }
   
-    router.push(`/search?l=${location}&c=${capacity}`);
+    router.push(`/search?l=${location}&c=${capacity}&t=${ctype}`);
 
   };
 
@@ -61,8 +64,14 @@ const Search = ({
       </div>
 
       <div>
-        <div className="weekBtn extend-button" onClick={() => extendToggle('location')}>
-          Any Event
+        <div className="weekBtn extend-button" onClick={() => extendToggle('ctype')}>
+        {ctype ? (
+          <div>
+            <p onClick={() => { setType(ctype); handleRemove2(); }}>{ctype}</p>
+          </div>
+        ) : (
+          "Any Centre"
+        )}
         </div>
       </div>
       <div className="guestBtn extend-button" onClick={() => dropdownToggle('capacity')}>

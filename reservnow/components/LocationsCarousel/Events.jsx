@@ -1,6 +1,11 @@
-const Events = ({ label, onClick }) => {
+const Events = ({ label, handleType, removeTypeExtend }) => {
+
+  const handleTypeClick = () => {
+    handleType(label);
+    removeTypeExtend();
+  }
   return (
-    <div className="location-Cards" onClick={onClick}>
+    <div className="location-Cards" onClick={handleTypeClick}>
       {label}
     </div>
   );
