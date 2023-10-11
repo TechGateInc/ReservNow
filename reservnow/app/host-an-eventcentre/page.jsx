@@ -51,12 +51,12 @@ const HostAnEventCentrePage = ({}) => {
     isSuccess: progressSuccess,
     isError: progressError,
     error: progressErrorData,
-    refetch: refetchProgress
+    refetch: refetchProgress,
   } = useGetProgressQuery(id);
 
   const handleReload = () => {
     refetchProgress();
-  }
+  };
 
   useEffect(() => {
     if (progressSuccess === true && progress) {
@@ -144,11 +144,13 @@ const HostAnEventCentrePage = ({}) => {
       descriptionPicker: descriptionsPick,
       centreType: activeType,
     };
+    handleReload();
 
     if (progressSuccess === true && progressId) {
       try {
         await updateProgress({ progressId, ...formData }); // Call the update mutation
         // window.alert("Progress updated successfully");
+        handleReload();
       } catch (error) {
         console.error(error);
         window.alert("An error occurred. Please try again.");
@@ -157,6 +159,7 @@ const HostAnEventCentrePage = ({}) => {
       try {
         await createProgress(formData); // Call the create mutation
         // window.alert("Progress created successfully");
+        handleReload();
       } catch (error) {
         console.error(error);
         window.alert("An error occurred. Please try again.");
