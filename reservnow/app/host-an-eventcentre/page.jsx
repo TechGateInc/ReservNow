@@ -128,7 +128,9 @@ export default function HostAnEventCentrePage() {
                 setActiveType={setActiveType}
               />
             )}
-            {active === "LocationPicker" && <LocationPicker />}
+            {active === "LocationPicker" && (
+              <LocationPicker setAddress={setAddress} address={address} />
+            )}
             {active === "Capacity" && (
               <Capacity capacity={capacity} setCapacity={setCapacity} />
             )}
