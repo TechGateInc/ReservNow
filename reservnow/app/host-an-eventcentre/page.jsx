@@ -51,7 +51,12 @@ const HostAnEventCentrePage = ({}) => {
     isSuccess: progressSuccess,
     isError: progressError,
     error: progressErrorData,
+    refetch: refetchProgress
   } = useGetProgressQuery(id);
+
+  const handleReload = () => {
+    refetchProgress();
+  }
 
   useEffect(() => {
     if (progressSuccess === true && progress) {
