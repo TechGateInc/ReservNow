@@ -19,6 +19,11 @@ import DescriptionInfo from "@/components/Host-an-eventcentre/CentreDescriptionI
 import DescriptionPicker from "@/components/Host-an-eventcentre/CentreDescriptionPicker/DescriptionPicker";
 import CentreTypePicker from "@/components/Host-an-eventcentre/CentreType/CentreTypePicker";
 import ReviewListings from "@/components/Host-an-eventcentre/Review Listing/ReviewListings";
+import {
+  useCreateProgressMutation,
+  useGetProgressQuery,
+  useUpdateProgressMutation,
+} from "@/features/progress/progressSlice";
 
 const HostAnEventCentrePage = ({}) => {
   const [active, setActive] = useState("Overview");
@@ -26,7 +31,7 @@ const HostAnEventCentrePage = ({}) => {
   const isSubmitDisabled = selectedFiles.length < 5;
   const coverPhoto = selectedFiles.length > 0 ? selectedFiles[0] : null;
   const remainingPhotos = selectedFiles.slice(1);
-  const [activeType, setActiveType] = useState(null);
+  const [activeType, setActiveType] = useState("");
   const [price, setPrice] = useState(0);
   const [description, setDescription] = useState("");
   const [name, setName] = useState("");
@@ -34,6 +39,121 @@ const HostAnEventCentrePage = ({}) => {
   const [isRadioButtonSelected, setIsRadioButtonSelected] = useState(false);
   const [descriptionsPick, setDescriptionsPick] = useState([]);
   const [activeAmenities, setActiveAmenities] = useState([]);
+  const [address, setAddress] = useState("");
+  const [progressId, setProgressId] = useState("");
+
+  const id = "64958637db3d3493ebaf8c84";
+  const {
+    data: progress,
+    loading: progressLoading,
+    isSuccess: progressSuccess,
+    isError: progressError,
+    error: progressErrorData,
+  } = useGetProgressQuery(id);
+
+  useEffect(() => {
+    if (progressSuccess === true && progress) {
+      setName(progress.name);
+      setAddress(progress.address);
+      setCapacity(progress.capacity);
+      setPrice(progress.price);
+      setDescription(progress.description);
+      setActiveAmenities(progress.amenities);
+      setProgressId(progress._id);
+      setActiveType(progress.centreType);
+      setDescriptionsPick(progress.descriptionPicker);
+    }
+  }, [progressSuccess, progress]);
+
+  useEffect(() => {
+    // Check if progress.data exists and update the active state
+    if (
+      progressSuccess &&
+      progress.activeType !== "" &&
+      progress.address == ""
+    ) {
+      setActive("CentreTypePicker");
+    } else if (
+      progressSuccess &&
+      progress.address !== "" &&
+      progress.capacity <= 10
+    ) {
+      setActive("LocationPicker");
+    } else if (
+      progressSuccess &&
+      progress.capacity > 10 &&
+      progress.amenities == ""
+    ) {
+      setActive("Capacity");
+    } else if (
+      progressSuccess &&
+      progress.amenities !== "" &&
+      progress.name == ""
+    ) {
+      setActive("AmenityPicker");
+    } else if (
+      progressSuccess &&
+      progress.name !== "" &&
+      progress.description == ""
+    ) {
+      setActive("NamePicker");
+    } else if (
+      progressSuccess &&
+      progress.description !== "" &&
+      progress.descriptionPicker == ""
+    ) {
+      setActive("DescriptionInfo");
+    } else if (
+      progressSuccess &&
+      progress.descriptionPicker !== "" &&
+      progress.price == 0
+    ) {
+      setActive("DescriptionPicker");
+    } else if (progressSuccess && progress.price !== "") {
+      setActive("PricePicker");
+    } else {
+      setActive("Overview");
+    }
+  }, [progress]);
+
+  const [createProgress] = useCreateProgressMutation();
+  const [updateProgress] = useUpdateProgressMutation(progressId);
+
+  const progressHandleSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = {
+      name: name,
+      address: address,
+      capacity: capacity,
+      price: price,
+      description: description,
+      city: "",
+      state: "",
+      venueOwner: id,
+      amenities: activeAmenities,
+      descriptionPicker: descriptionsPick,
+      centreType: activeType,
+    };
+
+    if (progressSuccess === true) {
+      try {
+        await updateProgress({ progressId, ...formData }); // Call the update mutation
+        // window.alert("Progress updated successfully");
+      } catch (error) {
+        console.error(error);
+        window.alert("An error occurred. Please try again.");
+      }
+    } else {
+      try {
+        await createProgress(formData); // Call the create mutation
+        window.alert("Progress created successfully");
+      } catch (error) {
+        console.error(error);
+        window.alert("An error occurred. Please try again.");
+      }
+    }
+  };
 
   return (
     <div className={styles["host-root"]}>
@@ -46,7 +166,7 @@ const HostAnEventCentrePage = ({}) => {
               style={{ height: "22px" }}
             />
             <Link href={"/newcentre"}>
-              <button>Exit</button>
+              <button onClick={progressHandleSubmit}>Save & Exit</button>
             </Link>
           </div>
           <div className={styles["host-content"]}>
@@ -59,7 +179,9 @@ const HostAnEventCentrePage = ({}) => {
                 setActiveType={setActiveType}
               />
             )}
-            {active === "LocationPicker" && <LocationPicker />}
+            {active === "LocationPicker" && (
+              <LocationPicker address={address} setAddress={setAddress} />
+            )}
             {active === "Capacity" && (
               <Capacity capacity={capacity} setCapacity={setCapacity} />
             )}
@@ -80,7 +202,12 @@ const HostAnEventCentrePage = ({}) => {
               />
             )}
             {active === "NamePicker" && (
-              <NamePicker name={name} setName={setName} />
+              <NamePicker
+                name={name}
+                setName={setName}
+                progress={progress}
+                progressSuccess={progressSuccess}
+              />
             )}
             {active === "DescriptionInfo" && (
               <DescriptionInfo
@@ -109,6 +236,8 @@ const HostAnEventCentrePage = ({}) => {
                 selectedFiles={selectedFiles}
                 name={name}
                 price={price}
+                description={description}
+                address={address}
               />
             )}
           </div>
@@ -188,7 +317,10 @@ const HostAnEventCentrePage = ({}) => {
             )}
             {active === "CentreTypePicker" && (
               <button
-                onClick={() => setActive("LocationPicker")}
+                onClick={(e) => {
+                  setActive("LocationPicker");
+                  progressHandleSubmit(e);
+                }}
                 className={styles["next-btn"]}
                 disabled={!activeType}
               >
@@ -205,8 +337,12 @@ const HostAnEventCentrePage = ({}) => {
             )}
             {active === "LocationPicker" && (
               <button
-                onClick={() => setActive("Capacity")}
+                onClick={(e) => {
+                  setActive("Capacity");
+                  progressHandleSubmit(e);
+                }}
                 className={styles["next-btn"]}
+                disabled={!address}
               >
                 Next
               </button>
@@ -221,7 +357,10 @@ const HostAnEventCentrePage = ({}) => {
             )}
             {active === "Capacity" && (
               <button
-                onClick={() => setActive("StandOut")}
+                onClick={(e) => {
+                  setActive("StandOut");
+                  progressHandleSubmit(e);
+                }}
                 className={styles["next-btn"]}
                 disabled={capacity < 20}
               >
@@ -238,7 +377,10 @@ const HostAnEventCentrePage = ({}) => {
             )}
             {active === "StandOut" && (
               <button
-                onClick={() => setActive("AmenityPicker")}
+                onClick={(e) => {
+                  setActive("AmenityPicker");
+                  progressHandleSubmit(e);
+                }}
                 className={styles["next-btn"]}
               >
                 Next
@@ -254,7 +396,10 @@ const HostAnEventCentrePage = ({}) => {
             )}
             {active === "AmenityPicker" && (
               <button
-                onClick={() => setActive("UploadGallery")}
+                onClick={(e) => {
+                  setActive("UploadGallery");
+                  progressHandleSubmit(e);
+                }}
                 className={styles["next-btn"]}
                 disabled={activeAmenities.length === 0}
               >
@@ -290,7 +435,10 @@ const HostAnEventCentrePage = ({}) => {
             )}
             {active === "NamePicker" && (
               <button
-                onClick={() => setActive("DescriptionInfo")}
+                onClick={(e) => {
+                  setActive("DescriptionInfo");
+                  progressHandleSubmit(e);
+                }}
                 className={styles["next-btn"]}
                 disabled={!name}
               >
@@ -307,7 +455,10 @@ const HostAnEventCentrePage = ({}) => {
             )}
             {active === "DescriptionInfo" && (
               <button
-                onClick={() => setActive("DescriptionPicker")}
+                onClick={(e) => {
+                  setActive("DescriptionPicker");
+                  progressHandleSubmit(e);
+                }}
                 className={styles["next-btn"]}
                 disabled={!description}
               >
@@ -324,7 +475,10 @@ const HostAnEventCentrePage = ({}) => {
             )}
             {active === "DescriptionPicker" && (
               <button
-                onClick={() => setActive("FinishSetup")}
+                onClick={(e) => {
+                  setActive("FinishSetup");
+                  progressHandleSubmit(e);
+                }}
                 className={styles["next-btn"]}
                 disabled={descriptionsPick.length === 0}
               >
@@ -357,7 +511,10 @@ const HostAnEventCentrePage = ({}) => {
             )}
             {active === "PricePicker" && (
               <button
-                onClick={() => setActive("Legal")}
+                onClick={(e) => {
+                  setActive("Legal");
+                  progressHandleSubmit(e);
+                }}
                 className={styles["next-btn"]}
                 disabled={!price}
               >
