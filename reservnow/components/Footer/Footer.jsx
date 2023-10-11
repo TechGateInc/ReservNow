@@ -3,11 +3,11 @@ import { useEffect, useState } from "react";
 import "../Footer/footer.css";
 import { AiFillCaretUp, AiOutlineClose } from "react-icons/ai";
 
-if (typeof document !== "undefined") {
-  const AOS = require("aos");
-  require("aos/dist/aos.css");
-  // AOS.init({ disable: true });}
-  AOS.init();}
+// if (typeof document !== "undefined") {
+//   const AOS = require("aos");
+//   require("aos/dist/aos.css");
+//   // AOS.init({ disable: true });}
+//   AOS.init();}
 
 
 const Footer = () => {
