@@ -1,14 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import Link from "next/link";
-
 import styles from "./page.module.css";
-import {
-  useCreateProgressMutation,
-  useGetProgressQuery,
-  useUpdateProgressMutation,
-} from "@/features/progress/progressSlice";
+import { useState } from "react";
+import React, { useEffect } from "react";
+import Link from "next/link";
 import Overview from "@/components/Host-an-eventcentre/Overview/Overview";
 import AboutCentreOverview from "@/components/Host-an-eventcentre/About Centre Overview/AboutCentreOverview";
 import UploadGallery from "@/components/Host-an-eventcentre/Upload Gallery/UploadGallery";
@@ -25,13 +20,13 @@ import DescriptionPicker from "@/components/Host-an-eventcentre/CentreDescriptio
 import CentreTypePicker from "@/components/Host-an-eventcentre/CentreType/CentreTypePicker";
 import ReviewListings from "@/components/Host-an-eventcentre/Review Listing/ReviewListings";
 
-export default function HostAnEventCentrePage() {
+const HostAnEventCentrePage = ({}) => {
   const [active, setActive] = useState("Overview");
   const [selectedFiles, setSelectedFiles] = useState([]);
   const isSubmitDisabled = selectedFiles.length < 5;
   const coverPhoto = selectedFiles.length > 0 ? selectedFiles[0] : null;
   const remainingPhotos = selectedFiles.slice(1);
-  const [activeType, setActiveType] = useState("");
+  const [activeType, setActiveType] = useState(null);
   const [price, setPrice] = useState(0);
   const [description, setDescription] = useState("");
   const [name, setName] = useState("");
@@ -39,70 +34,6 @@ export default function HostAnEventCentrePage() {
   const [isRadioButtonSelected, setIsRadioButtonSelected] = useState(false);
   const [descriptionsPick, setDescriptionsPick] = useState([]);
   const [activeAmenities, setActiveAmenities] = useState([]);
-  const [address, setAddress] = useState("");
-  const [progressId, setProgressId] = useState("");
-
-  const id = "64958637db3d3493ebaf8c84";
-  const {
-    data: progress,
-    loading: progressLoading,
-    isSuccess: progressSuccess,
-    isError: progressError,
-    error: progressErrorData,
-  } = useGetProgressQuery(id);
-
-  useEffect(() => {
-    if (progressSuccess === true && progress) {
-      setName(progress.name);
-      setAddress(progress.address);
-      setCapacity(progress.capacity);
-      setPrice(progress.price);
-      setDescription(progress.description);
-      setActiveAmenities(progress.amenities);
-      setProgressId(progress._id);
-      setActiveType(progress.centreType);
-      setDescriptionsPick(progress.descriptionPicker);
-    }
-  }, [progressSuccess, progress]);
-
-  const [createProgress] = useCreateProgressMutation();
-  const [updateProgress] = useUpdateProgressMutation(progressId);
-
-  const progressHandleSubmit = async (e) => {
-    e.preventDefault();
-
-    const formData = {
-      name: name,
-      address: address,
-      capacity: capacity,
-      price: price,
-      description: description,
-      city: "",
-      state: "",
-      venueOwner: id,
-      amenities: activeAmenities,
-      descriptionPicker: descriptionsPick,
-      centreType: activeType,
-    };
-
-    if (progressSuccess === true) {
-      try {
-        await updateProgress({ progressId, ...formData }); // Call the update mutation
-        // window.alert("Progress updated successfully");
-      } catch (error) {
-        console.error(error);
-        window.alert("An error occurred. Please try again.");
-      }
-    } else {
-      try {
-        await createProgress(formData); // Call the create mutation
-        window.alert("Progress created successfully");
-      } catch (error) {
-        console.error(error);
-        window.alert("An error occurred. Please try again.");
-      }
-    }
-  };
 
   return (
     <div className={styles["host-root"]}>
@@ -128,9 +59,7 @@ export default function HostAnEventCentrePage() {
                 setActiveType={setActiveType}
               />
             )}
-            {active === "LocationPicker" && (
-              <LocationPicker setAddress={setAddress} address={address} />
-            )}
+            {active === "LocationPicker" && <LocationPicker />}
             {active === "Capacity" && (
               <Capacity capacity={capacity} setCapacity={setCapacity} />
             )}
@@ -473,4 +402,6 @@ export default function HostAnEventCentrePage() {
       </div>
     </div>
   );
-}
+};
+
+export default HostAnEventCentrePage;
