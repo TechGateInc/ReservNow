@@ -40,6 +40,8 @@ const HostAnEventCentrePage = ({}) => {
   const [descriptionsPick, setDescriptionsPick] = useState([]);
   const [activeAmenities, setActiveAmenities] = useState([]);
   const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
   const [progressId, setProgressId] = useState("");
 
   const id = "64958637db3d3493ebaf8c84";
@@ -55,6 +57,8 @@ const HostAnEventCentrePage = ({}) => {
     if (progressSuccess === true && progress) {
       setName(progress.name);
       setAddress(progress.address);
+      setCity(progress.city);
+      setState(progress.state);
       setCapacity(progress.capacity);
       setPrice(progress.price);
       setDescription(progress.description);
@@ -66,7 +70,7 @@ const HostAnEventCentrePage = ({}) => {
   }, [progressSuccess, progress]);
 
   useEffect(() => {
-    // Check if progress.data exists and update the active state
+    // Check if progress exists and update the active state
     if (
       progressSuccess &&
       progress.activeType !== "" &&
@@ -128,15 +132,15 @@ const HostAnEventCentrePage = ({}) => {
       capacity: capacity,
       price: price,
       description: description,
-      city: "",
-      state: "",
+      city: city,
+      state: state,
       venueOwner: id,
       amenities: activeAmenities,
       descriptionPicker: descriptionsPick,
       centreType: activeType,
     };
 
-    if (progressSuccess === true) {
+    if (progressSuccess === true && progressId) {
       try {
         await updateProgress({ progressId, ...formData }); // Call the update mutation
         // window.alert("Progress updated successfully");
@@ -147,7 +151,7 @@ const HostAnEventCentrePage = ({}) => {
     } else {
       try {
         await createProgress(formData); // Call the create mutation
-        window.alert("Progress created successfully");
+        // window.alert("Progress created successfully");
       } catch (error) {
         console.error(error);
         window.alert("An error occurred. Please try again.");
@@ -180,7 +184,14 @@ const HostAnEventCentrePage = ({}) => {
               />
             )}
             {active === "LocationPicker" && (
-              <LocationPicker address={address} setAddress={setAddress} />
+              <LocationPicker
+                address={address}
+                setAddress={setAddress}
+                city={city}
+                setCity={setCity}
+                state={state}
+                setState={setState}
+              />
             )}
             {active === "Capacity" && (
               <Capacity capacity={capacity} setCapacity={setCapacity} />

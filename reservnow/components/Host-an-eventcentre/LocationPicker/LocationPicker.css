@@ -1,75 +1,116 @@
-.mapholder{
-  
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    top: -30px;
-    width: 54%;
-    margin-left: 23%;
-    padding-bottom: 100px;
-    margin-top: 60px;
+.mapholder {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  top: -30px;
+  width: 54%;
+  margin-left: 23%;
+  padding-bottom: 100px;
+  margin-top: 60px;
 }
 
-.searchHolder{
-    background-color: white;
-    width: 500px;
-    padding-left: 15px;
-    padding-right: 15px;
-    display: flex;
-    flex-direction: column;
-    align-items: centre;
-    justify-content: center;
-    border-radius: 30px;
-    position: absolute;
-    top: 200px;
-    padding-bottom: 10px;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+.location-form {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 90%;
+  flex-wrap: wrap;
+  /* background-color: red; */
 }
 
-.mapContainer{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    margin-top: 110px;
+.location-form input {
+  border-radius: 30px;
+  border: 1px solid #d0d0d0;
+  padding: 20px;
+  width: 45%;
+  margin-bottom: 30px;
+}
+.location-form input::placeholder {
+  color: #c4c4c4;
 }
 
-  .mapSearchBtn{
-    background-color: pink;
-    color: white;
-    border: none;
-    padding: 5px;
-    width: 140px;
-    border-radius: 5px;
-    margin-right: 10px;
+.showMapBtn {
+  display: flex;
+  align-items: right;
+  justify-content: flex-end;
+  width: 100%;
+}
 
+.showMapBtn button {
+  padding: 15px;
+  border: none;
+  background-color: black;
+  color: white;
+  border-radius: 5px;
+}
 
-  }
+.showMapBtn button:hover {
+  cursor: pointer;
+}
 
-  .hiddenMapSection{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    opacity: 0;
-    height:0px;
-    transition: height 0.3s ease;
+.showMapBtn button:disabled {
+  background-color: grey;
+  cursor: auto;
+}
 
+.searchHolder {
+  background-color: white;
+  width: 500px;
+  padding-left: 15px;
+  padding-right: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: centre;
+  justify-content: center;
+  border-radius: 30px;
+  position: absolute;
+  top: 200px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
 
-  }
+.mapContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 110px;
+}
 
-  .hiddenMapSection.show {
-    height: 100px;
-    opacity: 1;
-   
-  }
+.mapSearchBtn {
+  background-color: pink;
+  color: white;
+  border: none;
+  padding: 5px;
+  width: 140px;
+  border-radius: 5px;
+  margin-right: 10px;
+}
 
-  .imnput{
-    position: relative;
-    top: 10px;
-  }
+.hiddenMapSection {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  opacity: 0;
+  height: 0px;
+  transition: height 0.3s ease;
+}
 
-  .locationLink{
-    margin-left: 10px;
-    text-decoration: underline;
-  }
+.hiddenMapSection.show {
+  height: 100px;
+  opacity: 1;
+}
 
+.input {
+  position: relative;
+  padding: 5px;
+}
+
+/* .input input{
+  background-color: red;
+} */
+
+.locationLink {
+  margin-left: 10px;
+  text-decoration: underline;
+}
