@@ -22,11 +22,10 @@ import {
   useCreateProgressMutation,
   useGetProgressQuery,
   useUpdateProgressMutation,
-  useDeleteProgressMutation,
 } from "@/features/progress/progressSlice";
-import { useCreateEventCentreMutation } from "@/features/Event Centre/eventCentreSlice";
 
 const HostAnEventCentrePage = ({}) => {
+  const [active, setActive] = useState("Overview");
   const [selectedFiles, setSelectedFiles] = useState([]);
   const isSubmitDisabled = selectedFiles.length < 5;
   const coverPhoto = selectedFiles.length > 0 ? selectedFiles[0] : null;
@@ -36,9 +35,12 @@ const HostAnEventCentrePage = ({}) => {
   const [description, setDescription] = useState("");
   const [name, setName] = useState("");
   const [capacity, setCapacity] = useState(10);
+  const [isRadioButtonSelected, setIsRadioButtonSelected] = useState(false);
   const [descriptionsPick, setDescriptionsPick] = useState([]);
   const [activeAmenities, setActiveAmenities] = useState([]);
   const [address, setAddress] = useState("");
+  // const [city, setCity] = useState("");
+  // const [state, setState] = useState("");
   const [progressId, setProgressId] = useState("");
 
   const id = "64958637db3d3493ebaf8c84";
@@ -59,6 +61,8 @@ const HostAnEventCentrePage = ({}) => {
     if (progressSuccess === true && progress) {
       setName(progress.name);
       setAddress(progress.address);
+      // setCity(progress.city);
+      // setState(progress.state);
       setCapacity(progress.capacity);
       setPrice(progress.price);
       setDescription(progress.description);
@@ -69,53 +73,59 @@ const HostAnEventCentrePage = ({}) => {
     }
   }, [progressSuccess, progress]);
 
-  const [active, setActive] = useState("Overview");
-
   useEffect(() => {
-    if (progressSuccess === true) {
-      setActive(determineInitialState());
-    }
-  }, [progressSuccess]);
-
-  const determineInitialState = () => {
-    if (progress.centreType !== "" && progress.address === "") {
-      return "CentreTypePicker";
-    } else if (progress.address !== "" && progress.capacity === 10) {
-      return "LocationPicker";
-    } else if (progress.capacity > 10 && progress.amenities.length === 0) {
-      return "Capacity";
-    } else if (progress.amenities.length > 0 && progress.name === "") {
-      return "AmenityPicker";
-    } else if (progress.name !== "" && progress.description === "") {
-      return "NamePicker";
-    } else if (
-      progress.description !== "" &&
-      progress.descriptionPicker.length === 0
+    // Check if progress exists and update the active state
+    if (
+      progressSuccess &&
+      progress.activeType !== "" &&
+      progress.address == ""
     ) {
-      return "DescriptionInfo";
-    } else if (progress.descriptionPicker.length > 0 && progress.price === 0) {
-      return "DescriptionPicker";
-    } else if (progress.price > 0) {
-      return "PricePicker";
+      setActive("CentreTypePicker");
+    } else if (
+      progressSuccess &&
+      progress.address !== "" &&
+      progress.capacity <= 10
+    ) {
+      setActive("LocationPicker");
+    } else if (
+      progressSuccess &&
+      progress.capacity > 10 &&
+      progress.amenities == ""
+    ) {
+      setActive("Capacity");
+    } else if (
+      progressSuccess &&
+      progress.amenities !== "" &&
+      progress.name == ""
+    ) {
+      setActive("AmenityPicker");
+    } else if (
+      progressSuccess &&
+      progress.name !== "" &&
+      progress.description == ""
+    ) {
+      setActive("NamePicker");
+    } else if (
+      progressSuccess &&
+      progress.description !== "" &&
+      progress.descriptionPicker == ""
+    ) {
+      setActive("DescriptionInfo");
+    } else if (
+      progressSuccess &&
+      progress.descriptionPicker !== "" &&
+      progress.price == 0
+    ) {
+      setActive("DescriptionPicker");
+    } else if (progressSuccess && progress.price !== "") {
+      setActive("PricePicker");
+    } else {
+      setActive("Overview");
     }
-    return "Overview";
-  };
+  }, [progress]);
 
   const [createProgress] = useCreateProgressMutation();
   const [updateProgress] = useUpdateProgressMutation(progressId);
-  const [deleteProgress] = useDeleteProgressMutation(progressId);
-
-  const handleProgressDelete = async () => {
-    try {
-      await deleteProgress(progressId);
-      // Handle success
-      console.log("Progress deleted successfully");
-    } catch (error) {
-      // Handle error
-      console.error(error);
-      window.alert("An error occurred. Please try again.");
-    }
-  };
 
   const progressHandleSubmit = async (e) => {
     e.preventDefault();
@@ -135,9 +145,10 @@ const HostAnEventCentrePage = ({}) => {
     };
     handleReload();
 
-    if (progressSuccess === true) {
+    if (progressSuccess === true && progressId) {
       try {
         await updateProgress({ progressId, ...formData }); // Call the update mutation
+        // window.alert("Progress updated successfully");
         handleReload();
       } catch (error) {
         console.error(error);
@@ -146,38 +157,12 @@ const HostAnEventCentrePage = ({}) => {
     } else {
       try {
         await createProgress(formData); // Call the create mutation
+        // window.alert("Progress created successfully");
         handleReload();
       } catch (error) {
         console.error(error);
         window.alert("An error occurred. Please try again.");
       }
-    }
-  };
-
-  const [createEventCentre] = useCreateEventCentreMutation();
-  const eventCentreHandleSubmit = async (e) => {
-    e.preventDefault();
-
-    const formData = {
-      name: name,
-      address: address,
-      capacity: capacity,
-      price: price,
-      description: description,
-      city: "",
-      state: "",
-      venueOwner: id,
-      amenities: activeAmenities,
-      descriptionPicker: descriptionsPick,
-      centreType: activeType,
-    };
-
-    try {
-      await createEventCentre(formData); // Call the create mutation
-      window.alert("Event centre created successfully");
-    } catch (error) {
-      console.error(error);
-      window.alert("An error occurred. Please try again.");
     }
   };
 
@@ -206,7 +191,10 @@ const HostAnEventCentrePage = ({}) => {
               />
             )}
             {active === "LocationPicker" && (
-              <LocationPicker address={address} setAddress={setAddress} />
+              <LocationPicker
+                address={address}
+                setAddress={setAddress}
+              />
             )}
             {active === "Capacity" && (
               <Capacity capacity={capacity} setCapacity={setCapacity} />
@@ -251,6 +239,12 @@ const HostAnEventCentrePage = ({}) => {
             {active === "PricePicker" && (
               <PricePicker price={price} setPrice={setPrice} />
             )}
+            {/* {active === "Legal" && (
+              <Legal
+                isRadioButtonSelected={isRadioButtonSelected}
+                setIsRadioButtonSelected={setIsRadioButtonSelected}
+              />
+            )} */}
             {active === "ReviewListings" && (
               <ReviewListings
                 selectedFiles={selectedFiles}
@@ -293,7 +287,11 @@ const HostAnEventCentrePage = ({}) => {
                   ? styles["loader-medium11-width"]
                   : active === "PricePicker"
                   ? styles["loader-medium12-width"]
+                  : active === "Legal"
+                  ? styles["loader-medium13-width"]
                   : styles["loader-full-width"]
+
+                // : styles["loader-full-width"]
               }`}
             ></div>
           </div>
@@ -528,7 +526,7 @@ const HostAnEventCentrePage = ({}) => {
             {active === "PricePicker" && (
               <button
                 onClick={(e) => {
-                  setActive("ReviewListings");
+                  setActive("Legal");
                   progressHandleSubmit(e);
                 }}
                 className={styles["next-btn"]}
@@ -537,7 +535,7 @@ const HostAnEventCentrePage = ({}) => {
                 Next
               </button>
             )}
-            {active === "ReviewListings" && (
+            {active === "Legal" && (
               <button
                 className={styles["back-btn"]}
                 onClick={() => setActive("PricePicker")}
@@ -545,12 +543,26 @@ const HostAnEventCentrePage = ({}) => {
                 Back
               </button>
             )}
+            {active === "Legal" && (
+              <button
+                onClick={() => setActive("ReviewListings")}
+                className={styles["next-btn"]}
+                disabled={!isRadioButtonSelected}
+              >
+                Next
+              </button>
+            )}
             {active === "ReviewListings" && (
               <button
-                onClick={(e) => {
-                  handleProgressDelete(e);
-                  eventCentreHandleSubmit(e);
-                }}
+                className={styles["back-btn"]}
+                onClick={() => setActive("Legal")}
+              >
+                Back
+              </button>
+            )}
+            {active === "ReviewListings" && (
+              <button
+                onClick={() => setActive("")}
                 className={styles["next-btn"]}
               >
                 Next

@@ -5,12 +5,12 @@ import { AiOutlineClose } from "react-icons/ai";
 import { MdCancel } from "react-icons/md";
 import EmailVerification from "../Email Verification Modal/EmailVerification";
 
-if (typeof document !== "undefined") {
-  const AOS = require("aos");
-  require("aos/dist/aos.css");
-  AOS.init();
-  // AOS.init({ disable: true });
-}
+// if (typeof document !== "undefined") {
+//   const AOS = require("aos");
+//   require("aos/dist/aos.css");
+//   AOS.init();
+//   // AOS.init({ disable: true });
+// }
 
 export function DetailsGalleryPopup(props) {
   return props.trigger ? (
