@@ -41,7 +41,7 @@ const HostAnEventCentrePage = ({}) => {
   const [activeAmenities, setActiveAmenities] = useState([]);
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
-  const [state, setState] = useState("");
+  const [state, setisState] = useState("");
   const [progressId, setProgressId] = useState("");
 
   const id = "64958637db3d3493ebaf8c84";
@@ -63,7 +63,7 @@ const HostAnEventCentrePage = ({}) => {
       setName(progress.name);
       setAddress(progress.address);
       setCity(progress.city);
-      setState(progress.state);
+      setisState(progress.state);
       setCapacity(progress.capacity);
       setPrice(progress.price);
       setDescription(progress.description);
@@ -198,7 +198,7 @@ const HostAnEventCentrePage = ({}) => {
                 city={city}
                 setCity={setCity}
                 state={state}
-                setState={setState}
+                setisState={setisState}
               />
             )}
             {active === "Capacity" && (

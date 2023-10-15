@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 
 import "./LocationPicker.css";
 
-const LocationPicker = ({ address, setAddress, city, setCity, state, setState }) => {
+const LocationPicker = ({ address, setAddress, city, setCity, state, setisState }) => {
   const [houseNo, setHouseNo] = useState("");
   const [streetEstate, setStreetEstate] = useState("");
 
@@ -12,7 +12,7 @@ const LocationPicker = ({ address, setAddress, city, setCity, state, setState })
   const handleHouseNoChange = (e) => setHouseNo(e.target.value);
   const handleStreetEstateChange = (e) => setStreetEstate(e.target.value);
   const handleCityChange = (e) => setCity(e.target.value);
-  const handleStateChange = (e) => setState(e.target.value);
+  const handleStateChange = (e) => setisState(e.target.value);
 
   // Combine the values into one text
   const combinedText = `${houseNo} ${streetEstate}, ${city}, ${state}`;
