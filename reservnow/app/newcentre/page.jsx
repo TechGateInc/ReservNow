@@ -7,6 +7,7 @@ import Slider from "@mui/material/Slider";
 
 import styles from "./page.module.css";
 import EstimateModal from "@/components/modals/EstimateModal/EstimateModal";
+import { useGetProgressQuery } from "@/features/progress/progressSlice";
 
 const NewCentrePage = ({}) => {
   const [money, setMoney] = useState(5000);
@@ -26,6 +27,18 @@ const NewCentrePage = ({}) => {
   useEffect(() => {
     setSliderReady(true);
   }, []);
+
+  const id = "652c413c376e3cb68dc91f30";
+  const {
+    data: progress,
+    loading: progressLoading,
+    isSuccess: progressSuccess,
+    isError: progressError,
+    error: progressErrorData,
+    refetch: refetchProgress,
+  } = useGetProgressQuery(id);
+
+  console.log(progress)
 
   function DiscreteSlider() {
     return (
@@ -63,7 +76,7 @@ const NewCentrePage = ({}) => {
         <div className={styles["pageHeaderBtn"]}>
           <p>Ready to Reserv it?</p>
           <Link
-            href={"/host-an-eventcentre"}
+            href={progressSuccess && progress.centreType ? "/" : "/host-an-eventcentre"}
             style={{ textDecoration: "none" }}
           >
             <div className={styles["setUpBtn"]}>ReserveNov SetUp</div>

@@ -44,7 +44,7 @@ const HostAnEventCentrePage = ({}) => {
   const [state, setisState] = useState("");
   const [progressId, setProgressId] = useState("");
 
-  const id = "64958637db3d3493ebaf8c84";
+  const id = "652c413c376e3cb68dc91f30";
   const {
     data: progress,
     loading: progressLoading,
@@ -74,56 +74,56 @@ const HostAnEventCentrePage = ({}) => {
     }
   }, [progressSuccess, progress]);
 
-  useEffect(() => {
-    // Check if progress exists and update the active state
-    if (
-      progressSuccess &&
-      progress.activeType !== "" &&
-      progress.address == ""
-    ) {
-      setActive("CentreTypePicker");
-    } else if (
-      progressSuccess &&
-      progress.address !== "" &&
-      progress.capacity <= 10
-    ) {
-      setActive("LocationPicker");
-    } else if (
-      progressSuccess &&
-      progress.capacity > 10 &&
-      progress.amenities == ""
-    ) {
-      setActive("Capacity");
-    } else if (
-      progressSuccess &&
-      progress.amenities !== "" &&
-      progress.name == ""
-    ) {
-      setActive("AmenityPicker");
-    } else if (
-      progressSuccess &&
-      progress.name !== "" &&
-      progress.description == ""
-    ) {
-      setActive("NamePicker");
-    } else if (
-      progressSuccess &&
-      progress.description !== "" &&
-      progress.descriptionPicker == ""
-    ) {
-      setActive("DescriptionInfo");
-    } else if (
-      progressSuccess &&
-      progress.descriptionPicker !== "" &&
-      progress.price == 0
-    ) {
-      setActive("DescriptionPicker");
-    } else if (progressSuccess && progress.price !== "") {
-      setActive("PricePicker");
-    } else {
-      setActive("Overview");
-    }
-  }, [progress]);
+  // useEffect(() => {
+  //   // Check if progress exists and update the active state
+  //   if (
+  //     progressSuccess &&
+  //     progress.activeType !== "" &&
+  //     progress.address == ""
+  //   ) {
+  //     setActive("CentreTypePicker");
+  //   } else if (
+  //     progressSuccess &&
+  //     progress.address !== "" &&
+  //     progress.capacity <= 10
+  //   ) {
+  //     setActive("LocationPicker");
+  //   } else if (
+  //     progressSuccess &&
+  //     progress.capacity > 10 &&
+  //     progress.amenities == ""
+  //   ) {
+  //     setActive("Capacity");
+  //   } else if (
+  //     progressSuccess &&
+  //     progress.amenities !== "" &&
+  //     progress.name == ""
+  //   ) {
+  //     setActive("AmenityPicker");
+  //   } else if (
+  //     progressSuccess &&
+  //     progress.name !== "" &&
+  //     progress.description == ""
+  //   ) {
+  //     setActive("NamePicker");
+  //   } else if (
+  //     progressSuccess &&
+  //     progress.description !== "" &&
+  //     progress.descriptionPicker == ""
+  //   ) {
+  //     setActive("DescriptionInfo");
+  //   } else if (
+  //     progressSuccess &&
+  //     progress.descriptionPicker !== "" &&
+  //     progress.price == 0
+  //   ) {
+  //     setActive("DescriptionPicker");
+  //   } else if (progressSuccess && progress.price !== "") {
+  //     setActive("PricePicker");
+  //   } else {
+  //     setActive("Overview");
+  //   }
+  // }, [progress]);
 
   const [createProgress] = useCreateProgressMutation();
   const [updateProgress] = useUpdateProgressMutation(progressId);
