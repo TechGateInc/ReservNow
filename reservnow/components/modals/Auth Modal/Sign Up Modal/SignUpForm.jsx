@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import styles from "./signUpModal.module.css";
 import { useState } from "react";
+
+import styles from "./signUpModal.module.css";
 
 export default function SignUpForm({ formData, handleChange, handleSubmit }) {
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -71,41 +72,25 @@ export default function SignUpForm({ formData, handleChange, handleSubmit }) {
         <p>
           By selecting <b>Agree and continue</b>, i agree to ReservNow's
           <b>
-            <Link
-              href={{}}
-              style={{ textDecoration: "none", color: "pink" }}
-            >
-              {" "}
-              Terms of Service{" "}
+            <Link href={"/"} style={{ textDecoration: "none", color: "pink" }}>
+              Terms of Service
             </Link>
           </b>
           ,
           <b>
-            <Link
-              href={{}}
-              style={{ textDecoration: "none", color: "pink" }}
-            >
-              {" "}
+            <Link href={"/"} style={{ textDecoration: "none", color: "pink" }}>
               Payments Terms of Service
             </Link>
           </b>
           , and
           <b>
-            <Link
-              href={{}}
-              style={{ textDecoration: "none", color: "pink" }}
-            >
-              {" "}
-              Nondiscrimination Policy{" "}
+            <Link href={"/"} style={{ textDecoration: "none", color: "pink" }}>
+              Nondiscrimination Policy
             </Link>
           </b>
           and acknowledge the
           <b>
-            <Link
-              href={{}}
-              style={{ textDecoration: "none", color: "pink" }}
-            >
-              {" "}
+            <Link href={"/"} style={{ textDecoration: "none", color: "pink" }}>
               Privacy Policy
             </Link>
           </b>

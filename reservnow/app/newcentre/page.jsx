@@ -2,13 +2,12 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-
-import styles from "./page.module.css";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
-import EstimateModal from "@/components/modals/EstimateModal/EstimateModal";
 
-import { Providers } from "@/Provider";
+import styles from "./page.module.css";
+import EstimateModal from "@/components/modals/EstimateModal/EstimateModal";
+import { useGetProgressQuery } from "@/features/progress/progressSlice";
 
 const NewCentrePage = ({ }) => {
   const [money, setMoney] = useState(5000);
@@ -28,6 +27,18 @@ const NewCentrePage = ({ }) => {
   useEffect(() => {
     setSliderReady(true);
   }, []);
+
+  const id = "652c413c376e3cb68dc91f30";
+  const {
+    data: progress,
+    loading: progressLoading,
+    isSuccess: progressSuccess,
+    isError: progressError,
+    error: progressErrorData,
+    refetch: refetchProgress,
+  } = useGetProgressQuery(id);
+
+  console.log(progress)
 
   function DiscreteSlider() {
     return (
@@ -51,7 +62,7 @@ const NewCentrePage = ({ }) => {
     );
   }
   return (
-    <Providers>
+    <div className={styles["new-centre-root"]}>
       <div className={styles["newPageHeader"]}>
         <div>
           <Link href={"/"}>
@@ -64,8 +75,11 @@ const NewCentrePage = ({ }) => {
         </div>
         <div className={styles["pageHeaderBtn"]}>
           <p>Ready to Reserv it?</p>
-          <Link href={"/host-an-eventcentre"} style={{ textDecoration: "none" }}>
-            <div className={styles["setUpBtn"]}>ReserveNov SetUp</div>
+          <Link
+            href={progressSuccess && progress.centreType ? "/" : "/host-an-eventcentre"}
+            style={{ textDecoration: "none" }}
+          >
+            <div className={styles["setUpBtn"]}>ReservNow SetUp</div>
           </Link>
         </div>
       </div>
@@ -73,9 +87,7 @@ const NewCentrePage = ({ }) => {
         <div className={styles["newPageText"]}>
           <p className={styles["ReservText"]}>Reserv It.</p>
           <p className={styles["ReservText2"]}>You Could Earn</p>
-          <p className={styles["ReservText2"]}>
-            ₦
-          </p>
+          <p className={styles["ReservText2"]}>₦</p>
           <p style={{ marginTop: 20 }}>
             {hours} hours at an estimated ₦5000 an hour
           </p>
@@ -112,7 +124,7 @@ const NewCentrePage = ({ }) => {
           ></iframe>
         </div>
       </div>
-    </Providers>
+    </div>
   );
 };
 

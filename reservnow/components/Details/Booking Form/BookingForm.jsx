@@ -2,12 +2,6 @@
 
 import { useState } from "react";
 import { useSelector } from "react-redux";
-
-import "./bookingForm.css";
-
-import { useCreateBookingMutation } from "@/features/booking/bookingSlice";
-import { selectCurrentToken } from "@/features/auth/authSlice";
-
 import { AiFillStar } from "react-icons/ai";
 import { TbCurrencyNaira } from "react-icons/tb";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
@@ -16,6 +10,10 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import dayjs from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
+
+import "./bookingForm.css";
+import { useCreateBookingMutation } from "@/features/booking/bookingSlice";
+import { selectCurrentToken } from "@/features/auth/authSlice";
 import LoginModal from "@/components/modals/Auth Modal/LoginModal";
 
 const BookingForm = ({ id, eventCentre, review }) => {
@@ -89,9 +87,9 @@ const BookingForm = ({ id, eventCentre, review }) => {
 
   const isUserLoggedIn = () => {
     if (!token) {
-      setTrigger(true)
+      setTrigger(true);
     }
-  }
+  };
 
   return (
     <div className="card-right-root" key={eventCentre._id}>
@@ -123,7 +121,7 @@ const BookingForm = ({ id, eventCentre, review }) => {
               </b>
             </div>
           </div>
-          <div >
+          <div>
             <div className="card-right-content">
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DemoContainer
@@ -171,7 +169,9 @@ const BookingForm = ({ id, eventCentre, review }) => {
               </div>
             </div>
             <div className="book-btn">
-              <button type="submit" onClick={isUserLoggedIn}>Book</button>
+              <button type="submit" onClick={isUserLoggedIn}>
+                Book
+              </button>
             </div>
           </div>
           <div
@@ -210,10 +210,7 @@ const BookingForm = ({ id, eventCentre, review }) => {
           </div>
         </div>
       </div>
-      <LoginModal
-        showLoginModal={trigger}
-        setShowLoginModal={setTrigger}
-      />
+      <LoginModal showLoginModal={trigger} setShowLoginModal={setTrigger} />
     </div>
   );
 };

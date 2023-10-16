@@ -1,7 +1,6 @@
 .galleryHolder {
   padding-left: 5%;
   padding-right: 5%;
-  margin-top: 100px;
 }
 
 .galleryCardV1 {
@@ -12,7 +11,6 @@
   justify-content: center;
   align-items: center;
   margin-bottom: 10px;
-  
 }
 
 .galleryCardHolder {
@@ -21,10 +19,6 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
- 
-}
-
-.centreImageHolder {
 }
 
 .centreDesc {
@@ -49,7 +43,6 @@
   z-index: 1;
   width: 20px;
 }
-
 
 .likeIcon1 {
   color: white;
@@ -77,5 +70,4 @@
   display: flex;
   overflow-x: auto;
   white-space: nowrap;
-  /* Add other styles as needed */
 }

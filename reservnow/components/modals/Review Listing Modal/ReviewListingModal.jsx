@@ -1,5 +1,6 @@
-import "./reviewListingModal.css";
 import { IoIosArrowBack } from "react-icons/io";
+
+import "./reviewListingModal.css";
 
 export function ReviewListingModal(props) {
   return props.trigger ? (
@@ -50,12 +51,14 @@ export function ReviewListingModal(props) {
                 >
                   Location
                 </div>
-                <div className="text">
-                 {props.address}
-                </div>
+                <div className="text">{props.address}</div>
                 <div className="policy">
                   We’ll only share your address with guests who are booked as
-                  outlined in our <span style={{textDecoration: "underline"}}>privacy policy</span>.
+                  outlined in our{" "}
+                  <span style={{ textDecoration: "underline" }}>
+                    privacy policy
+                  </span>
+                  .
                 </div>
               </div>
             </div>

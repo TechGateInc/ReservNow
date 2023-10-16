@@ -1,7 +1,9 @@
 "use client"
+
 import React, { useState, useRef } from "react";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/splide/dist/css/splide.min.css";
+
 import "./CentreGallery.css";
 
 const ImageSlider = () => {

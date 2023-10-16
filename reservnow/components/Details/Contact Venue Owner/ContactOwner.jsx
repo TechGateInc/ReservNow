@@ -1,15 +1,14 @@
-import "./contactOwner.css";
 import dayjs from "dayjs";
 import { AiFillStar } from "react-icons/ai";
 import { VscVerifiedFilled } from "react-icons/vsc";
 import { BsShield } from "react-icons/bs";
 
-const ContactOwner = ({  eventCentre, review }) => {
+import "./contactOwner.css";
+
+const ContactOwner = ({ eventCentre, review }) => {
   // Assuming centreDetails.venueOwner.createdAt is a valid date string
   const createdAt = dayjs(
-    eventCentre &&
-    eventCentre.venueOwner &&
-    eventCentre.venueOwner.createdAt
+    eventCentre && eventCentre.venueOwner && eventCentre.venueOwner.createdAt
   );
 
   // Format the date as "MMMM YYYY" (e.g., "June 2023")
@@ -57,7 +56,7 @@ const ContactOwner = ({  eventCentre, review }) => {
           <button>Contact Owner</button>
         </div>
         <div className="protection">
-          <BsShield style={{fontSize: "20px"}}/>
+          <BsShield style={{ fontSize: "20px" }} />
           <div className="text">
             To protect your payment, never transfer money or communicate outside
             of the ReservNow website.

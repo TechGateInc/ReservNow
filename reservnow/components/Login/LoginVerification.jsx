@@ -1,5 +1,6 @@
-import "./LoginVerfication.css";
 import { AiOutlineMail, AiOutlinePhone } from "react-icons/ai";
+
+import "./LoginVerfication.css";
 
 const LoginVerification = ({ setActive }) => {
   return (

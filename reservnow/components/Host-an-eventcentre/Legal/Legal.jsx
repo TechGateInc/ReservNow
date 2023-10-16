@@ -1,8 +1,5 @@
-"use client";
-
-import React, { useState } from "react";
-import "./legal.css";
 import { GrCircleInformation } from "react-icons/gr";
+import "./legal.css";
 
 const Legal = ({ isRadioButtonSelected, setIsRadioButtonSelected }) => {
   const handleRadioButtonChange = (event) => {

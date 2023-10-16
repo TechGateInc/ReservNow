@@ -1,11 +1,12 @@
 "use client";
 
+import { useState, useEffect } from "react";
+import { MdArrowForwardIos } from "react-icons/md";
+
 import "./thingsToKnow.css";
 import { CentreRulesPopup } from "../../modals/Popup/Popup";
 import { SafetyPropertyPopup } from "../../modals/Popup/Popup";
 import { CancellationPolicyPopup } from "../../modals/Popup/Popup";
-import { MdArrowForwardIos } from "react-icons/md";
-import { useState, useEffect } from "react";
 
 const ThingsToKnow = ({}) => {
   const [centreRules, setCentreRules] = useState(false);

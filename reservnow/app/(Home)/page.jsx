@@ -1,5 +1,3 @@
-"use client";
-
 import { Providers } from "@/Provider";
 import CentreGallery from "@/components/CentreGallery/CentreGallery";
 

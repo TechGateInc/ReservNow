@@ -1,8 +1,9 @@
 "use client";
 
-import "./detailsGallery.css";
 import { useState, useEffect } from "react";
 import { TfiGallery } from "react-icons/tfi";
+
+import "./detailsGallery.css";
 import { DetailsGalleryPopup } from "../../modals/Popup/Popup";
 
 const DetailsGallery = () => {
@@ -36,7 +37,11 @@ const DetailsGallery = () => {
 
   return (
     <div className="details-gallery-root">
-      <div className="details-image-container" onClick={() => setGallery(true)} style={{cursor: "pointer"}}>
+      <div
+        className="details-image-container"
+        onClick={() => setGallery(true)}
+        style={{ cursor: "pointer" }}
+      >
         <div className="details-image-right">
           <img src="/images/details.jpg" alt="" />
         </div>

@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import "./PricePicker.css";
 import { AiOutlineMinus } from "react-icons/ai";
 import { IoAddOutline } from "react-icons/io5";
+
+import "./PricePicker.css";
 
 const PricePicker = ({ price, setPrice }) => {
   const handlePlusClick = () => {
