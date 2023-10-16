@@ -1,0 +1,21 @@
+.hosting-header-root {
+  width: 100%;
+  padding: 20px;
+  border: 1px solid #eeeded;
+}
+.hostingHeader-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.hostingHeader-content ul {
+  display: flex;
+  /* background-color: blue; */
+  width: 400px;
+  justify-content: space-between;
+}
+.hostingHeader-content ul li {
+  text-decoration: none;
+  list-style: none;
+  color: #c7c0c0;
+}

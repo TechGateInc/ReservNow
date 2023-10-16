@@ -76,7 +76,7 @@ const NewCentrePage = ({}) => {
         <div className={styles["pageHeaderBtn"]}>
           <p>Ready to Reserv it?</p>
           <Link
-            href={progressSuccess && progress.centreType ? "/" : "/host-an-eventcentre"}
+            href={progressSuccess && progress.centreType ? "/hosting" : "/host-an-eventcentre"}
             style={{ textDecoration: "none" }}
           >
             <div className={styles["setUpBtn"]}>ReserveNov SetUp</div>

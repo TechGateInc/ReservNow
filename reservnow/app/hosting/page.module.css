@@ -1,0 +1,83 @@
+.hosting-container {
+  margin-top: 50px;
+  padding-left: 150px;
+  padding-right: 150px;
+}
+.progress-container {
+  display: flex;
+  align-items: center;
+  width: 300px;
+  justify-content: space-between;
+  border: 1px solid #d6d6d6;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 40px;
+}
+.progress-container p {
+  margin-top: 3px;
+}
+.progress-container button {
+  background-color: white;
+  border: none;
+  font-size: 16px;
+  text-decoration: underline;
+  margin-top: 5px;
+  cursor: pointer;
+}
+.your-reservations .title {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+.your-reservations .title p {
+  font-weight: bold;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.your-reservations-navBar ul {
+  display: flex;
+  width: 70%;
+  justify-content: space-between;
+  list-style: none;
+  margin-bottom: 30px;
+}
+.your-reservations-navBar ul li {
+  border: #d6d6d6 1px solid;
+  padding: 10px 15px 10px 15px;
+  border-radius: 20px;
+}
+.your-reservations-content {
+  width: 100%;
+  background-color: #f7f7f7;
+  border-radius: 10px;
+  padding: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.your-reservations-content p {
+  text-align: center;
+}
+.your-reservations-empty {
+  text-align: center;
+}
+.here-to-help {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+.here-to-help .title {
+  margin-bottom: 20px;
+}
+.here-to-help .content {
+  display: flex;
+}
+.here-to-help .content .help {
+  display: flex;
+  width: 450px;
+  border: 1px solid #d6d6d6;
+  padding: 20px;
+  border-radius: 10px;
+  cursor: pointer;
+}
