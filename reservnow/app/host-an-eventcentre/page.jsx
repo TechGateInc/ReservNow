@@ -25,7 +25,6 @@ import {
 } from "@/features/progress/progressSlice";
 
 const HostAnEventCentrePage = ({}) => {
-  const [active, setActive] = useState("Overview");
   const [selectedFiles, setSelectedFiles] = useState([]);
   const isSubmitDisabled = selectedFiles.length < 5;
   const coverPhoto = selectedFiles.length > 0 ? selectedFiles[0] : null;
@@ -39,11 +38,9 @@ const HostAnEventCentrePage = ({}) => {
   const [descriptionsPick, setDescriptionsPick] = useState([]);
   const [activeAmenities, setActiveAmenities] = useState([]);
   const [address, setAddress] = useState("");
-  // const [city, setCity] = useState("");
-  // const [state, setState] = useState("");
   const [progressId, setProgressId] = useState("");
 
-  const id = "64958637db3d3493ebaf8c84";
+  const id = "652c413c376e3cb68dc91f30";
   const {
     data: progress,
     loading: progressLoading,
@@ -61,8 +58,6 @@ const HostAnEventCentrePage = ({}) => {
     if (progressSuccess === true && progress) {
       setName(progress.name);
       setAddress(progress.address);
-      // setCity(progress.city);
-      // setState(progress.state);
       setCapacity(progress.capacity);
       setPrice(progress.price);
       setDescription(progress.description);
@@ -73,56 +68,64 @@ const HostAnEventCentrePage = ({}) => {
     }
   }, [progressSuccess, progress]);
 
-  useEffect(() => {
-    // Check if progress exists and update the active state
+  // console.log(progress);
+  const determineInitialState = () => {
     if (
-      progressSuccess &&
-      progress.activeType !== "" &&
-      progress.address == ""
+      progressSuccess === true &&
+      progress.centreType !== "" &&
+      progress.address === ""
     ) {
-      setActive("CentreTypePicker");
+      return "CentreTypePicker";
     } else if (
-      progressSuccess &&
+      progressSuccess === true &&
       progress.address !== "" &&
       progress.capacity <= 10
     ) {
-      setActive("LocationPicker");
+      return "LocationPicker";
     } else if (
-      progressSuccess &&
+      progressSuccess === true &&
       progress.capacity > 10 &&
-      progress.amenities == ""
+      progress.amenities.length === 0
     ) {
-      setActive("Capacity");
+      return "Capacity";
     } else if (
-      progressSuccess &&
-      progress.amenities !== "" &&
-      progress.name == ""
+      progressSuccess === true &&
+      progress.amenities.length > 0 &&
+      progress.name === ""
     ) {
-      setActive("AmenityPicker");
+      return "AmenityPicker";
     } else if (
-      progressSuccess &&
+      progressSuccess === true &&
       progress.name !== "" &&
-      progress.description == ""
+      progress.description === ""
     ) {
-      setActive("NamePicker");
+      return "NamePicker";
     } else if (
-      progressSuccess &&
+      progressSuccess === true &&
       progress.description !== "" &&
-      progress.descriptionPicker == ""
+      progress.descriptionPicker.length === 0
     ) {
-      setActive("DescriptionInfo");
+      return "DescriptionInfo";
     } else if (
-      progressSuccess &&
-      progress.descriptionPicker !== "" &&
-      progress.price == 0
+      progressSuccess === true &&
+      progress.descriptionPicker.length > 0 &&
+      progress.price === 0
     ) {
-      setActive("DescriptionPicker");
-    } else if (progressSuccess && progress.price !== "") {
-      setActive("PricePicker");
-    } else {
-      setActive("Overview");
+      return "DescriptionPicker";
+    } else if (progressSuccess === true && progress.price > 0) {
+      return "PricePicker";
     }
-  }, [progress]);
+  };
+
+  // useEffect(() => {
+  //   // Determine the initial state after rendering is complete
+  //     console.log("useEffect is running");
+  //     const initialState = determineInitialState();
+  //     console.log(initialState);
+  //     setActive(initialState);
+  // }, [determineInitialState !== undefined]); // Empty dependency array for initial render
+
+  const [active, setActive] = useState("Overview");
 
   const [createProgress] = useCreateProgressMutation();
   const [updateProgress] = useUpdateProgressMutation(progressId);
@@ -143,7 +146,7 @@ const HostAnEventCentrePage = ({}) => {
       descriptionPicker: descriptionsPick,
       centreType: activeType,
     };
-    handleReload();
+    // handleReload();
 
     if (progressSuccess === true && progressId) {
       try {
@@ -191,10 +194,7 @@ const HostAnEventCentrePage = ({}) => {
               />
             )}
             {active === "LocationPicker" && (
-              <LocationPicker
-                address={address}
-                setAddress={setAddress}
-              />
+              <LocationPicker address={address} setAddress={setAddress} />
             )}
             {active === "Capacity" && (
               <Capacity capacity={capacity} setCapacity={setCapacity} />

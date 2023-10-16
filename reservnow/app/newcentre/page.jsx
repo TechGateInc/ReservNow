@@ -69,7 +69,7 @@ const newCentrePage = ({}) => {
         <div className={styles["pageHeaderBtn"]}>
           <p>Ready to Reserv it?</p>
           <Link href={"/host-an-eventcentre"} style={{textDecoration: "none"}}>
-            <div className={styles["setUpBtn"]}>ReserveNov SetUp</div>
+            <div className={styles["setUpBtn"]}>ReservNow SetUp</div>
           </Link>
         </div>
       </div>
