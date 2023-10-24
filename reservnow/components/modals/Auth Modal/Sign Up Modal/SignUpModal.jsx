@@ -5,6 +5,7 @@ import { AiOutlineClose } from "react-icons/ai";
 
 import styles from "../loginModal.module.css";
 import SignUpForm from "./SignUpForm";
+import { useCreateUserMutation } from "@/features/auth/authApiSlice";
 
 export function SignUpModal(props) {
   const [signUpFormData, setSignUpFormData] = useState({
@@ -14,24 +15,20 @@ export function SignUpModal(props) {
     phoneNo: "",
   });
 
+  const [createUser] = useCreateUserMutation();
+
   const signUpHandleSubmit = async (e) => {
     e.preventDefault();
+
+    const formData = signUpFormData;
+
     try {
-      const response = await fetch(`${config.baseURL}/user/signup`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(signUpFormData),
-      });
-      // Handle response
-      const data = await response.json();
-      window.alert("Sign up successful");
+      await createUser(formData); // Call the create mutation
+      window.alert("User created successfully");
     } catch (error) {
-      window.alert("Sign up failed");
       console.error(error);
+      window.alert("An error occurred. Please try again.");
     }
-    setSignUpFormData({ name: "", email: "", password: "", phoneNo: "" });
   };
 
   const signUpHandleChange = (e) => {
@@ -46,8 +43,8 @@ export function SignUpModal(props) {
         <button
           className={styles["back-btn"]}
           onClick={() => {
-            props.checkEmailModalTrigger(true);
             props.setTrigger(false);
+            props.setEmailVerification(true);
           }}
         >
           <div className={styles["back-icon"]}>

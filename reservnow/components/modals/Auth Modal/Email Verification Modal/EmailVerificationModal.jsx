@@ -21,9 +21,9 @@ export function EmailVerificationModal(props) {
         <EmailVerificationForm
           email={props.email}
           setEmail={props.setEmail}
-          emailModalTrigger={props.setTrigger}
-          signInModalTrigger={props.signInModalTrigger}
-          signUpModalTrigger={props.signUpModalTrigger}
+          setTrigger={props.setTrigger}
+          setShowSignInModal={props.setShowSignInModal}
+          setName={props.setName}
         />
       </div>
     </div>

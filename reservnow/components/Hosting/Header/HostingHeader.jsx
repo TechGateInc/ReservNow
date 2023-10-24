@@ -31,19 +31,21 @@ const HostingHeader = ({}) => {
   return (
     <div className="hosting-header-root">
       <div className="hostingHeader-container">
-        <div className="logo">
+        <div>
           <img
             src="/images/RNL.svg"
             alt="ReservNow"
-            style={{ height: "22px" }}
+            style={{ height: "18px" }}
           />
         </div>
         <div className="hostingHeader-content">
           <ul>
-            <Link href={"/hosting"} style={{textDecoration: "none"}}>
+            <Link href={"/hosting"} style={{ textDecoration: "none" }}>
               <li>Today</li>
             </Link>
-            <li>Inbox</li>
+            <Link href={"/hosting/inbox"} style={{ textDecoration: "none" }}>
+              <li>Inbox</li>
+            </Link>
             <li>Calendar</li>
             <li>Insights</li>
             <li>Menu</li>

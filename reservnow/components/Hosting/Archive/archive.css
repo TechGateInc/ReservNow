@@ -1,0 +1,20 @@
+.archive-root {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+  .archive-root button {
+    margin-top: 20px;
+    padding: 15px 20px 15px 20px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+  }
+  

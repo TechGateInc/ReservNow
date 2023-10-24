@@ -1,0 +1,57 @@
+.schedule-message-root {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.schedule-message-container {
+  width: 500px;
+  background-color: #eeeded;
+  padding: 30px;
+  border-radius: 10px;
+  margin-top: 100px;
+}
+.schedule-message-root .createBtn {
+  padding: 10px 20px 10px 20px;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+.schedule-message-root .learnBtn {
+  padding: 10px 20px 10px 20px;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin-top: 10px;
+  background-color: white;
+  cursor: pointer;
+}
+
+/* For the Popup */
+.schedule-messages-title {
+  font-size: 25px;
+  font-weight: bold;
+}
+.template-name input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 10px;
+  outline: none;
+  margin-top: 30px;
+}
+.template-name p {
+  font-size: 12px;
+  color: grey;
+  margin-top: 5px;
+}
+.message {
+  margin-top: 30px;
+}
+.message-title {
+  font-weight: bold;
+}

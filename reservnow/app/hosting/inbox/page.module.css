@@ -1,0 +1,60 @@
+.inbox-root {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.inbox-sidebar-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.inbox-sidebar {
+  display: flex;
+  width: 90%;
+  border-radius: 20px;
+  padding: 10px 10px 10px 20px;
+  width: 90%;
+  display: flex;
+  align-items: center;
+  align-self: center;
+  align-content: center;
+}
+.inbox-sidebar:hover {
+  background-color: #eeeded;
+  cursor: pointer;
+  
+}
+.inbox-header-text {
+  font-weight: 600;
+  font-size: 20px;
+}
+.inbox-search-bar {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border: black 1px solid;
+  padding: 10px;
+  border-radius: 20px;
+  margin-top: 10px;
+}
+.inbox-search-bar input {
+  width: 100%;
+  border: none;
+  outline: none;
+  margin-left: 5px;
+}
+.activeItem {
+  background-color: black;
+  color: white;
+  border-radius: 20px;
+  padding: 10px 10px 10px 20px;
+  width: 90%;
+  display: flex;
+  align-items: center;
+}
+.activeItem:hover {
+    cursor:auto;
+    background-color: black;
+}
+

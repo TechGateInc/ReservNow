@@ -1,0 +1,13 @@
+.quick-replies-root {
+  width: 100%;
+}
+.quick-replies-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+.quick-replies-header {
+  margin-bottom: 20px;
+}
+.quick-replies-content .row {
+  display: flex;
+}

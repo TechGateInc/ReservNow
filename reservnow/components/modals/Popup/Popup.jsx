@@ -27,11 +27,20 @@ export function EstimatePopup(props) {
   return props.trigger ? (
     <div className={styles["popup-modal"]}>
       <div className={styles["popup-modal-inner"]}>
-        <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginBottom: 20 }}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+            marginBottom: 20,
+          }}
+        >
           <div>
             <p style={{ textAlign: "center" }}>Tell us about your Centre</p>
           </div>
-          <div className={styles["cancel-icon"]}
+          <div
+            className={styles["cancel-icon"]}
             onClick={() => {
               props.setTrigger(false);
             }}
@@ -180,6 +189,31 @@ export function CancellationPolicyPopup(props) {
         <div className="content" style={{ paddingTop: "30px" }}>
           {props.children}
         </div>
+      </div>
+    </div>
+  ) : (
+    ""
+  );
+}
+
+export function InboxPopup(props) {
+  return props.trigger ? (
+    <div
+      className={styles["popup-modal"]}
+      style={{ zIndex: 99999, position: "fixed" }}
+    >
+      <div className={styles["popup-modal-inner"]}>
+        <button
+          className={styles["close-btn"]}
+          onClick={() => {
+            props.setTrigger(false);
+          }}
+        >
+          <div className={styles["cancel-icon"]}>
+            <MdCancel />
+          </div>
+        </button>
+        {props.children}
       </div>
     </div>
   ) : (

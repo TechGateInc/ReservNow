@@ -7,34 +7,41 @@ import { EmailVerificationModal } from "./Email Verification Modal/EmailVerifica
 import { SignInModal } from "./SignIn Modal/SignInModal";
 import { SignUpModal } from "./Sign Up Modal/SignUpModal";
 
-export default function LoginModal({ showLoginModal, setShowLoginModal }) {
+export default function LoginModal({
+  emailVerification,
+  setEmailVerification,
+  showSignUpModal,
+  setShowSignUpModal,
+}) {
   const [showSignInModal, setShowSignInModal] = useState(false);
-  const [showSignUpModal, setShowSignUpModal] = useState(false);
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
 
   return (
     <div className={styles["login-modal-root"]}>
       <EmailVerificationModal
-        trigger={showLoginModal}
-        setTrigger={setShowLoginModal}
+        trigger={emailVerification}
+        setTrigger={setEmailVerification}
         email={email}
         setEmail={setEmail}
-        signInModalTrigger={setShowSignInModal}
-        signUpModalTrigger={setShowSignUpModal}
+        setShowSignInModal={setShowSignInModal}
+        name={name}
+        setName={setName}
       />
       <SignInModal
         trigger={showSignInModal}
         setTrigger={setShowSignInModal}
         email={email}
         setEmail={setEmail}
-        checkEmailModalTrigger={setShowLoginModal}
+        name={name}
       />
       <SignUpModal
         trigger={showSignUpModal}
         setTrigger={setShowSignUpModal}
         email={email}
         setEmail={setEmail}
-        checkEmailModalTrigger={setShowLoginModal}
+        emailVerification={emailVerification}
+        setEmailVerification={setEmailVerification}
       />
     </div>
   );

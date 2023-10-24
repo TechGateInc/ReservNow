@@ -2,34 +2,26 @@
 
 import styles from "./emailVerification.module.css";
 import config from "@/config";
+import { useGetUserEmailMutation } from "@/features/auth/authApiSlice";
 
 export default function EmailVerificationForm({
   email,
   setEmail,
-  emailModalTrigger,
-  signInModalTrigger,
-  signUpModalTrigger,
+  setShowSignInModal,
+  setTrigger,
+  setName,
 }) {
-  const handleEmailVerification = async (e) => {
-    e.preventDefault();
+  const [checkEmail] = useGetUserEmailMutation();
+
+  const handleEmailVerification = async () => {
     try {
-      const response = await fetch(
-        `${config.baseURL}/user/check-email/${email}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      // Handle response
-      const data = await response.json();
-      if (response.ok) {
-        emailModalTrigger(false);
-        signInModalTrigger(true);
+      const res = await checkEmail({ email: email });
+      if (res.data.message == "User Found") {
+        setName(res.data.user.name);
+        setTrigger(false);
+        setShowSignInModal(true);
       } else {
-        emailModalTrigger(false);
-        signUpModalTrigger(true);
+        window.alert("user does not exist");
       }
     } catch (error) {
       console.error(error);

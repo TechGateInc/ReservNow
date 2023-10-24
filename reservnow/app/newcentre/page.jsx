@@ -38,7 +38,6 @@ const NewCentrePage = ({}) => {
     refetch: refetchProgress,
   } = useGetProgressQuery(id);
 
-  console.log(progress)
 
   function DiscreteSlider() {
     return (
@@ -76,10 +75,14 @@ const NewCentrePage = ({}) => {
         <div className={styles["pageHeaderBtn"]}>
           <p>Ready to Reserv it?</p>
           <Link
-            href={progressSuccess && progress.centreType ? "/hosting" : "/host-an-eventcentre"}
+            href={
+              progressSuccess && progress.centreType
+                ? "/hosting"
+                : "/host-an-eventcentre"
+            }
             style={{ textDecoration: "none" }}
           >
-            <div className={styles["setUpBtn"]}>ReserveNov SetUp</div>
+            <div className={styles["setUpBtn"]}>ReservNow SetUp</div>
           </Link>
         </div>
       </div>

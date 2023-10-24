@@ -14,7 +14,7 @@ import LoginModal from "@/components/modals/Auth Modal/LoginModal";
 
 const Header = () => {
   const [emailVerification, setEmailVerification] = useState(false);
-
+  const [showSignUpModal, setShowSignUpModal] = useState(false);
   const [centres, getCentres] = useState(null);
   const [centreTypes, getCentreTypes] = useState(null);
 
@@ -238,17 +238,19 @@ const Header = () => {
             {isMenuOpen && (
               <div className="DropdownContent">
                 <div className="contentSection1">
-                  <Link
-                    href={"/"}
+                  <button
                     className="DropdownLinks"
                     onClick={() => setEmailVerification(true)}
                     style={{ textDecoration: "none" }}
                   >
                     Log in
-                  </Link>
-                  <Link href={"/"} className="DropdownLinks">
-                    Sign in
-                  </Link>
+                  </button>
+                  <button
+                    className="DropdownLinks"
+                    onClick={() => setShowSignUpModal(true)}
+                  >
+                    Sign up
+                  </button>
                 </div>
                 <div className="contentSection2">
                   <Link href={"/"} className="DropdownLinks">
@@ -263,6 +265,8 @@ const Header = () => {
       <LoginModal
         emailVerification={emailVerification}
         setEmailVerification={setEmailVerification}
+        showSignUpModal={showSignUpModal}
+        setShowSignUpModal={setShowSignUpModal}
       />
     </div>
   );

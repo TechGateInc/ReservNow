@@ -1,21 +1,28 @@
 .hosting-header-root {
   width: 100%;
-  padding: 20px;
+  padding: 9px 20px 9px 20px;
   border: 1px solid #eeeded;
+  z-index: 99999;
+  position: fixed;
+  background-color: white;
 }
 .hostingHeader-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 999 !important;
 }
 .hostingHeader-content ul {
   display: flex;
   /* background-color: blue; */
   width: 400px;
   justify-content: space-between;
+  z-index: 999 !important;
 }
 .hostingHeader-content ul li {
   text-decoration: none;
   list-style: none;
-  color: #c7c0c0;
+  color: #b5b5b5;
+  font-size: 15px;
+  z-index: 999 !important;
 }

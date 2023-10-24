@@ -1,14 +1,16 @@
 "use client";
 import styles from "./page.module.css";
 import { useGetProgressQuery } from "@/features/progress/progressSlice";
-import HostingHeader from "@/components/Hosting/Header/HostingHeader";
 import { useGetUserQuery } from "@/features/user/userSlice";
 import { AiOutlineInfoCircle } from "react-icons/ai";
 import { HiOutlineClipboardDocumentList } from "react-icons/hi2";
 import { BsFillPersonFill, BsHeadphones } from "react-icons/bs";
 import HostingFooter from "@/components/Hosting/Footer/HostingFooter";
+import { useAppSelector } from "@/hook";
 
 const Hosting = ({}) => {
+  const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
+  console.log(isLoggedIn);
   const id = "652c413c376e3cb68dc91f30";
   const {
     data: user,
@@ -30,7 +32,6 @@ const Hosting = ({}) => {
 
   return (
     <div className={styles["hosting-root"]}>
-      <HostingHeader />
       <div className={styles["hosting-container"]}>
         <h2>Welcome Back, {user && user.name}</h2>
         <div className={styles["progress-container"]}>
