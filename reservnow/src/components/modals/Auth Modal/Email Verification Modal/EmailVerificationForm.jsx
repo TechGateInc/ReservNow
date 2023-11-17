@@ -16,8 +16,8 @@ export default function EmailVerificationForm({
   const handleEmailVerification = async () => {
     try {
       const res = await checkEmail({ email: email })
-      if (res.data.message == "User Found") {
-        setName(res.data.name);
+      if (res && res.data.message == "User Found") {
+        setName(res.data.user.name);
         setTrigger(false);
         setShowSignInModal(true);
       } else {

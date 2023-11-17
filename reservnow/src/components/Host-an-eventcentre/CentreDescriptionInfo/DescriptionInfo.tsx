@@ -1,7 +1,19 @@
+"use client";
+import { NextPage } from "next";
+import React from "react";
+
 import "./DescriptionInfo.css";
 
-const DescriptionInfo = ({ description, setDescription }) => {
-  const handleInputChange = (event) => {
+interface DescriptionInfoProps {
+  description: any;
+  setDescription: any;
+}
+
+const DescriptionInfo: NextPage<DescriptionInfoProps> = ({
+  description,
+  setDescription,
+}) => {
+  const handleInputChange = (event: any) => {
     const inputName = event.target.value;
     if (inputName.length <= 500) {
       setDescription(inputName);

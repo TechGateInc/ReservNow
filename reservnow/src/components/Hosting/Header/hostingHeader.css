@@ -26,3 +26,8 @@
   font-size: 15px;
   z-index: 999 !important;
 }
+
+.active-link {
+  color: black !important;
+  /* Add any other styling you want for active links */
+}

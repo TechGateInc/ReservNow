@@ -5,10 +5,16 @@ import { AiOutlineMinus } from "react-icons/ai";
 import { IoAddOutline } from "react-icons/io5";
 import { MdError } from "react-icons/md";
 import { HiOutlineInformationCircle } from "react-icons/hi";
+import { NextPage } from "next";
 
 import "./capacity.css";
 
-const Capacity = ({ capacity, setCapacity }) => {
+interface CapacityProps {
+  capacity: any;
+  setCapacity: any;
+}
+
+const Capacity: NextPage<CapacityProps> = ({ capacity, setCapacity }) => {
   const [eventInfo, setEventInfo] = useState("");
 
   const handleMinusClick = () => {

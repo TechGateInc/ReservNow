@@ -26,7 +26,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
     getUserEmail: builder.mutation({
       query: ({ email }) => {
         return {
-          url: `/user/check-email/${email}`,
+          url: `/user/check-email`,
           method: "POST",
           body: {
             email,

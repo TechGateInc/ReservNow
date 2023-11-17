@@ -1,20 +1,28 @@
+"use client";
+import React from "react";
+import { NextPage } from "next";
 import { AiOutlineMinus } from "react-icons/ai";
 import { IoAddOutline } from "react-icons/io5";
 
 import "./PricePicker.css";
 
-const PricePicker = ({ price, setPrice }) => {
+interface PricePickerProps {
+  price: any;
+  setPrice: any;
+}
+
+const PricePicker: NextPage<PricePickerProps> = ({ price, setPrice }) => {
   const handlePlusClick = () => {
-    setPrice(price + 1);
+    setPrice(price + 1000);
   };
 
   const handleMinusClick = () => {
     if (price > 0) {
-      setPrice(price - 1);
+      setPrice(price - 1000);
     }
   };
 
-  const handleInputChange = (event) => {
+  const handleInputChange = (event: any) => {
     const value = event.target.value;
     if (value === "") {
       setPrice(0);

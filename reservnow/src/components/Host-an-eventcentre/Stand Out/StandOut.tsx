@@ -1,6 +1,11 @@
+"use client";
 import "./standOut.css";
+import React from "react";
+import { NextPage } from "next";
 
-const StandOut = ({}) => {
+interface StandOutProps {}
+
+const StandOut: NextPage<StandOutProps> = () => {
   return (
     <div className="stand-out-root">
       <div className="stand-out-container">

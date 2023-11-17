@@ -4,22 +4,28 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
+import { NextPage } from "next";
 
 import styles from "./page.module.css";
 import EstimateModal from "@/src/components/modals/EstimateModal/EstimateModal";
 import { useGetProgressQuery } from "@/src/api/features/progress/progressSlice";
+import { isUserLoggedIn } from "@/src/api/auth";
 
-const NewCentrePage = ({}) => {
+interface NewCentrePageProps {}
+
+const NewCentrePage: NextPage<NewCentrePageProps> = () => {
   const [money, setMoney] = useState(5000);
   const [hours, setHours] = useState(1);
   const [isSliderReady, setSliderReady] = useState(false);
   const [estimateModal, setEstimateModal] = useState(false);
+  const checkUserLoggedIn = isUserLoggedIn();
+  console.log(checkUserLoggedIn);
 
-  function valuetext(value) {
+  function valuetext(value: any) {
     return `${value}°C`;
   }
 
-  const handleSliderChange = (event, newValue) => {
+  const handleSliderChange = (event: any, newValue: any) => {
     setHours(newValue);
     setMoney(newValue * 5000);
   };
@@ -31,13 +37,12 @@ const NewCentrePage = ({}) => {
   const id = "652c413c376e3cb68dc91f30";
   const {
     data: progress,
-    loading: progressLoading,
+    isLoading: progressLoading,
     isSuccess: progressSuccess,
     isError: progressError,
     error: progressErrorData,
     refetch: refetchProgress,
   } = useGetProgressQuery(id);
-
 
   function DiscreteSlider() {
     return (
@@ -74,16 +79,22 @@ const NewCentrePage = ({}) => {
         </div>
         <div className={styles["pageHeaderBtn"]}>
           <p>Ready to Reserv it?</p>
-          <Link
-            href={
-              progressSuccess && progress.centreType
-                ? "/hosting"
-                : "/host-an-eventcentre"
-            }
-            style={{ textDecoration: "none" }}
-          >
-            <div className={styles["setUpBtn"]}>ReservNow SetUp</div>
-          </Link>
+          {checkUserLoggedIn ? (
+            <Link
+              href={
+                progressSuccess && progress.centreType
+                  ? "/hosting"
+                  : "/host-an-eventcentre"
+              }
+              style={{ textDecoration: "none" }}
+            >
+              <div className={styles["setUpBtn"]}>ReservNow SetUp</div>
+            </Link>
+          ) : (
+            <Link href={"/login"} style={{ textDecoration: "none" }}>
+              <div className={styles["setUpBtn"]}>ReservNow SetUp</div>
+            </Link>
+          )}
         </div>
       </div>
       <div className={styles["newPageHolder"]}>

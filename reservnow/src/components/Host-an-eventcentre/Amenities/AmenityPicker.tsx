@@ -1,12 +1,21 @@
 "use client";
 
 import React from "react";
+import { NextPage } from "next";
 
 import "./AmenityPicker.css";
 import { useGetAmenityQuery } from "@/src/api/features/amenity/amenitySlice";
 
-const AmenityPicker = ({ activeAmenities, setActiveAmenities }) => {
-  const { data: amenity, isLoading, isError } = useGetAmenityQuery();
+interface AmenityPickerProps {
+  activeAmenities: any;
+  setActiveAmenities: any;
+}
+
+const AmenityPicker: NextPage<AmenityPickerProps> = ({
+  activeAmenities,
+  setActiveAmenities,
+}) => {
+  const { data: amenity, isLoading, isError } = useGetAmenityQuery({});
 
   const amenityByCategory = {};
 
@@ -24,7 +33,7 @@ const AmenityPicker = ({ activeAmenities, setActiveAmenities }) => {
     return <div>No amenity data available</div>;
   }
 
-  amenity.forEach((item) => {
+  amenity.forEach((item: any) => {
     const category = item.category.name;
     if (!amenityByCategory[category]) {
       amenityByCategory[category] = [];
@@ -37,11 +46,11 @@ const AmenityPicker = ({ activeAmenities, setActiveAmenities }) => {
 
     const handleClick = () => {
       if (isActive) {
-        setActiveAmenities((prevAmenities) =>
-          prevAmenities.filter((a) => a !== amenityItem._id)
+        setActiveAmenities((prevAmenities: any) =>
+          prevAmenities.filter((a: any) => a !== amenityItem._id)
         );
       } else {
-        setActiveAmenities((prevAmenities) => [
+        setActiveAmenities((prevAmenities: any) => [
           ...prevAmenities,
           amenityItem._id,
         ]);
@@ -70,7 +79,7 @@ const AmenityPicker = ({ activeAmenities, setActiveAmenities }) => {
           <div key={category}>
             <h2 style={{ marginBottom: 30 }}>{category}</h2>
             <div className="amenity-list">
-              {amenities.map((amenityItem, index) => (
+              {(amenities as any[]).map((amenityItem: any, index: any) => (
                 <AmenityCard key={index} amenityItem={amenityItem} />
               ))}
             </div>

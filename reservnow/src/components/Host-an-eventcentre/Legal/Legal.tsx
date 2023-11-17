@@ -1,8 +1,19 @@
+"use client";
+import React from "react";
+import { NextPage } from "next";
 import { GrCircleInformation } from "react-icons/gr";
 import "./legal.css";
 
-const Legal = ({ isRadioButtonSelected, setIsRadioButtonSelected }) => {
-  const handleRadioButtonChange = (event) => {
+interface LegalProps {
+  isRadioButtonSelected: any;
+  setIsRadioButtonSelected: any;
+}
+
+const Legal: NextPage<LegalProps> = ({
+  isRadioButtonSelected,
+  setIsRadioButtonSelected,
+}) => {
+  const handleRadioButtonChange = (event: any) => {
     setIsRadioButtonSelected(event.target.value !== "");
   };
 

@@ -1,6 +1,11 @@
+"use client";
 import "./overview.css";
+import React from "react";
+import { NextPage } from "next";
 
-const Overview = ({}) => {
+interface OverviewProps {}
+
+const Overview: NextPage<OverviewProps> = () => {
   return (
     <div className="overview-root">
       <div className="host-content-left">

@@ -1,14 +1,24 @@
 "use client";
 
 import { useState } from "react";
+import React from "react";
+import { NextPage } from "next";
 
 import "./estimatemodal.css";
 import { EstimatePopup } from "../Popup/Popup";
 
-const EstimateModal = ({ estimateModal, setEstimateModal }) => {
+interface EstimateModalProps {
+  estimateModal: boolean;
+  setEstimateModal: any;
+}
+
+const EstimateModal: NextPage<EstimateModalProps> = ({
+  estimateModal,
+  setEstimateModal,
+}) => {
   const [selectedOption, setSelectedOption] = useState("");
 
-  const handleSelectChange = (event) => {
+  const handleSelectChange = (event: any) => {
     setSelectedOption(event.target.value);
   };
   return (
@@ -17,7 +27,14 @@ const EstimateModal = ({ estimateModal, setEstimateModal }) => {
         <div className="popupHolder">
           <div className="addressHolder">
             <p style={{ textAlign: "left" }}>Address or area</p>
-            <input className="locationInput" />
+            <input
+              className="locationInput"
+              style={{
+                outline: "none",
+                paddingLeft: "10px",
+                paddingRight: "10px",
+              }}
+            />
           </div>
           <div className="addressHolder selectHolder">
             <p>Capacity</p>
@@ -25,6 +42,11 @@ const EstimateModal = ({ estimateModal, setEstimateModal }) => {
               value={selectedOption}
               onChange={handleSelectChange}
               className="locationInput"
+              style={{
+                outline: "none",
+                paddingLeft: "10px",
+                paddingRight: "10px",
+              }}
             >
               <option value="">Select an option</option>
               <option value="option1">Option 1</option>

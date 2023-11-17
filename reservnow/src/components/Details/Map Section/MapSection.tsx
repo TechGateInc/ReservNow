@@ -1,6 +1,12 @@
 import "./mapSection.css";
+import React from "react";
+import { NextPage } from "next";
 
-const MapSection = ({ eventCentre }) => {
+interface MapSectionProps {
+  eventCentre: any;
+}
+
+const MapSection: NextPage<MapSectionProps> = ({ eventCentre }) => {
   return (
     <div className="map-section-root">
       <div className="map-section">

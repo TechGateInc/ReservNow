@@ -1,6 +1,11 @@
+"use client";
 import "./aboutCentreOverview.css";
+import React from "react";
+import { NextPage } from "next";
 
-const AboutCentreOverview = ({}) => {
+interface AboutCentreOverviewProps {}
+
+const AboutCentreOverview: NextPage<AboutCentreOverviewProps> = () => {
   return (
     <div className="about-centreO-root">
       <div className="about-centreO-container">

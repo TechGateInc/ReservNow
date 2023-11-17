@@ -1,24 +1,47 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
+import { NextPage } from "next";
 
 import "./LocationPicker.css";
 
-const LocationPicker = ({ address, setAddress, city, setCity, state, setisState }) => {
+interface LocationPickerProps {
+  address: any;
+  setAddress: any;
+  city: any;
+  setCity: any;
+  state: any;
+  setisState: any;
+  progress: any;
+}
+
+const LocationPicker: NextPage<LocationPickerProps> = ({
+  address,
+  setAddress,
+  city,
+  setCity,
+  state,
+  setisState,
+  progress,
+}) => {
   const [houseNo, setHouseNo] = useState("");
   const [streetEstate, setStreetEstate] = useState("");
 
   // Update state when input values change
-  const handleHouseNoChange = (e) => setHouseNo(e.target.value);
-  const handleStreetEstateChange = (e) => setStreetEstate(e.target.value);
-  const handleCityChange = (e) => setCity(e.target.value);
-  const handleStateChange = (e) => setisState(e.target.value);
+  const handleHouseNoChange = (e: any) => setHouseNo(e.target.value);
+  const handleStreetEstateChange = (e: any) => setStreetEstate(e.target.value);
+  const handleCityChange = (e: any) => setCity(e.target.value);
+  const handleStateChange = (e: any) => setisState(e.target.value);
 
   // Combine the values into one text
   const combinedText = `${houseNo} ${streetEstate}, ${city}, ${state}`;
 
   const [showMap, setShowMap] = useState("form");
-  setAddress(houseNo && streetEstate && city && state && showMap === "map" ? combinedText : "")
+  setAddress(
+    houseNo && streetEstate && city && state && showMap === "map"
+      ? combinedText
+      : progress.address
+  );
 
   // const handleGetLocation = () => {
   //   if (navigator.geolocation) {
@@ -51,8 +74,6 @@ const LocationPicker = ({ address, setAddress, city, setCity, state, setisState 
   //     console.error("Geolocation is not supported by this browser.");
   //   }
   // };
-  
-
 
   return (
     <div className="mapholder">
@@ -64,7 +85,7 @@ const LocationPicker = ({ address, setAddress, city, setCity, state, setisState 
         reservation
       </p>
 
-      {showMap === "form" && (
+      {showMap === "form" && progress.address === "" ? (
         <div className="location-form">
           <input
             type="text"
@@ -104,26 +125,32 @@ const LocationPicker = ({ address, setAddress, city, setCity, state, setisState 
             </button>
           </div>
         </div>
-      )}
-
-      {showMap !== "form" && (
+      ) : (
         <div className="mapContainer">
           <div className="searchHolder">
             <div
               style={{ display: "flex", flexDirection: "row" }}
               className="input"
             >
-              <input
-                type="text"
-                placeholder="Enter an address"
-                value={combinedText}
-                style={{ border: "none", width: "100%", padding: 10 }}
-                disabled
-              />
+              {progress.address === "" ? (
+                <input
+                  type="text"
+                  placeholder="Enter an address"
+                  value={combinedText}
+                  style={{ border: "none", width: "100%", padding: 10 }}
+                  disabled
+                />
+              ) : (
+                <p style={{ border: "none", width: "100%", padding: 10 }}>
+                  {progress.address}
+                </p>
+              )}
             </div>
           </div>
           <iframe
-            src={`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3963.7996105457046!2d3.3814625749447713!3d6.546968393445971!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b8d74a1d96faf%3A0xc6ca00ab91edfc5c!2s${combinedText}!5e0!3m2!1sen!2sng!4v1686910536404!5m2!1sen!2sng`}
+            src={`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3963.7996105457046!2d3.3814625749447713!3d6.546968393445971!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b8d74a1d96faf%3A0xc6ca00ab91edfc5c!2s${
+              progress.address === "" ? combinedText : progress.address
+            }!5e0!3m2!1sen!2sng!4v1686910536404!5m2!1sen!2sng`}
             style={{
               width: "650px",
               height: "450px",
@@ -136,6 +163,37 @@ const LocationPicker = ({ address, setAddress, city, setCity, state, setisState 
           ></iframe>
         </div>
       )}
+
+      {/* // {(showMap !== "form" && address !== "") && (
+      //   <div className="mapContainer">
+      //     <div className="searchHolder">
+      //       <div
+      //         style={{ display: "flex", flexDirection: "row" }}
+      //         className="input"
+      //       >
+      //         <input
+      //           type="text"
+      //           placeholder="Enter an address"
+      //           value={combinedText}
+      //           style={{ border: "none", width: "100%", padding: 10 }}
+      //           disabled
+      //         />
+      //       </div>
+      //     </div>
+      //     <iframe
+      //       src={`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3963.7996105457046!2d3.3814625749447713!3d6.546968393445971!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b8d74a1d96faf%3A0xc6ca00ab91edfc5c!2s${combinedText}!5e0!3m2!1sen!2sng!4v1686910536404!5m2!1sen!2sng`}
+      //       style={{
+      //         width: "650px",
+      //         height: "450px",
+      //         border: "none",
+      //         borderRadius: 20,
+      //         marginTop: -30,
+      //       }}
+      //       title="Google Maps"
+      //       loading="lazy"
+      //     ></iframe>
+      //   </div>
+      // )} */}
     </div>
   );
 };

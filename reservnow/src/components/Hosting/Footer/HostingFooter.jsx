@@ -47,7 +47,7 @@ const HostingFooter = ({}) => {
           </ul>
         </div>
       </div>
-      <div className="footer">
+      <div className="below">
         <div className="footer-left">
           <p>© 2023 ReservNow, Inc.</p>
           <p>Terms</p>

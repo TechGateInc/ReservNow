@@ -2,13 +2,17 @@
 
 import { useState, useEffect } from "react";
 import { MdArrowForwardIos } from "react-icons/md";
+import React from "react";
+import { NextPage } from "next";
 
 import "./thingsToKnow.css";
 import { CentreRulesPopup } from "../../modals/Popup/Popup";
 import { SafetyPropertyPopup } from "../../modals/Popup/Popup";
 import { CancellationPolicyPopup } from "../../modals/Popup/Popup";
 
-const ThingsToKnow = ({}) => {
+interface ThingsToKnowProps {}
+
+const ThingsToKnow: NextPage<ThingsToKnowProps> = ({}) => {
   const [centreRules, setCentreRules] = useState(false);
   const [SafetyProperty, setSafetyProperty] = useState(false);
   const [cancellationPolicy, setCancellationPolicy] = useState(false);

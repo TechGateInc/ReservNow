@@ -4,10 +4,19 @@ import React, { useState, useRef } from "react";
 import { IoImagesOutline } from "react-icons/io5";
 import { BsTrash } from "react-icons/bs";
 import { IoAddSharp } from "react-icons/io5";
+import { NextPage } from "next";
 
 import "./uploadGallery.css";
 
-const UploadGallery = ({
+interface UploadGalleryProps {
+  selectedFiles: any;
+  setSelectedFiles: any;
+  isSubmitDisabled: any;
+  coverPhoto: any;
+  remainingPhotos: any;
+}
+
+const UploadGallery: NextPage<UploadGalleryProps> = ({
   selectedFiles,
   setSelectedFiles,
   isSubmitDisabled,
@@ -17,33 +26,33 @@ const UploadGallery = ({
   const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef(null);
 
-  const handleFileChange = (event) => {
+  const handleFileChange = (event: any) => {
     const files = event.target.files;
-    setSelectedFiles((prevFiles) => [...prevFiles, ...files]);
+    setSelectedFiles((prevFiles: any) => [...prevFiles, ...files]);
   };
 
   const handleClick = () => {
     fileInputRef.current.click();
   };
 
-  const handleDragOver = (event) => {
+  const handleDragOver = (event: any) => {
     event.preventDefault();
     setIsDragging(true);
   };
 
-  const handleDragLeave = (event) => {
+  const handleDragLeave = (event: any) => {
     event.preventDefault();
     setIsDragging(false);
   };
 
-  const handleDrop = (event) => {
+  const handleDrop = (event: any) => {
     event.preventDefault();
     const files = event.dataTransfer.files;
     setSelectedFiles([...files]);
     setIsDragging(false);
   };
 
-  const handleRemove = (index) => {
+  const handleRemove = (index: any) => {
     const updatedFiles = [...selectedFiles];
     updatedFiles.splice(index, 1);
     setSelectedFiles(updatedFiles);
@@ -59,15 +68,15 @@ const UploadGallery = ({
     fileInputRef.current.click();
   };
 
-  const handleDragStart = (event, index) => {
+  const handleDragStart = (event: any, index: any) => {
     event.dataTransfer.setData("text/plain", index);
   };
 
-  const handleDragOverPhoto = (event) => {
+  const handleDragOverPhoto = (event: any) => {
     event.preventDefault();
   };
 
-  const handleDropPhoto = (event, index) => {
+  const handleDropPhoto = (event: any, index: any) => {
     event.preventDefault();
     const draggedIndex = event.dataTransfer.getData("text/plain");
     const updatedFiles = [...selectedFiles];
@@ -77,7 +86,7 @@ const UploadGallery = ({
     setSelectedFiles(updatedFiles);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: any) => {
     event.preventDefault();
 
     if (selectedFiles.length < 5) {

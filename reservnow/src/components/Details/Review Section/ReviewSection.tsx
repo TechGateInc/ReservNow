@@ -2,12 +2,22 @@
 
 import { useState } from "react";
 import { AiFillStar } from "react-icons/ai";
+import React from "react";
+import { NextPage } from "next";
 
 import "./reviewSection.css";
 import { Rating } from "@/src/components/Ratings Star/RatingStar";
 import { ReviewPopup } from "@/src/components/modals/Popup/Popup";
 
-const ReviewSection = ({ review, eventCentre }) => {
+interface ReviewSectionProps {
+  eventCentre: any;
+  review: any;
+}
+
+const ReviewSection: NextPage<ReviewSectionProps> = ({
+  eventCentre,
+  review,
+}) => {
   const [Review, setReview] = useState(false); // to activate the review popup
 
   return (

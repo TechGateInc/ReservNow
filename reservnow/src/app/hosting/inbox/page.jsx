@@ -89,7 +89,6 @@ export default function inbox() {
               {sidebarItems.map(({ name, href, icon: Icon }) => (
                 <div
                   key={name}
-                  disablePadding
                   className={styles["inbox-sidebar-container"]}
                   onClick={() => setActive(href)}
                 >
@@ -122,7 +121,6 @@ export default function inbox() {
               {sidebarItems2.map(({ name, href, icon: Icon, disabled }) => (
                 <div
                   key={name}
-                  disablePadding
                   className={styles["inbox-sidebar-container"]}
                   onClick={() => {
                     if (!disabled) {

@@ -19,18 +19,18 @@
   cursor: pointer;
   text-decoration: underline;
 }
-.hosting-footer-root .footer {
+.hosting-footer-root .below {
   margin-top: 100px;
   display: flex;
   justify-content: space-between;
 }
-.hosting-footer-root .footer .footer-left {
+.hosting-footer-root .below .footer-left {
   display: flex;
   width: 500px;
   justify-content: space-between;
   font-size: 14px;
 }
-.hosting-footer-root .footer .footer-right {
+.hosting-footer-root .below .footer-right {
   display: flex;
   width: 280px;
   align-items: center;

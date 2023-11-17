@@ -1,18 +1,29 @@
+"use client";
+import React from "react";
+import { NextPage } from "next";
 import "./DescriptionPicker.css";
 import { useGetDescriptionPickerQuery } from "@/src/api/features/descriptionPicker/descriptionPickerSlice";
 
-const DescriptionPicker = ({ descriptionsPick, setDescriptionsPick }) => {
-  const { data: Descriptions } = useGetDescriptionPickerQuery();
+interface DescriptionPickerProps {
+  descriptionsPick: any;
+  setDescriptionsPick: any;
+}
+
+const DescriptionPicker: NextPage<DescriptionPickerProps> = ({
+  descriptionsPick,
+  setDescriptionsPick,
+}) => {
+  const { data: Descriptions } = useGetDescriptionPickerQuery({});
   console.log(descriptionsPick);
 
-  const handleDescriptionClick = (_id) => {
+  const handleDescriptionClick = (_id: any) => {
     // Check if the clicked description is already selected
     const isDescriptionSelected = descriptionsPick.includes(_id);
 
     if (isDescriptionSelected) {
       // If the clicked description is already selected, remove it from the array
       const updatedDescriptions = descriptionsPick.filter(
-        (desc) => desc !== _id
+        (desc: any) => desc !== _id
       );
       setDescriptionsPick(updatedDescriptions);
     } else {

@@ -24,8 +24,11 @@ import {
   useGetProgressQuery,
   useUpdateProgressMutation,
 } from "@/src/api/features/progress/progressSlice";
+import { NextPage } from "next";
 
-const HostAnEventCentrePage = ({}) => {
+interface HostAnEventCentrePageProps {}
+
+const HostAnEventCentrePage: NextPage<HostAnEventCentrePageProps> = () => {
   const [active, setActive] = useState("Overview");
   const [selectedFiles, setSelectedFiles] = useState([]);
   const isSubmitDisabled = selectedFiles.length < 5;
@@ -47,7 +50,7 @@ const HostAnEventCentrePage = ({}) => {
   const id = "652c413c376e3cb68dc91f30";
   const {
     data: progress,
-    loading: progressLoading,
+    isLoading: progressLoading,
     isSuccess: progressSuccess,
     isError: progressError,
     error: progressErrorData,
@@ -126,9 +129,9 @@ const HostAnEventCentrePage = ({}) => {
   // }, [progress]);
 
   const [createProgress] = useCreateProgressMutation();
-  const [updateProgress] = useUpdateProgressMutation(progressId);
+  const [updateProgress] = useUpdateProgressMutation();
 
-  const progressHandleSubmit = async (e) => {
+  const progressHandleSubmit = async (e: any) => {
     e.preventDefault();
 
     const formData = {
@@ -167,6 +170,7 @@ const HostAnEventCentrePage = ({}) => {
     }
   };
 
+
   return (
     <div className={styles["host-root"]}>
       <div className={styles["host-container"]}>
@@ -199,6 +203,7 @@ const HostAnEventCentrePage = ({}) => {
                 setCity={setCity}
                 state={state}
                 setisState={setisState}
+                progress={progress}
               />
             )}
             {active === "Capacity" && (
@@ -221,12 +226,7 @@ const HostAnEventCentrePage = ({}) => {
               />
             )}
             {active === "NamePicker" && (
-              <NamePicker
-                name={name}
-                setName={setName}
-                progress={progress}
-                progressSuccess={progressSuccess}
-              />
+              <NamePicker name={name} setName={setName} />
             )}
             {active === "DescriptionInfo" && (
               <DescriptionInfo

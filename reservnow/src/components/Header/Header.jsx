@@ -10,13 +10,16 @@ import config from "@/src/api/config";
 import Search from "../Search/Search";
 import Location from "../LocationsCarousel/Location";
 import Events from "../LocationsCarousel/Events";
-import LoginModal from "@/src/components/modals/Auth Modal/LoginModal";
+import LoginModal from "../modals/Auth Modal/LoginModal";
+import { isUserLoggedIn } from "@/src/api/auth";
 
 const Header = () => {
   const [emailVerification, setEmailVerification] = useState(false);
   const [showSignUpModal, setShowSignUpModal] = useState(false);
   const [centres, getCentres] = useState(null);
   const [centreTypes, getCentreTypes] = useState(null);
+  const checkUserLoggedIn = isUserLoggedIn();
+  // console.log(checkUserLoggedIn);
 
   useEffect(() => {
     const fetchCentres = async () => {
@@ -226,9 +229,19 @@ const Header = () => {
         </div>
         <div className="ProfileSection">
           <div className="ReserveLink">
-            <Link href={"/newcentre"} style={{ textDecoration: "none" }}>
-              <p style={{ fontSize: 12, color: "black" }}> Add Event Centre</p>
-            </Link>
+            {!checkUserLoggedIn ? (
+              <Link href={"/newcentre"} style={{ textDecoration: "none" }}>
+                <p style={{ fontSize: 12, color: "black" }}>
+                  Add Event Centre
+                </p>
+              </Link>
+            ) : (
+              <Link href={"/hosting"} style={{ textDecoration: "none" }}>
+                <p style={{ fontSize: 12, color: "black" }}>
+                  Switch to hosting
+                </p>
+              </Link>
+            )}
           </div>
           <div className="profileHolder" onClick={() => dropdownToggle("menu")}>
             <div className="profileHolderIcons">

@@ -1,6 +1,11 @@
+"use client";
+import React from "react";
+import { NextPage } from "next";
 import "./finishSetup.css";
 
-const FinishSetup = ({}) => {
+interface FinishSetupProps {}
+
+const FinishSetup: NextPage<FinishSetupProps> = () => {
   return (
     <div className="finish-setup-root">
       <div className="finish-setup-container">

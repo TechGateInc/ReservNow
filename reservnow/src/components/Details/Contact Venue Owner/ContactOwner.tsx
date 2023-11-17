@@ -2,10 +2,17 @@ import dayjs from "dayjs";
 import { AiFillStar } from "react-icons/ai";
 import { VscVerifiedFilled } from "react-icons/vsc";
 import { BsShield } from "react-icons/bs";
+import React from "react";
+import { NextPage } from "next";
 
 import "./contactOwner.css";
 
-const ContactOwner = ({ eventCentre, review }) => {
+interface ContactOwnerProps {
+  eventCentre: any;
+  review: any;
+}
+
+const ContactOwner: NextPage<ContactOwnerProps> = ({ eventCentre, review }) => {
   // Assuming centreDetails.venueOwner.createdAt is a valid date string
   const createdAt = dayjs(
     eventCentre && eventCentre.venueOwner && eventCentre.venueOwner.createdAt

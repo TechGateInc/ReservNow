@@ -4,29 +4,36 @@ import React, { useState, useEffect } from "react";
 import { IoPeopleOutline } from "react-icons/io5";
 import { BsFan } from "react-icons/bs";
 import { MdArrowForwardIos } from "react-icons/md";
+import { NextPage } from "next";
 
 import "./detailsInformation.css";
 import { AmenitiesPopup } from "@/src/components/modals/Popup/Popup";
 import { DescriptionPopup } from "@/src/components/modals/Popup/Popup";
 import { useGetAmenityCategoryQuery } from "@/src/api/features/amenityCategory/amenityCategorySlice";
 
-const DetailsInformation = ({ eventCentre }) => {
+interface DetailsInformationProps {
+  eventCentre: any;
+}
+
+const DetailsInformation: NextPage<DetailsInformationProps> = ({
+  eventCentre,
+}) => {
   const [amenities, setAmenities] = useState(false); // to activate the amenities popup
   const [description, setDescription] = useState(false);
   const [groupedAmenities, setGroupedAmenities] = useState({});
 
   const {
     data: amenity,
-    loading: amenityLoading,
+    isLoading: amenityLoading,
     isSuccess: amenitySuccess,
     isError: amenityError,
     error: amenityErrorData,
-  } = useGetAmenityCategoryQuery();
+  } = useGetAmenityCategoryQuery({});
 
   useEffect(() => {
     if (eventCentre.amenities) {
       // Step 1: Group amenities by category
-      const grouped = eventCentre.amenities.reduce((result, item) => {
+      const grouped = eventCentre.amenities.reduce((result: any, item: any) => {
         if (!result[item.category]) {
           result[item.category] = [];
         }
@@ -38,7 +45,7 @@ const DetailsInformation = ({ eventCentre }) => {
       // Step 3: Sort item names within each category alphabetically
       for (const category in grouped) {
         if (grouped && grouped[category] && Array.isArray(grouped[category])) {
-          grouped[category].sort((a, b) => {
+          grouped[category].sort((a: any, b: any) => {
             if (a && a.name && b && b.name) {
               return a.name.localeCompare(b.name);
             }

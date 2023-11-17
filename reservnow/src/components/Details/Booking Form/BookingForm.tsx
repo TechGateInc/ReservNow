@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import React from "react";
+import { NextPage } from "next";
 import { useSelector } from "react-redux";
 import { AiFillStar } from "react-icons/ai";
 import { TbCurrencyNaira } from "react-icons/tb";
@@ -13,10 +15,21 @@ import advancedFormat from "dayjs/plugin/advancedFormat";
 
 import "./bookingForm.css";
 import { useCreateBookingMutation } from "@/src/api/features/booking/bookingSlice";
-import { selectCurrentToken } from "@/src/api/features/auth/authSlice";
 import LoginModal from "@/src/components/modals/Auth Modal/LoginModal";
 
-const BookingForm = ({ id, eventCentre, review }) => {
+interface BookingFormProps {
+  id: any;
+  eventCentre: any;
+  review: any;
+  checkUserLoggedIn: any;
+}
+
+const BookingForm: NextPage<BookingFormProps> = ({
+  id,
+  eventCentre,
+  review,
+  checkUserLoggedIn,
+}) => {
   const [createBooking] = useCreateBookingMutation();
 
   // Add the necessary plugin to dayjs
@@ -38,14 +51,14 @@ const BookingForm = ({ id, eventCentre, review }) => {
     notes: "",
   });
   const calculateDurationInHours = () => {
-    const duration = start && end && end.diff(start, "hour");
+    const duration = start && end && dayjs(end).diff(dayjs(start), "hour");
     return duration;
   };
 
   // Example usage
   const durationInHours = calculateDurationInHours();
 
-  const bookingHandleSubmit = async (e) => {
+  const bookingHandleSubmit = async (e: any) => {
     e.preventDefault();
 
     const formData = {
@@ -66,15 +79,15 @@ const BookingForm = ({ id, eventCentre, review }) => {
       window.alert("An error occurred. Please try again.");
     }
 
-    setStart("");
-    setEnd("");
+    // setStart("");
+    // setEnd("");
     setBookingForm({
       ...bookingForm,
       notes: "",
     });
   };
 
-  const bookingHandleChange = (e) => {
+  const bookingHandleChange = (e: any) => {
     const { name, value } = e.target;
     setBookingForm((prevData) => ({
       ...prevData,
@@ -82,12 +95,13 @@ const BookingForm = ({ id, eventCentre, review }) => {
     }));
   };
 
-  const [trigger, setTrigger] = useState(false);
-  const token = useSelector(selectCurrentToken);
+  const [emailVerification, setEmailVerification] = useState(false);
 
-  const isUserLoggedIn = () => {
-    if (!token) {
-      setTrigger(true);
+  const isUserLoggedIn = (e: any) => {
+    if (checkUserLoggedIn === false) {
+      setEmailVerification(true);
+    } else {
+      bookingHandleSubmit(e);
     }
   };
 
@@ -136,8 +150,8 @@ const BookingForm = ({ id, eventCentre, review }) => {
                   <DateTimePicker
                     label="End Date and Time"
                     onChange={setEnd}
-                    minDateTime={start.add(minEndTime, "hour")}
-                    maxDateTime={start.add(maxEndDate, "day")}
+                    // minDateTime={start.add(minEndTime, "hour").format()} // Convert to string
+                    // maxDateTime={start.add(maxEndDate, "day").format()}
                   />
                 </DemoContainer>
               </LocalizationProvider>
@@ -210,7 +224,12 @@ const BookingForm = ({ id, eventCentre, review }) => {
           </div>
         </div>
       </div>
-      <LoginModal showLoginModal={trigger} setShowLoginModal={setTrigger} />
+      <LoginModal
+        emailVerification={emailVerification}
+        setEmailVerification={setEmailVerification}
+        showSignUpModal={undefined}
+        setShowSignUpModal={undefined}
+      />
     </div>
   );
 };

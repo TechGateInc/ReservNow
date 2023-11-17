@@ -2,11 +2,15 @@
 
 import { useState, useEffect } from "react";
 import { TfiGallery } from "react-icons/tfi";
+import React from "react";
+import { NextPage } from "next";
 
 import "./detailsGallery.css";
 import { DetailsGalleryPopup } from "../../modals/Popup/Popup";
 
-const DetailsGallery = () => {
+interface DetailsGalleryProps {}
+
+const DetailsGallery: NextPage<DetailsGalleryProps> = () => {
   const [gallery, setGallery] = useState(false);
 
   useEffect(() => {

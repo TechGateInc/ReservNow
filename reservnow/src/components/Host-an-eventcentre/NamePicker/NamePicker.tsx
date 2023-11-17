@@ -1,7 +1,15 @@
+"use client";
+import React from "react";
+import { NextPage } from "next";
 import "./NamePicker.css";
 
-const NamePicker = ({ name, setName, progress, progressSuccess }) => {
-  const handleInputChange = (e) => {
+interface NamePickerProps {
+  name: any;
+  setName: any;
+}
+
+const NamePicker: NextPage<NamePickerProps> = ({ name, setName }) => {
+  const handleInputChange = (e: any) => {
     const inputName = e.target.value;
     if (inputName.length <= 32) {
       setName(inputName);

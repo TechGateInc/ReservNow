@@ -3,13 +3,24 @@
 import { useState } from "react";
 import { BsClipboardCheck } from "react-icons/bs";
 import { BsCalendarEvent } from "react-icons/bs";
-import { LuEdit3 } from "react-icons/lu";
 import { AiFillStar } from "react-icons/ai";
+import { MdEditNote } from "react-icons/md";
+// import {LuEdit3} from "react-icons/lu"
+import React from "react";
+import { NextPage } from "next";
 
 import "./reviewListings.css";
 import { ReviewListingModal } from "@/src/components/modals/Review Listing Modal/ReviewListingModal";
 
-const ReviewListings = ({
+interface ReviewListingsProps {
+  selectedFiles: any;
+  name: any;
+  price: any;
+  description: any;
+  address: any;
+}
+
+const ReviewListings: NextPage<ReviewListingsProps> = ({
   selectedFiles,
   name,
   price,
@@ -18,6 +29,7 @@ const ReviewListings = ({
 }) => {
   const firstImage = selectedFiles[0];
   const [isReview, setIsReview] = useState(false);
+  const formattedPrice = new Intl.NumberFormat().format(price);
 
   return (
     <div className="review-listing-root">
@@ -47,7 +59,7 @@ const ReviewListings = ({
                   </div>
                 </div>
                 <div className="bottom">
-                  ₦{price}
+                  ₦{formattedPrice}
                   <div style={{ marginLeft: "5px" }}>per hour</div>
                 </div>
               </div>
@@ -106,7 +118,8 @@ const ReviewListings = ({
               </div>
               <div className="content">
                 <div className="text">
-                  <LuEdit3 style={{ fontSize: "35px" }} />
+                  {/* <LuEdit3 style={{ fontSize: "35px" }} /> */}
+                  <MdEditNote style={{ fontSize: "35px" }}/>
                   <div
                     style={{
                       fontWeight: "600",

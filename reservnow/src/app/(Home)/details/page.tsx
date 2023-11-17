@@ -1,7 +1,7 @@
-"use client";
-
-import React from "react";
-import { useEffect, useState } from "react";
+// Import necessary types from Next.js
+"use client"
+import { NextPage } from "next";
+import { useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { AiFillStar } from "react-icons/ai";
 
@@ -13,31 +13,33 @@ import MapSection from "@/src/components/Details/Map Section/MapSection";
 import ReviewSection from "@/src/components/Details/Review Section/ReviewSection";
 import ContactOwner from "@/src/components/Details/Contact Venue Owner/ContactOwner";
 import ThingsToKnow from "@/src/components/Details/Things To Know/ThingsToKnow";
-import LoginModal from "@/src/components/modals/Auth Modal/LoginModal";
 import { DetailsSkeleton } from "@/src/components/Skeleton/Skeleton";
 import { useGetEventCentreQuery } from "@/src/api/features/eventCenter/eventCenterSlice";
-import { useGetReviewQuery } from "@/src/api/features/review/review-Slice";
+import { useGetReviewQuery } from "@/src/api/features/Details/reviewSlice";
+import React from "react";
+import { isUserLoggedIn } from "@/src/api/auth";
 
-export default function Details() {
+interface DetailsProps {}
+
+const Details: NextPage<DetailsProps> = () => {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
-  const [emailVerification, setEmailVerification] = useState(false);
+
+  const checkUserLoggedIn = isUserLoggedIn()
+  
 
   const {
     data: eventCentre,
-    loading: eventCentreLoading,
+    isLoading: eventCentreLoading,
     isSuccess: eventCentreSuccess,
-    isError: eventCentreError,
-    error: eventCentreErrorData,
   } = useGetEventCentreQuery(id);
 
   const {
     data: review,
-    loading: reviewLoading,
+    isLoading: reviewLoading,
     isSuccess: reviewSuccess,
-    isError: reviewError,
-    error: reviewErrorData,
   } = useGetReviewQuery(id);
+  
 
   // to move to the review section once a button is clicked
   const reviewSection = () => {
@@ -51,12 +53,12 @@ export default function Details() {
     let scrollPosition = 0;
 
     const handleScroll = () => {
-      if (eventCentreLoading && reviewLoading && eventCentreSuccess === true) {
+      if (eventCentreLoading && reviewLoading && eventCentreSuccess) {
         window.scrollTo(0, scrollPosition);
       }
     };
 
-    if (eventCentreLoading && reviewLoading && eventCentreSuccess === true) {
+    if (eventCentreLoading && reviewLoading && eventCentreSuccess) {
       scrollPosition = window.scrollY;
       document.body.classList.add("popup-open");
       document.body.style.paddingRight = `${
@@ -107,6 +109,7 @@ export default function Details() {
                   eventCentre={eventCentre}
                   review={review}
                   id={id}
+                  checkUserLoggedIn={checkUserLoggedIn}
                 />
               </div>
             </div>
@@ -126,12 +129,10 @@ export default function Details() {
           <div className="things-to-know-section">
             <ThingsToKnow />
           </div>
-          <LoginModal
-            emailVerification={emailVerification}
-            setEmailVerification={setEmailVerification}
-          />
         </div>
       )}
     </div>
   );
-}
+};
+
+export default Details;

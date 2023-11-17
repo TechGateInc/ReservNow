@@ -1,10 +1,21 @@
+"use client";
 import "./CentreTypePicker.css";
 import { useGetCentreTypeQuery } from "@/src/api/features/centreType/centreTypeSlice";
+import React from "react";
+import { NextPage } from "next";
 
-const CentreTypePicker = ({ activeType, setActiveType }) => {
-  const { data: centreType } = useGetCentreTypeQuery();
+interface CentreTypePickerProps {
+  activeType: any;
+  setActiveType: any;
+}
 
-  const handleTypeChange = (_id) => {
+const CentreTypePicker: NextPage<CentreTypePickerProps> = ({
+  activeType,
+  setActiveType,
+}) => {
+  const { data: centreType } = useGetCentreTypeQuery({});
+
+  const handleTypeChange = (_id: String) => {
     setActiveType(_id);
   };
 
@@ -14,7 +25,7 @@ const CentreTypePicker = ({ activeType, setActiveType }) => {
         What type of centre best describes your Event Centre ?
       </p>
       <div className="centreTypeHolder">
-        {centreType?.map((centreTypes, index) => (
+        {centreType?.map((centreTypes: any, index: any) => (
           <div
             className={`centreTypeCard ${
               activeType === centreTypes._id ? "centreActive" : ""
