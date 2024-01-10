@@ -3,8 +3,11 @@ import "./scheduleMessages.css";
 import { RiChat2Line } from "react-icons/ri";
 import { InboxPopup } from "@/src/components/modals/Popup/Popup";
 import { useState } from "react";
+import { NextPage } from "next";
 
-const ScheduleMessages = ({}) => {
+interface ScheduleMessagesProps {}
+
+const ScheduleMessages: NextPage<ScheduleMessagesProps> = () => {
   const [inbox, setInbox] = useState(false);
 
   return (
@@ -32,9 +35,7 @@ const ScheduleMessages = ({}) => {
         </div>
         <div className="message">
           <div className="message-title">Message</div>
-          <div className="message-container">
-            
-          </div>
+          <div className="message-container"></div>
         </div>
       </InboxPopup>
     </div>

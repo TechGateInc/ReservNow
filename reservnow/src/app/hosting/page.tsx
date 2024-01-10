@@ -1,5 +1,6 @@
 "use client";
 import styles from "./page.module.css";
+import { NextPage } from "next";
 import { useGetProgressQuery } from "@/src/api/features/progress/progressSlice";
 import { useGetUserQuery } from "@/src/api/features/user/userSlice";
 import { AiOutlineInfoCircle } from "react-icons/ai";
@@ -7,14 +8,17 @@ import { HiOutlineClipboardDocumentList } from "react-icons/hi2";
 import { BsFillPersonFill, BsHeadphones } from "react-icons/bs";
 import HostingFooter from "@/src/components/Hosting/Footer/HostingFooter";
 import { useAppSelector } from "@/src/api/hook";
+import { isUserLoggedIn } from "@/src/api/auth";
 
-const Hosting = ({}) => {
-  const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
-  console.log(isLoggedIn);
+interface HostingProps {}
+
+const Hosting: NextPage<HostingProps> = () => {
+  // const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
+  // console.log(isLoggedIn);
   const id = "652c413c376e3cb68dc91f30";
   const {
     data: user,
-    loading: userLoading,
+    isLoading: userLoading,
     isSuccess: userSuccess,
     isError: userError,
     error: userErrorData,
@@ -23,7 +27,7 @@ const Hosting = ({}) => {
 
   const {
     data: progress,
-    loading: progressLoading,
+    isLoading: progressLoading,
     isSuccess: progressSuccess,
     isError: progressError,
     error: progressErrorData,

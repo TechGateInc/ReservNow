@@ -5,8 +5,11 @@ import {
   AiFillTwitterSquare,
   AiFillInstagram,
 } from "react-icons/ai";
+import { NextPage } from "next";
 
-const HostingFooter = ({}) => {
+interface HostingFooterProps {}
+
+const HostingFooter: NextPage<HostingFooterProps> = () => {
   return (
     <div className="hosting-footer-root">
       <div className="hosting-footer-content">

@@ -3,6 +3,7 @@
 import "./hostingHeader.css";
 import React, { useState } from "react";
 import Link from "next/link";
+import { NextPage } from "next";
 
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
@@ -18,10 +19,12 @@ import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 import { AiOutlineBell } from "react-icons/ai";
 
-const HostingHeader = ({}) => {
+interface HostingHeaderProps {}
+
+const HostingHeader: NextPage<HostingHeaderProps> = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
-  const handleClick = (event) => {
+  const handleClick = (event: any) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {

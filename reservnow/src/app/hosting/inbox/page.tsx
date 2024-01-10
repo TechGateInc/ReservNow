@@ -16,27 +16,35 @@ import ReservNowSupport from "@/src/components/Hosting/ReservNow Support/ReservN
 import Archive from "@/src/components/Hosting/Archive/Archive";
 import QuickReplies from "@/src/components/Hosting/Quick Replies/QuickReplies";
 import ScheduleMessages from "@/src/components/Hosting/Schedule Messages/ScheduleMessages";
+import { MUIStyledCommonProps, Theme } from "@mui/system";
+import { HTMLAttributes } from "react";
 
-const drawerWidth = 250;
+const drawerWidth = 240; // Assuming you have defined drawerWidth somewhere
 
-const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
-  ({ theme, open }) => ({
-    flexGrow: 1,
-    padding: theme.spacing(3),
+interface MainProps
+  extends MUIStyledCommonProps<Theme>,
+    HTMLAttributes<HTMLElement> {
+  open?: boolean;
+}
+
+const Main = styled("main", {
+  shouldForwardProp: (prop) => prop !== "open",
+})<MainProps>(({ theme, open }) => ({
+  flexGrow: 1,
+  padding: theme.spacing(3),
+  transition: theme.transitions.create("margin", {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  marginLeft: `-${drawerWidth}px`,
+  ...(open && {
     transition: theme.transitions.create("margin", {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
     }),
-    marginLeft: `-${drawerWidth}px`,
-    ...(open && {
-      transition: theme.transitions.create("margin", {
-        easing: theme.transitions.easing.easeOut,
-        duration: theme.transitions.duration.enteringScreen,
-      }),
-      marginLeft: 0,
-    }),
-  })
-);
+    marginLeft: 0,
+  }),
+}));
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",

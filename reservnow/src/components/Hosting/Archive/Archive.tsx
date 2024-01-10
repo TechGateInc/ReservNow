@@ -1,10 +1,13 @@
 "use client";
 import { BiMessageCheck } from "react-icons/bi";
-import "./reservNowSupport.css";
+import "./archive.css";
+import { NextPage } from "next";
 
-const ReservNowSupport = ({}) => {
+interface ArchiveProps {}
+
+const Archive: NextPage<ArchiveProps> = () => {
   return (
-    <div className="reservNow-support-root">
+    <div className="archive-root">
       <BiMessageCheck style={{ fontSize: "30px" }} />
       <div style={{ fontSize: "14px", marginTop: "10px" }}>No new messages</div>
       <div
@@ -14,11 +17,11 @@ const ReservNowSupport = ({}) => {
           color: "#b5b5b5",
         }}
       >
-        You don’t have any messages in the ReservNow Support folder.
+        You don’t have any messages in the Archive folder.
       </div>
       <button>Go to all messages</button>
     </div>
   );
 };
 
-export default ReservNowSupport;
+export default Archive;

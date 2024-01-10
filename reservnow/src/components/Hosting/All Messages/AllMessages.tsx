@@ -1,8 +1,12 @@
 "use client";
 import { BiMessageCheck } from "react-icons/bi";
 import "./allMessages.css"
+import { NextPage } from "next";
 
-const AllMessages = ({}) => {
+
+interface AllMessagesProps {}
+
+const AllMessages: NextPage<AllMessagesProps> = () => {
   return (
     <div className="all-messages-root">
       <BiMessageCheck style={{ fontSize: "30px" }} />

@@ -1,6 +1,9 @@
 import "./quickReplies.css";
+import { NextPage } from "next";
 
-const QuickReplies = ({}) => {
+interface QuickRepliesProps {}
+
+const QuickReplies: NextPage<QuickRepliesProps> = () => {
   return (
     <div className="quick-replies-root">
       <div className="quick-replies-header">
